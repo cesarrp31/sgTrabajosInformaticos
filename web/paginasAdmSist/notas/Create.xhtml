@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="NotasCreateDlg" widgetVar="NotasCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateNotasTitle}">
+            <h:form id="NotasCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{notasController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateNotasLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="dd/MM/yyyy HH:mm:ss" value="#{notasController.selected.fecha}" title="#{bundle.EditNotasTitle_fecha}" required="true" requiredMessage="#{bundle.EditNotasRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateNotasLabel_idTipoNota}" for="idTipoNota" />
+                        <p:selectOneMenu id="idTipoNota" value="#{notasController.selected.idTipoNota}" required="true" requiredMessage="#{bundle.EditNotasRequiredMessage_idTipoNota}">
+                            <f:selectItems value="#{tipoNotaController.itemsAvailableSelectOne}"
+                                           var="idTipoNotaItem"
+                                           itemValue="#{idTipoNotaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateNotasLabel_imagen}" for="imagen" />
+                        <p:inputTextarea rows="4" cols="30" id="imagen" value="#{notasController.selected.imagen}" title="#{bundle.CreateNotasTitle_imagen}" />
+                        <p:outputLabel value="#{bundle.CreateNotasLabel_idNota}" for="idNota" />
+                        <p:inputText id="idNota" value="#{notasController.selected.idNota}" title="#{bundle.CreateNotasTitle_idNota}" required="true" requiredMessage="#{bundle.CreateNotasRequiredMessage_idNota}"/>
+                        <p:outputLabel value="#{bundle.CreateNotasLabel_idDependenciaOrigen}" for="idDependenciaOrigen" />
+                        <p:selectOneMenu id="idDependenciaOrigen" value="#{notasController.selected.idDependenciaOrigen}" required="true" requiredMessage="#{bundle.EditNotasRequiredMessage_idDependenciaOrigen}">
+                            <f:selectItems value="#{dependenciasController.itemsAvailableSelectOne}"
+                                           var="idDependenciaOrigenItem"
+                                           itemValue="#{idDependenciaOrigenItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateNotasLabel_nroNota}" for="nroNota" />
+                        <p:inputText id="nroNota" value="#{notasController.selected.nroNota}" title="#{bundle.CreateNotasTitle_nroNota}" required="true" requiredMessage="#{bundle.CreateNotasRequiredMessage_nroNota}"/>
+                        <p:outputLabel value="#{bundle.CreateNotasLabel_observacion}" for="observacion" />
+                        <p:inputText id="observacion" value="#{notasController.selected.observacion}" title="#{bundle.CreateNotasTitle_observacion}" />
+                        <p:outputLabel value="#{bundle.CreateNotasLabel_idDependenciaDestino}" for="idDependenciaDestino" />
+                        <p:selectOneMenu id="idDependenciaDestino" value="#{notasController.selected.idDependenciaDestino}" required="true" requiredMessage="#{bundle.EditNotasRequiredMessage_idDependenciaDestino}">
+                            <f:selectItems value="#{dependenciasController.itemsAvailableSelectOne}"
+                                           var="idDependenciaDestinoItem"
+                                           itemValue="#{idDependenciaDestinoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{notasController.create}" value="#{bundle.Save}" update="display,:NotasListForm:datalist,:growl" oncomplete="handleSubmit(args,'NotasCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="NotasCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

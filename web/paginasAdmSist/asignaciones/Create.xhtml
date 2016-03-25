@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AsignacionesCreateDlg" widgetVar="AsignacionesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAsignacionesTitle}">
+            <h:form id="AsignacionesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{asignacionesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAsignacionesLabel_fechaHasta}" for="fechaHasta" />
+                        <p:calendar id="fechaHasta" pattern="dd/MM/yyyy HH:mm:ss" value="#{asignacionesController.selected.fechaHasta}" title="#{bundle.EditAsignacionesTitle_fechaHasta}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateAsignacionesLabel_fechaDesde}" for="fechaDesde" />
+                        <p:calendar id="fechaDesde" pattern="dd/MM/yyyy HH:mm:ss" value="#{asignacionesController.selected.fechaDesde}" title="#{bundle.EditAsignacionesTitle_fechaDesde}" required="true" requiredMessage="#{bundle.EditAsignacionesRequiredMessage_fechaDesde}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateAsignacionesLabel_idNota}" for="idNota" />
+                        <p:selectOneMenu id="idNota" value="#{asignacionesController.selected.idNota}" >
+                            <f:selectItems value="#{notasController.itemsAvailableSelectOne}"
+                                           var="idNotaItem"
+                                           itemValue="#{idNotaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAsignacionesLabel_idDependencia}" for="idDependencia" />
+                        <p:selectOneMenu id="idDependencia" value="#{asignacionesController.selected.idDependencia}" required="true" requiredMessage="#{bundle.EditAsignacionesRequiredMessage_idDependencia}">
+                            <f:selectItems value="#{dependenciasController.itemsAvailableSelectOne}"
+                                           var="idDependenciaItem"
+                                           itemValue="#{idDependenciaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAsignacionesLabel_idAsignacion}" for="idAsignacion" />
+                        <p:inputText id="idAsignacion" value="#{asignacionesController.selected.idAsignacion}" title="#{bundle.CreateAsignacionesTitle_idAsignacion}" required="true" requiredMessage="#{bundle.CreateAsignacionesRequiredMessage_idAsignacion}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{asignacionesController.create}" value="#{bundle.Save}" update="display,:AsignacionesListForm:datalist,:growl" oncomplete="handleSubmit(args,'AsignacionesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AsignacionesCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

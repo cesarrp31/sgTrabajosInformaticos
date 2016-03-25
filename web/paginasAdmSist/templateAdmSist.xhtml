@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title><ui:insert name="title">#{bundle.AppTitle}</ui:insert></title>
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputScript library="js" name="jsfcrud.js"/>
+    </h:head>
+
+    <h:body>
+
+        <p:growl id="growl" life="3000" />
+
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="65" header="#{bundle.AppName}">
+                <h:form id="menuForm">
+                    <p:menubar>                        
+                        <p:menuitem value="#{bundle.Home}" outcome="/paginasAdmSist/indexAdmSist" icon="ui-icon-home"/>
+                        <p:submenu label="#{bundle.MenuGestionTrabajos}">
+                            <p:menuitem value="Trabajos" outcome="/paginasAdmSist/trabajos/List.xhtml" />
+                            <p:menuitem value="Notas" outcome="/paginasAdmSist/notas/List.xhtml" />
+                            <p:menuitem value="PatrimoniosXTrabajos" outcome="/paginasAdmSist/patrimoniosXTrabajos/List.xhtml" />
+                            <p:menuitem value="EstadosXTrabajo" outcome="/paginasAdmSist/estadosXTrabajo/List.xhtml" />
+                            <p:menuitem value="TareasRealizadas" outcome="/paginasAdmSist/tareasRealizadas/List.xhtml" />
+                            <p:menuitem value="TareasXProblemas" outcome="/paginasAdmSist/tareasXProblemas/List.xhtml" />
+                            <p:menuitem value="TecnicosXTrabajos" outcome="/paginasAdmSist/tecnicosXTrabajos/List.xhtml" />
+                            <p:menuitem value="ProblemasDetectados" outcome="/paginasAdmSist/problemasDetectados/List.xhtml" />
+                            <p:menuitem value="ProblemasN1" outcome="/paginasAdmSist/problemasN1/List.xhtml" />
+                            <p:menuitem value="ProblemasN2" outcome="/paginasAdmSist/problemasN2/List.xhtml" />
+                            <p:menuitem value="ProblemasN3" outcome="/paginasAdmSist/problemasN3/List.xhtml" />
+                            <p:menuitem value="ElementosUtilizados" outcome="/paginasAdmSist/elementosUtilizados/List.xhtml" />
+                        </p:submenu>                        
+                        <p:submenu label="#{bundle.MenuGestionInsumos}">
+                            <p:menuitem value="InsumosDisponibles" outcome="/paginasAdmSist/insumosDisponibles/List.xhtml" />
+                            <p:menuitem value="ModelosInsumo" outcome="/paginasAdmSist/modelosInsumo/List.xhtml" />
+                            <p:menuitem value="TipoInsumo" outcome="/paginasAdmSist/tipoInsumo/List.xhtml" />
+                            <p:menuitem value="CaracteristicasXInsumo" outcome="/paginasAdmSist/caracteristicasXInsumo/List.xhtml" />
+                            <p:menuitem value="EntregaInsumos" outcome="/paginasAdmSist/entregaInsumos/List.xhtml" />  
+                            <p:menuitem value="LineaEntrega" outcome="/paginasAdmSist/lineaEntrega/List.xhtml" />
+                        </p:submenu>
+                        <p:submenu label="#{bundle.MenuGestionPatrimonios}">
+                            <p:menuitem value="Patrimonios" outcome="/paginasAdmSist/patrimonios/List.xhtml" />
+                            <p:menuitem value="TipoPatrimonio" outcome="/paginasAdmSist/tipoPatrimonio/List.xhtml" />
+                            <p:menuitem value="Asignaciones" outcome="/paginasAdmSist/asignaciones/List.xhtml" />
+                            <p:menuitem value="PatrimoniosXAsignaciones" outcome="/paginasAdmSist/patrimoniosXAsignaciones/List.xhtml" />
+                            <p:menuitem value="InsumosXPatrimonio" outcome="/paginasAdmSist/insumosXPatrimonio/List.xhtml" />
+                        </p:submenu>
+                        <p:submenu label="#{bundle.MenuGestionNotas}">
+                            <p:menuitem value="TipoNota" outcome="/paginasAdmSist/tipoNota/List.xhtml" />
+                        </p:submenu>                        
+                        <p:submenu label="#{bundle.MenuGestionTecnicos}">
+                            <p:menuitem value="Tecnicos" outcome="/paginasAdmSist/tecnicos/List.xhtml" />
+                            <p:menuitem value="TipoEspecialidad" outcome="/paginasAdmSist/tipoEspecialidad/List.xhtml" />
+                        </p:submenu>
+                        <p:submenu label="#{bundle.MenuGestionDependencias}">
+                            <p:menuitem value="Dependencias" outcome="/paginasAdmSist/dependencias/List.xhtml" />
+                            <p:menuitem value="Encargados" outcome="/paginasAdmSist/encargados/List.xhtml" />
+                        </p:submenu>
+                        <p:submenu label="#{bundle.MenuGestionInformes}">                            
+                        </p:submenu>
+                        <p:submenu label="#{bundle.Maintenance}">
+                            <p:menuitem value="Caracteristicas" outcome="/paginasAdmSist/caracteristicas/List.xhtml" />
+                            <p:menuitem value="CaracteristicasXPonderaciones" outcome="/paginasAdmSist/caracteristicasXPonderaciones/List.xhtml" />
+                            <p:menuitem value="EstadosTrabajo" outcome="/paginasAdmSist/estadosTrabajo/List.xhtml" />
+                            <p:menuitem value="Marcas" outcome="/paginasAdmSist/marcas/List.xhtml" />
+                            <p:menuitem value="TransicionesEstado" outcome="/paginasAdmSist/transicionesEstado/List.xhtml" />
+                            <p:menuitem value="Tareas" outcome="/paginasAdmSist/tareas/List.xhtml" />
+                            <p:menuitem value="UnidadMedida" outcome="/paginasAdmSist/unidadMedida/List.xhtml" />
+                        </p:submenu>
+                        <p:submenu label="#{bundle.MenuGestionSistemas}">
+                            <p:menuitem value="Configuraciones"/>
+                            <p:menuitem value="Roles" outcome="/paginasAdmSist/roles/List.xhtml" />
+                            <p:menuitem value="Usuarios" outcome="/paginasAdmSist/usuarios/List.xhtml" />
+                            <p:menuitem value="Tablas" outcome="/paginasAdmSist/tablas/List.xhtml" />
+                            <p:menuitem value="Permisos" outcome="/paginasAdmSist/permisos/List.xhtml" />
+                            <p:menuitem value="MedicionTamanioTabla" outcome="/paginasAdmSist/medicionTamanioTabla/List.xhtml" />
+                            <p:menuitem value="MedicionXTabla" outcome="/paginasAdmSist/medicionXTabla/List.xhtml" />
+                            <p:menuitem value="Ponderaciones" outcome="/paginasAdmSist/ponderaciones/List.xhtml" />
+                            <p:menuitem value="Prioridades" outcome="/paginasAdmSist/prioridades/List.xhtml" />
+                        </p:submenu>
+                        <p:submenu label="#{bundle.MenuAyuda}">
+                            <p:menuitem value="#{bundle.MenuItemAyuda}" outcome="/ayuda/ayuda.xhtml" />
+                            <p:menuitem value="#{bundle.MenuItemACercaDe}" outcome="/ayuda/aCercaDe.xhtml" />
+                        </p:submenu>
+                        <f:facet name="options">                            
+                            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+                        </f:facet>                        
+                    </p:menubar>
+                </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="1">
+                <ui:insert name="footer"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <ui:insert name="body"/>
+            </p:layoutUnit>
+            
+            <p:layoutUnit position="west">
+                <p:panel>
+                    <h3>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/asignaciones/List" value="Asignaciones"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/caracteristicas/List" value="Caracteristicas"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/caracteristicasXInsumo/List" value="CaracteristicasXInsumo"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/caracteristicasXPonderaciones/List" value="CaracteristicasXPonderaciones"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/dependencias/List" value="Dependencias"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/elementosUtilizados/List" value="ElementosUtilizados"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/encargados/List" value="Encargados"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/entregaInsumos/List" value="EntregaInsumos"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/estadosTrabajo/List" value="EstadosTrabajo"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/estadosXTrabajo/List" value="EstadosXTrabajo"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/insumosDisponibles/List" value="InsumosDisponibles"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/insumosXPatrimonio/List" value="InsumosXPatrimonio"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/lineaEntrega/List" value="LineaEntrega"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/marcas/List" value="Marcas"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/medicionTamanioTabla/List" value="MedicionTamanioTabla"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/medicionXTabla/List" value="MedicionXTabla"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/modelosInsumo/List" value="ModelosInsumo"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/notas/List" value="Notas"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/patrimonios/List" value="Patrimonios"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/patrimoniosXAsignaciones/List" value="PatrimoniosXAsignaciones"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/patrimoniosXTrabajos/List" value="PatrimoniosXTrabajos"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/permisos/List" value="Permisos"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/ponderaciones/List" value="Ponderaciones"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/prioridades/List" value="Prioridades"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/problemasDetectados/List" value="ProblemasDetectados"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/problemasN1/List" value="ProblemasN1"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/problemasN2/List" value="ProblemasN2"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/problemasN3/List" value="ProblemasN3"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/roles/List" value="Roles"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/tablas/List" value="Tablas"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/tareas/List" value="Tareas"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/tareasRealizadas/List" value="TareasRealizadas"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/tareasXProblemas/List" value="TareasXProblemas"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/tecnicos/List" value="Tecnicos"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/tecnicosXTrabajos/List" value="TecnicosXTrabajos"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/tipoEspecialidad/List" value="TipoEspecialidad"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/tipoInsumo/List" value="TipoInsumo"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/tipoNota/List" value="TipoNota"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/tipoPatrimonio/List" value="TipoPatrimonio"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/trabajos/List" value="Trabajos"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/transicionesEstado/List" value="TransicionesEstado"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/unidadMedida/List" value="UnidadMedida"/>
+                    <br />
+                    <h:link outcome="/paginasAdmSist/usuarios/List" value="Usuarios"/>
+                    </h3>
+                </p:panel>
+            </p:layoutUnit>
+
+        </p:layout>
+
+    </h:body>
+
+</html>

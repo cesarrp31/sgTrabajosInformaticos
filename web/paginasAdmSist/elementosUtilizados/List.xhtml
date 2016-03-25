@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/paginasAdmSist/templateAdmSist.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListElementosUtilizadosTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="ElementosUtilizadosListForm">
+                <p:panel header="#{bundle.ListElementosUtilizadosTitle}">
+                    <p:dataTable id="datalist" value="#{elementosUtilizadosController.items}" var="item"
+                                 selectionMode="single" selection="#{elementosUtilizadosController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idElemento}"
+                                 rows="20"
+                                 rowsPerPageTemplate="20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementosUtilizadosTitle_idEstadoXTrabajo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idEstadoXTrabajo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementosUtilizadosTitle_idInsumo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idInsumo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementosUtilizadosTitle_observaciones}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.observaciones}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementosUtilizadosTitle_idElemento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idElemento}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementosUtilizadosTitle_cantidad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cantidad}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{elementosUtilizadosController.prepareCreate}" update=":ElementosUtilizadosCreateForm" oncomplete="PF('ElementosUtilizadosCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ElementosUtilizadosViewForm" oncomplete="PF('ElementosUtilizadosViewDialog').show()" disabled="#{empty elementosUtilizadosController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ElementosUtilizadosEditForm" oncomplete="PF('ElementosUtilizadosEditDialog').show()" disabled="#{empty elementosUtilizadosController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{elementosUtilizadosController.destroy}" update=":growl,datalist" disabled="#{empty elementosUtilizadosController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

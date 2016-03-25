@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TrabajosEditDlg" widgetVar="TrabajosEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTrabajosTitle}">
+            <h:form id="TrabajosEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{trabajosController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTrabajosLabel_idTrabajo}" for="idTrabajo" />
+                        <p:inputText id="idTrabajo" value="#{trabajosController.selected.idTrabajo}" title="#{bundle.EditTrabajosTitle_idTrabajo}" required="true" requiredMessage="#{bundle.EditTrabajosRequiredMessage_idTrabajo}"/>
+                        <p:outputLabel value="#{bundle.EditTrabajosLabel_nroFicha}" for="nroFicha" />
+                        <p:inputText id="nroFicha" value="#{trabajosController.selected.nroFicha}" title="#{bundle.EditTrabajosTitle_nroFicha}" required="true" requiredMessage="#{bundle.EditTrabajosRequiredMessage_nroFicha}"/>
+                        <p:outputLabel value="#{bundle.EditTrabajosLabel_usuarioIniciador}" for="usuarioIniciador" />
+                        <p:selectOneMenu id="usuarioIniciador" value="#{trabajosController.selected.usuarioIniciador}" required="true" requiredMessage="#{bundle.EditTrabajosRequiredMessage_usuarioIniciador}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"
+                                           var="usuarioIniciadorItem"
+                                           itemValue="#{usuarioIniciadorItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditTrabajosLabel_fechaComienzo}" for="fechaComienzo" />
+                        <p:calendar id="fechaComienzo" pattern="dd/MM/yyyy HH:mm:ss" value="#{trabajosController.selected.fechaComienzo}" title="#{bundle.EditTrabajosTitle_fechaComienzo}" required="true" requiredMessage="#{bundle.EditTrabajosRequiredMessage_fechaComienzo}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditTrabajosLabel_idNota}" for="idNota" />
+                        <p:selectOneMenu id="idNota" value="#{trabajosController.selected.idNota}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{notasController.itemsAvailableSelectOne}"
+                                           var="idNotaItem"
+                                           itemValue="#{idNotaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditTrabajosLabel_idPrioridad}" for="idPrioridad" />
+                        <p:selectOneMenu id="idPrioridad" value="#{trabajosController.selected.idPrioridad}" required="true" requiredMessage="#{bundle.EditTrabajosRequiredMessage_idPrioridad}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{prioridadesController.itemsAvailableSelectOne}"
+                                           var="idPrioridadItem"
+                                           itemValue="#{idPrioridadItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditTrabajosLabel_idDependencia}" for="idDependencia" />
+                        <p:selectOneMenu id="idDependencia" value="#{trabajosController.selected.idDependencia}" required="true" requiredMessage="#{bundle.EditTrabajosRequiredMessage_idDependencia}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{dependenciasController.itemsAvailableSelectOne}"
+                                           var="idDependenciaItem"
+                                           itemValue="#{idDependenciaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditTrabajosLabel_sintomas}" for="sintomas" />
+                        <p:inputText id="sintomas" value="#{trabajosController.selected.sintomas}" title="#{bundle.EditTrabajosTitle_sintomas}" />
+                        <p:outputLabel value="#{bundle.EditTrabajosLabel_fechaFin}" for="fechaFin" />
+                        <p:calendar id="fechaFin" pattern="dd/MM/yyyy HH:mm:ss" value="#{trabajosController.selected.fechaFin}" title="#{bundle.EditTrabajosTitle_fechaFin}"  showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{trabajosController.update}" value="#{bundle.Save}" update="display,:TrabajosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TrabajosEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TrabajosEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

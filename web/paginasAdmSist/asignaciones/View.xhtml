@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AsignacionesViewDlg" widgetVar="AsignacionesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAsignacionesTitle}">
+            <h:form id="AsignacionesViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{asignacionesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAsignacionesLabel_fechaHasta}"/>
+                        <h:outputText value="#{asignacionesController.selected.fechaHasta}" title="#{bundle.ViewAsignacionesTitle_fechaHasta}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewAsignacionesLabel_fechaDesde}"/>
+                        <h:outputText value="#{asignacionesController.selected.fechaDesde}" title="#{bundle.ViewAsignacionesTitle_fechaDesde}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewAsignacionesLabel_idNota}"/>
+                        <h:outputText value="#{asignacionesController.selected.idNota}" title="#{bundle.ViewAsignacionesTitle_idNota}"/>
+                        <h:outputText value="#{bundle.ViewAsignacionesLabel_idDependencia}"/>
+                        <h:outputText value="#{asignacionesController.selected.idDependencia}" title="#{bundle.ViewAsignacionesTitle_idDependencia}"/>
+                        <h:outputText value="#{bundle.ViewAsignacionesLabel_idAsignacion}"/>
+                        <h:outputText value="#{asignacionesController.selected.idAsignacion}" title="#{bundle.ViewAsignacionesTitle_idAsignacion}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AsignacionesViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

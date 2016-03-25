@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PatrimoniosCreateDlg" widgetVar="PatrimoniosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePatrimoniosTitle}">
+            <h:form id="PatrimoniosCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{patrimoniosController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePatrimoniosLabel_idPatrimonio}" for="idPatrimonio" />
+                        <p:inputText id="idPatrimonio" value="#{patrimoniosController.selected.idPatrimonio}" title="#{bundle.CreatePatrimoniosTitle_idPatrimonio}" required="true" requiredMessage="#{bundle.CreatePatrimoniosRequiredMessage_idPatrimonio}"/>
+                        <p:outputLabel value="#{bundle.CreatePatrimoniosLabel_fechaBaja}" for="fechaBaja" />
+                        <p:calendar id="fechaBaja" pattern="dd/MM/yyyy HH:mm:ss" value="#{patrimoniosController.selected.fechaBaja}" title="#{bundle.EditPatrimoniosTitle_fechaBaja}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePatrimoniosLabel_fechaAlta}" for="fechaAlta" />
+                        <p:calendar id="fechaAlta" pattern="dd/MM/yyyy HH:mm:ss" value="#{patrimoniosController.selected.fechaAlta}" title="#{bundle.EditPatrimoniosTitle_fechaAlta}" required="true" requiredMessage="#{bundle.EditPatrimoniosRequiredMessage_fechaAlta}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePatrimoniosLabel_idTipo}" for="idTipo" />
+                        <p:selectOneMenu id="idTipo" value="#{patrimoniosController.selected.idTipo}" required="true" requiredMessage="#{bundle.EditPatrimoniosRequiredMessage_idTipo}">
+                            <f:selectItems value="#{tipoPatrimonioController.itemsAvailableSelectOne}"
+                                           var="idTipoItem"
+                                           itemValue="#{idTipoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePatrimoniosLabel_idPonderacion}" for="idPonderacion" />
+                        <p:selectOneMenu id="idPonderacion" value="#{patrimoniosController.selected.idPonderacion}" required="true" requiredMessage="#{bundle.EditPatrimoniosRequiredMessage_idPonderacion}">
+                            <f:selectItems value="#{ponderacionesController.itemsAvailableSelectOne}"
+                                           var="idPonderacionItem"
+                                           itemValue="#{idPonderacionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePatrimoniosLabel_comentario}" for="comentario" />
+                        <p:inputText id="comentario" value="#{patrimoniosController.selected.comentario}" title="#{bundle.CreatePatrimoniosTitle_comentario}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{patrimoniosController.create}" value="#{bundle.Save}" update="display,:PatrimoniosListForm:datalist,:growl" oncomplete="handleSubmit(args,'PatrimoniosCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PatrimoniosCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

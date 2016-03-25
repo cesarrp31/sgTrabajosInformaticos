@@ -5,6 +5,7 @@ package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -163,4 +164,35 @@ public class Dependencias implements Serializable {
     public void setNombreCorto(String nombreCorto) {
         this.nombreCorto = nombreCorto;
     }
+
+    @Override
+    public String toString() {
+        return "(" + "id:" + idDependencia + ", " + dependencia + ")";
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 41 * hash + Objects.hashCode(this.idDependencia);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Dependencias other = (Dependencias) obj;
+        if (!Objects.equals(this.idDependencia, other.idDependencia)) {
+            return false;
+        }
+        return true;
+    }
+    
 }

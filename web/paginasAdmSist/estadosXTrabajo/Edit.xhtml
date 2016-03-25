@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EstadosXTrabajoEditDlg" widgetVar="EstadosXTrabajoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEstadosXTrabajoTitle}">
+            <h:form id="EstadosXTrabajoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{estadosXTrabajoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditEstadosXTrabajoLabel_idEstadoXTrabajo}" for="idEstadoXTrabajo" />
+                        <p:inputText id="idEstadoXTrabajo" value="#{estadosXTrabajoController.selected.idEstadoXTrabajo}" title="#{bundle.EditEstadosXTrabajoTitle_idEstadoXTrabajo}" required="true" requiredMessage="#{bundle.EditEstadosXTrabajoRequiredMessage_idEstadoXTrabajo}"/>
+                        <p:outputLabel value="#{bundle.EditEstadosXTrabajoLabel_trabajoRealizado}" for="trabajoRealizado" />
+                        <p:inputText id="trabajoRealizado" value="#{estadosXTrabajoController.selected.trabajoRealizado}" title="#{bundle.EditEstadosXTrabajoTitle_trabajoRealizado}" required="true" requiredMessage="#{bundle.EditEstadosXTrabajoRequiredMessage_trabajoRealizado}"/>
+                        <p:outputLabel value="#{bundle.EditEstadosXTrabajoLabel_estado}" for="estado" />
+                        <p:selectOneMenu id="estado" value="#{estadosXTrabajoController.selected.estado}" required="true" requiredMessage="#{bundle.EditEstadosXTrabajoRequiredMessage_estado}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{estadosTrabajoController.itemsAvailableSelectOne}"
+                                           var="estadoItem"
+                                           itemValue="#{estadoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEstadosXTrabajoLabel_fechaHasta}" for="fechaHasta" />
+                        <p:calendar id="fechaHasta" pattern="dd/MM/yyyy HH:mm:ss" value="#{estadosXTrabajoController.selected.fechaHasta}" title="#{bundle.EditEstadosXTrabajoTitle_fechaHasta}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditEstadosXTrabajoLabel_nroFicha}" for="nroFicha" />
+                        <p:inputText id="nroFicha" value="#{estadosXTrabajoController.selected.nroFicha}" title="#{bundle.EditEstadosXTrabajoTitle_nroFicha}" required="true" requiredMessage="#{bundle.EditEstadosXTrabajoRequiredMessage_nroFicha}"/>
+                        <p:outputLabel value="#{bundle.EditEstadosXTrabajoLabel_idTrabajo}" for="idTrabajo" />
+                        <p:selectOneMenu id="idTrabajo" value="#{estadosXTrabajoController.selected.idTrabajo}" required="true" requiredMessage="#{bundle.EditEstadosXTrabajoRequiredMessage_idTrabajo}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{trabajosController.itemsAvailableSelectOne}"
+                                           var="idTrabajoItem"
+                                           itemValue="#{idTrabajoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEstadosXTrabajoLabel_fechaDesde}" for="fechaDesde" />
+                        <p:calendar id="fechaDesde" pattern="dd/MM/yyyy HH:mm:ss" value="#{estadosXTrabajoController.selected.fechaDesde}" title="#{bundle.EditEstadosXTrabajoTitle_fechaDesde}" required="true" requiredMessage="#{bundle.EditEstadosXTrabajoRequiredMessage_fechaDesde}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditEstadosXTrabajoLabel_observaciones}" for="observaciones" />
+                        <p:inputText id="observaciones" value="#{estadosXTrabajoController.selected.observaciones}" title="#{bundle.EditEstadosXTrabajoTitle_observaciones}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{estadosXTrabajoController.update}" value="#{bundle.Save}" update="display,:EstadosXTrabajoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EstadosXTrabajoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EstadosXTrabajoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

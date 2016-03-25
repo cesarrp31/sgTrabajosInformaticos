@@ -5,6 +5,7 @@ package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -58,4 +59,35 @@ public class Prioridades implements Serializable {
     public void setPrioridad(String prioridad) {
         this.prioridad = prioridad;
     }
+
+    @Override
+    public String toString() {
+        return "(" + "id:" + idPrioridad + ", " + prioridad + ")";
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.idPrioridad);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Prioridades other = (Prioridades) obj;
+        if (!Objects.equals(this.idPrioridad, other.idPrioridad)) {
+            return false;
+        }
+        return true;
+    }
+    
 }
