@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsuariosViewDlg" widgetVar="UsuariosViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewUsuariosTitle}">
+            <h:form id="UsuariosViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usuariosController.selected != null}">
+                        <h:outputText value="#{bundle.ViewUsuariosLabel_password}"/>
+                        <h:outputText value="#{usuariosController.selected.password}" title="#{bundle.ViewUsuariosTitle_password}"/>
+                        <h:outputText value="#{bundle.ViewUsuariosLabel_idRol}"/>
+                        <h:outputText value="#{usuariosController.selected.idRol}" title="#{bundle.ViewUsuariosTitle_idRol}"/>
+                        <h:outputText value="#{bundle.ViewUsuariosLabel_dominio}"/>
+                        <h:outputText value="#{usuariosController.selected.dominio}" title="#{bundle.ViewUsuariosTitle_dominio}"/>
+                        <h:outputText value="#{bundle.ViewUsuariosLabel_grupo}"/>
+                        <h:outputText value="#{usuariosController.selected.grupo}" title="#{bundle.ViewUsuariosTitle_grupo}"/>
+                        <h:outputText value="#{bundle.ViewUsuariosLabel_usuario}"/>
+                        <h:outputText value="#{usuariosController.selected.usuario}" title="#{bundle.ViewUsuariosTitle_usuario}"/>
+                        <h:outputText value="#{bundle.ViewUsuariosLabel_idTecnico}"/>
+                        <h:outputText value="#{usuariosController.selected.idTecnico}" title="#{bundle.ViewUsuariosTitle_idTecnico}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="UsuariosViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

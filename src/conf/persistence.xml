@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="sgTrabajosInformaticosUnit" transaction-type="JTA">
+    <jta-data-source>java:app/BDTrabajosCasa</jta-data-source>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.TecnicosXTrabajos</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.Caracteristicas</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.TipoPatrimonio</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.EstadosTrabajo</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.Notas</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.Roles</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.Trabajos</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.Usuarios</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.EntregaInsumos</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.TransicionesEstado</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.Ponderaciones</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.Encargados</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.TareasRealizadas</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.TipoNota</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.PatrimoniosXAsignaciones</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.Tecnicos</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.TipoEspecialidad</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.ProblemasDetectados</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.Tablas</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.CaracteristicasXPonderaciones</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.UnidadMedida</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.MedicionXTabla</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.MedicionTamanioTabla</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.Asignaciones</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.Dependencias</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.ElementosUtilizados</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.Permisos</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.Tareas</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.Prioridades</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.CaracteristicasXInsumo</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.EstadosXTrabajo</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.LineaEntrega</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.Patrimonios</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.ModelosInsumo</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.PatrimoniosXTrabajos</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.InsumosDisponibles</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.Marcas</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.TipoInsumo</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.ProblemasN3</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.InsumosXPatrimonio</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.ProblemasN1</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.ProblemasN2</class>
+    <class>org.legislaturachaco.sgTrabajosInformaticos.entidades.TareasXProblemas</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+    </properties>
+  </persistence-unit>
+</persistence>

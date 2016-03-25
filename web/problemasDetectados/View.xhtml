@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProblemasDetectadosViewDlg" widgetVar="ProblemasDetectadosViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewProblemasDetectadosTitle}">
+            <h:form id="ProblemasDetectadosViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{problemasDetectadosController.selected != null}">
+                        <h:outputText value="#{bundle.ViewProblemasDetectadosLabel_idProblemaN3}"/>
+                        <h:outputText value="#{problemasDetectadosController.selected.idProblemaN3}" title="#{bundle.ViewProblemasDetectadosTitle_idProblemaN3}"/>
+                        <h:outputText value="#{bundle.ViewProblemasDetectadosLabel_idProblemaDetectado}"/>
+                        <h:outputText value="#{problemasDetectadosController.selected.idProblemaDetectado}" title="#{bundle.ViewProblemasDetectadosTitle_idProblemaDetectado}"/>
+                        <h:outputText value="#{bundle.ViewProblemasDetectadosLabel_idTrabajo}"/>
+                        <h:outputText value="#{problemasDetectadosController.selected.idTrabajo}" title="#{bundle.ViewProblemasDetectadosTitle_idTrabajo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ProblemasDetectadosViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

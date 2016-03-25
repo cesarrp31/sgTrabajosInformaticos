@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProblemasDetectadosEditDlg" widgetVar="ProblemasDetectadosEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditProblemasDetectadosTitle}">
+            <h:form id="ProblemasDetectadosEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{problemasDetectadosController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditProblemasDetectadosLabel_idProblemaN3}" for="idProblemaN3" />
+                        <p:selectOneMenu id="idProblemaN3" value="#{problemasDetectadosController.selected.idProblemaN3}" required="true" requiredMessage="#{bundle.EditProblemasDetectadosRequiredMessage_idProblemaN3}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{problemasN3Controller.itemsAvailableSelectOne}"
+                                           var="idProblemaN3Item"
+                                           itemValue="#{idProblemaN3Item}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditProblemasDetectadosLabel_idProblemaDetectado}" for="idProblemaDetectado" />
+                        <p:inputText id="idProblemaDetectado" value="#{problemasDetectadosController.selected.idProblemaDetectado}" title="#{bundle.EditProblemasDetectadosTitle_idProblemaDetectado}" required="true" requiredMessage="#{bundle.EditProblemasDetectadosRequiredMessage_idProblemaDetectado}"/>
+                        <p:outputLabel value="#{bundle.EditProblemasDetectadosLabel_idTrabajo}" for="idTrabajo" />
+                        <p:selectOneMenu id="idTrabajo" value="#{problemasDetectadosController.selected.idTrabajo}" required="true" requiredMessage="#{bundle.EditProblemasDetectadosRequiredMessage_idTrabajo}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{trabajosController.itemsAvailableSelectOne}"
+                                           var="idTrabajoItem"
+                                           itemValue="#{idTrabajoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{problemasDetectadosController.update}" value="#{bundle.Save}" update="display,:ProblemasDetectadosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProblemasDetectadosEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ProblemasDetectadosEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

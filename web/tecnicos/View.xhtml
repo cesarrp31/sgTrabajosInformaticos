@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TecnicosViewDlg" widgetVar="TecnicosViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTecnicosTitle}">
+            <h:form id="TecnicosViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tecnicosController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTecnicosLabel_apellido}"/>
+                        <h:outputText value="#{tecnicosController.selected.apellido}" title="#{bundle.ViewTecnicosTitle_apellido}"/>
+                        <h:outputText value="#{bundle.ViewTecnicosLabel_correo}"/>
+                        <h:outputText value="#{tecnicosController.selected.correo}" title="#{bundle.ViewTecnicosTitle_correo}"/>
+                        <h:outputText value="#{bundle.ViewTecnicosLabel_idTecnico}"/>
+                        <h:outputText value="#{tecnicosController.selected.idTecnico}" title="#{bundle.ViewTecnicosTitle_idTecnico}"/>
+                        <h:outputText value="#{bundle.ViewTecnicosLabel_nombre}"/>
+                        <h:outputText value="#{tecnicosController.selected.nombre}" title="#{bundle.ViewTecnicosTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewTecnicosLabel_idTipoEspecialidad}"/>
+                        <h:outputText value="#{tecnicosController.selected.idTipoEspecialidad}" title="#{bundle.ViewTecnicosTitle_idTipoEspecialidad}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TecnicosViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CaracteristicasCreateDlg" widgetVar="CaracteristicasCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCaracteristicasTitle}">
+            <h:form id="CaracteristicasCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{caracteristicasController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCaracteristicasLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{caracteristicasController.selected.descripcion}" title="#{bundle.CreateCaracteristicasTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.CreateCaracteristicasLabel_idCaracteristica}" for="idCaracteristica" />
+                        <p:inputText id="idCaracteristica" value="#{caracteristicasController.selected.idCaracteristica}" title="#{bundle.CreateCaracteristicasTitle_idCaracteristica}" required="true" requiredMessage="#{bundle.CreateCaracteristicasRequiredMessage_idCaracteristica}"/>
+                        <p:outputLabel value="#{bundle.CreateCaracteristicasLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{caracteristicasController.selected.nombre}" title="#{bundle.CreateCaracteristicasTitle_nombre}" required="true" requiredMessage="#{bundle.CreateCaracteristicasRequiredMessage_nombre}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{caracteristicasController.create}" value="#{bundle.Save}" update="display,:CaracteristicasListForm:datalist,:growl" oncomplete="handleSubmit(args,'CaracteristicasCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CaracteristicasCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

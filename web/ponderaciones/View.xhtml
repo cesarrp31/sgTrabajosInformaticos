@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PonderacionesViewDlg" widgetVar="PonderacionesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPonderacionesTitle}">
+            <h:form id="PonderacionesViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ponderacionesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPonderacionesLabel_ponderacion}"/>
+                        <h:outputText value="#{ponderacionesController.selected.ponderacion}" title="#{bundle.ViewPonderacionesTitle_ponderacion}"/>
+                        <h:outputText value="#{bundle.ViewPonderacionesLabel_fechaHasta}"/>
+                        <h:outputText value="#{ponderacionesController.selected.fechaHasta}" title="#{bundle.ViewPonderacionesTitle_fechaHasta}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPonderacionesLabel_fechaDesde}"/>
+                        <h:outputText value="#{ponderacionesController.selected.fechaDesde}" title="#{bundle.ViewPonderacionesTitle_fechaDesde}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPonderacionesLabel_idPonderacion}"/>
+                        <h:outputText value="#{ponderacionesController.selected.idPonderacion}" title="#{bundle.ViewPonderacionesTitle_idPonderacion}"/>
+                        <h:outputText value="#{bundle.ViewPonderacionesLabel_observacion}"/>
+                        <h:outputText value="#{ponderacionesController.selected.observacion}" title="#{bundle.ViewPonderacionesTitle_observacion}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PonderacionesViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

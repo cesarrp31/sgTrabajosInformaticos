@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ModelosInsumoViewDlg" widgetVar="ModelosInsumoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewModelosInsumoTitle}">
+            <h:form id="ModelosInsumoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{modelosInsumoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewModelosInsumoLabel_idTipoInsumo}"/>
+                        <h:outputText value="#{modelosInsumoController.selected.idTipoInsumo}" title="#{bundle.ViewModelosInsumoTitle_idTipoInsumo}"/>
+                        <h:outputText value="#{bundle.ViewModelosInsumoLabel_idUnidadMedida}"/>
+                        <h:outputText value="#{modelosInsumoController.selected.idUnidadMedida}" title="#{bundle.ViewModelosInsumoTitle_idUnidadMedida}"/>
+                        <h:outputText value="#{bundle.ViewModelosInsumoLabel_idModelo}"/>
+                        <h:outputText value="#{modelosInsumoController.selected.idModelo}" title="#{bundle.ViewModelosInsumoTitle_idModelo}"/>
+                        <h:outputText value="#{bundle.ViewModelosInsumoLabel_idMarca}"/>
+                        <h:outputText value="#{modelosInsumoController.selected.idMarca}" title="#{bundle.ViewModelosInsumoTitle_idMarca}"/>
+                        <h:outputText value="#{bundle.ViewModelosInsumoLabel_modelo}"/>
+                        <h:outputText value="#{modelosInsumoController.selected.modelo}" title="#{bundle.ViewModelosInsumoTitle_modelo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ModelosInsumoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

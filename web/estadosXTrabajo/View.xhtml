@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EstadosXTrabajoViewDlg" widgetVar="EstadosXTrabajoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEstadosXTrabajoTitle}">
+            <h:form id="EstadosXTrabajoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{estadosXTrabajoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewEstadosXTrabajoLabel_idEstadoXTrabajo}"/>
+                        <h:outputText value="#{estadosXTrabajoController.selected.idEstadoXTrabajo}" title="#{bundle.ViewEstadosXTrabajoTitle_idEstadoXTrabajo}"/>
+                        <h:outputText value="#{bundle.ViewEstadosXTrabajoLabel_trabajoRealizado}"/>
+                        <h:outputText value="#{estadosXTrabajoController.selected.trabajoRealizado}" title="#{bundle.ViewEstadosXTrabajoTitle_trabajoRealizado}"/>
+                        <h:outputText value="#{bundle.ViewEstadosXTrabajoLabel_estado}"/>
+                        <h:outputText value="#{estadosXTrabajoController.selected.estado}" title="#{bundle.ViewEstadosXTrabajoTitle_estado}"/>
+                        <h:outputText value="#{bundle.ViewEstadosXTrabajoLabel_fechaHasta}"/>
+                        <h:outputText value="#{estadosXTrabajoController.selected.fechaHasta}" title="#{bundle.ViewEstadosXTrabajoTitle_fechaHasta}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEstadosXTrabajoLabel_nroFicha}"/>
+                        <h:outputText value="#{estadosXTrabajoController.selected.nroFicha}" title="#{bundle.ViewEstadosXTrabajoTitle_nroFicha}"/>
+                        <h:outputText value="#{bundle.ViewEstadosXTrabajoLabel_idTrabajo}"/>
+                        <h:outputText value="#{estadosXTrabajoController.selected.idTrabajo}" title="#{bundle.ViewEstadosXTrabajoTitle_idTrabajo}"/>
+                        <h:outputText value="#{bundle.ViewEstadosXTrabajoLabel_fechaDesde}"/>
+                        <h:outputText value="#{estadosXTrabajoController.selected.fechaDesde}" title="#{bundle.ViewEstadosXTrabajoTitle_fechaDesde}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEstadosXTrabajoLabel_observaciones}"/>
+                        <h:outputText value="#{estadosXTrabajoController.selected.observaciones}" title="#{bundle.ViewEstadosXTrabajoTitle_observaciones}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="EstadosXTrabajoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

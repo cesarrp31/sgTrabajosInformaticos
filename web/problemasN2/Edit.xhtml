@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProblemasN2EditDlg" widgetVar="ProblemasN2EditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditProblemasN2Title}">
+            <h:form id="ProblemasN2EditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{problemasN2Controller.selected != null}">
+                        <p:outputLabel value="#{bundle.EditProblemasN2Label_idProblemaN1}" for="idProblemaN1" />
+                        <p:selectOneMenu id="idProblemaN1" value="#{problemasN2Controller.selected.idProblemaN1}" required="true" requiredMessage="#{bundle.EditProblemasN2RequiredMessage_idProblemaN1}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{problemasN1Controller.itemsAvailableSelectOne}"
+                                           var="idProblemaN1Item"
+                                           itemValue="#{idProblemaN1Item}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditProblemasN2Label_idProblemaN2}" for="idProblemaN2" />
+                        <p:inputText id="idProblemaN2" value="#{problemasN2Controller.selected.idProblemaN2}" title="#{bundle.EditProblemasN2Title_idProblemaN2}" required="true" requiredMessage="#{bundle.EditProblemasN2RequiredMessage_idProblemaN2}"/>
+                        <p:outputLabel value="#{bundle.EditProblemasN2Label_problema}" for="problema" />
+                        <p:inputText id="problema" value="#{problemasN2Controller.selected.problema}" title="#{bundle.EditProblemasN2Title_problema}" required="true" requiredMessage="#{bundle.EditProblemasN2RequiredMessage_problema}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{problemasN2Controller.update}" value="#{bundle.Save}" update="display,:ProblemasN2ListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProblemasN2EditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ProblemasN2EditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

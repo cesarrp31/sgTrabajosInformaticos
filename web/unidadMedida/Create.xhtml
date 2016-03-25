@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UnidadMedidaCreateDlg" widgetVar="UnidadMedidaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUnidadMedidaTitle}">
+            <h:form id="UnidadMedidaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{unidadMedidaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateUnidadMedidaLabel_abreviatura}" for="abreviatura" />
+                        <p:inputText id="abreviatura" value="#{unidadMedidaController.selected.abreviatura}" title="#{bundle.CreateUnidadMedidaTitle_abreviatura}" required="true" requiredMessage="#{bundle.CreateUnidadMedidaRequiredMessage_abreviatura}"/>
+                        <p:outputLabel value="#{bundle.CreateUnidadMedidaLabel_unidadMedida}" for="unidadMedida" />
+                        <p:inputText id="unidadMedida" value="#{unidadMedidaController.selected.unidadMedida}" title="#{bundle.CreateUnidadMedidaTitle_unidadMedida}" required="true" requiredMessage="#{bundle.CreateUnidadMedidaRequiredMessage_unidadMedida}"/>
+                        <p:outputLabel value="#{bundle.CreateUnidadMedidaLabel_idUnidadMedida}" for="idUnidadMedida" />
+                        <p:inputText id="idUnidadMedida" value="#{unidadMedidaController.selected.idUnidadMedida}" title="#{bundle.CreateUnidadMedidaTitle_idUnidadMedida}" required="true" requiredMessage="#{bundle.CreateUnidadMedidaRequiredMessage_idUnidadMedida}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{unidadMedidaController.create}" value="#{bundle.Save}" update="display,:UnidadMedidaListForm:datalist,:growl" oncomplete="handleSubmit(args,'UnidadMedidaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UnidadMedidaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

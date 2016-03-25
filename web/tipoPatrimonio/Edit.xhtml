@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipoPatrimonioEditDlg" widgetVar="TipoPatrimonioEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTipoPatrimonioTitle}">
+            <h:form id="TipoPatrimonioEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tipoPatrimonioController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTipoPatrimonioLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{tipoPatrimonioController.selected.descripcion}" title="#{bundle.EditTipoPatrimonioTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.EditTipoPatrimonioLabel_tipo}" for="tipo" />
+                        <p:inputText id="tipo" value="#{tipoPatrimonioController.selected.tipo}" title="#{bundle.EditTipoPatrimonioTitle_tipo}" required="true" requiredMessage="#{bundle.EditTipoPatrimonioRequiredMessage_tipo}"/>
+                        <p:outputLabel value="#{bundle.EditTipoPatrimonioLabel_idTipo}" for="idTipo" />
+                        <p:inputText id="idTipo" value="#{tipoPatrimonioController.selected.idTipo}" title="#{bundle.EditTipoPatrimonioTitle_idTipo}" required="true" requiredMessage="#{bundle.EditTipoPatrimonioRequiredMessage_idTipo}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipoPatrimonioController.update}" value="#{bundle.Save}" update="display,:TipoPatrimonioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TipoPatrimonioEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TipoPatrimonioEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PatrimoniosXTrabajosViewDlg" widgetVar="PatrimoniosXTrabajosViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPatrimoniosXTrabajosTitle}">
+            <h:form id="PatrimoniosXTrabajosViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{patrimoniosXTrabajosController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPatrimoniosXTrabajosLabel_idPatrimonio}"/>
+                        <h:outputText value="#{patrimoniosXTrabajosController.selected.idPatrimonio}" title="#{bundle.ViewPatrimoniosXTrabajosTitle_idPatrimonio}"/>
+                        <h:outputText value="#{bundle.ViewPatrimoniosXTrabajosLabel_idTrabajo}"/>
+                        <h:outputText value="#{patrimoniosXTrabajosController.selected.idTrabajo}" title="#{bundle.ViewPatrimoniosXTrabajosTitle_idTrabajo}"/>
+                        <h:outputText value="#{bundle.ViewPatrimoniosXTrabajosLabel_idPatrimonioXTrabajo}"/>
+                        <h:outputText value="#{patrimoniosXTrabajosController.selected.idPatrimonioXTrabajo}" title="#{bundle.ViewPatrimoniosXTrabajosTitle_idPatrimonioXTrabajo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PatrimoniosXTrabajosViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

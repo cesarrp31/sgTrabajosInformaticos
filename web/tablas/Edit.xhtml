@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TablasEditDlg" widgetVar="TablasEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTablasTitle}">
+            <h:form id="TablasEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tablasController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTablasLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{tablasController.selected.descripcion}" title="#{bundle.EditTablasTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.EditTablasLabel_tabla}" for="tabla" />
+                        <p:inputText id="tabla" value="#{tablasController.selected.tabla}" title="#{bundle.EditTablasTitle_tabla}" required="true" requiredMessage="#{bundle.EditTablasRequiredMessage_tabla}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tablasController.update}" value="#{bundle.Save}" update="display,:TablasListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TablasEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TablasEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MedicionXTablaEditDlg" widgetVar="MedicionXTablaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMedicionXTablaTitle}">
+            <h:form id="MedicionXTablaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{medicionXTablaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditMedicionXTablaLabel_valor}" for="valor" />
+                        <p:inputText id="valor" value="#{medicionXTablaController.selected.valor}" title="#{bundle.EditMedicionXTablaTitle_valor}" required="true" requiredMessage="#{bundle.EditMedicionXTablaRequiredMessage_valor}"/>
+                        <p:outputLabel value="#{bundle.EditMedicionXTablaLabel_idMedicion}" for="idMedicion" />
+                        <p:selectOneMenu id="idMedicion" value="#{medicionXTablaController.selected.idMedicion}" required="true" requiredMessage="#{bundle.EditMedicionXTablaRequiredMessage_idMedicion}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{medicionTamanioTablaController.itemsAvailableSelectOne}"
+                                           var="idMedicionItem"
+                                           itemValue="#{idMedicionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditMedicionXTablaLabel_tabla}" for="tabla" />
+                        <p:selectOneMenu id="tabla" value="#{medicionXTablaController.selected.tabla}" required="true" requiredMessage="#{bundle.EditMedicionXTablaRequiredMessage_tabla}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tablasController.itemsAvailableSelectOne}"
+                                           var="tablaItem"
+                                           itemValue="#{tablaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditMedicionXTablaLabel_idMedicionXTabla}" for="idMedicionXTabla" />
+                        <p:inputText id="idMedicionXTabla" value="#{medicionXTablaController.selected.idMedicionXTabla}" title="#{bundle.EditMedicionXTablaTitle_idMedicionXTabla}" required="true" requiredMessage="#{bundle.EditMedicionXTablaRequiredMessage_idMedicionXTabla}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{medicionXTablaController.update}" value="#{bundle.Save}" update="display,:MedicionXTablaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MedicionXTablaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MedicionXTablaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

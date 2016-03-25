@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LineaEntregaEditDlg" widgetVar="LineaEntregaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditLineaEntregaTitle}">
+            <h:form id="LineaEntregaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{lineaEntregaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditLineaEntregaLabel_idEntregaInsumo}" for="idEntregaInsumo" />
+                        <p:selectOneMenu id="idEntregaInsumo" value="#{lineaEntregaController.selected.idEntregaInsumo}" required="true" requiredMessage="#{bundle.EditLineaEntregaRequiredMessage_idEntregaInsumo}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{entregaInsumosController.itemsAvailableSelectOne}"
+                                           var="idEntregaInsumoItem"
+                                           itemValue="#{idEntregaInsumoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditLineaEntregaLabel_idInsumo}" for="idInsumo" />
+                        <p:selectOneMenu id="idInsumo" value="#{lineaEntregaController.selected.idInsumo}" required="true" requiredMessage="#{bundle.EditLineaEntregaRequiredMessage_idInsumo}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{insumosDisponiblesController.itemsAvailableSelectOne}"
+                                           var="idInsumoItem"
+                                           itemValue="#{idInsumoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditLineaEntregaLabel_idLineaEntrega}" for="idLineaEntrega" />
+                        <p:inputText id="idLineaEntrega" value="#{lineaEntregaController.selected.idLineaEntrega}" title="#{bundle.EditLineaEntregaTitle_idLineaEntrega}" required="true" requiredMessage="#{bundle.EditLineaEntregaRequiredMessage_idLineaEntrega}"/>
+                        <p:outputLabel value="#{bundle.EditLineaEntregaLabel_cantidad}" for="cantidad" />
+                        <p:inputText id="cantidad" value="#{lineaEntregaController.selected.cantidad}" title="#{bundle.EditLineaEntregaTitle_cantidad}" required="true" requiredMessage="#{bundle.EditLineaEntregaRequiredMessage_cantidad}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{lineaEntregaController.update}" value="#{bundle.Save}" update="display,:LineaEntregaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LineaEntregaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LineaEntregaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

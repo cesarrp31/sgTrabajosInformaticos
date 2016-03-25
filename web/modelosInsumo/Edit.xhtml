@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ModelosInsumoEditDlg" widgetVar="ModelosInsumoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditModelosInsumoTitle}">
+            <h:form id="ModelosInsumoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{modelosInsumoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditModelosInsumoLabel_idTipoInsumo}" for="idTipoInsumo" />
+                        <p:selectOneMenu id="idTipoInsumo" value="#{modelosInsumoController.selected.idTipoInsumo}" required="true" requiredMessage="#{bundle.EditModelosInsumoRequiredMessage_idTipoInsumo}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoInsumoController.itemsAvailableSelectOne}"
+                                           var="idTipoInsumoItem"
+                                           itemValue="#{idTipoInsumoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditModelosInsumoLabel_idUnidadMedida}" for="idUnidadMedida" />
+                        <p:selectOneMenu id="idUnidadMedida" value="#{modelosInsumoController.selected.idUnidadMedida}" required="true" requiredMessage="#{bundle.EditModelosInsumoRequiredMessage_idUnidadMedida}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{unidadMedidaController.itemsAvailableSelectOne}"
+                                           var="idUnidadMedidaItem"
+                                           itemValue="#{idUnidadMedidaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditModelosInsumoLabel_idModelo}" for="idModelo" />
+                        <p:inputText id="idModelo" value="#{modelosInsumoController.selected.idModelo}" title="#{bundle.EditModelosInsumoTitle_idModelo}" required="true" requiredMessage="#{bundle.EditModelosInsumoRequiredMessage_idModelo}"/>
+                        <p:outputLabel value="#{bundle.EditModelosInsumoLabel_idMarca}" for="idMarca" />
+                        <p:selectOneMenu id="idMarca" value="#{modelosInsumoController.selected.idMarca}" required="true" requiredMessage="#{bundle.EditModelosInsumoRequiredMessage_idMarca}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{marcasController.itemsAvailableSelectOne}"
+                                           var="idMarcaItem"
+                                           itemValue="#{idMarcaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditModelosInsumoLabel_modelo}" for="modelo" />
+                        <p:inputText id="modelo" value="#{modelosInsumoController.selected.modelo}" title="#{bundle.EditModelosInsumoTitle_modelo}" required="true" requiredMessage="#{bundle.EditModelosInsumoRequiredMessage_modelo}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{modelosInsumoController.update}" value="#{bundle.Save}" update="display,:ModelosInsumoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ModelosInsumoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ModelosInsumoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

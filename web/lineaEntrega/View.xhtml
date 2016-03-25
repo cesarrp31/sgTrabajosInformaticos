@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LineaEntregaViewDlg" widgetVar="LineaEntregaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewLineaEntregaTitle}">
+            <h:form id="LineaEntregaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{lineaEntregaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewLineaEntregaLabel_idEntregaInsumo}"/>
+                        <h:outputText value="#{lineaEntregaController.selected.idEntregaInsumo}" title="#{bundle.ViewLineaEntregaTitle_idEntregaInsumo}"/>
+                        <h:outputText value="#{bundle.ViewLineaEntregaLabel_idInsumo}"/>
+                        <h:outputText value="#{lineaEntregaController.selected.idInsumo}" title="#{bundle.ViewLineaEntregaTitle_idInsumo}"/>
+                        <h:outputText value="#{bundle.ViewLineaEntregaLabel_idLineaEntrega}"/>
+                        <h:outputText value="#{lineaEntregaController.selected.idLineaEntrega}" title="#{bundle.ViewLineaEntregaTitle_idLineaEntrega}"/>
+                        <h:outputText value="#{bundle.ViewLineaEntregaLabel_cantidad}"/>
+                        <h:outputText value="#{lineaEntregaController.selected.cantidad}" title="#{bundle.ViewLineaEntregaTitle_cantidad}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="LineaEntregaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

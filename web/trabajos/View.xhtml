@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TrabajosViewDlg" widgetVar="TrabajosViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTrabajosTitle}">
+            <h:form id="TrabajosViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{trabajosController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTrabajosLabel_idTrabajo}"/>
+                        <h:outputText value="#{trabajosController.selected.idTrabajo}" title="#{bundle.ViewTrabajosTitle_idTrabajo}"/>
+                        <h:outputText value="#{bundle.ViewTrabajosLabel_nroFicha}"/>
+                        <h:outputText value="#{trabajosController.selected.nroFicha}" title="#{bundle.ViewTrabajosTitle_nroFicha}"/>
+                        <h:outputText value="#{bundle.ViewTrabajosLabel_usuarioIniciador}"/>
+                        <h:outputText value="#{trabajosController.selected.usuarioIniciador}" title="#{bundle.ViewTrabajosTitle_usuarioIniciador}"/>
+                        <h:outputText value="#{bundle.ViewTrabajosLabel_fechaComienzo}"/>
+                        <h:outputText value="#{trabajosController.selected.fechaComienzo}" title="#{bundle.ViewTrabajosTitle_fechaComienzo}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewTrabajosLabel_idNota}"/>
+                        <h:outputText value="#{trabajosController.selected.idNota}" title="#{bundle.ViewTrabajosTitle_idNota}"/>
+                        <h:outputText value="#{bundle.ViewTrabajosLabel_idPrioridad}"/>
+                        <h:outputText value="#{trabajosController.selected.idPrioridad}" title="#{bundle.ViewTrabajosTitle_idPrioridad}"/>
+                        <h:outputText value="#{bundle.ViewTrabajosLabel_idDependencia}"/>
+                        <h:outputText value="#{trabajosController.selected.idDependencia}" title="#{bundle.ViewTrabajosTitle_idDependencia}"/>
+                        <h:outputText value="#{bundle.ViewTrabajosLabel_sintomas}"/>
+                        <h:outputText value="#{trabajosController.selected.sintomas}" title="#{bundle.ViewTrabajosTitle_sintomas}"/>
+                        <h:outputText value="#{bundle.ViewTrabajosLabel_fechaFin}"/>
+                        <h:outputText value="#{trabajosController.selected.fechaFin}" title="#{bundle.ViewTrabajosTitle_fechaFin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TrabajosViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

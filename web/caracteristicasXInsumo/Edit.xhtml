@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CaracteristicasXInsumoEditDlg" widgetVar="CaracteristicasXInsumoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCaracteristicasXInsumoTitle}">
+            <h:form id="CaracteristicasXInsumoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{caracteristicasXInsumoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCaracteristicasXInsumoLabel_idCarXIns}" for="idCarXIns" />
+                        <p:inputText id="idCarXIns" value="#{caracteristicasXInsumoController.selected.idCarXIns}" title="#{bundle.EditCaracteristicasXInsumoTitle_idCarXIns}" required="true" requiredMessage="#{bundle.EditCaracteristicasXInsumoRequiredMessage_idCarXIns}"/>
+                        <p:outputLabel value="#{bundle.EditCaracteristicasXInsumoLabel_valor}" for="valor" />
+                        <p:inputText id="valor" value="#{caracteristicasXInsumoController.selected.valor}" title="#{bundle.EditCaracteristicasXInsumoTitle_valor}" required="true" requiredMessage="#{bundle.EditCaracteristicasXInsumoRequiredMessage_valor}"/>
+                        <p:outputLabel value="#{bundle.EditCaracteristicasXInsumoLabel_idCaracteristica}" for="idCaracteristica" />
+                        <p:selectOneMenu id="idCaracteristica" value="#{caracteristicasXInsumoController.selected.idCaracteristica}" required="true" requiredMessage="#{bundle.EditCaracteristicasXInsumoRequiredMessage_idCaracteristica}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{caracteristicasController.itemsAvailableSelectOne}"
+                                           var="idCaracteristicaItem"
+                                           itemValue="#{idCaracteristicaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditCaracteristicasXInsumoLabel_idModelo}" for="idModelo" />
+                        <p:selectOneMenu id="idModelo" value="#{caracteristicasXInsumoController.selected.idModelo}" required="true" requiredMessage="#{bundle.EditCaracteristicasXInsumoRequiredMessage_idModelo}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{modelosInsumoController.itemsAvailableSelectOne}"
+                                           var="idModeloItem"
+                                           itemValue="#{idModeloItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{caracteristicasXInsumoController.update}" value="#{bundle.Save}" update="display,:CaracteristicasXInsumoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CaracteristicasXInsumoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CaracteristicasXInsumoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

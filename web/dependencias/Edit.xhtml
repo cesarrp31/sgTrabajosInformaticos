@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DependenciasEditDlg" widgetVar="DependenciasEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditDependenciasTitle}">
+            <h:form id="DependenciasEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{dependenciasController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditDependenciasLabel_idEncargado}" for="idEncargado" />
+                        <p:selectOneMenu id="idEncargado" value="#{dependenciasController.selected.idEncargado}" required="true" requiredMessage="#{bundle.EditDependenciasRequiredMessage_idEncargado}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{encargadosController.itemsAvailableSelectOne}"
+                                           var="idEncargadoItem"
+                                           itemValue="#{idEncargadoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDependenciasLabel_observaciones}" for="observaciones" />
+                        <p:inputText id="observaciones" value="#{dependenciasController.selected.observaciones}" title="#{bundle.EditDependenciasTitle_observaciones}" />
+                        <p:outputLabel value="#{bundle.EditDependenciasLabel_dependeDe}" for="dependeDe" />
+                        <p:selectOneMenu id="dependeDe" value="#{dependenciasController.selected.dependeDe}" required="true" requiredMessage="#{bundle.EditDependenciasRequiredMessage_dependeDe}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{dependenciasController.itemsAvailableSelectOne}"
+                                           var="dependeDeItem"
+                                           itemValue="#{dependeDeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDependenciasLabel_idDependencia}" for="idDependencia" />
+                        <p:inputText id="idDependencia" value="#{dependenciasController.selected.idDependencia}" title="#{bundle.EditDependenciasTitle_idDependencia}" required="true" requiredMessage="#{bundle.EditDependenciasRequiredMessage_idDependencia}"/>
+                        <p:outputLabel value="#{bundle.EditDependenciasLabel_dependencia}" for="dependencia" />
+                        <p:inputText id="dependencia" value="#{dependenciasController.selected.dependencia}" title="#{bundle.EditDependenciasTitle_dependencia}" required="true" requiredMessage="#{bundle.EditDependenciasRequiredMessage_dependencia}"/>
+                        <p:outputLabel value="#{bundle.EditDependenciasLabel_nombreCorto}" for="nombreCorto" />
+                        <p:inputText id="nombreCorto" value="#{dependenciasController.selected.nombreCorto}" title="#{bundle.EditDependenciasTitle_nombreCorto}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{dependenciasController.update}" value="#{bundle.Save}" update="display,:DependenciasListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DependenciasEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DependenciasEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

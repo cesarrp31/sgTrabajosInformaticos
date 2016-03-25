@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TransicionesEstadoEditDlg" widgetVar="TransicionesEstadoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTransicionesEstadoTitle}">
+            <h:form id="TransicionesEstadoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{transicionesEstadoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTransicionesEstadoLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{transicionesEstadoController.selected.descripcion}" title="#{bundle.EditTransicionesEstadoTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.EditTransicionesEstadoLabel_estado}" for="estado" />
+                        <p:selectOneMenu id="estado" value="#{transicionesEstadoController.selected.estado}" required="true" requiredMessage="#{bundle.EditTransicionesEstadoRequiredMessage_estado}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{estadosTrabajoController.itemsAvailableSelectOne}"
+                                           var="estadoItem"
+                                           itemValue="#{estadoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditTransicionesEstadoLabel_estadoSiguiente}" for="estadoSiguiente" />
+                        <p:selectOneMenu id="estadoSiguiente" value="#{transicionesEstadoController.selected.estadoSiguiente}" required="true" requiredMessage="#{bundle.EditTransicionesEstadoRequiredMessage_estadoSiguiente}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{estadosTrabajoController.itemsAvailableSelectOne}"
+                                           var="estadoSiguienteItem"
+                                           itemValue="#{estadoSiguienteItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditTransicionesEstadoLabel_idProxEstado}" for="idProxEstado" />
+                        <p:inputText id="idProxEstado" value="#{transicionesEstadoController.selected.idProxEstado}" title="#{bundle.EditTransicionesEstadoTitle_idProxEstado}" required="true" requiredMessage="#{bundle.EditTransicionesEstadoRequiredMessage_idProxEstado}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{transicionesEstadoController.update}" value="#{bundle.Save}" update="display,:TransicionesEstadoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TransicionesEstadoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TransicionesEstadoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

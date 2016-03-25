@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TecnicosCreateDlg" widgetVar="TecnicosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTecnicosTitle}">
+            <h:form id="TecnicosCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tecnicosController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTecnicosLabel_apellido}" for="apellido" />
+                        <p:inputText id="apellido" value="#{tecnicosController.selected.apellido}" title="#{bundle.CreateTecnicosTitle_apellido}" required="true" requiredMessage="#{bundle.CreateTecnicosRequiredMessage_apellido}"/>
+                        <p:outputLabel value="#{bundle.CreateTecnicosLabel_correo}" for="correo" />
+                        <p:inputText id="correo" value="#{tecnicosController.selected.correo}" title="#{bundle.CreateTecnicosTitle_correo}" required="true" requiredMessage="#{bundle.CreateTecnicosRequiredMessage_correo}"/>
+                        <p:outputLabel value="#{bundle.CreateTecnicosLabel_idTecnico}" for="idTecnico" />
+                        <p:inputText id="idTecnico" value="#{tecnicosController.selected.idTecnico}" title="#{bundle.CreateTecnicosTitle_idTecnico}" required="true" requiredMessage="#{bundle.CreateTecnicosRequiredMessage_idTecnico}"/>
+                        <p:outputLabel value="#{bundle.CreateTecnicosLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{tecnicosController.selected.nombre}" title="#{bundle.CreateTecnicosTitle_nombre}" required="true" requiredMessage="#{bundle.CreateTecnicosRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.CreateTecnicosLabel_idTipoEspecialidad}" for="idTipoEspecialidad" />
+                        <p:selectOneMenu id="idTipoEspecialidad" value="#{tecnicosController.selected.idTipoEspecialidad}" >
+                            <f:selectItems value="#{tipoEspecialidadController.itemsAvailableSelectOne}"
+                                           var="idTipoEspecialidadItem"
+                                           itemValue="#{idTipoEspecialidadItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tecnicosController.create}" value="#{bundle.Save}" update="display,:TecnicosListForm:datalist,:growl" oncomplete="handleSubmit(args,'TecnicosCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TecnicosCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

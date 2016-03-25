@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MedicionTamanioTablaCreateDlg" widgetVar="MedicionTamanioTablaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMedicionTamanioTablaTitle}">
+            <h:form id="MedicionTamanioTablaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{medicionTamanioTablaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateMedicionTamanioTablaLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{medicionTamanioTablaController.selected.fecha}" title="#{bundle.EditMedicionTamanioTablaTitle_fecha}" required="true" requiredMessage="#{bundle.EditMedicionTamanioTablaRequiredMessage_fecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateMedicionTamanioTablaLabel_idMedicion}" for="idMedicion" />
+                        <p:inputText id="idMedicion" value="#{medicionTamanioTablaController.selected.idMedicion}" title="#{bundle.CreateMedicionTamanioTablaTitle_idMedicion}" required="true" requiredMessage="#{bundle.CreateMedicionTamanioTablaRequiredMessage_idMedicion}"/>
+                        <p:outputLabel value="#{bundle.CreateMedicionTamanioTablaLabel_observacion}" for="observacion" />
+                        <p:inputText id="observacion" value="#{medicionTamanioTablaController.selected.observacion}" title="#{bundle.CreateMedicionTamanioTablaTitle_observacion}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{medicionTamanioTablaController.create}" value="#{bundle.Save}" update="display,:MedicionTamanioTablaListForm:datalist,:growl" oncomplete="handleSubmit(args,'MedicionTamanioTablaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MedicionTamanioTablaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

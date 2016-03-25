@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CaracteristicasXPonderacionesViewDlg" widgetVar="CaracteristicasXPonderacionesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCaracteristicasXPonderacionesTitle}">
+            <h:form id="CaracteristicasXPonderacionesViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{caracteristicasXPonderacionesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCaracteristicasXPonderacionesLabel_valor}"/>
+                        <h:outputText value="#{caracteristicasXPonderacionesController.selected.valor}" title="#{bundle.ViewCaracteristicasXPonderacionesTitle_valor}"/>
+                        <h:outputText value="#{bundle.ViewCaracteristicasXPonderacionesLabel_idCaracteristica}"/>
+                        <h:outputText value="#{caracteristicasXPonderacionesController.selected.idCaracteristica}" title="#{bundle.ViewCaracteristicasXPonderacionesTitle_idCaracteristica}"/>
+                        <h:outputText value="#{bundle.ViewCaracteristicasXPonderacionesLabel_idUnidadMedida}"/>
+                        <h:outputText value="#{caracteristicasXPonderacionesController.selected.idUnidadMedida}" title="#{bundle.ViewCaracteristicasXPonderacionesTitle_idUnidadMedida}"/>
+                        <h:outputText value="#{bundle.ViewCaracteristicasXPonderacionesLabel_idPonderacion}"/>
+                        <h:outputText value="#{caracteristicasXPonderacionesController.selected.idPonderacion}" title="#{bundle.ViewCaracteristicasXPonderacionesTitle_idPonderacion}"/>
+                        <h:outputText value="#{bundle.ViewCaracteristicasXPonderacionesLabel_idCarXPon}"/>
+                        <h:outputText value="#{caracteristicasXPonderacionesController.selected.idCarXPon}" title="#{bundle.ViewCaracteristicasXPonderacionesTitle_idCarXPon}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CaracteristicasXPonderacionesViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListLineaEntregaTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="LineaEntregaListForm">
+                <p:panel header="#{bundle.ListLineaEntregaTitle}">
+                    <p:dataTable id="datalist" value="#{lineaEntregaController.items}" var="item"
+                                 selectionMode="single" selection="#{lineaEntregaController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idLineaEntrega}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLineaEntregaTitle_idEntregaInsumo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idEntregaInsumo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLineaEntregaTitle_idInsumo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idInsumo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLineaEntregaTitle_idLineaEntrega}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idLineaEntrega}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLineaEntregaTitle_cantidad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cantidad}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{lineaEntregaController.prepareCreate}" update=":LineaEntregaCreateForm" oncomplete="PF('LineaEntregaCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":LineaEntregaViewForm" oncomplete="PF('LineaEntregaViewDialog').show()" disabled="#{empty lineaEntregaController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":LineaEntregaEditForm" oncomplete="PF('LineaEntregaEditDialog').show()" disabled="#{empty lineaEntregaController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{lineaEntregaController.destroy}" update=":growl,datalist" disabled="#{empty lineaEntregaController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

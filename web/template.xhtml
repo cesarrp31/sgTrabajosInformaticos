@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputScript library="js" name="jsfcrud.js"/>
+    </h:head>
+
+    <h:body>
+
+        <p:growl id="growl" life="3000" />
+
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="65" header="#{bundle.AppName}">
+                <h:form id="menuForm">
+                    <p:menubar>
+                        <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
+                        <p:submenu label="#{bundle.Maintenance}">
+                            <p:menuitem value="Asignaciones" outcome="/asignaciones/List.xhtml" />
+                            <p:menuitem value="Caracteristicas" outcome="/caracteristicas/List.xhtml" />
+                            <p:menuitem value="CaracteristicasXInsumo" outcome="/caracteristicasXInsumo/List.xhtml" />
+                            <p:menuitem value="CaracteristicasXPonderaciones" outcome="/caracteristicasXPonderaciones/List.xhtml" />
+                            <p:menuitem value="Dependencias" outcome="/dependencias/List.xhtml" />
+                            <p:menuitem value="ElementosUtilizados" outcome="/elementosUtilizados/List.xhtml" />
+                            <p:menuitem value="Encargados" outcome="/encargados/List.xhtml" />
+                            <p:menuitem value="EntregaInsumos" outcome="/entregaInsumos/List.xhtml" />
+                            <p:menuitem value="EstadosTrabajo" outcome="/estadosTrabajo/List.xhtml" />
+                            <p:menuitem value="EstadosXTrabajo" outcome="/estadosXTrabajo/List.xhtml" />
+                            <p:menuitem value="InsumosDisponibles" outcome="/insumosDisponibles/List.xhtml" />
+                            <p:menuitem value="InsumosXPatrimonio" outcome="/insumosXPatrimonio/List.xhtml" />
+                            <p:menuitem value="LineaEntrega" outcome="/lineaEntrega/List.xhtml" />
+                            <p:menuitem value="Marcas" outcome="/marcas/List.xhtml" />
+                            <p:menuitem value="MedicionTamanioTabla" outcome="/medicionTamanioTabla/List.xhtml" />
+                            <p:menuitem value="MedicionXTabla" outcome="/medicionXTabla/List.xhtml" />
+                            <p:menuitem value="ModelosInsumo" outcome="/modelosInsumo/List.xhtml" />
+                            <p:menuitem value="Notas" outcome="/notas/List.xhtml" />
+                            <p:menuitem value="Patrimonios" outcome="/patrimonios/List.xhtml" />
+                            <p:menuitem value="PatrimoniosXAsignaciones" outcome="/patrimoniosXAsignaciones/List.xhtml" />
+                            <p:menuitem value="PatrimoniosXTrabajos" outcome="/patrimoniosXTrabajos/List.xhtml" />
+                            <p:menuitem value="Permisos" outcome="/permisos/List.xhtml" />
+                            <p:menuitem value="Ponderaciones" outcome="/ponderaciones/List.xhtml" />
+                            <p:menuitem value="Prioridades" outcome="/prioridades/List.xhtml" />
+                            <p:menuitem value="ProblemasDetectados" outcome="/problemasDetectados/List.xhtml" />
+                            <p:menuitem value="ProblemasN1" outcome="/problemasN1/List.xhtml" />
+                            <p:menuitem value="ProblemasN2" outcome="/problemasN2/List.xhtml" />
+                            <p:menuitem value="ProblemasN3" outcome="/problemasN3/List.xhtml" />
+                            <p:menuitem value="Roles" outcome="/roles/List.xhtml" />
+                            <p:menuitem value="Tablas" outcome="/tablas/List.xhtml" />
+                            <p:menuitem value="Tareas" outcome="/tareas/List.xhtml" />
+                            <p:menuitem value="TareasRealizadas" outcome="/tareasRealizadas/List.xhtml" />
+                            <p:menuitem value="TareasXProblemas" outcome="/tareasXProblemas/List.xhtml" />
+                            <p:menuitem value="Tecnicos" outcome="/tecnicos/List.xhtml" />
+                            <p:menuitem value="TecnicosXTrabajos" outcome="/tecnicosXTrabajos/List.xhtml" />
+                            <p:menuitem value="TipoEspecialidad" outcome="/tipoEspecialidad/List.xhtml" />
+                            <p:menuitem value="TipoInsumo" outcome="/tipoInsumo/List.xhtml" />
+                            <p:menuitem value="TipoNota" outcome="/tipoNota/List.xhtml" />
+                            <p:menuitem value="TipoPatrimonio" outcome="/tipoPatrimonio/List.xhtml" />
+                            <p:menuitem value="Trabajos" outcome="/trabajos/List.xhtml" />
+                            <p:menuitem value="TransicionesEstado" outcome="/transicionesEstado/List.xhtml" />
+                            <p:menuitem value="UnidadMedida" outcome="/unidadMedida/List.xhtml" />
+                            <p:menuitem value="Usuarios" outcome="/usuarios/List.xhtml" />
+                        </p:submenu>
+                    </p:menubar>
+                </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="60">
+                <ui:insert name="footer"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <ui:insert name="body"/>
+            </p:layoutUnit>
+
+        </p:layout>
+
+    </h:body>
+
+</html>

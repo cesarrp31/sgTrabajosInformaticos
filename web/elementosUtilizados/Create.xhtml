@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ElementosUtilizadosCreateDlg" widgetVar="ElementosUtilizadosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateElementosUtilizadosTitle}">
+            <h:form id="ElementosUtilizadosCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{elementosUtilizadosController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateElementosUtilizadosLabel_idEstadoXTrabajo}" for="idEstadoXTrabajo" />
+                        <p:selectOneMenu id="idEstadoXTrabajo" value="#{elementosUtilizadosController.selected.idEstadoXTrabajo}" required="true" requiredMessage="#{bundle.EditElementosUtilizadosRequiredMessage_idEstadoXTrabajo}">
+                            <f:selectItems value="#{estadosXTrabajoController.itemsAvailableSelectOne}"
+                                           var="idEstadoXTrabajoItem"
+                                           itemValue="#{idEstadoXTrabajoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateElementosUtilizadosLabel_idInsumo}" for="idInsumo" />
+                        <p:selectOneMenu id="idInsumo" value="#{elementosUtilizadosController.selected.idInsumo}" required="true" requiredMessage="#{bundle.EditElementosUtilizadosRequiredMessage_idInsumo}">
+                            <f:selectItems value="#{insumosDisponiblesController.itemsAvailableSelectOne}"
+                                           var="idInsumoItem"
+                                           itemValue="#{idInsumoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateElementosUtilizadosLabel_observaciones}" for="observaciones" />
+                        <p:inputText id="observaciones" value="#{elementosUtilizadosController.selected.observaciones}" title="#{bundle.CreateElementosUtilizadosTitle_observaciones}" />
+                        <p:outputLabel value="#{bundle.CreateElementosUtilizadosLabel_idElemento}" for="idElemento" />
+                        <p:inputText id="idElemento" value="#{elementosUtilizadosController.selected.idElemento}" title="#{bundle.CreateElementosUtilizadosTitle_idElemento}" required="true" requiredMessage="#{bundle.CreateElementosUtilizadosRequiredMessage_idElemento}"/>
+                        <p:outputLabel value="#{bundle.CreateElementosUtilizadosLabel_cantidad}" for="cantidad" />
+                        <p:inputText id="cantidad" value="#{elementosUtilizadosController.selected.cantidad}" title="#{bundle.CreateElementosUtilizadosTitle_cantidad}" required="true" requiredMessage="#{bundle.CreateElementosUtilizadosRequiredMessage_cantidad}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{elementosUtilizadosController.create}" value="#{bundle.Save}" update="display,:ElementosUtilizadosListForm:datalist,:growl" oncomplete="handleSubmit(args,'ElementosUtilizadosCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ElementosUtilizadosCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

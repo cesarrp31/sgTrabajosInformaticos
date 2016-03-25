@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InsumosDisponiblesCreateDlg" widgetVar="InsumosDisponiblesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateInsumosDisponiblesTitle}">
+            <h:form id="InsumosDisponiblesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{insumosDisponiblesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateInsumosDisponiblesLabel_idInsumo}" for="idInsumo" />
+                        <p:inputText id="idInsumo" value="#{insumosDisponiblesController.selected.idInsumo}" title="#{bundle.CreateInsumosDisponiblesTitle_idInsumo}" required="true" requiredMessage="#{bundle.CreateInsumosDisponiblesRequiredMessage_idInsumo}"/>
+                        <p:outputLabel value="#{bundle.CreateInsumosDisponiblesLabel_idModelo}" for="idModelo" />
+                        <p:selectOneMenu id="idModelo" value="#{insumosDisponiblesController.selected.idModelo}" required="true" requiredMessage="#{bundle.EditInsumosDisponiblesRequiredMessage_idModelo}">
+                            <f:selectItems value="#{modelosInsumoController.itemsAvailableSelectOne}"
+                                           var="idModeloItem"
+                                           itemValue="#{idModeloItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateInsumosDisponiblesLabel_cantidadDisponible}" for="cantidadDisponible" />
+                        <p:inputText id="cantidadDisponible" value="#{insumosDisponiblesController.selected.cantidadDisponible}" title="#{bundle.CreateInsumosDisponiblesTitle_cantidadDisponible}" required="true" requiredMessage="#{bundle.CreateInsumosDisponiblesRequiredMessage_cantidadDisponible}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{insumosDisponiblesController.create}" value="#{bundle.Save}" update="display,:InsumosDisponiblesListForm:datalist,:growl" oncomplete="handleSubmit(args,'InsumosDisponiblesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="InsumosDisponiblesCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

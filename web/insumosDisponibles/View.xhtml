@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InsumosDisponiblesViewDlg" widgetVar="InsumosDisponiblesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewInsumosDisponiblesTitle}">
+            <h:form id="InsumosDisponiblesViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{insumosDisponiblesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewInsumosDisponiblesLabel_idInsumo}"/>
+                        <h:outputText value="#{insumosDisponiblesController.selected.idInsumo}" title="#{bundle.ViewInsumosDisponiblesTitle_idInsumo}"/>
+                        <h:outputText value="#{bundle.ViewInsumosDisponiblesLabel_idModelo}"/>
+                        <h:outputText value="#{insumosDisponiblesController.selected.idModelo}" title="#{bundle.ViewInsumosDisponiblesTitle_idModelo}"/>
+                        <h:outputText value="#{bundle.ViewInsumosDisponiblesLabel_cantidadDisponible}"/>
+                        <h:outputText value="#{insumosDisponiblesController.selected.cantidadDisponible}" title="#{bundle.ViewInsumosDisponiblesTitle_cantidadDisponible}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="InsumosDisponiblesViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

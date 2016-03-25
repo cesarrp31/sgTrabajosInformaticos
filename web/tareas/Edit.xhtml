@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TareasEditDlg" widgetVar="TareasEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTareasTitle}">
+            <h:form id="TareasEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tareasController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTareasLabel_tarea}" for="tarea" />
+                        <p:inputText id="tarea" value="#{tareasController.selected.tarea}" title="#{bundle.EditTareasTitle_tarea}" required="true" requiredMessage="#{bundle.EditTareasRequiredMessage_tarea}"/>
+                        <p:outputLabel value="#{bundle.EditTareasLabel_idTarea}" for="idTarea" />
+                        <p:inputText id="idTarea" value="#{tareasController.selected.idTarea}" title="#{bundle.EditTareasTitle_idTarea}" required="true" requiredMessage="#{bundle.EditTareasRequiredMessage_idTarea}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tareasController.update}" value="#{bundle.Save}" update="display,:TareasListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TareasEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TareasEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

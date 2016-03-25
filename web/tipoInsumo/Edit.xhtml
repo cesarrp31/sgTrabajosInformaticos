@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipoInsumoEditDlg" widgetVar="TipoInsumoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTipoInsumoTitle}">
+            <h:form id="TipoInsumoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tipoInsumoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTipoInsumoLabel_idTipoInsumo}" for="idTipoInsumo" />
+                        <p:inputText id="idTipoInsumo" value="#{tipoInsumoController.selected.idTipoInsumo}" title="#{bundle.EditTipoInsumoTitle_idTipoInsumo}" required="true" requiredMessage="#{bundle.EditTipoInsumoRequiredMessage_idTipoInsumo}"/>
+                        <p:outputLabel value="#{bundle.EditTipoInsumoLabel_tipoInsumo}" for="tipoInsumo" />
+                        <p:inputText id="tipoInsumo" value="#{tipoInsumoController.selected.tipoInsumo}" title="#{bundle.EditTipoInsumoTitle_tipoInsumo}" required="true" requiredMessage="#{bundle.EditTipoInsumoRequiredMessage_tipoInsumo}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipoInsumoController.update}" value="#{bundle.Save}" update="display,:TipoInsumoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TipoInsumoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TipoInsumoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CaracteristicasXPonderacionesCreateDlg" widgetVar="CaracteristicasXPonderacionesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCaracteristicasXPonderacionesTitle}">
+            <h:form id="CaracteristicasXPonderacionesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{caracteristicasXPonderacionesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCaracteristicasXPonderacionesLabel_valor}" for="valor" />
+                        <p:inputText id="valor" value="#{caracteristicasXPonderacionesController.selected.valor}" title="#{bundle.CreateCaracteristicasXPonderacionesTitle_valor}" required="true" requiredMessage="#{bundle.CreateCaracteristicasXPonderacionesRequiredMessage_valor}"/>
+                        <p:outputLabel value="#{bundle.CreateCaracteristicasXPonderacionesLabel_idCaracteristica}" for="idCaracteristica" />
+                        <p:selectOneMenu id="idCaracteristica" value="#{caracteristicasXPonderacionesController.selected.idCaracteristica}" required="true" requiredMessage="#{bundle.EditCaracteristicasXPonderacionesRequiredMessage_idCaracteristica}">
+                            <f:selectItems value="#{caracteristicasController.itemsAvailableSelectOne}"
+                                           var="idCaracteristicaItem"
+                                           itemValue="#{idCaracteristicaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCaracteristicasXPonderacionesLabel_idUnidadMedida}" for="idUnidadMedida" />
+                        <p:selectOneMenu id="idUnidadMedida" value="#{caracteristicasXPonderacionesController.selected.idUnidadMedida}" required="true" requiredMessage="#{bundle.EditCaracteristicasXPonderacionesRequiredMessage_idUnidadMedida}">
+                            <f:selectItems value="#{unidadMedidaController.itemsAvailableSelectOne}"
+                                           var="idUnidadMedidaItem"
+                                           itemValue="#{idUnidadMedidaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCaracteristicasXPonderacionesLabel_idPonderacion}" for="idPonderacion" />
+                        <p:selectOneMenu id="idPonderacion" value="#{caracteristicasXPonderacionesController.selected.idPonderacion}" required="true" requiredMessage="#{bundle.EditCaracteristicasXPonderacionesRequiredMessage_idPonderacion}">
+                            <f:selectItems value="#{ponderacionesController.itemsAvailableSelectOne}"
+                                           var="idPonderacionItem"
+                                           itemValue="#{idPonderacionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCaracteristicasXPonderacionesLabel_idCarXPon}" for="idCarXPon" />
+                        <p:inputText id="idCarXPon" value="#{caracteristicasXPonderacionesController.selected.idCarXPon}" title="#{bundle.CreateCaracteristicasXPonderacionesTitle_idCarXPon}" required="true" requiredMessage="#{bundle.CreateCaracteristicasXPonderacionesRequiredMessage_idCarXPon}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{caracteristicasXPonderacionesController.create}" value="#{bundle.Save}" update="display,:CaracteristicasXPonderacionesListForm:datalist,:growl" oncomplete="handleSubmit(args,'CaracteristicasXPonderacionesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CaracteristicasXPonderacionesCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
