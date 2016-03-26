@@ -5,6 +5,7 @@ package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +21,9 @@ import javax.persistence.Table;
 @Table(name = "tecnicos")
 
 public class Tecnicos implements Serializable {
+    public static final int LONG_MAX_APELLIDO= 45,
+                            LONG_MAX_CORREO= 50,
+                            LONG_MAX_NOMBRE= 45;
 
     @OneToMany(targetEntity = EntregaInsumos.class, mappedBy = "idTecnico")
     private List<EntregaInsumos> entregaInsumosCollection;
@@ -130,4 +134,35 @@ public class Tecnicos implements Serializable {
     public void setIdTipoEspecialidad(TipoEspecialidad idTipoEspecialidad) {
         this.idTipoEspecialidad = idTipoEspecialidad;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 41 * hash + Objects.hashCode(this.idTecnico);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Tecnicos other = (Tecnicos) obj;
+        if (!Objects.equals(this.idTecnico, other.idTecnico)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Tecnicos{" + "apellido=" + apellido + ", baja=" + baja + ", idTecnico=" + idTecnico + ", nombre=" + nombre + '}';
+    }
+    
 }

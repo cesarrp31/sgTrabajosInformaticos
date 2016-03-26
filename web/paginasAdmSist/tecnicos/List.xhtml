@@ -17,6 +17,7 @@
             <h:form id="TecnicosListForm">
                 <p:panel header="#{bundle.ListTecnicosTitle}">
                     <p:dataTable id="datalist" value="#{tecnicosController.items}" var="item"
+                                 widgetVar="tecnicosTable"
                                  selectionMode="single" selection="#{tecnicosController.selected}"
                                  paginator="true"
                                  rowKey="#{item.idTecnico}"
@@ -29,21 +30,15 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTecnicosTitle_apellido}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.apellido}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTecnicosTitle_correo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.correo}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTecnicosTitle_idTecnico}"/>
                             </f:facet>
                             <h:outputText value="#{item.idTecnico}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTecnicosTitle_apellido}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.apellido}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -55,7 +50,29 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTecnicosTitle_idTipoEspecialidad}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idTipoEspecialidad}"/>
+                            <h:outputText value="#{item.idTipoEspecialidad.especialidad}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTecnicosTitle_correo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.correo}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.baja}">
+                        <!--
+                        <p:column headerText="#{bundle.ListTecnicosTitle_baja}"  filterBy="#{item.baja}" filterMatchMode="equals">
+                            <f:facet name="filter">
+                                <p:selectOneButton onchange="PF('tecnicosTable').filter()">
+                                    <f:converter converterId="javax.faces.Boolean" />
+                                    <f:selectItem itemLabel="Todos" itemValue="" />
+                                    <f:selectItem itemLabel="Si" itemValue="true" />
+                                    <f:selectItem itemLabel="No" itemValue="false" />
+                                </p:selectOneButton>                               
+                            </f:facet> -->
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTecnicosTitle_baja}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.baja ? 'Si' : 'No'}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{tecnicosController.prepareCreate}" update=":TecnicosCreateForm" oncomplete="PF('TecnicosCreateDialog').show()"/>

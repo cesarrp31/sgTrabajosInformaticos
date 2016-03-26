@@ -30,6 +30,10 @@ public class TipoEspecialidadController implements Serializable {
 
     public TipoEspecialidadController() {
     }
+    
+    public int obtenerLongMaxEspecialidad(){
+        return TipoEspecialidad.LONG_MAX_ESPECIALIDAD;
+    }
 
     public TipoEspecialidad getSelected() {
         return selected;
@@ -67,11 +71,13 @@ public class TipoEspecialidadController implements Serializable {
     }
 
     public void destroy() {
+        /*
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("TipoEspecialidadDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        */
     }
 
     public List<TipoEspecialidad> getItems() {

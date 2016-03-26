@@ -67,11 +67,13 @@ public class TipoInsumoController implements Serializable {
     }
 
     public void destroy() {
+        /*
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("TipoInsumoDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        */
     }
 
     public List<TipoInsumo> getItems() {

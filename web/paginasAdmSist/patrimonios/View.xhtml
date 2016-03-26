@@ -14,10 +14,6 @@
                     <p:panelGrid columns="2" rendered="#{patrimoniosController.selected != null}">
                         <h:outputText value="#{bundle.ViewPatrimoniosLabel_idPatrimonio}"/>
                         <h:outputText value="#{patrimoniosController.selected.idPatrimonio}" title="#{bundle.ViewPatrimoniosTitle_idPatrimonio}"/>
-                        <h:outputText value="#{bundle.ViewPatrimoniosLabel_fechaBaja}"/>
-                        <h:outputText value="#{patrimoniosController.selected.fechaBaja}" title="#{bundle.ViewPatrimoniosTitle_fechaBaja}">
-                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
-                        </h:outputText>
                         <h:outputText value="#{bundle.ViewPatrimoniosLabel_fechaAlta}"/>
                         <h:outputText value="#{patrimoniosController.selected.fechaAlta}" title="#{bundle.ViewPatrimoniosTitle_fechaAlta}">
                             <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
@@ -28,6 +24,12 @@
                         <h:outputText value="#{patrimoniosController.selected.idPonderacion}" title="#{bundle.ViewPatrimoniosTitle_idPonderacion}"/>
                         <h:outputText value="#{bundle.ViewPatrimoniosLabel_comentario}"/>
                         <h:outputText value="#{patrimoniosController.selected.comentario}" title="#{bundle.ViewPatrimoniosTitle_comentario}"/>
+                        <h:outputText value="#{bundle.ViewPatrimoniosLabel_fechaBaja}"/>
+                        <h:outputText value="#{patrimoniosController.selected.fechaBaja}" title="#{bundle.ViewPatrimoniosTitle_fechaBaja}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPatrimoniosLabel_baja}"/>
+                        <h:outputText value="#{patrimoniosController.selected.baja}" title="#{bundle.ViewPatrimoniosTitle_baja}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="PatrimoniosViewDialog.hide()"/>
                 </h:panelGroup>

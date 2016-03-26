@@ -30,6 +30,18 @@ public class TecnicosController implements Serializable {
 
     public TecnicosController() {
     }
+    
+    public int obtenerLongMaxApellido(){
+        return Tecnicos.LONG_MAX_APELLIDO;
+    }
+    
+    public int obtenerLongMaxNombre(){
+        return Tecnicos.LONG_MAX_NOMBRE;
+    }
+    
+    public int obtenerLongMaxCorreo(){
+        return Tecnicos.LONG_MAX_CORREO;
+    }
 
     public Tecnicos getSelected() {
         return selected;
@@ -67,11 +79,13 @@ public class TecnicosController implements Serializable {
     }
 
     public void destroy() {
+        /*
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("TecnicosDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        */
     }
 
     public List<Tecnicos> getItems() {

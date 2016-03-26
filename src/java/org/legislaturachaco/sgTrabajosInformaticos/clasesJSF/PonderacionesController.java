@@ -30,6 +30,14 @@ public class PonderacionesController implements Serializable {
 
     public PonderacionesController() {
     }
+    
+    public int obtenerLongMaxPonderacion(){
+        return Ponderaciones.LONG_MAX_PONDERACION;
+    }
+    
+    public int obtenerLongMaxObservacion(){
+        return Ponderaciones.LONG_MAX_OBSERVACION;
+    }
 
     public Ponderaciones getSelected() {
         return selected;
@@ -67,11 +75,13 @@ public class PonderacionesController implements Serializable {
     }
 
     public void destroy() {
+        /*
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("PonderacionesDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        */
     }
 
     public List<Ponderaciones> getItems() {

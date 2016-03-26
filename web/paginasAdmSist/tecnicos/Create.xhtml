@@ -11,24 +11,70 @@
         <p:dialog id="TecnicosCreateDlg" widgetVar="TecnicosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTecnicosTitle}">
             <h:form id="TecnicosCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{tecnicosController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateTecnicosLabel_apellido}" for="apellido" />
-                        <p:inputText id="apellido" value="#{tecnicosController.selected.apellido}" title="#{bundle.CreateTecnicosTitle_apellido}" required="true" requiredMessage="#{bundle.CreateTecnicosRequiredMessage_apellido}"/>
-                        <p:outputLabel value="#{bundle.CreateTecnicosLabel_correo}" for="correo" />
-                        <p:inputText id="correo" value="#{tecnicosController.selected.correo}" title="#{bundle.CreateTecnicosTitle_correo}" required="true" requiredMessage="#{bundle.CreateTecnicosRequiredMessage_correo}"/>
+                    <p:panelGrid rendered="#{tecnicosController.selected != null}">
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.CreateTecnicosLabel_apellido}" for="apellido" />
+                            </p:column>
+                            <p:column>
+                                <p:inputText id="apellido" value="#{tecnicosController.selected.apellido}" 
+                                     title="#{bundle.CreateTecnicosTitle_apellido}" required="true" 
+                                     requiredMessage="#{bundle.CreateTecnicosRequiredMessage_apellido}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.CreateTecnicosLabel_nombre}" for="nombre" />
+                            </p:column>
+                            <p:column>
+                                <p:inputText id="nombre" value="#{tecnicosController.selected.nombre}" 
+                                     title="#{bundle.CreateTecnicosTitle_nombre}" required="true" 
+                                     requiredMessage="#{bundle.CreateTecnicosRequiredMessage_nombre}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.CreateTecnicosLabel_idTipoEspecialidad}" for="idTipoEspecialidad" />
+                            </p:column>
+                            <p:column>
+                                <p:selectOneMenu id="idTipoEspecialidad" value="#{tecnicosController.selected.idTipoEspecialidad}" >
+                                    <f:selectItems value="#{tipoEspecialidadController.itemsAvailableSelectOne}"
+                                                   var="idTipoEspecialidadItem"
+                                                   itemValue="#{idTipoEspecialidadItem}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.CreateTecnicosLabel_correo}" for="correo" />
+                            </p:column>
+                            <p:column>
+                                <p:inputText id="correo" value="#{tecnicosController.selected.correo}" 
+                                     title="#{bundle.CreateTecnicosTitle_correo}" required="true" 
+                                     requiredMessage="#{bundle.CreateTecnicosRequiredMessage_correo}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.CreateTecnicosLabel_baja}" for="baja" />
+                            </p:column>
+                            <p:column>
+                                <p:inputText id="baja" value="#{tecnicosController.selected.baja}" 
+                                     title="#{bundle.CreateTecnicosTitle_baja}" required="true" 
+                                     requiredMessage="#{bundle.CreateTecnicosRequiredMessage_baja}"/>
+                            </p:column>
+                        </p:row>                        
+                        <!--
                         <p:outputLabel value="#{bundle.CreateTecnicosLabel_idTecnico}" for="idTecnico" />
-                        <p:inputText id="idTecnico" value="#{tecnicosController.selected.idTecnico}" title="#{bundle.CreateTecnicosTitle_idTecnico}" required="true" requiredMessage="#{bundle.CreateTecnicosRequiredMessage_idTecnico}"/>
-                        <p:outputLabel value="#{bundle.CreateTecnicosLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{tecnicosController.selected.nombre}" title="#{bundle.CreateTecnicosTitle_nombre}" required="true" requiredMessage="#{bundle.CreateTecnicosRequiredMessage_nombre}"/>
-                        <p:outputLabel value="#{bundle.CreateTecnicosLabel_idTipoEspecialidad}" for="idTipoEspecialidad" />
-                        <p:selectOneMenu id="idTipoEspecialidad" value="#{tecnicosController.selected.idTipoEspecialidad}" >
-                            <f:selectItems value="#{tipoEspecialidadController.itemsAvailableSelectOne}"
-                                           var="idTipoEspecialidadItem"
-                                           itemValue="#{idTipoEspecialidadItem}"/>
-                        </p:selectOneMenu>
+                        <p:inputText id="idTecnico" value="#{tecnicosController.selected.idTecnico}" 
+                                        title="#{bundle.CreateTecnicosTitle_idTecnico}" required="true" 
+                                        requiredMessage="#{bundle.CreateTecnicosRequiredMessage_idTecnico}"/>
+                        -->
                     </p:panelGrid>
                     <p:commandButton actionListener="#{tecnicosController.create}" value="#{bundle.Save}" update="display,:TecnicosListForm:datalist,:growl" oncomplete="handleSubmit(args,'TecnicosCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="TecnicosCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TecnicosCreateDialog.hide()" immediate="true" ajax="false">
+                        <p:resetInput target="display"/>
+                    </p:commandButton>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

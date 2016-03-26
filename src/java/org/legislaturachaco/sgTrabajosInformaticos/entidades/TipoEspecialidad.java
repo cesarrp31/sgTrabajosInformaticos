@@ -5,6 +5,7 @@ package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +19,8 @@ import javax.persistence.Table;
 @Table(name = "tipoEspecialidad")
 
 public class TipoEspecialidad implements Serializable {
-
+    public static final int LONG_MAX_ESPECIALIDAD= 60;
+    
     @OneToMany(targetEntity = Tecnicos.class, mappedBy = "idTipoEspecialidad")
     private List<Tecnicos> tecnicosCollection;
 
@@ -58,4 +60,35 @@ public class TipoEspecialidad implements Serializable {
     public void setIdTipoEspecialidad(Integer idTipoEspecialidad) {
         this.idTipoEspecialidad = idTipoEspecialidad;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.idTipoEspecialidad);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TipoEspecialidad other = (TipoEspecialidad) obj;
+        if (!Objects.equals(this.idTipoEspecialidad, other.idTipoEspecialidad)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "TipoEspecialidad{" + "especialidad=" + especialidad + '}';
+    }
+     
 }

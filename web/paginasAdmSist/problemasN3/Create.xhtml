@@ -8,23 +8,63 @@
 
     <ui:composition>
 
-        <p:dialog id="ProblemasN3CreateDlg" widgetVar="ProblemasN3CreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateProblemasN3Title}">
+        <p:dialog id="ProblemasN3CreateDlg" widgetVar="ProblemasN3CreateDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle.CreateProblemasN3Title}">
             <h:form id="ProblemasN3CreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{problemasN3Controller.selected != null}">
+                    <p:panelGrid rendered="#{problemasN3Controller.selected != null}">
+                        <!--
                         <p:outputLabel value="#{bundle.CreateProblemasN3Label_idProblemaN3}" for="idProblemaN3" />
-                        <p:inputText id="idProblemaN3" value="#{problemasN3Controller.selected.idProblemaN3}" title="#{bundle.CreateProblemasN3Title_idProblemaN3}" required="true" requiredMessage="#{bundle.CreateProblemasN3RequiredMessage_idProblemaN3}"/>
-                        <p:outputLabel value="#{bundle.CreateProblemasN3Label_idProblemaN2}" for="idProblemaN2" />
-                        <p:selectOneMenu id="idProblemaN2" value="#{problemasN3Controller.selected.idProblemaN2}" required="true" requiredMessage="#{bundle.EditProblemasN3RequiredMessage_idProblemaN2}">
-                            <f:selectItems value="#{problemasN2Controller.itemsAvailableSelectOne}"
-                                           var="idProblemaN2Item"
-                                           itemValue="#{idProblemaN2Item}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateProblemasN3Label_problema}" for="problema" />
-                        <p:inputText id="problema" value="#{problemasN3Controller.selected.problema}" title="#{bundle.CreateProblemasN3Title_problema}" required="true" requiredMessage="#{bundle.CreateProblemasN3RequiredMessage_problema}"/>
+                        <p:inputText id="idProblemaN3" value="#{problemasN3Controller.selected.idProblemaN3}" 
+                                    title="#{bundle.CreateProblemasN3Title_idProblemaN3}" required="true" 
+                                    requiredMessage="#{bundle.CreateProblemasN3RequiredMessage_idProblemaN3}"/>
+                        -->
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.CreateProblemasN2Label_idProblemaN1}" for="idProblemaN1" />
+                            </p:column>
+                            <p:column>
+                                <p:selectOneMenu id="idProblemaN1" value="#{problemasN3Controller.tempN1}" required="true" 
+                                         requiredMessage="#{bundle.EditProblemasN2RequiredMessage_idProblemaN1}">
+                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}" itemValue="" noSelectionOption="true" />
+                                    <f:selectItems value="#{problemasN1Controller.itemsAvailableSelectOne}"/>
+                                    <p:ajax listener="#{problemasN3Controller.buscarProblemasN2()}" update="idProblemaN2"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.CreateProblemasN3Label_idProblemaN2}" for="idProblemaN2" />
+                            </p:column>
+                            <p:column>
+                                <p:selectOneMenu id="idProblemaN2" value="#{problemasN3Controller.selected.idProblemaN2}" 
+                                         required="true" requiredMessage="#{bundle.EditProblemasN3RequiredMessage_idProblemaN2}">
+                                    <f:selectItems value="#{problemasN3Controller.tempN1.problemasN2Collection}"
+                                                   var="idProblemaN2Item"
+                                                   itemValue="#{idProblemaN2Item}"/>
+                                    <p:ajax listener="#{problemasN3Controller.setearIdProblemas()}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.CreateProblemasN3Label_problema}" for="problema" />
+                            </p:column>
+                            <p:column>
+                                <p:inputText id="problema" value="#{problemasN3Controller.selected.problema}"
+                                     size="#{problemasN3Controller.obtenerLongMaxProblema()}"
+                                     maxlength="#{problemasN3Controller.obtenerLongMaxProblema()}"
+                                     title="#{bundle.CreateProblemasN3Title_problema}" required="true" 
+                                     requiredMessage="#{bundle.CreateProblemasN3RequiredMessage_problema}"/>
+                            </p:column>
+                        </p:row>                      
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{problemasN3Controller.create}" value="#{bundle.Save}" update="display,:ProblemasN3ListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProblemasN3CreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="ProblemasN3CreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{problemasN3Controller.create}" value="#{bundle.Save}" 
+                                     update="display,:ProblemasN3ListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args,'ProblemasN3CreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ProblemasN3CreateDialog.hide()" immediate="true" ajax="false">
+                        <p:resetInput target="display"/>
+                    </p:commandButton>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

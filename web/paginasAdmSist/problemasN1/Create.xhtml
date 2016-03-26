@@ -8,17 +8,36 @@
 
     <ui:composition>
 
-        <p:dialog id="ProblemasN1CreateDlg" widgetVar="ProblemasN1CreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateProblemasN1Title}">
+        <p:dialog id="ProblemasN1CreateDlg" widgetVar="ProblemasN1CreateDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle.CreateProblemasN1Title}">
             <h:form id="ProblemasN1CreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{problemasN1Controller.selected != null}">
+                    <p:panelGrid rendered="#{problemasN1Controller.selected != null}">
+                        <!--
                         <p:outputLabel value="#{bundle.CreateProblemasN1Label_idProblemaN1}" for="idProblemaN1" />
-                        <p:inputText id="idProblemaN1" value="#{problemasN1Controller.selected.idProblemaN1}" title="#{bundle.CreateProblemasN1Title_idProblemaN1}" required="true" requiredMessage="#{bundle.CreateProblemasN1RequiredMessage_idProblemaN1}"/>
-                        <p:outputLabel value="#{bundle.CreateProblemasN1Label_problema}" for="problema" />
-                        <p:inputText id="problema" value="#{problemasN1Controller.selected.problema}" title="#{bundle.CreateProblemasN1Title_problema}" required="true" requiredMessage="#{bundle.CreateProblemasN1RequiredMessage_problema}"/>
+                        <p:inputText id="idProblemaN1" value="#{problemasN1Controller.selected.idProblemaN1}" 
+                        title="#{bundle.CreateProblemasN1Title_idProblemaN1}" required="true" 
+                        requiredMessage="#{bundle.CreateProblemasN1RequiredMessage_idProblemaN1}"/>
+                        -->
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.CreateProblemasN1Label_problema}" for="problema" />
+                            </p:column>
+                            <p:column>
+                                <p:inputText id="problema" value="#{problemasN1Controller.selected.problema}"
+                                     size="#{problemasN1Controller.obtenerLongMaxProblema()}"
+                                     maxlength="#{problemasN1Controller.obtenerLongMaxProblema()}" 
+                                     title="#{bundle.CreateProblemasN1Title_problema}" required="true" 
+                                     requiredMessage="#{bundle.CreateProblemasN1RequiredMessage_problema}"/>
+                            </p:column>
+                        </p:row>                    
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{problemasN1Controller.create}" value="#{bundle.Save}" update="display,:ProblemasN1ListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProblemasN1CreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="ProblemasN1CreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{problemasN1Controller.create}" value="#{bundle.Save}" 
+                                     update="display,:ProblemasN1ListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args,'ProblemasN1CreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ProblemasN1CreateDialog.hide()" immediate="true" ajax="false">
+                        <p:resetInput target="display"/>
+                    </p:commandButton>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

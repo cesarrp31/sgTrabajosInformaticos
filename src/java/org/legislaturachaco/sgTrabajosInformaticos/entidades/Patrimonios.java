@@ -6,6 +6,7 @@ package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +22,8 @@ import javax.persistence.TemporalType;
 @Table(name = "patrimonios")
 
 public class Patrimonios implements Serializable {
+    public static int LONG_MAX_PATRIMONIO= 9,
+                    LONG_MAX_COMENTARIO= 100;            
 
     @Column(name = "idPatrimonio", table = "patrimonios", nullable = false, length = 9)
     @Id
@@ -92,6 +95,10 @@ public class Patrimonios implements Serializable {
     public Boolean isBaja() {
         return this.baja;
     }
+    
+    public Boolean getBaja() {
+        return this.baja;
+    }
 
     public void setBaja(Boolean baja) {
         this.baja = baja;
@@ -144,4 +151,36 @@ public class Patrimonios implements Serializable {
     public void setComentario(String comentario) {
         this.comentario = comentario;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.idPatrimonio);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Patrimonios other = (Patrimonios) obj;
+        if (!Objects.equals(this.idPatrimonio, other.idPatrimonio)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Patrimonios{" + "idPatrimonio=" + idPatrimonio + ", idPonderacion=" + idPonderacion + '}';
+    }
+    
+    
 }

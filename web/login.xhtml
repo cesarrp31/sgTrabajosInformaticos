@@ -15,7 +15,7 @@
             <h:form id="loginForm">          
                 <p:growl id="msg" showDetail="true" life="3000" />
                 <p:panel header="Login" style="width: 360px;">
-                    <h:panelGrid id="loginPanel">
+                    <p:panelGrid id="loginPanel">
                         <p:row>
                             <p:column>
                                 <p:outputLabel value="Usuario:" for="username"/>
@@ -43,7 +43,7 @@
                                                  update="loginForm" ajax="true"></p:commandButton>
                             </p:column>                            
                         </p:row>
-                    </h:panelGrid>
+                    </p:panelGrid>
                 </p:panel> 
             </h:form>
         </ui:define>

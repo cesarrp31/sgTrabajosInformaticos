@@ -12,10 +12,14 @@
             <h:form id="ProblemasN3ViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{problemasN3Controller.selected != null}">
+                        <h:outputText value="#{bundle.ViewProblemasN2Label_idProblemaN1}"/>
+                        <h:outputText value="#{problemasN3Controller.selected.idProblemaN2.idProblemaN1.toString()}" 
+                                      title="#{bundle.ViewProblemasN2Title_idProblemaN1}"/>
+                        <h:outputText value="#{bundle.ViewProblemasN3Label_idProblemaN2}"/>
+                        <h:outputText value="#{problemasN3Controller.selected.idProblemaN2.toString()}" 
+                                      title="#{bundle.ViewProblemasN3Title_idProblemaN2}"/>
                         <h:outputText value="#{bundle.ViewProblemasN3Label_idProblemaN3}"/>
                         <h:outputText value="#{problemasN3Controller.selected.idProblemaN3}" title="#{bundle.ViewProblemasN3Title_idProblemaN3}"/>
-                        <h:outputText value="#{bundle.ViewProblemasN3Label_idProblemaN2}"/>
-                        <h:outputText value="#{problemasN3Controller.selected.idProblemaN2}" title="#{bundle.ViewProblemasN3Title_idProblemaN2}"/>
                         <h:outputText value="#{bundle.ViewProblemasN3Label_problema}"/>
                         <h:outputText value="#{problemasN3Controller.selected.problema}" title="#{bundle.ViewProblemasN3Title_problema}"/>
                     </p:panelGrid>

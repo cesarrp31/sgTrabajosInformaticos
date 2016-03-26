@@ -32,15 +32,7 @@
                                 <h:outputText value="#{bundle.ListPatrimoniosTitle_idPatrimonio}"/>
                             </f:facet>
                             <h:outputText value="#{item.idPatrimonio}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPatrimoniosTitle_fechaBaja}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fechaBaja}">
-                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
-                            </h:outputText>
-                        </p:column>
+                        </p:column>                        
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPatrimoniosTitle_fechaAlta}"/>
@@ -53,19 +45,33 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPatrimoniosTitle_idTipo}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idTipo}"/>
+                            <h:outputText value="#{item.idTipo.tipo}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPatrimoniosTitle_idPonderacion}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idPonderacion}"/>
+                            <h:outputText value="#{item.idPonderacion.ponderacion}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPatrimoniosTitle_comentario}"/>
                             </f:facet>
                             <h:outputText value="#{item.comentario}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPatrimoniosTitle_fechaBaja}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaBaja}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPatrimoniosTitle_baja}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.baja}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{patrimoniosController.prepareCreate}" update=":PatrimoniosCreateForm" oncomplete="PF('PatrimoniosCreateDialog').show()"/>

@@ -6,6 +6,7 @@ package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +22,8 @@ import javax.persistence.TemporalType;
 @Table(name = "ponderaciones")
 
 public class Ponderaciones implements Serializable {
+    public static final int LONG_MAX_PONDERACION= 45,
+                            LONG_MAX_OBSERVACION= 100;
 
     @OneToMany(targetEntity = Patrimonios.class, mappedBy = "idPonderacion")
     private List<Patrimonios> patrimoniosCollection;
@@ -110,4 +113,35 @@ public class Ponderaciones implements Serializable {
     public void setObservacion(String observacion) {
         this.observacion = observacion;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.idPonderacion);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Ponderaciones other = (Ponderaciones) obj;
+        if (!Objects.equals(this.idPonderacion, other.idPonderacion)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Ponderaciones{" + "ponderacion=" + ponderacion + '}';
+    }
+    
 }

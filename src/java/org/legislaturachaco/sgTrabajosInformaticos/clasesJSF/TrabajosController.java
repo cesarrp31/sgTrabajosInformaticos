@@ -6,6 +6,7 @@ import org.legislaturachaco.sgTrabajosInformaticos.clasesJSF.util.JsfUtil.Persis
 import org.legislaturachaco.sgTrabajosInformaticos.sessionBeans.TrabajosFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -18,6 +19,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.Fechas;
 
 @Named("trabajosController")
 @SessionScoped
@@ -27,10 +29,29 @@ public class TrabajosController implements Serializable {
     private org.legislaturachaco.sgTrabajosInformaticos.sessionBeans.TrabajosFacade ejbFacade;
     private List<Trabajos> items = null;
     private Trabajos selected;
+    
+    private static final int FILAS_SINTOMAS= 5;
+    
 
     public TrabajosController() {
     }
 
+    public Date obtenerFechaActual(){
+        return Fechas.obtenerFechaActual();
+    }
+    
+    public int obtenerLongMaxSintomas(){
+        return Trabajos.LONG_MAX_SINTOMAS;
+    }
+    
+    public int filasSintomas(){
+        return FILAS_SINTOMAS;
+    }
+    
+    public int columnasSintomas(){
+        return obtenerLongMaxSintomas()/FILAS_SINTOMAS;
+    }
+    
     public Trabajos getSelected() {
         return selected;
     }

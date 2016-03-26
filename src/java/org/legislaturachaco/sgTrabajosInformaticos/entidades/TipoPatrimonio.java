@@ -5,6 +5,7 @@ package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,9 @@ import javax.persistence.Table;
 @Table(name = "tipoPatrimonio")
 
 public class TipoPatrimonio implements Serializable {
+    public static final int LON_MAX_TIPO= 45,
+                            LONG_MAX_DESCRIPCION= 100;
+    
 
     @Column(name = "descripcion", table = "tipoPatrimonio", length = 100)
     @Basic
@@ -70,4 +74,35 @@ public class TipoPatrimonio implements Serializable {
     public void setIdTipo(Integer idTipo) {
         this.idTipo = idTipo;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.idTipo);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TipoPatrimonio other = (TipoPatrimonio) obj;
+        if (!Objects.equals(this.idTipo, other.idTipo)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return tipo;
+    }
+    
 }

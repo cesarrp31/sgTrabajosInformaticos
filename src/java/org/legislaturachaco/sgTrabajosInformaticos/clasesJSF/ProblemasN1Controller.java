@@ -30,6 +30,10 @@ public class ProblemasN1Controller implements Serializable {
 
     public ProblemasN1Controller() {
     }
+    
+    public int obtenerLongMaxProblema(){
+        return ProblemasN1.LONG_MAX_PROBLEMA;
+    }
 
     public ProblemasN1 getSelected() {
         return selected;
@@ -66,12 +70,15 @@ public class ProblemasN1Controller implements Serializable {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ProblemasN1Updated"));
     }
 
+    
     public void destroy() {
+        /*
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("ProblemasN1Deleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        */
     }
 
     public List<ProblemasN1> getItems() {

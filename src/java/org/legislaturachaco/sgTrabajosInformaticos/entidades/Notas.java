@@ -6,6 +6,7 @@ package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -64,6 +65,10 @@ public class Notas implements Serializable {
     @Column(name = "observacion", table = "notas", length = 500)
     @Basic
     private String observacion;
+    
+    @Column(name = "resuelta", table = "notas", nullable = false)
+    @Basic
+    private boolean resuelta;
 
     @ManyToOne(optional = false, targetEntity = Dependencias.class)
     @JoinColumn(name = "idDependenciaDestino")
@@ -160,4 +165,43 @@ public class Notas implements Serializable {
     public void setIdDependenciaDestino(Dependencias idDependenciaDestino) {
         this.idDependenciaDestino = idDependenciaDestino;
     }
+
+    public boolean isResuelta() {
+        return resuelta;
+    }
+
+    public void setResuelta(boolean resuelta) {
+        this.resuelta = resuelta;
+    }
+
+    @Override
+    public String toString() {
+        return "Notas{" + "fecha=" + fecha + ", idTipoNota=" + idTipoNota + ", nroNota=" + nroNota + ", resuelta=" + resuelta + ", idDependenciaDestino=" + idDependenciaDestino + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.idNota);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Notas other = (Notas) obj;
+        if (!Objects.equals(this.idNota, other.idNota)) {
+            return false;
+        }
+        return true;
+    }
+    
 }

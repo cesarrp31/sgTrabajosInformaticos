@@ -29,15 +29,21 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProblemasN3Title_idProblemaN3}"/>
+                                <h:outputText value="#{bundle.ListProblemasN2Title_idProblemaN1}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idProblemaN3}"/>
+                            <h:outputText value="#{item.idProblemaN2.idProblemaN1.toString()}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListProblemasN3Title_idProblemaN2}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idProblemaN2}"/>
+                            <h:outputText value="#{item.idProblemaN2.toString()}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProblemasN3Title_idProblemaN3}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idProblemaN3}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

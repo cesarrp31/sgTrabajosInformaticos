@@ -8,32 +8,49 @@
 
     <ui:composition>
 
-        <p:dialog id="PatrimoniosCreateDlg" widgetVar="PatrimoniosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePatrimoniosTitle}">
+        <p:dialog id="PatrimoniosCreateDlg" widgetVar="PatrimoniosCreateDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle.CreatePatrimoniosTitle}">
             <h:form id="PatrimoniosCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{patrimoniosController.selected != null}">
                         <p:outputLabel value="#{bundle.CreatePatrimoniosLabel_idPatrimonio}" for="idPatrimonio" />
-                        <p:inputText id="idPatrimonio" value="#{patrimoniosController.selected.idPatrimonio}" title="#{bundle.CreatePatrimoniosTitle_idPatrimonio}" required="true" requiredMessage="#{bundle.CreatePatrimoniosRequiredMessage_idPatrimonio}"/>
-                        <p:outputLabel value="#{bundle.CreatePatrimoniosLabel_fechaBaja}" for="fechaBaja" />
-                        <p:calendar id="fechaBaja" pattern="dd/MM/yyyy HH:mm:ss" value="#{patrimoniosController.selected.fechaBaja}" title="#{bundle.EditPatrimoniosTitle_fechaBaja}"  showOn="button"/>
+                        <p:inputText id="idPatrimonio" value="#{patrimoniosController.selected.idPatrimonio}" 
+                                     title="#{bundle.CreatePatrimoniosTitle_idPatrimonio}" required="true" 
+                                     requiredMessage="#{bundle.CreatePatrimoniosRequiredMessage_idPatrimonio}"/>
                         <p:outputLabel value="#{bundle.CreatePatrimoniosLabel_fechaAlta}" for="fechaAlta" />
-                        <p:calendar id="fechaAlta" pattern="dd/MM/yyyy HH:mm:ss" value="#{patrimoniosController.selected.fechaAlta}" title="#{bundle.EditPatrimoniosTitle_fechaAlta}" required="true" requiredMessage="#{bundle.EditPatrimoniosRequiredMessage_fechaAlta}" showOn="button"/>
+                        <p:calendar id="fechaAlta" pattern="dd/MM/yyyy HH:mm:ss" 
+                                    value="#{patrimoniosController.selected.fechaAlta}" 
+                                    title="#{bundle.EditPatrimoniosTitle_fechaAlta}" required="true" 
+                                    requiredMessage="#{bundle.EditPatrimoniosRequiredMessage_fechaAlta}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreatePatrimoniosLabel_idTipo}" for="idTipo" />
-                        <p:selectOneMenu id="idTipo" value="#{patrimoniosController.selected.idTipo}" required="true" requiredMessage="#{bundle.EditPatrimoniosRequiredMessage_idTipo}">
+                        <p:selectOneMenu id="idTipo" value="#{patrimoniosController.selected.idTipo}" required="true" 
+                                         requiredMessage="#{bundle.EditPatrimoniosRequiredMessage_idTipo}">
                             <f:selectItems value="#{tipoPatrimonioController.itemsAvailableSelectOne}"
                                            var="idTipoItem"
                                            itemValue="#{idTipoItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatePatrimoniosLabel_idPonderacion}" for="idPonderacion" />
-                        <p:selectOneMenu id="idPonderacion" value="#{patrimoniosController.selected.idPonderacion}" required="true" requiredMessage="#{bundle.EditPatrimoniosRequiredMessage_idPonderacion}">
+                        <p:selectOneMenu id="idPonderacion" value="#{patrimoniosController.selected.idPonderacion}" required="true" 
+                                         requiredMessage="#{bundle.EditPatrimoniosRequiredMessage_idPonderacion}">
                             <f:selectItems value="#{ponderacionesController.itemsAvailableSelectOne}"
                                            var="idPonderacionItem"
                                            itemValue="#{idPonderacionItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatePatrimoniosLabel_comentario}" for="comentario" />
-                        <p:inputText id="comentario" value="#{patrimoniosController.selected.comentario}" title="#{bundle.CreatePatrimoniosTitle_comentario}" />
+                        <p:inputText id="comentario" value="#{patrimoniosController.selected.comentario}" 
+                                     title="#{bundle.CreatePatrimoniosTitle_comentario}" />
+                        <p:outputLabel value="#{bundle.CreatePatrimoniosLabel_fechaBaja}" for="fechaBaja" />
+                        <p:calendar id="fechaBaja" pattern="dd/MM/yyyy HH:mm:ss" 
+                                    value="#{patrimoniosController.selected.fechaBaja}" 
+                                    title="#{bundle.EditPatrimoniosTitle_fechaBaja}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePatrimoniosLabel_baja}" for="baja" />
+                        <p:inputText id="baja" value="#{patrimoniosController.selected.baja}" 
+                                     title="#{bundle.CreatePatrimoniosTitle_baja}" required="true" 
+                                     requiredMessage="#{bundle.CreatePatrimoniosRequiredMessage_baja}"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{patrimoniosController.create}" value="#{bundle.Save}" update="display,:PatrimoniosListForm:datalist,:growl" oncomplete="handleSubmit(args,'PatrimoniosCreateDialog');"/>
+                    <p:commandButton actionListener="#{patrimoniosController.create}" value="#{bundle.Save}" 
+                                     update="display,:PatrimoniosListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args,'PatrimoniosCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PatrimoniosCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

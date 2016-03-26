@@ -12,16 +12,18 @@
             <h:form id="TecnicosViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tecnicosController.selected != null}">
-                        <h:outputText value="#{bundle.ViewTecnicosLabel_apellido}"/>
-                        <h:outputText value="#{tecnicosController.selected.apellido}" title="#{bundle.ViewTecnicosTitle_apellido}"/>
-                        <h:outputText value="#{bundle.ViewTecnicosLabel_correo}"/>
-                        <h:outputText value="#{tecnicosController.selected.correo}" title="#{bundle.ViewTecnicosTitle_correo}"/>
                         <h:outputText value="#{bundle.ViewTecnicosLabel_idTecnico}"/>
                         <h:outputText value="#{tecnicosController.selected.idTecnico}" title="#{bundle.ViewTecnicosTitle_idTecnico}"/>
+                        <h:outputText value="#{bundle.ViewTecnicosLabel_apellido}"/>
+                        <h:outputText value="#{tecnicosController.selected.apellido}" title="#{bundle.ViewTecnicosTitle_apellido}"/>
                         <h:outputText value="#{bundle.ViewTecnicosLabel_nombre}"/>
                         <h:outputText value="#{tecnicosController.selected.nombre}" title="#{bundle.ViewTecnicosTitle_nombre}"/>
                         <h:outputText value="#{bundle.ViewTecnicosLabel_idTipoEspecialidad}"/>
                         <h:outputText value="#{tecnicosController.selected.idTipoEspecialidad}" title="#{bundle.ViewTecnicosTitle_idTipoEspecialidad}"/>
+                        <h:outputText value="#{bundle.ViewTecnicosLabel_correo}"/>
+                        <h:outputText value="#{tecnicosController.selected.correo}" title="#{bundle.ViewTecnicosTitle_correo}"/>
+                        <h:outputText value="#{bundle.ViewTecnicosLabel_baja}"/>
+                        <h:outputText value="#{tecnicosController.selected.baja}" title="#{bundle.ViewTecnicosTitle_baja}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="TecnicosViewDialog.hide()"/>
                 </h:panelGroup>

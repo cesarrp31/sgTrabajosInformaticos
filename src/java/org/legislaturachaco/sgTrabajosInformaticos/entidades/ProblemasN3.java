@@ -5,6 +5,7 @@ package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +22,8 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "problemasN3", uniqueConstraints = @UniqueConstraint(columnNames = {"idProblemaN2", "idProblemaN3"}))
 
 public class ProblemasN3 implements Serializable {
+    
+    public static final int LONG_MAX_PROBLEMA= 45;
 
     @Column(name = "idProblemaN3", table = "problemasN3", nullable = false)
     @Id
@@ -84,4 +87,35 @@ public class ProblemasN3 implements Serializable {
     public void setProblema(String problema) {
         this.problema = problema;
     }
+    
+    @Override
+    public String toString() {
+        return problema;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 19 * hash + Objects.hashCode(this.idProblemaN3);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ProblemasN3 other = (ProblemasN3) obj;
+        if (!Objects.equals(this.idProblemaN3, other.idProblemaN3)) {
+            return false;
+        }
+        return true;
+    }
+    
 }

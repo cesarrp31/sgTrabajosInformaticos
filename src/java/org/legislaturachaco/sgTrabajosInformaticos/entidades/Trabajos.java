@@ -6,6 +6,7 @@ package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,6 +24,7 @@ import javax.persistence.TemporalType;
 @Table(name = "trabajos")
 
 public class Trabajos implements Serializable {
+    public static final int LONG_MAX_SINTOMAS= 500;
 
     @OneToMany(targetEntity = ProblemasDetectados.class, mappedBy = "idTrabajo")
     private List<ProblemasDetectados> problemasDetectadosCollection;
@@ -171,4 +173,36 @@ public class Trabajos implements Serializable {
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 31 * hash + Objects.hashCode(this.idTrabajo);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Trabajos other = (Trabajos) obj;
+        if (!Objects.equals(this.idTrabajo, other.idTrabajo)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Trabajos{" + "idTrabajo=" + idTrabajo + ", nroFicha=" + nroFicha + ", fechaComienzo=" + fechaComienzo + ", idNota=" + idNota + ", idPrioridad=" + idPrioridad + ", idDependencia=" + idDependencia + '}';
+    }
+    
+    
 }

@@ -31,6 +31,14 @@ public class TipoPatrimonioController implements Serializable {
     public TipoPatrimonioController() {
     }
 
+    public int obtenerLongMaxTipo(){
+        return TipoPatrimonio.LON_MAX_TIPO;
+    }
+    
+    public int obtenerLongMaxDescripcion(){
+        return TipoPatrimonio.LONG_MAX_DESCRIPCION;
+    }
+    
     public TipoPatrimonio getSelected() {
         return selected;
     }
@@ -67,11 +75,13 @@ public class TipoPatrimonioController implements Serializable {
     }
 
     public void destroy() {
+        /*
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("TipoPatrimonioDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        */
     }
 
     public List<TipoPatrimonio> getItems() {

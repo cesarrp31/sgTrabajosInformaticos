@@ -14,21 +14,67 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.legislaturachaco.sgTrabajosInformaticos.entidades.ProblemasN1;
+import org.legislaturachaco.sgTrabajosInformaticos.entidades.ProblemasN2;
 
 @Named("problemasN3Controller")
 @SessionScoped
+@ViewScoped
 public class ProblemasN3Controller implements Serializable {
 
     @EJB
     private org.legislaturachaco.sgTrabajosInformaticos.sessionBeans.ProblemasN3Facade ejbFacade;
     private List<ProblemasN3> items = null;
     private ProblemasN3 selected;
+    
+    private ProblemasN2 tempN2;
+    private ProblemasN1 tempN1;
 
     public ProblemasN3Controller() {
+    }
+    
+    public ProblemasN2 getTempN2() {
+        return tempN2;
+    }
+
+    public void setTempN2(ProblemasN2 tempN2) {
+        this.tempN2 = tempN2;
+        System.out.println("0 - "+tempN1+" "+tempN2);
+    }
+
+    public ProblemasN1 getTempN1() {
+        return tempN1;
+    }
+
+    public void setTempN1(ProblemasN1 tempN1) {
+        this.tempN1 = tempN1;
+        System.out.println("0 - "+tempN1+" "+tempN2);
+    }
+    
+    /**
+     * Actualiza el id de Nivel 1.
+     */
+    public void buscarProblemasN2(){
+        System.out.println("0 - "+tempN1+" "+tempN2);        
+    }
+    
+    /**
+     * Actualiza el id de Nivel 2.
+     * 
+     */
+    public void setearIdProblemas(){
+        System.out.println("0 - "+tempN1+" "+tempN2);
+        //selected.setIdProblemasN1(tempN1);
+        //selected.setIdProblemaN2(tempN2);
+    }
+    
+    public int obtenerLongMaxProblema(){
+        return ProblemasN3.LONG_MAX_PROBLEMA;
     }
 
     public ProblemasN3 getSelected() {
@@ -67,11 +113,13 @@ public class ProblemasN3Controller implements Serializable {
     }
 
     public void destroy() {
+        /*
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("ProblemasN3Deleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        */
     }
 
     public List<ProblemasN3> getItems() {

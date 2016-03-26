@@ -8,28 +8,74 @@
 
     <ui:composition>
 
-        <p:dialog id="TecnicosEditDlg" widgetVar="TecnicosEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTecnicosTitle}">
+        <p:dialog id="TecnicosEditDlg" widgetVar="TecnicosEditDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle.EditTecnicosTitle}">
             <h:form id="TecnicosEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{tecnicosController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditTecnicosLabel_apellido}" for="apellido" />
-                        <p:inputText id="apellido" value="#{tecnicosController.selected.apellido}" title="#{bundle.EditTecnicosTitle_apellido}" required="true" requiredMessage="#{bundle.EditTecnicosRequiredMessage_apellido}"/>
-                        <p:outputLabel value="#{bundle.EditTecnicosLabel_correo}" for="correo" />
-                        <p:inputText id="correo" value="#{tecnicosController.selected.correo}" title="#{bundle.EditTecnicosTitle_correo}" required="true" requiredMessage="#{bundle.EditTecnicosRequiredMessage_correo}"/>
+                    <p:panelGrid rendered="#{tecnicosController.selected != null}">
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.EditTecnicosLabel_apellido}" for="apellido" />
+                            </p:column>
+                            <p:column>
+                                <p:inputText id="apellido" value="#{tecnicosController.selected.apellido}" 
+                                             title="#{bundle.EditTecnicosTitle_apellido}" required="true" 
+                                             requiredMessage="#{bundle.EditTecnicosRequiredMessage_apellido}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.EditTecnicosLabel_nombre}" for="nombre" />
+                            </p:column>
+                            <p:column>
+                                <p:inputText id="nombre" value="#{tecnicosController.selected.nombre}" 
+                                             title="#{bundle.EditTecnicosTitle_nombre}" required="true" 
+                                             requiredMessage="#{bundle.EditTecnicosRequiredMessage_nombre}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.EditTecnicosLabel_idTipoEspecialidad}" for="idTipoEspecialidad" />
+                            </p:column>
+                            <p:column>
+                                <p:selectOneMenu id="idTipoEspecialidad" value="#{tecnicosController.selected.idTipoEspecialidad}" >
+                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                    <f:selectItems value="#{tipoEspecialidadController.itemsAvailableSelectOne}"
+                                                   var="idTipoEspecialidadItem"
+                                                   itemValue="#{idTipoEspecialidadItem}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.EditTecnicosLabel_correo}" for="correo" />
+                            </p:column>
+                            <p:column>
+                                <p:inputText id="correo" value="#{tecnicosController.selected.correo}" 
+                                     title="#{bundle.EditTecnicosTitle_correo}" required="true" 
+                                     requiredMessage="#{bundle.EditTecnicosRequiredMessage_correo}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.EditTecnicosLabel_baja}" for="baja" />
+                            </p:column>
+                            <p:column>
+                                <p:inputText id="baja" value="#{tecnicosController.selected.baja}" 
+                                     title="#{bundle.EditTecnicosTitle_baja}" required="true" 
+                                     requiredMessage="#{bundle.EditTecnicosRequiredMessage_baja}"/>
+                            </p:column>
+                        </p:row>                   
+                        <!--
                         <p:outputLabel value="#{bundle.EditTecnicosLabel_idTecnico}" for="idTecnico" />
                         <p:inputText id="idTecnico" value="#{tecnicosController.selected.idTecnico}" title="#{bundle.EditTecnicosTitle_idTecnico}" required="true" requiredMessage="#{bundle.EditTecnicosRequiredMessage_idTecnico}"/>
-                        <p:outputLabel value="#{bundle.EditTecnicosLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{tecnicosController.selected.nombre}" title="#{bundle.EditTecnicosTitle_nombre}" required="true" requiredMessage="#{bundle.EditTecnicosRequiredMessage_nombre}"/>
-                        <p:outputLabel value="#{bundle.EditTecnicosLabel_idTipoEspecialidad}" for="idTipoEspecialidad" />
-                        <p:selectOneMenu id="idTipoEspecialidad" value="#{tecnicosController.selected.idTipoEspecialidad}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{tipoEspecialidadController.itemsAvailableSelectOne}"
-                                           var="idTipoEspecialidadItem"
-                                           itemValue="#{idTipoEspecialidadItem}"/>
-                        </p:selectOneMenu>
+                        -->                     
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{tecnicosController.update}" value="#{bundle.Save}" update="display,:TecnicosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TecnicosEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="TecnicosEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{tecnicosController.update}" value="#{bundle.Save}" 
+                                     update="display,:TecnicosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TecnicosEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TecnicosEditDialog.hide()" immediate="true" ajax="false">
+                        <p:resetInput target="display"/>
+                    </p:commandButton>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

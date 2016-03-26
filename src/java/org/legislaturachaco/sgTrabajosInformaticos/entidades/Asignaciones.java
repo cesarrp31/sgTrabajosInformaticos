@@ -6,6 +6,7 @@ package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,6 +51,10 @@ public class Asignaciones implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idAsignacion;
+    
+    @Column(name = "prestamo", table = "asignaciones", nullable = false)
+    @Basic
+    private boolean prestamo;
 
     public Asignaciones() {
 
@@ -102,4 +107,43 @@ public class Asignaciones implements Serializable {
     public void setIdAsignacion(Integer idAsignacion) {
         this.idAsignacion = idAsignacion;
     }
+
+    public boolean isPrestamo() {
+        return prestamo;
+    }
+
+    public void setPrestamo(boolean prestamo) {
+        this.prestamo = prestamo;
+    }
+
+    @Override
+    public String toString() {
+        return "Asignaciones{" + "fechaHasta=" + fechaHasta + ", idNota=" + idNota + ", idDependencia=" + idDependencia + ", idAsignacion=" + idAsignacion + ", resuelta=" + prestamo + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.idAsignacion);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Asignaciones other = (Asignaciones) obj;
+        if (!Objects.equals(this.idAsignacion, other.idAsignacion)) {
+            return false;
+        }
+        return true;
+    }
+    
 }

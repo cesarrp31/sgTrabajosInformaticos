@@ -30,6 +30,14 @@ public class PatrimoniosController implements Serializable {
 
     public PatrimoniosController() {
     }
+    
+    public int obtenerLongMaxPatrimonio(){
+        return Patrimonios.LONG_MAX_PATRIMONIO;
+    }
+    
+    public int obtenerLongMaxComentario(){
+        return Patrimonios.LONG_MAX_COMENTARIO;
+    }
 
     public Patrimonios getSelected() {
         return selected;
@@ -67,11 +75,13 @@ public class PatrimoniosController implements Serializable {
     }
 
     public void destroy() {
+        /*
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("PatrimoniosDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        */
     }
 
     public List<Patrimonios> getItems() {
