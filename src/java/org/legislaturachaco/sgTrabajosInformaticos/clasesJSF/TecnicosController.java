@@ -6,6 +6,7 @@ import org.legislaturachaco.sgTrabajosInformaticos.clasesJSF.util.JsfUtil.Persis
 import org.legislaturachaco.sgTrabajosInformaticos.sessionBeans.TecnicosFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -133,6 +134,20 @@ public class TecnicosController implements Serializable {
 
     public List<Tecnicos> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+    
+    /**
+     * Devuelve los tecnicos que no estan dados de baja.
+     * @return 
+     */
+    public List<Tecnicos> obtenerTecnicosDisponibles(){
+        List<Tecnicos> tecnicosDisponibles= new ArrayList();
+        for(Tecnicos pat: this.getItems()){
+            if((!pat.isBaja())){
+                tecnicosDisponibles.add(pat);
+            }
+        }
+        return tecnicosDisponibles;
     }
 
     @FacesConverter(forClass = Tecnicos.class)

@@ -6,6 +6,7 @@ import org.legislaturachaco.sgTrabajosInformaticos.clasesJSF.util.JsfUtil.Persis
 import org.legislaturachaco.sgTrabajosInformaticos.sessionBeans.PatrimoniosFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -14,6 +15,7 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -21,6 +23,7 @@ import javax.faces.convert.FacesConverter;
 
 @Named("patrimoniosController")
 @SessionScoped
+@ViewScoped
 public class PatrimoniosController implements Serializable {
 
     @EJB
@@ -129,6 +132,20 @@ public class PatrimoniosController implements Serializable {
 
     public List<Patrimonios> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+    
+    /**
+     * Devuelve los patrimonios que no estan dados de baja.
+     * @return 
+     */
+    public List<Patrimonios> obtenerPatrimoniosDisponibles(){
+        List<Patrimonios> patrimoniosDisponibles= new ArrayList();
+        for(Patrimonios pat: this.getItems()){
+            if((!pat.isBaja())){
+                patrimoniosDisponibles.add(pat);
+            }
+        }
+        return patrimoniosDisponibles;
     }
 
     @FacesConverter(forClass = Patrimonios.class)

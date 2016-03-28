@@ -6,6 +6,7 @@ import org.legislaturachaco.sgTrabajosInformaticos.clasesJSF.util.JsfUtil.Persis
 import org.legislaturachaco.sgTrabajosInformaticos.sessionBeans.ProblemasN3Facade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -167,6 +168,14 @@ public class ProblemasN3Controller implements Serializable {
 
     public List<ProblemasN3> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+    
+    public List<ProblemasN3> obtenerProblemasDisponibles(){
+        List<ProblemasN3> resultado= new ArrayList();
+        for(ProblemasN3 p: this.getItems()){
+            resultado.add(p);
+        }
+        return resultado;
     }
 
     @FacesConverter(forClass = ProblemasN3.class)

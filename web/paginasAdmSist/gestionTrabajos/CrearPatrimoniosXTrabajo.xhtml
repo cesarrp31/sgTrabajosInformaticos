@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <h:form id="CargaTrabajosPatrimoniosForm">
+            <p:panel header="#{bundle.CargaTrabajosAgregarPatrimonios}">
+                <p:dataTable id="datalistPatDisp" value="#{cargaTrabajos.listaPatrimoniosDisponibles()}" var="item"
+                             selectionMode="single" selection="#{cargaTrabajos.patrimonioActual}"
+                             paginator="true"
+                             rowKey="#{item.idPatrimonio}"
+                             rows="5"
+                             sortMode="multiple" >                    
+                    
+                    <p:ajax event="rowSelect" 
+                            update="#{p:component('datalistPatDisp')} #{p:component('datalistPatAgregados')} btnAgregarPat btnInicializarPat"/>
+                    <p:ajax event="rowUnselect" 
+                            update="#{p:component('datalistPatDisp')} #{p:component('datalistPatAgregados')} btnAgregarPat btnInicializarPat"/>
+                    
+                    <p:column sortBy="#{item.idPatrimonio}" filterBy="#{item.idPatrimonio}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPatrimoniosTitle_idPatrimonio}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPatrimonio}"/>
+                    </p:column>                        
+                    <p:column sortBy="#{item.idPonderacion.ponderacion}" filterBy="#{item.idPonderacion.ponderacion}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPatrimoniosTitle_idPonderacion}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPonderacion.ponderacion}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.idTipo.tipo}" filterBy="#{item.idTipo.tipo}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPatrimoniosTitle_idTipo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idTipo.tipo}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="btnAgregarPat" icon="ui-icon-plus"
+                                 value="#{bundle.CargaTrabajosBtnAgregarPatrimonios}" 
+                                 actionListener="#{cargaTrabajos.agregarPatrimonioSeleccionado()}" 
+                                 update="#{p:component('datalistPatDisp')} #{p:component('datalistPatAgregados')}"
+                                 process="@this"/>
+                        <p:commandButton id="btnInicializarPat" icon="ui-icon-alert"
+                                 value="#{bundle.CargaTrabajosBtnInicializarListasPatrimonios}" 
+                                 actionListener="#{cargaTrabajos.inicializarListasPatrimonios()}" 
+                                 update="#{p:component('datalistPatDisp')} #{p:component('datalistPatAgregados')}"
+                                 process="@this"/>
+                    </f:facet>
+                </p:dataTable>               
+            </p:panel>
+            <p:panel header="#{bundle.CargaTrabajosPatrimoniosSeleccionados}">
+                    <p:dataTable id="datalistPatAgregados" value="#{cargaTrabajos.patrimoniosSeleccionados}" var="itemA"
+                             selectionMode="single" selection="#{cargaTrabajos.patrimonioAgregadoActual}"
+                                     paginator="true"
+                                     rowKey="#{itemA.idPatrimonio}"
+                                     rows="10"
+                                     sortMode="multiple">
+                    <p:ajax event="rowSelect" 
+                            update="#{p:component('datalistPatDisp')} #{p:component('datalistPatAgregados')} btnRemoverPat"/>
+                    <p:ajax event="rowUnselect" 
+                            update="#{p:component('datalistPatDisp')} #{p:component('datalistPatAgregados')} btnRemoverPat"/>
+                    <p:column sortBy="#{itemA.idPatrimonio}" filterBy="#{itemA.idPatrimonio}">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPatrimoniosTitle_idPatrimonio}"/>
+                        </f:facet>
+                        <h:outputText value="#{itemA.idPatrimonio}"/>
+                    </p:column>                        
+                    <p:column sortBy="#{itemA.idPonderacion.ponderacion}" filterBy="#{itemA.idPonderacion.ponderacion}">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPatrimoniosTitle_idPonderacion}"/>
+                        </f:facet>
+                        <h:outputText value="#{itemA.idPonderacion.ponderacion}"/>
+                    </p:column>
+                    <p:column sortBy="#{itemA.idTipo.tipo}" filterBy="#{itemA.idTipo.tipo}">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListPatrimoniosTitle_idTipo}"/>
+                        </f:facet>
+                        <h:outputText value="#{itemA.idTipo.tipo}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="btnRemoverPat" icon="ui-icon-trash"
+                                 value="#{bundle.CargaTrabajosBtnRemoverPatrimonios}" 
+                                 actionListener="#{cargaTrabajos.removerPatrimonioSeleccionado()}" 
+                                 update="#{p:component('datalistPatDisp')} #{p:component('datalistPatAgregados')}" 
+                                 process="@this"/>
+                    </f:facet>
+                </p:dataTable>                
+            </p:panel>
+        </h:form>
+    </ui:composition>
+</html>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/paginasAdmSist/templateAdmSist.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTrabajosTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="CargaTrabajosListForm">
+                <p:panel header="#{bundle.CargaTrabajosTitle}">
+                    <h:panelGroup id="display">
+                        <p:panelGrid>
+                            <p:row>
+                                <p:column width="200px">
+                                    <p:outputLabel value="#{bundle.CreateTrabajosLabel_nroFicha}" for="nroFicha"/>                                                                      
+                                    <p:inputText id="nroFicha" value="#{cargaTrabajos.trabajoActual.nroFicha}" size="10"
+                                                 title="#{bundle.CreateTrabajosTitle_nroFicha}" required="true" 
+                                                 requiredMessage="#{bundle.CreateTrabajosRequiredMessage_nroFicha}"/>
+
+                                </p:column>
+                                <p:column width="200px">
+                                    <p:outputLabel value="#{bundle.CreateTrabajosLabel_idNota}" for="idNota"/>
+                                    <p:selectOneMenu id="idNota" value="#{cargaTrabajos.trabajoActual.idNota}" style="width:150px">
+                                        <f:selectItems value="#{notasController.itemsAvailableSelectOne}"
+                                                       var="idNotaItem"
+                                                       itemValue="#{idNotaItem}"/>
+                                    </p:selectOneMenu>
+                                </p:column>
+                                <p:column width="200px">
+                                    <p:outputLabel value="#{bundle.CreateTrabajosLabel_fechaComienzo}"/>
+                                    <p:calendar id="fechaComienzo" pattern="dd/MM/yyyy HH:mm:ss" style="width:150px"
+                                                value="#{cargaTrabajos.trabajoActual.fechaComienzo}" 
+                                                title="#{bundle.EditTrabajosTitle_fechaComienzo}" required="true" 
+                                                requiredMessage="#{bundle.EditTrabajosRequiredMessage_fechaComienzo}" showOn="button"/>
+                                </p:column>
+                                <p:column width="200px">
+                                    <p:outputLabel value="#{bundle.CreateTrabajosLabel_idDependencia}"/>
+                                    <p:selectOneMenu id="idDependencia" value="#{cargaTrabajos.trabajoActual.idDependencia}" required="true" 
+                                                     requiredMessage="#{bundle.EditTrabajosRequiredMessage_idDependencia}">
+                                        <f:selectItems value="#{dependenciasController.itemsAvailableSelectOne}"
+                                                       var="idDependenciaItem"
+                                                       itemValue="#{idDependenciaItem}"/>
+                                    </p:selectOneMenu>
+                                </p:column>
+                                <p:column width="200px">
+                                    <p:outputLabel value="#{bundle.CreateTrabajosLabel_idPrioridad}"/>
+                                    <p:selectOneMenu id="idPrioridad" value="#{cargaTrabajos.trabajoActual.idPrioridad}" required="true" 
+                                                     requiredMessage="#{bundle.EditTrabajosRequiredMessage_idPrioridad}">
+                                        <f:selectItems value="#{prioridadesController.itemsAvailableSelectOne}"
+                                                       var="idPrioridadItem"
+                                                       itemValue="#{idPrioridadItem}"/>
+                                    </p:selectOneMenu>
+                                </p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>
+                                    <p:outputLabel value="#{bundle.CreateTrabajosLabel_sintomas}" for="sintomas" />
+                                </p:column>
+                                <p:column colspan="4">                                    
+                                    <p:inputTextarea id="sintomas" value="#{cargaTrabajos.trabajoActual.sintomas}"
+                                                     rows="#{trabajosController.filasSintomas()}" 
+                                                     cols="#{trabajosController.columnasSintomas()}"
+                                                     maxlength="#{trabajosController.obtenerLongMaxSintomas()}"
+                                                     title="#{bundle.CreateTrabajosTitle_sintomas}" />
+                                </p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column width="200px">
+                                    <p:panel>
+                                        <p:outputLabel value="#{bundle.CreateTrabajosLabel_usuarioIniciador}" for="usuarioIniciador" />
+                                        <p:selectOneMenu id="usuarioIniciador" value="#{cargaTrabajos.trabajoActual.usuarioIniciador}" required="true" 
+                                                         requiredMessage="#{bundle.EditTrabajosRequiredMessage_usuarioIniciador}">
+                                            <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"
+                                                           var="usuarioIniciadorItem"
+                                                           itemValue="#{usuarioIniciadorItem}"/>
+                                        </p:selectOneMenu>
+                                    </p:panel>                                    
+                                </p:column>
+                                <p:column width="200px">
+                                    <p:panel>
+                                        <p:outputLabel value="#{bundle.CreateTrabajosLabel_fechaFin}" for="fechaFin" />
+                                        <p:calendar id="fechaFin" pattern="dd/MM/yyyy HH:mm:ss" 
+                                                    value="#{cargaTrabajos.trabajoActual.fechaFin}" 
+                                                    title="#{bundle.EditTrabajosTitle_fechaFin}"  showOn="button"/>
+                                    </p:panel>                                    
+                                </p:column>
+                            </p:row>
+                            <!--
+                            <p:outputLabel value="#{bundle.CreateTrabajosLabel_idTrabajo}" for="idTrabajo" />
+                            <p:inputText id="idTrabajo" value="#{cargaTrabajos.trabajoActual.idTrabajo}" 
+                            title="#{bundle.CreateTrabajosTitle_idTrabajo}" required="true" 
+                            requiredMessage="#{bundle.CreateTrabajosRequiredMessage_idTrabajo}"/>
+                            -->                      
+                        </p:panelGrid>
+                        
+                        <p:commandButton actionListener="#{cargaTrabajos.create}" value="#{bundle.Save}" 
+                                         update="display,:CargaTrabajosListForm,:growl" icon="ui-icon-disk"
+                                         oncomplete="handleSubmit(args,'CargaTrabajosListForm');"/>
+                        <p:commandButton value="#{bundle.Cancel}" icon="ui-icon-cancel"/>
+                        
+                    </h:panelGroup>    
+                </p:panel>
+                <p:panel id="pnlExtras" header="#{bundle.CargaTrabajosExtras}">
+                    <p:accordionPanel multiple="true" activeIndex="">
+                        <p:tab title="#{bundle.CargaTrabajosPatrimoniosDisponibles}">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <ui:include src="/paginasAdmSist/gestionTrabajos/CrearPatrimoniosXTrabajo.xhtml"/>
+                            </h:panelGrid>
+                        </p:tab>
+                        <p:tab title="#{bundle.CargaTrabajosTecnicosDisponibles}">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <ui:include src="/paginasAdmSist/gestionTrabajos/CrearTecnicosXTrabajo.xhtml"/>
+                            </h:panelGrid>
+                        </p:tab>
+                        <p:tab title="#{bundle.CargaTrabajosProblemasDetectados}">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <ui:include src="/paginasAdmSist/gestionTrabajos/CrearProblemasDetectados.xhtml"/>
+                            </h:panelGrid>
+                        </p:tab>
+                    </p:accordionPanel>
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

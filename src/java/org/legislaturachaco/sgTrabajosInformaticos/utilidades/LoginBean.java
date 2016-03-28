@@ -5,82 +5,79 @@
  */
 package org.legislaturachaco.sgTrabajosInformaticos.utilidades;
 
-import java.io.Serializable;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import org.legislaturachaco.sgTrabajosInformaticos.clasesJSF.UsuariosController;
+import org.legislaturachaco.sgTrabajosInformaticos.entidades.Usuarios;
+import java.io.Serializable;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
+import org.primefaces.context.RequestContext;
  
-@ManagedBean(name = "loginBean")
-@SessionScoped
 /**
  *
  * @author Cesar
  */
+@ManagedBean(name = "loginBean")
+@SessionScoped
 public class LoginBean implements Serializable {
- 
-    private static final long serialVersionUID = 1L;
-    private String password;
-    private String message, uname;
- 
-    public String getMessage() {
-        return message;
+    private String nombre;
+    private String clave;
+    private boolean logeado = false;
+    private static final String INICIO="/login.xhtml";
+    
+    public boolean estaLogeado() {
+        return logeado;
+    } 
+    public String getNombre() {
+        return nombre;
+    } 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    } 
+    public String getClave() {
+        return clave; 
     }
- 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setClave(String clave) {
+        this.clave = clave;
     }
- 
-    public String getPassword() {
-        return password;
-    }
- 
-    public void setPassword(String password) {
-        this.password = password;
-    }
- 
-    public String getUname() {
-        return uname;
-    }
- 
-    public void setUname(String uname) {
-        this.uname = uname;
-    }
- 
-    public String loginProject() {
-        //boolean result = UserDAO.login(uname, password);
-        boolean result =true;
-        if (result) {
-            // get Http Session and store username
-            //HttpSession session = Util.getSession();
-            //session.setAttribute("username", uname);
- 
-            return "/paginasAdmSist/indexAdmSist";
-        } else {
- 
-            FacesContext.getCurrentInstance().addMessage(
-                    null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN,
-                    "Invalid Login!",
-                    "Please Try Again!"));
- 
-            // invalidate session, and redirect to other pages
- 
-            //message = "Invalid Login. Please Try Again!";
-            return "/login";
+    public String login() {
+        String usu= "admin";
+        String sigPagina= INICIO;
+        RequestContext context = RequestContext.getCurrentInstance();
+        FacesMessage msg = null;
+        if (nombre != null && nombre.equals(usu) && 
+                clave != null && clave.equals("admin")) {
+            logeado = true;
+            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@", nombre);
+            System.out.println("Inicio sesión: "+nombre);
+            sigPagina= "/paginasAdmSist/indexAdmSist.xhtml?faces-redirect=true";
+        }else{
+            logeado = false;
+            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
+            "Credenciales no válidas");
         }
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        context.addCallbackParam("estaLogeado", logeado);
+        
+        if (logeado)
+            context.addCallbackParam("view", sigPagina);
+        
+        return sigPagina;
+    } 
+    
+    public void logout() {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+        .getExternalContext().getSession(false);
+        session.invalidate();
+        logeado= false;
+        System.out.println("Fin sesión: "+nombre);
+        
     }
     
-    public String optenerRaizCarpetaUsuario(){
-        return "/paginasAdmSist";
+    public String obtenerSalida(){
+        return INICIO+"?faces-redirect=true";
     }
- 
-    public String logout() {
-      //HttpSession session = Util.getSession();
-      //session.invalidate();
-      
-      System.out.println("Se salió");
-      return "/login";
-   }
 }

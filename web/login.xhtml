@@ -21,7 +21,7 @@
                                 <p:outputLabel value="Usuario:" for="username"/>
                             </p:column>
                             <p:column>
-                                <p:inputText id="username" value="#{loginBean.uname}" ></p:inputText>
+                                <p:inputText id="username" value="#{loginBean.nombre}" ></p:inputText>
                                 <p:message for="username" ></p:message>
                                 <p:watermark value="Nombre de Ususario" for="username"/>
                             </p:column>
@@ -31,7 +31,7 @@
                                 <p:outputLabel value="Contraseña:" for="password"/>
                             </p:column>
                             <p:column>
-                                <p:password id="password" value="#{loginBean.password}"  feedback="false" ></p:password>
+                                <p:password id="password" value="#{loginBean.clave}" feedback="false" ></p:password>
                                 <p:message for="password"></p:message>
                                 <p:watermark value="Contraseña de Ususario" for="password"/>
                             </p:column>                                           
@@ -39,7 +39,7 @@
                         <p:row>
                             <p:column></p:column>
                             <p:column>
-                                <p:commandButton action="#{loginBean.loginProject()}" value="Login" 
+                                <p:commandButton action="#{loginBean.login()}" value="Login" icon="ui-icon-person"
                                                  update="loginForm" ajax="true"></p:commandButton>
                             </p:column>                            
                         </p:row>

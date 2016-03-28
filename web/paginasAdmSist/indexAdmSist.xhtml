@@ -11,9 +11,11 @@
                 <p:panel header="#{bundle.IndexTitle}">
                     <h1>AdmSist</h1>
                     <h2>
-                        Carger Trabajo Nuevo<br/>
+                        <p:link value="Cargar Trabajo Nuevo" outcome="/paginasAdmSist/gestionTrabajos/cargaTrabajos"
+                                onclick="#{cargaTrabajos.prepareCreate()}"/>
+                        <br/>
                         Ver Trabajos Pendientes<br/>
-                        Ver Notas No Atendidas (Falta Campo Boolean Atendida)<br/>
+                        Ver Notas No Atendidas<br/>
                         Algunos Gráficos Estadísticos
                     </h2>
                 </p:panel>

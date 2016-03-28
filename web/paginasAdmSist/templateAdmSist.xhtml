@@ -17,7 +17,7 @@
         <p:growl id="growl" life="3000" />
 
         <p:layout fullPage="true">
-            <p:layoutUnit position="north" size="65" header="#{bundle.AppName}">
+            <p:layoutUnit position="north" size="65" header="#{loginBean.nombre}">
                 <h:form id="menuForm">
                     <p:menubar>                        
                         <p:menuitem value="#{bundle.Home}" outcome="/paginasAdmSist/indexAdmSist" icon="ui-icon-home"/>
@@ -84,12 +84,12 @@
                             <p:menuitem value="Prioridades" outcome="/paginasAdmSist/prioridades/List.xhtml" />
                         </p:submenu>
                         <p:submenu label="#{bundle.MenuAyuda}">
-                            <p:menuitem value="#{bundle.MenuItemAyuda}" outcome="/ayuda/ayuda.xhtml" />
-                            <p:menuitem value="#{bundle.MenuItemACercaDe}" outcome="/ayuda/aCercaDe.xhtml" />
+                            <p:menuitem value="#{bundle.MenuItemAyuda}" outcome="/paginasAdmSist/ayuda/ayuda.xhtml" />
+                            <p:menuitem value="#{bundle.MenuItemACercaDe}" outcome="/paginasAdmSist/ayuda/aCercaDe.xhtml" />
                         </p:submenu>
-                        <f:facet name="options">                            
-                            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
-                        </f:facet>                        
+                        <p:submenu label="Administración">
+                            <p:menuitem value="Sair" outcome="#{loginBean.obtenerSalida()}" icon="ui-icon-close" action="#{loginBean.login()}"/>			
+                      </p:submenu>
                     </p:menubar>
                 </h:form>
             </p:layoutUnit>
