@@ -87,8 +87,8 @@
                             <p:menuitem value="#{bundle.MenuItemAyuda}" outcome="/paginasAdmSist/ayuda/ayuda.xhtml" />
                             <p:menuitem value="#{bundle.MenuItemACercaDe}" outcome="/paginasAdmSist/ayuda/aCercaDe.xhtml" />
                         </p:submenu>
-                        <p:submenu label="Administración">
-                            <p:menuitem value="Sair" outcome="#{loginBean.obtenerSalida()}" icon="ui-icon-close" action="#{loginBean.login()}"/>			
+                        <p:submenu label="#{bundle.MenuAdministracion}">
+                            <p:menuitem value="#{bundle.MenuItemLogout}" outcome="#{loginBean.obtenerSalida()}" icon="ui-icon-close" action="#{loginBean.login()}"/>			
                       </p:submenu>
                     </p:menubar>
                 </h:form>

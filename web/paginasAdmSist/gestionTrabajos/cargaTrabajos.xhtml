@@ -87,7 +87,7 @@
                                 <p:column width="200px">
                                     <p:panel>
                                         <p:outputLabel value="#{bundle.CreateTrabajosLabel_fechaFin}" for="fechaFin" />
-                                        <p:calendar id="fechaFin" pattern="dd/MM/yyyy HH:mm:ss" 
+                                        <p:calendar id="fechaFin" pattern="dd/MM/yyyy HH:mm:ss" disabled="true"
                                                     value="#{cargaTrabajos.trabajoActual.fechaFin}" 
                                                     title="#{bundle.EditTrabajosTitle_fechaFin}"  showOn="button"/>
                                     </p:panel>                                    
@@ -109,7 +109,7 @@
                     </h:panelGroup>    
                 </p:panel>
                 <p:panel id="pnlExtras" header="#{bundle.CargaTrabajosExtras}">
-                    <p:accordionPanel multiple="true" activeIndex="">
+                     <p:tabView activeIndex="">
                         <p:tab title="#{bundle.CargaTrabajosPatrimoniosDisponibles}">
                             <h:panelGrid columns="2" cellpadding="10">
                                 <ui:include src="/paginasAdmSist/gestionTrabajos/CrearPatrimoniosXTrabajo.xhtml"/>
@@ -125,7 +125,7 @@
                                 <ui:include src="/paginasAdmSist/gestionTrabajos/CrearProblemasDetectados.xhtml"/>
                             </h:panelGrid>
                         </p:tab>
-                    </p:accordionPanel>
+                    </p:tabView>
                 </p:panel>
             </h:form>
         </ui:define>

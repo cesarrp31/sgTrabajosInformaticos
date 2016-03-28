@@ -31,7 +31,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDependenciasTitle_idEncargado}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idEncargado}"/>
+                            <h:outputText value="#{item.idEncargado.apellido}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -43,7 +43,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDependenciasTitle_dependeDe}"/>
                             </f:facet>
-                            <h:outputText value="#{item.dependeDe}"/>
+                            <h:outputText value="#{item.dependeDe.dependencia}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

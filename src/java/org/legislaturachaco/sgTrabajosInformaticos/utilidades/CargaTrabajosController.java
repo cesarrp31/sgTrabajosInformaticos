@@ -207,8 +207,39 @@ public class CargaTrabajosController implements Serializable {
     }
     
     public void create() {
+        PatrimoniosXTrabajos auxPat;
+        TecnicosXTrabajos auxTec;
+        /*
+        1)Crear trabajo
+        2)Cargar patrimonio (si existe)
+        3)Cargar tecnicos (si existe). Estado trabajo Asignado
+        4)Si no existe tecnicos, estado trabajo Abierto o No Comenzado.
+        5)Cargar problemas Detectados si existe.
+        */
+        
+        //Paso 1
+        trabajosController.setSelected(trabajo);
         trabajosController.create();
-        patrimoniosXTrabajosController.create();
+        
+        //Paso 2
+        for(Patrimonios p: patrimoniosSeleccionados){
+            auxPat= patrimoniosXTrabajosController.prepareCreate();
+            auxPat.setIdPatrimonio(p);
+            auxPat.setIdTrabajo(trabajo);
+            patrimoniosXTrabajosController.setSelected(auxPat);
+            patrimoniosXTrabajosController.create();
+        }
+               
+        if(tecnicosSeleccionados.isEmpty()){
+            //Paso 4
+        }else{
+            //Paso 3
+            for(Tecnicos t: tecnicosSeleccionados){
+                auxTec= tecnicosXTrabajosController.prepareCreate();
+                auxTec.setIdTecnico(t);
+            }
+        }
+            
         problemasDetectadosController.create();
         estadosXTrabajoController.create();
         
@@ -217,7 +248,7 @@ public class CargaTrabajosController implements Serializable {
         elementosUtilizadosController.create();
         tecnicosXTrabajosController.create();
     }
-
+    /*
     public void update() {    
         trabajosController.update();
         patrimoniosXTrabajosController.update();
@@ -229,7 +260,7 @@ public class CargaTrabajosController implements Serializable {
         elementosUtilizadosController.update();
         tecnicosXTrabajosController.update();
     }
-
+    */
     public void destroy() {
         /*
         */
