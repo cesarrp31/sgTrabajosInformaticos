@@ -42,6 +42,10 @@ public class Patrimonios implements Serializable {
     @Column(name = "baja", table = "patrimonios")
     @Basic
     private Boolean baja;
+    
+    @Column(name = "enReparacion", table = "patrimonios", nullable = false)
+    @Basic
+    private Boolean enReparacion;
 
     @OneToMany(targetEntity = PatrimoniosXTrabajos.class, mappedBy = "idPatrimonio")
     private List<PatrimoniosXTrabajos> patrimoniosXTrabajosCollection;
@@ -150,6 +154,14 @@ public class Patrimonios implements Serializable {
 
     public void setComentario(String comentario) {
         this.comentario = comentario;
+    }
+
+    public Boolean getEnReparacion() {
+        return enReparacion;
+    }
+
+    public void setEnReparacion(Boolean enReparacion) {
+        this.enReparacion = enReparacion;
     }
 
     @Override

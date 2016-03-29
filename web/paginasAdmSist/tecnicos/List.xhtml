@@ -23,6 +23,7 @@
                                  rowKey="#{item.idTecnico}"
                                  rows="20"
                                  rowsPerPageTemplate="20,30,40,50"
+                                 sortMode="multiple"
                                  >
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
@@ -34,33 +35,31 @@
                             </f:facet>
                             <h:outputText value="#{item.idTecnico}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.apellido}" filterBy="#{item.apellido}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTecnicosTitle_apellido}"/>
                             </f:facet>
                             <h:outputText value="#{item.apellido}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.nombre}" filterBy="#{item.nombre}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTecnicosTitle_nombre}"/>
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.idTipoEspecialidad.especialidad}" filterBy="#{item.idTipoEspecialidad.especialidad}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTecnicosTitle_idTipoEspecialidad}"/>
                             </f:facet>
                             <h:outputText value="#{item.idTipoEspecialidad.especialidad}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.correo}" filterBy="#{item.correo}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTecnicosTitle_correo}"/>
                             </f:facet>
                             <h:outputText value="#{item.correo}"/>
                         </p:column>
-                        <p:column filterBy="#{item.baja}">
-                        <!--
-                        <p:column headerText="#{bundle.ListTecnicosTitle_baja}"  filterBy="#{item.baja}" filterMatchMode="equals">
+                        <p:column headerText="#{bundle.ListTecnicosTitle_ocupado}"  filterBy="#{item.ocupado}" filterMatchMode="equals">
                             <f:facet name="filter">
                                 <p:selectOneButton onchange="PF('tecnicosTable').filter()">
                                     <f:converter converterId="javax.faces.Boolean" />
@@ -68,10 +67,28 @@
                                     <f:selectItem itemLabel="Si" itemValue="true" />
                                     <f:selectItem itemLabel="No" itemValue="false" />
                                 </p:selectOneButton>                               
-                            </f:facet> -->
+                            </f:facet>
+                            <!--
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTecnicosTitle_ocupado}"/>
+                            </f:facet>
+                            -->
+                            <h:outputText value="#{item.ocupado ? 'Si' : 'No'}"/>
+                        </p:column>
+                        <p:column headerText="#{bundle.ListTecnicosTitle_baja}" filterBy="#{item.baja}" filterMatchMode="equals">
+                            <f:facet name="filter">
+                                <p:selectOneButton onchange="PF('tecnicosTable').filter()">
+                                    <f:converter converterId="javax.faces.Boolean" />
+                                    <f:selectItem itemLabel="Todos" itemValue="" />
+                                    <f:selectItem itemLabel="Si" itemValue="true" />
+                                    <f:selectItem itemLabel="No" itemValue="false" />
+                                </p:selectOneButton>                               
+                            </f:facet>
+                            <!--
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTecnicosTitle_baja}"/>
                             </f:facet>
+                            -->
                             <h:outputText value="#{item.baja ? 'Si' : 'No'}"/>
                         </p:column>
                         <f:facet name="footer">

@@ -5,6 +5,7 @@ package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +17,7 @@ import javax.persistence.Table;
 @Table(name = "estadosTrabajo")
 
 public class EstadosTrabajo implements Serializable {
-
+    
     @Column(name = "descripcion", table = "estadosTrabajo", length = 100)
     @Basic
     private String descripcion;
@@ -77,4 +78,35 @@ public class EstadosTrabajo implements Serializable {
     public void setTransicionesEstadoCollection(List<TransicionesEstado> transicionesEstadoCollection) {
         this.transicionesEstadoCollection = transicionesEstadoCollection;
     }
+
+    @Override
+    public String toString() {
+        return "EstadosTrabajo{" + "estado=" + estado + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 71 * hash + Objects.hashCode(this.estado);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final EstadosTrabajo other = (EstadosTrabajo) obj;
+        if (!Objects.equals(this.estado, other.estado)) {
+            return false;
+        }
+        return true;
+    }
+    
 }

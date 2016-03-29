@@ -22,17 +22,12 @@
                                  rowKey="#{item.idTecnicoXTrabajo}"
                                  rows="20"
                                  rowsPerPageTemplate="20,30,40,50"
+                                 sortMode="multiple"
                                  >
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTecnicosXTrabajosTitle_idEstadoXTrabajo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idEstadoXTrabajo}"/>
-                        </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTecnicosXTrabajosTitle_idTecnicoXTrabajo}"/>
@@ -41,9 +36,15 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTecnicosXTrabajosTitle_idEstadoXTrabajo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idEstadoXTrabajo} (#{item.idEstadoXTrabajo.soloFechaDesdeString()}, #{item.idEstadoXTrabajo.estado}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.idTecnico.apellido}, #{item.idTecnico.nombre}" filterBy="#{item.idTecnico.apellido}, #{item.idTecnico.nombre}" filterMatchMode="contains">
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTecnicosXTrabajosTitle_idTecnico}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idTecnico}"/>
+                            <h:outputText value="#{item.idTecnico.apellido}, #{item.idTecnico.nombre}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{tecnicosXTrabajosController.prepareCreate}" update=":TecnicosXTrabajosCreateForm" oncomplete="PF('TecnicosXTrabajosCreateDialog').show()"/>

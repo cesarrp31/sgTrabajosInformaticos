@@ -42,6 +42,10 @@ public class Tecnicos implements Serializable {
     @Column(name = "baja", table = "tecnicos", nullable = false)
     @Basic
     private boolean baja;
+    
+    @Column(name = "ocupado", table = "tecnicos", nullable = false)
+    @Basic
+    private boolean ocupado;
 
     @Column(name = "idTecnico", table = "tecnicos", nullable = false)
     @Id
@@ -133,6 +137,14 @@ public class Tecnicos implements Serializable {
 
     public void setIdTipoEspecialidad(TipoEspecialidad idTipoEspecialidad) {
         this.idTipoEspecialidad = idTipoEspecialidad;
+    }
+
+    public boolean isOcupado() {
+        return ocupado;
+    }
+
+    public void setOcupado(boolean ocupado) {
+        this.ocupado = ocupado;
     }
 
     @Override

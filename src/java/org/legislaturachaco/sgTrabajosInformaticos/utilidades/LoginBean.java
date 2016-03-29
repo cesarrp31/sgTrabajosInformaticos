@@ -53,24 +53,25 @@ public class LoginBean implements Serializable {
         String sigPagina= INICIO;
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
-            
+            /*
         if(consultaDominio()){
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@", nombre);
             System.out.println("Inicio sesión: "+nombre);
             sigPagina= "/paginasAdmSist/indexAdmSist.xhtml?faces-redirect=true";
-        }else{            
-            if (nombre != null && nombre.equals(usu) && 
+        }*/
+        
+        if (nombre != null && nombre.equals(usu) && 
                     clave != null && clave.equals("admin")) {
                 logeado = true;
                 msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@", nombre);
                 System.out.println("Inicio sesión: "+nombre);
                 sigPagina= "/paginasAdmSist/indexAdmSist.xhtml?faces-redirect=true";
-            }else{
-                logeado = false;
-                msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
-                "Credenciales no válidas");
-            }
+        }else{
+            logeado = false;
+            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
+            "Credenciales no válidas");
         }
+        
         FacesContext.getCurrentInstance().addMessage(null, msg);
         context.addCallbackParam("estaLogeado", logeado);
         

@@ -6,6 +6,7 @@ package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,6 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.Utiles;
 
 @Entity
 @Table(name = "estadosXTrabajo", uniqueConstraints = @UniqueConstraint(columnNames = {"idTrabajo", "estado", "fechaDesde"}))
@@ -172,4 +174,44 @@ public class EstadosXTrabajo implements Serializable {
     public void setTareasRealizadasCollection(List<TareasRealizadas> tareasRealizadasCollection) {
         this.tareasRealizadasCollection = tareasRealizadasCollection;
     }
+    
+    public String soloFechaDesdeString(){
+        return Utiles.fechaFormateada(fechaDesde, "dd/MM/yyyy");
+    }
+    
+    public String soloFechaHastaString(){
+        return Utiles.fechaFormateada(fechaHasta, "dd/MM/yyyy");
+    }
+    
+    @Override
+    public String toString() {
+        return "id:" + idEstadoXTrabajo;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 73 * hash + Objects.hashCode(this.idEstadoXTrabajo);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final EstadosXTrabajo other = (EstadosXTrabajo) obj;
+        if (!Objects.equals(this.idEstadoXTrabajo, other.idEstadoXTrabajo)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

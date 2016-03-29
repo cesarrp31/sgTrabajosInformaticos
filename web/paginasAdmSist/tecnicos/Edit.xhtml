@@ -58,6 +58,16 @@
                         </p:row>
                         <p:row>
                             <p:column>
+                                <p:outputLabel value="#{bundle.EditTecnicosLabel_ocupado}" for="ocupado" />
+                            </p:column>
+                            <p:column>
+                                <p:inputText id="ocupado" value="#{tecnicosController.selected.ocupado}" 
+                                     title="#{bundle.EditTecnicosTitle_ocupado}" required="true" 
+                                     requiredMessage="#{bundle.EditTecnicosRequiredMessage_ocupado}"/>
+                            </p:column>
+                        </p:row> 
+                        <p:row>
+                            <p:column>
                                 <p:outputLabel value="#{bundle.EditTecnicosLabel_baja}" for="baja" />
                             </p:column>
                             <p:column>
