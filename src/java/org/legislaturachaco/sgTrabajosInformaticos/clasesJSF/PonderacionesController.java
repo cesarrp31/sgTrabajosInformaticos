@@ -6,6 +6,7 @@ import org.legislaturachaco.sgTrabajosInformaticos.clasesJSF.util.JsfUtil.Persis
 import org.legislaturachaco.sgTrabajosInformaticos.sessionBeans.PonderacionesFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -129,6 +130,15 @@ public class PonderacionesController implements Serializable {
 
     public List<Ponderaciones> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+    
+    public List<Ponderaciones> ponderacionesValidas(){
+        List<Ponderaciones> lista= new ArrayList();
+        for(Ponderaciones p: this.getItems()){
+            if((p.getIdPonderacion() > 0)&& (p.getIdPonderacion() < 6))
+                lista.add(p);
+        }        
+        return lista;
     }
 
     @FacesConverter(forClass = Ponderaciones.class)

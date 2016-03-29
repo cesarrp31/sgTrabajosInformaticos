@@ -123,6 +123,10 @@ public class EstadosTrabajoController implements Serializable {
         return getFacade().findAll();
     }
 
+    public EstadosTrabajo obtenerEstado(String nombreEstado){
+        return this.getEstadosTrabajo(nombreEstado);        
+    }
+    
     @FacesConverter(forClass = EstadosTrabajo.class)
     public static class EstadosTrabajoControllerConverter implements Converter {
 

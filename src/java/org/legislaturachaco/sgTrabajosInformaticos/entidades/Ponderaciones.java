@@ -141,7 +141,7 @@ public class Ponderaciones implements Serializable {
 
     @Override
     public String toString() {
-        return "Ponderaciones{" + "ponderacion=" + ponderacion + '}';
+        return ponderacion;
     }
     
 }

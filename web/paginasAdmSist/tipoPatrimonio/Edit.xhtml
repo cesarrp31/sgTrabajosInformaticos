@@ -12,12 +12,15 @@
             <h:form id="TipoPatrimonioEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tipoPatrimonioController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditTipoPatrimonioLabel_descripcion}" for="descripcion" />
-                        <p:inputText id="descripcion" value="#{tipoPatrimonioController.selected.descripcion}" title="#{bundle.EditTipoPatrimonioTitle_descripcion}" />
                         <p:outputLabel value="#{bundle.EditTipoPatrimonioLabel_tipo}" for="tipo" />
                         <p:inputText id="tipo" value="#{tipoPatrimonioController.selected.tipo}" title="#{bundle.EditTipoPatrimonioTitle_tipo}" required="true" requiredMessage="#{bundle.EditTipoPatrimonioRequiredMessage_tipo}"/>
+                        <p:outputLabel value="#{bundle.EditTipoPatrimonioLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{tipoPatrimonioController.selected.descripcion}" title="#{bundle.EditTipoPatrimonioTitle_descripcion}" />
+
+                        <!--
                         <p:outputLabel value="#{bundle.EditTipoPatrimonioLabel_idTipo}" for="idTipo" />
                         <p:inputText id="idTipo" value="#{tipoPatrimonioController.selected.idTipo}" title="#{bundle.EditTipoPatrimonioTitle_idTipo}" required="true" requiredMessage="#{bundle.EditTipoPatrimonioRequiredMessage_idTipo}"/>
+                        -->
                     </p:panelGrid>
                     <p:commandButton actionListener="#{tipoPatrimonioController.update}" value="#{bundle.Save}" update="display,:TipoPatrimonioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TipoPatrimonioEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="TipoPatrimonioEditDialog.hide()"/>

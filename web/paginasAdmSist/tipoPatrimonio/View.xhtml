@@ -12,12 +12,12 @@
             <h:form id="TipoPatrimonioViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tipoPatrimonioController.selected != null}">
-                        <h:outputText value="#{bundle.ViewTipoPatrimonioLabel_descripcion}"/>
-                        <h:outputText value="#{tipoPatrimonioController.selected.descripcion}" title="#{bundle.ViewTipoPatrimonioTitle_descripcion}"/>
-                        <h:outputText value="#{bundle.ViewTipoPatrimonioLabel_tipo}"/>
-                        <h:outputText value="#{tipoPatrimonioController.selected.tipo}" title="#{bundle.ViewTipoPatrimonioTitle_tipo}"/>
                         <h:outputText value="#{bundle.ViewTipoPatrimonioLabel_idTipo}"/>
                         <h:outputText value="#{tipoPatrimonioController.selected.idTipo}" title="#{bundle.ViewTipoPatrimonioTitle_idTipo}"/>
+                        <h:outputText value="#{bundle.ViewTipoPatrimonioLabel_tipo}"/>
+                        <h:outputText value="#{tipoPatrimonioController.selected.tipo}" title="#{bundle.ViewTipoPatrimonioTitle_tipo}"/>
+                        <h:outputText value="#{bundle.ViewTipoPatrimonioLabel_descripcion}"/>
+                        <h:outputText value="#{tipoPatrimonioController.selected.descripcion}" title="#{bundle.ViewTipoPatrimonioTitle_descripcion}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="TipoPatrimonioViewDialog.hide()"/>
                 </h:panelGroup>

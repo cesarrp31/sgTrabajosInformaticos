@@ -55,10 +55,8 @@ public class CargaTrabajosController implements Serializable {
     
     private ProblemasDetectados problemasDetectadoActual;
     private PatrimoniosXTrabajos patrimoniosXTrabajoActual;
-    private EstadosXTrabajo estadosXTrabajoActual;
     
     //Creación del estadosXTrabajo y sus 4 grandes tablas;
-    private EstadosTrabajo estadosTrabajoActual;
     private TareasRealizadas realizadasActual;
     private ElementosUtilizados elementosUtilizadosActual;
     private TecnicosXTrabajos tecnicosXTrabajo;
@@ -66,13 +64,15 @@ public class CargaTrabajosController implements Serializable {
     private PatrimoniosController patrimoniosController;
     private TecnicosController tecnicosController;
     private ProblemasN3Controller problemasController;
+    private EstadosTrabajoController estadosTrabajoController;
+    
+    private EstadosXTrabajo estadosXTrabajo;
     
     private TrabajosController trabajosController;
     private PatrimoniosXTrabajosController patrimoniosXTrabajosController;
     private ProblemasDetectadosController problemasDetectadosController;
     private EstadosXTrabajoController estadosXTrabajoController;
     
-    private EstadosTrabajoController estadosTrabajoController;
     private TareasRealizadasController tareasRealizadasController;
     private ElementosUtilizadosController elementosUtilizadosController;
     private TecnicosXTrabajosController tecnicosXTrabajosController;
@@ -202,26 +202,43 @@ public class CargaTrabajosController implements Serializable {
         patrimoniosController= (PatrimoniosController) Utiles.obtenerController("patrimoniosController");
         tecnicosController= (TecnicosController) Utiles.obtenerController("tecnicosController");
         problemasController= (ProblemasN3Controller) Utiles.obtenerController("problemasN3Controller");
-        
+        estadosXTrabajoController= (EstadosXTrabajoController) Utiles.obtenerController("estadosXTrabajoController");
+        estadosTrabajoController= (EstadosTrabajoController) Utiles.obtenerController("estadosTrabajoController");
         inicializarListas();
     }
     
     public void create() {
-        PatrimoniosXTrabajos auxPat;
-        TecnicosXTrabajos auxTec;
         /*
         1)Crear trabajo
-        2)Cargar patrimonio (si existe)
-        3)Cargar tecnicos (si existe). Estado trabajo Asignado
-        4)Si no existe tecnicos, estado trabajo Abierto o No Comenzado.
-        5)Cargar problemas Detectados si existe.
+        2)Cargar los patrimonios en el trabajo (si existe)
+        3a)Si no existe tecnicos, estado trabajo No Comenzado.
+        3b)Cargar tecnicos (si existe). Estado trabajo Asignado
+        4)Cargar problemas Detectados si existe.
+        5)Gragar todo en la BD.
         */
         
         //Paso 1
+        this.crearTrabajo();        
+        //Paso 2
+        this.cargarPatrimonios();              
+        
+        if(tecnicosSeleccionados.isEmpty()){
+            //Paso 3a
+            this.crearEstadoNoComenzado();
+        }else{
+            //Paso 3b
+            this.crearEstadoAsignado();
+        }        
+        //Paso 5
+    }
+    
+    private void crearTrabajo(){
         trabajosController.setSelected(trabajo);
         trabajosController.create();
-        
-        //Paso 2
+    }
+    
+    private void cargarPatrimonios(){
+        PatrimoniosXTrabajos auxPat;
         for(Patrimonios p: patrimoniosSeleccionados){
             auxPat= patrimoniosXTrabajosController.prepareCreate();
             auxPat.setIdPatrimonio(p);
@@ -229,24 +246,28 @@ public class CargaTrabajosController implements Serializable {
             patrimoniosXTrabajosController.setSelected(auxPat);
             patrimoniosXTrabajosController.create();
         }
-               
-        if(tecnicosSeleccionados.isEmpty()){
-            //Paso 4
-        }else{
-            //Paso 3
+    }
+    
+    private void crearEstadoNoComenzado(){
+        estadosXTrabajo= 
+                    estadosXTrabajoController.prepareCreate(
+                            estadosTrabajoController, 
+                            Utiles.ESTADO_NO_COMENZADO);
+    }
+    
+    private void crearEstadoAsignado(){
+        TecnicosXTrabajos auxTec;
+        estadosXTrabajo= 
+                    estadosXTrabajoController.prepareCreate(
+                            estadosTrabajoController, 
+                            Utiles.ESTADO_ASIGNADO);
+            
             for(Tecnicos t: tecnicosSeleccionados){
                 auxTec= tecnicosXTrabajosController.prepareCreate();
                 auxTec.setIdTecnico(t);
+                auxTec.setIdEstadoXTrabajo(estadosXTrabajo);
             }
-        }
-            
-        problemasDetectadosController.create();
-        estadosXTrabajoController.create();
-        
-        estadosTrabajoController.create();
-        tareasRealizadasController.create();
-        elementosUtilizadosController.create();
-        tecnicosXTrabajosController.create();
+            //estadosXTrabajo.setTecnicosXTrabajosCollection(auxTec);
     }
     /*
     public void update() {    

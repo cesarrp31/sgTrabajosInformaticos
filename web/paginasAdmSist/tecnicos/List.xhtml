@@ -59,7 +59,8 @@
                             </f:facet>
                             <h:outputText value="#{item.correo}"/>
                         </p:column>
-                        <p:column headerText="#{bundle.ListTecnicosTitle_ocupado}"  filterBy="#{item.ocupado}" filterMatchMode="equals">
+                        <p:column headerText="#{bundle.ListTecnicosTitle_ocupado}" 
+                                  filterBy="#{item.ocupado}" filterMatchMode="equals">
                             <f:facet name="filter">
                                 <p:selectOneButton onchange="PF('tecnicosTable').filter()">
                                     <f:converter converterId="javax.faces.Boolean" />
@@ -75,7 +76,8 @@
                             -->
                             <h:outputText value="#{item.ocupado ? 'Si' : 'No'}"/>
                         </p:column>
-                        <p:column headerText="#{bundle.ListTecnicosTitle_baja}" filterBy="#{item.baja}" filterMatchMode="equals">
+                        <p:column headerText="#{bundle.ListTecnicosTitle_baja}" 
+                                  filterBy="#{item.baja}" filterMatchMode="equals">
                             <f:facet name="filter">
                                 <p:selectOneButton onchange="PF('tecnicosTable').filter()">
                                     <f:converter converterId="javax.faces.Boolean" />

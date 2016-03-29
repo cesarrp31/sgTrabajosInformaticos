@@ -14,12 +14,14 @@
                     <p:panelGrid columns="2" rendered="#{ponderacionesController.selected != null}">
                         <p:outputLabel value="#{bundle.CreatePonderacionesLabel_ponderacion}" for="ponderacion" />
                         <p:inputText id="ponderacion" value="#{ponderacionesController.selected.ponderacion}" title="#{bundle.CreatePonderacionesTitle_ponderacion}" required="true" requiredMessage="#{bundle.CreatePonderacionesRequiredMessage_ponderacion}"/>
-                        <p:outputLabel value="#{bundle.CreatePonderacionesLabel_fechaHasta}" for="fechaHasta" />
-                        <p:calendar id="fechaHasta" pattern="dd/MM/yyyy HH:mm:ss" value="#{ponderacionesController.selected.fechaHasta}" title="#{bundle.EditPonderacionesTitle_fechaHasta}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreatePonderacionesLabel_fechaDesde}" for="fechaDesde" />
                         <p:calendar id="fechaDesde" pattern="dd/MM/yyyy HH:mm:ss" value="#{ponderacionesController.selected.fechaDesde}" title="#{bundle.EditPonderacionesTitle_fechaDesde}" required="true" requiredMessage="#{bundle.EditPonderacionesRequiredMessage_fechaDesde}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePonderacionesLabel_fechaHasta}" for="fechaHasta" />
+                        <p:calendar id="fechaHasta" pattern="dd/MM/yyyy HH:mm:ss" value="#{ponderacionesController.selected.fechaHasta}" title="#{bundle.EditPonderacionesTitle_fechaHasta}"  showOn="button"/>
+                        <!--
                         <p:outputLabel value="#{bundle.CreatePonderacionesLabel_idPonderacion}" for="idPonderacion" />
                         <p:inputText id="idPonderacion" value="#{ponderacionesController.selected.idPonderacion}" title="#{bundle.CreatePonderacionesTitle_idPonderacion}" required="true" requiredMessage="#{bundle.CreatePonderacionesRequiredMessage_idPonderacion}"/>
+                        -->
                         <p:outputLabel value="#{bundle.CreatePonderacionesLabel_observacion}" for="observacion" />
                         <p:inputText id="observacion" value="#{ponderacionesController.selected.observacion}" title="#{bundle.CreatePonderacionesTitle_observacion}" />
                     </p:panelGrid>

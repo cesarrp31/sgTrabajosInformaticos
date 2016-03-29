@@ -54,6 +54,12 @@ public class EstadosXTrabajoController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
+    
+    public EstadosXTrabajo prepareCreate(EstadosTrabajoController et, String nombreEstado) {
+        selected = this.prepareCreate();
+        selected.setEstado(et.obtenerEstado(nombreEstado));
+        return selected;
+    }
 
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("EstadosXTrabajoCreated"));

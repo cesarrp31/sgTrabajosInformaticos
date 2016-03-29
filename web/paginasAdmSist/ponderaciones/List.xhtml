@@ -29,17 +29,15 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPonderacionesTitle_ponderacion}"/>
+                                <h:outputText value="#{bundle.ListPonderacionesTitle_idPonderacion}"/>
                             </f:facet>
-                            <h:outputText value="#{item.ponderacion}"/>
+                            <h:outputText value="#{item.idPonderacion}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPonderacionesTitle_fechaHasta}"/>
+                                <h:outputText value="#{bundle.ListPonderacionesTitle_ponderacion}"/>
                             </f:facet>
-                            <h:outputText value="#{item.fechaHasta}">
-                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
-                            </h:outputText>
+                            <h:outputText value="#{item.ponderacion}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -51,9 +49,11 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPonderacionesTitle_idPonderacion}"/>
+                                <h:outputText value="#{bundle.ListPonderacionesTitle_fechaHasta}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idPonderacion}"/>
+                            <h:outputText value="#{item.fechaHasta}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                            </h:outputText>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

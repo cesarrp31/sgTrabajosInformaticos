@@ -12,18 +12,18 @@
             <h:form id="PonderacionesViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ponderacionesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPonderacionesLabel_idPonderacion}"/>
+                        <h:outputText value="#{ponderacionesController.selected.idPonderacion}" title="#{bundle.ViewPonderacionesTitle_idPonderacion}"/>
                         <h:outputText value="#{bundle.ViewPonderacionesLabel_ponderacion}"/>
                         <h:outputText value="#{ponderacionesController.selected.ponderacion}" title="#{bundle.ViewPonderacionesTitle_ponderacion}"/>
-                        <h:outputText value="#{bundle.ViewPonderacionesLabel_fechaHasta}"/>
-                        <h:outputText value="#{ponderacionesController.selected.fechaHasta}" title="#{bundle.ViewPonderacionesTitle_fechaHasta}">
-                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
-                        </h:outputText>
                         <h:outputText value="#{bundle.ViewPonderacionesLabel_fechaDesde}"/>
                         <h:outputText value="#{ponderacionesController.selected.fechaDesde}" title="#{bundle.ViewPonderacionesTitle_fechaDesde}">
                             <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                         </h:outputText>
-                        <h:outputText value="#{bundle.ViewPonderacionesLabel_idPonderacion}"/>
-                        <h:outputText value="#{ponderacionesController.selected.idPonderacion}" title="#{bundle.ViewPonderacionesTitle_idPonderacion}"/>
+                        <h:outputText value="#{bundle.ViewPonderacionesLabel_fechaHasta}"/>
+                        <h:outputText value="#{ponderacionesController.selected.fechaHasta}" title="#{bundle.ViewPonderacionesTitle_fechaHasta}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
                         <h:outputText value="#{bundle.ViewPonderacionesLabel_observacion}"/>
                         <h:outputText value="#{ponderacionesController.selected.observacion}" title="#{bundle.ViewPonderacionesTitle_observacion}"/>
                     </p:panelGrid>

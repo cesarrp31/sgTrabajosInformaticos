@@ -26,12 +26,12 @@
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-
+                        
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTipoPatrimonioTitle_descripcion}"/>
+                                <h:outputText value="#{bundle.ListTipoPatrimonioTitle_idTipo}"/>
                             </f:facet>
-                            <h:outputText value="#{item.descripcion}"/>
+                            <h:outputText value="#{item.idTipo}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -41,10 +41,11 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTipoPatrimonioTitle_idTipo}"/>
+                                <h:outputText value="#{bundle.ListTipoPatrimonioTitle_descripcion}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idTipo}"/>
+                            <h:outputText value="#{item.descripcion}"/>
                         </p:column>
+                        
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{tipoPatrimonioController.prepareCreate}" update=":TipoPatrimonioCreateForm" oncomplete="PF('TipoPatrimonioCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TipoPatrimonioViewForm" oncomplete="PF('TipoPatrimonioViewDialog').show()" disabled="#{empty tipoPatrimonioController.selected}"/>
