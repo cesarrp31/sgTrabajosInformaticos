@@ -46,6 +46,10 @@ public class Patrimonios implements Serializable {
     @Column(name = "enReparacion", table = "patrimonios", nullable = false)
     @Basic
     private Boolean enReparacion;
+    
+    @Column(name = "asignado", table = "patrimonios", nullable = false)
+    @Basic
+    private Boolean asignado;
 
     @OneToMany(targetEntity = PatrimoniosXTrabajos.class, mappedBy = "idPatrimonio")
     private List<PatrimoniosXTrabajos> patrimoniosXTrabajosCollection;
@@ -164,6 +168,14 @@ public class Patrimonios implements Serializable {
         this.enReparacion = enReparacion;
     }
 
+    public Boolean getAsignado() {
+        return asignado;
+    }
+
+    public void setAsignado(Boolean asignado) {
+        this.asignado = asignado;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;

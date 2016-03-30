@@ -12,20 +12,20 @@
             <h:form id="AsignacionesViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{asignacionesController.selected != null}">
-                        <h:outputText value="#{bundle.ViewAsignacionesLabel_fechaHasta}"/>
-                        <h:outputText value="#{asignacionesController.selected.fechaHasta}" title="#{bundle.ViewAsignacionesTitle_fechaHasta}">
-                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
-                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewAsignacionesLabel_idAsignacion}"/>
+                        <h:outputText value="#{asignacionesController.selected.idAsignacion}" title="#{bundle.ViewAsignacionesTitle_idAsignacion}"/>
+                        <h:outputText value="#{bundle.ViewAsignacionesLabel_idNota}"/>
+                        <h:outputText value="#{asignacionesController.selected.idNota.nroNota}" title="#{bundle.ViewAsignacionesTitle_idNota}"/>
+                        <h:outputText value="#{bundle.ViewAsignacionesLabel_idDependencia}"/>
+                        <h:outputText value="#{asignacionesController.selected.idDependencia.dependencia}" title="#{bundle.ViewAsignacionesTitle_idDependencia}"/>
                         <h:outputText value="#{bundle.ViewAsignacionesLabel_fechaDesde}"/>
                         <h:outputText value="#{asignacionesController.selected.fechaDesde}" title="#{bundle.ViewAsignacionesTitle_fechaDesde}">
                             <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                         </h:outputText>
-                        <h:outputText value="#{bundle.ViewAsignacionesLabel_idNota}"/>
-                        <h:outputText value="#{asignacionesController.selected.idNota}" title="#{bundle.ViewAsignacionesTitle_idNota}"/>
-                        <h:outputText value="#{bundle.ViewAsignacionesLabel_idDependencia}"/>
-                        <h:outputText value="#{asignacionesController.selected.idDependencia}" title="#{bundle.ViewAsignacionesTitle_idDependencia}"/>
-                        <h:outputText value="#{bundle.ViewAsignacionesLabel_idAsignacion}"/>
-                        <h:outputText value="#{asignacionesController.selected.idAsignacion}" title="#{bundle.ViewAsignacionesTitle_idAsignacion}"/>
+                        <h:outputText value="#{bundle.ViewAsignacionesLabel_fechaHasta}"/>
+                        <h:outputText value="#{asignacionesController.selected.fechaHasta}" title="#{bundle.ViewAsignacionesTitle_fechaHasta}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="AsignacionesViewDialog.hide()"/>
                 </h:panelGroup>

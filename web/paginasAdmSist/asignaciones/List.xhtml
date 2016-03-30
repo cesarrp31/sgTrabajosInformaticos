@@ -22,6 +22,7 @@
                                  rowKey="#{item.idAsignacion}"
                                  rows="20"
                                  rowsPerPageTemplate="20,30,40,50"
+                                 sortMode="multiple"
                                  >
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
@@ -29,13 +30,23 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListAsignacionesTitle_fechaHasta}"/>
+                                <h:outputText value="#{bundle.ListAsignacionesTitle_idAsignacion}"/>
                             </f:facet>
-                            <h:outputText value="#{item.fechaHasta}">
-                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
-                            </h:outputText>
+                            <h:outputText value="#{item.idAsignacion}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.idNota.nroNota}" filterBy="#{item.idNota.nroNota}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionesTitle_idNota}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idNota.nroNota}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.idDependencia}" filterBy="#{item.idDependencia}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsignacionesTitle_idDependencia}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idDependencia.dependencia}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.fechaDesde}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAsignacionesTitle_fechaDesde}"/>
                             </f:facet>
@@ -45,22 +56,13 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListAsignacionesTitle_idNota}"/>
+                                <h:outputText value="#{bundle.ListAsignacionesTitle_fechaHasta}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idNota}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListAsignacionesTitle_idDependencia}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idDependencia}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListAsignacionesTitle_idAsignacion}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idAsignacion}"/>
-                        </p:column>
+                            <h:outputText value="#{item.fechaHasta}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>                        
+                        
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{asignacionesController.prepareCreate}" update=":AsignacionesCreateForm" oncomplete="PF('AsignacionesCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":AsignacionesViewForm" oncomplete="PF('AsignacionesViewDialog').show()" disabled="#{empty asignacionesController.selected}"/>

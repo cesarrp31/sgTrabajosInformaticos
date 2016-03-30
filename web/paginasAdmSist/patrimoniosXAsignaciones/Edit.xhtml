@@ -8,28 +8,36 @@
 
     <ui:composition>
 
-        <p:dialog id="PatrimoniosXAsignacionesEditDlg" widgetVar="PatrimoniosXAsignacionesEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPatrimoniosXAsignacionesTitle}">
+        <p:dialog id="PatrimoniosXAsignacionesEditDlg" widgetVar="PatrimoniosXAsignacionesEditDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle.EditPatrimoniosXAsignacionesTitle}">
             <h:form id="PatrimoniosXAsignacionesEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{patrimoniosXAsignacionesController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditPatrimoniosXAsignacionesLabel_idPatrimonio}" for="idPatrimonio" />
-                        <p:selectOneMenu id="idPatrimonio" value="#{patrimoniosXAsignacionesController.selected.idPatrimonio}" required="true" requiredMessage="#{bundle.EditPatrimoniosXAsignacionesRequiredMessage_idPatrimonio}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{patrimoniosController.itemsAvailableSelectOne}"
-                                           var="idPatrimonioItem"
-                                           itemValue="#{idPatrimonioItem}"/>
-                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditPatrimoniosXAsignacionesLabel_idAsignacion}" for="idAsignacion" />
-                        <p:selectOneMenu id="idAsignacion" value="#{patrimoniosXAsignacionesController.selected.idAsignacion}" required="true" requiredMessage="#{bundle.EditPatrimoniosXAsignacionesRequiredMessage_idAsignacion}">
+                        <p:selectOneMenu id="idAsignacion" value="#{patrimoniosXAsignacionesController.selected.idAsignacion}" required="true" 
+                                         requiredMessage="#{bundle.EditPatrimoniosXAsignacionesRequiredMessage_idAsignacion}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{asignacionesController.itemsAvailableSelectOne}"
                                            var="idAsignacionItem"
                                            itemValue="#{idAsignacionItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditPatrimoniosXAsignacionesLabel_idPatXAsig}" for="idPatXAsig" />
-                        <p:inputText id="idPatXAsig" value="#{patrimoniosXAsignacionesController.selected.idPatXAsig}" title="#{bundle.EditPatrimoniosXAsignacionesTitle_idPatXAsig}" required="true" requiredMessage="#{bundle.EditPatrimoniosXAsignacionesRequiredMessage_idPatXAsig}"/>
+                        <p:outputLabel value="#{bundle.EditPatrimoniosXAsignacionesLabel_idPatrimonio}" for="idPatrimonio" />
+                        <p:selectOneMenu id="idPatrimonio" value="#{patrimoniosXAsignacionesController.selected.idPatrimonio}" required="true" 
+                                         requiredMessage="#{bundle.EditPatrimoniosXAsignacionesRequiredMessage_idPatrimonio}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{patrimoniosController.itemsAvailableSelectOne}"
+                                           var="idPatrimonioItem"
+                                           itemValue="#{idPatrimonioItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPatrimoniosXAsignacionesLabel_fechaDesde}" for="fechaDesde" />
+                        <p:calendar id="fechaDesde" pattern="dd/MM/yyyy HH:mm:ss" value="#{patrimoniosXAsignacionesController.selected.fechaDesde}" 
+                                    title="#{bundle.EditPatrimoniosXAsignacionesTitle_fechaDesde}" required="true" 
+                                    requiredMessage="#{bundle.EditPatrimoniosXAsignacionesRequiredMessage_fechaDesde}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditPatrimoniosXAsignacionesLabel_prestado}" for="prestado" />
+                        <p:selectBooleanCheckbox id="prestado" value="#{patrimoniosXAsignacionesController.selected.prestado}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{patrimoniosXAsignacionesController.update}" value="#{bundle.Save}" update="display,:PatrimoniosXAsignacionesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PatrimoniosXAsignacionesEditDialog');"/>
+                    <p:commandButton actionListener="#{patrimoniosXAsignacionesController.update}" value="#{bundle.Save}" 
+                                     update="display,:PatrimoniosXAsignacionesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PatrimoniosXAsignacionesEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PatrimoniosXAsignacionesEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

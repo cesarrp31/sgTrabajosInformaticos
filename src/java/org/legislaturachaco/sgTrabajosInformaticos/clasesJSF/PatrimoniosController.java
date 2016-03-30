@@ -147,6 +147,20 @@ public class PatrimoniosController implements Serializable {
         }
         return patrimoniosDisponibles;
     }
+    
+    /**
+     * Devuelve los patrimonios que no estan dados de baja y que no estan asignados.
+     * @return 
+     */
+    public List<Patrimonios> obtenerPatrimoniosDisponiblesNoAsignados(){
+        List<Patrimonios> patrimoniosDisponibles= new ArrayList();
+        for(Patrimonios pat: this.getItems()){
+            if((!pat.isBaja())&&(!pat.getAsignado())){
+                patrimoniosDisponibles.add(pat);
+            }
+        }
+        return patrimoniosDisponibles;
+    }
 
     @FacesConverter(forClass = Patrimonios.class)
     public static class PatrimoniosControllerConverter implements Converter {

@@ -52,10 +52,6 @@ public class Asignaciones implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idAsignacion;
     
-    @Column(name = "prestamo", table = "asignaciones", nullable = false)
-    @Basic
-    private boolean prestamo;
-
     public Asignaciones() {
 
     }
@@ -108,17 +104,9 @@ public class Asignaciones implements Serializable {
         this.idAsignacion = idAsignacion;
     }
 
-    public boolean isPrestamo() {
-        return prestamo;
-    }
-
-    public void setPrestamo(boolean prestamo) {
-        this.prestamo = prestamo;
-    }
-
     @Override
     public String toString() {
-        return "Asignaciones{" + "fechaHasta=" + fechaHasta + ", idNota=" + idNota + ", idDependencia=" + idDependencia + ", idAsignacion=" + idAsignacion + ", resuelta=" + prestamo + '}';
+        return "Asignaciones{" + "fechaHasta=" + fechaHasta + ", idNota=" + idNota + ", idDependencia=" + idDependencia + ", idAsignacion=" + idAsignacion + ")";
     }
 
     @Override

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <h:form id="CargaAsignacionPatrimonioForm">
+            <p:growl id="msg" showDetail="true" escape="false" />
+
+            <p:pickList id="PatPickList" value="#{cargaAsignaciones.listaDualPatrimonios}" 
+                        var="patrimonio" converter="converterDualListPatrimonios"
+                        itemValue="#{patrimonio}" itemLabel="#{patrimonio.idPatrimonio}" 
+                        showCheckbox="true" responsive="true"
+                        showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains">
+
+                <f:facet name="sourceCaption">#{bundle.Disponibles}</f:facet>
+                <f:facet name="targetCaption">#{bundle.Seleccionados}</f:facet>
+
+                <p:ajax event="transfer" listener="#{cargaAsignaciones.onTransfer}" update="msg" />
+                <p:ajax event="select" listener="#{cargaAsignaciones.onSelect}" update="msg" />
+                <p:ajax event="unselect" listener="#{cargaAsignaciones.onUnselect}" update="msg" />
+                <p:ajax event="reorder" listener="#{cargaAsignaciones.onReorder}" update="msg" />
+
+                <p:column style="width:auto">
+                    <h:outputText value="#{patrimonio.idPatrimonio}" />
+                </p:column>
+            </p:pickList>
+
+            <p:commandButton id="pojoSubmit" style="margin-top:5px" />
+        </h:form>
+    </ui:composition>
+</html>
+

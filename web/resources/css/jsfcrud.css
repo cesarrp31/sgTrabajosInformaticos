@@ -16,6 +16,17 @@
     margin-top: 10px !important;
 }
 
-.anchoFilaTrabajos {
-    width:"50px"
+.colBooleano {
+    text-align: center;
+    width: 150px;
+}
+
+.colFecha {
+    text-align: right;
+    width: 150px;
+}
+
+.colIdString {
+    text-align: center;
+    width: 120px;
 }

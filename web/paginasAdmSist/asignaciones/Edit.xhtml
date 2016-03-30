@@ -12,26 +12,29 @@
             <h:form id="AsignacionesEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{asignacionesController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditAsignacionesLabel_fechaHasta}" for="fechaHasta" />
-                        <p:calendar id="fechaHasta" pattern="dd/MM/yyyy HH:mm:ss" value="#{asignacionesController.selected.fechaHasta}" title="#{bundle.EditAsignacionesTitle_fechaHasta}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.EditAsignacionesLabel_fechaDesde}" for="fechaDesde" />
-                        <p:calendar id="fechaDesde" pattern="dd/MM/yyyy HH:mm:ss" value="#{asignacionesController.selected.fechaDesde}" title="#{bundle.EditAsignacionesTitle_fechaDesde}" required="true" requiredMessage="#{bundle.EditAsignacionesRequiredMessage_fechaDesde}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditAsignacionesLabel_idNota}" for="idNota" />
                         <p:selectOneMenu id="idNota" value="#{asignacionesController.selected.idNota}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{notasController.itemsAvailableSelectOne}"
                                            var="idNotaItem"
+                                           itemLabel="#{idNotaItem.nroNota}"
                                            itemValue="#{idNotaItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditAsignacionesLabel_idDependencia}" for="idDependencia" />
-                        <p:selectOneMenu id="idDependencia" value="#{asignacionesController.selected.idDependencia}" required="true" requiredMessage="#{bundle.EditAsignacionesRequiredMessage_idDependencia}">
+                        <p:selectOneMenu id="idDependencia" value="#{asignacionesController.selected.idDependencia}" required="true" 
+                                         requiredMessage="#{bundle.EditAsignacionesRequiredMessage_idDependencia}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{dependenciasController.itemsAvailableSelectOne}"
                                            var="idDependenciaItem"
                                            itemValue="#{idDependenciaItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditAsignacionesLabel_idAsignacion}" for="idAsignacion" />
-                        <p:inputText id="idAsignacion" value="#{asignacionesController.selected.idAsignacion}" title="#{bundle.EditAsignacionesTitle_idAsignacion}" required="true" requiredMessage="#{bundle.EditAsignacionesRequiredMessage_idAsignacion}"/>
+                        <p:outputLabel value="#{bundle.EditAsignacionesLabel_fechaDesde}" for="fechaDesde" />
+                        <p:calendar id="fechaDesde" pattern="dd/MM/yyyy HH:mm:ss" value="#{asignacionesController.selected.fechaDesde}" 
+                                    title="#{bundle.EditAsignacionesTitle_fechaDesde}" required="true" requiredMessage="#{bundle.EditAsignacionesRequiredMessage_fechaDesde}" 
+                                    showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditAsignacionesLabel_fechaHasta}" for="fechaHasta" />
+                        <p:calendar id="fechaHasta" pattern="dd/MM/yyyy HH:mm:ss" value="#{asignacionesController.selected.fechaHasta}" 
+                                    title="#{bundle.EditAsignacionesTitle_fechaHasta}"  showOn="button"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{asignacionesController.update}" value="#{bundle.Save}" update="display,:AsignacionesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AsignacionesEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="AsignacionesEditDialog.hide()"/>

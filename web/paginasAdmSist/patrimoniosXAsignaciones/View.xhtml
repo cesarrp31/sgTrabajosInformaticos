@@ -8,16 +8,22 @@
 
     <ui:composition>
 
-        <p:dialog id="PatrimoniosXAsignacionesViewDlg" widgetVar="PatrimoniosXAsignacionesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPatrimoniosXAsignacionesTitle}">
+        <p:dialog id="PatrimoniosXAsignacionesViewDlg" widgetVar="PatrimoniosXAsignacionesViewDialog" modal="true" resizable="false" appendTo="@(body)" 
+                  header="#{bundle.ViewPatrimoniosXAsignacionesTitle}">
             <h:form id="PatrimoniosXAsignacionesViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{patrimoniosXAsignacionesController.selected != null}">
-                        <h:outputText value="#{bundle.ViewPatrimoniosXAsignacionesLabel_idPatrimonio}"/>
-                        <h:outputText value="#{patrimoniosXAsignacionesController.selected.idPatrimonio}" title="#{bundle.ViewPatrimoniosXAsignacionesTitle_idPatrimonio}"/>
-                        <h:outputText value="#{bundle.ViewPatrimoniosXAsignacionesLabel_idAsignacion}"/>
-                        <h:outputText value="#{patrimoniosXAsignacionesController.selected.idAsignacion}" title="#{bundle.ViewPatrimoniosXAsignacionesTitle_idAsignacion}"/>
                         <h:outputText value="#{bundle.ViewPatrimoniosXAsignacionesLabel_idPatXAsig}"/>
                         <h:outputText value="#{patrimoniosXAsignacionesController.selected.idPatXAsig}" title="#{bundle.ViewPatrimoniosXAsignacionesTitle_idPatXAsig}"/>
+                        <h:outputText value="#{bundle.ViewPatrimoniosXAsignacionesLabel_idAsignacion}"/>
+                        <h:outputText value="#{patrimoniosXAsignacionesController.selected.idAsignacion}" title="#{bundle.ViewPatrimoniosXAsignacionesTitle_idAsignacion}"/>
+                        <h:outputText value="#{bundle.ViewPatrimoniosXAsignacionesLabel_idPatrimonio}"/>
+                        <h:outputText value="#{patrimoniosXAsignacionesController.selected.idPatrimonio}" title="#{bundle.ViewPatrimoniosXAsignacionesTitle_idPatrimonio}"/>
+                        <h:outputText value="#{bundle.ViewPatrimoniosXAsignacionesLabel_fechaDesde}"/>
+                        <h:outputText value="#{patrimoniosXAsignacionesController.selected.fechaDesde}" title="#{bundle.ViewPatrimoniosXAsignacionesTitle_fechaDesde}"/>
+                        <h:outputText value="#{bundle.ViewPatrimoniosXAsignacionesLabel_prestado}"/>
+                        <h:outputText value="#{patrimoniosXAsignacionesController.selected.prestado? 'Si' : 'No'}" 
+                                      title="#{bundle.ViewPatrimoniosXAsignacionesTitle_prestado}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="PatrimoniosXAsignacionesViewDialog.hide()"/>
                 </h:panelGroup>

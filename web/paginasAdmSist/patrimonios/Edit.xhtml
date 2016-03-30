@@ -41,13 +41,16 @@
                         <p:outputLabel value="#{bundle.EditPatrimoniosLabel_comentario}" for="comentario" />
                         <p:inputText id="comentario" value="#{patrimoniosController.selected.comentario}" 
                                      title="#{bundle.EditPatrimoniosTitle_comentario}" />
+                        <p:outputLabel value="#{bundle.EditPatrimoniosLabel_asignado}" for="asignado" />
+                        <p:selectBooleanCheckbox id="asignado" value="#{patrimoniosController.selected.asignado}" required="true" />
+                        <p:outputLabel value="#{bundle.EditPatrimoniosLabel_enReparacion}" for="enReparacion" />
+                        <p:selectBooleanCheckbox id="enReparacion" value="#{patrimoniosController.selected.enReparacion}" required="true" />
                         <p:outputLabel value="#{bundle.EditPatrimoniosLabel_fechaBaja}" for="fechaBaja" />
                         <p:calendar id="fechaBaja" pattern="dd/MM/yyyy HH:mm:ss" 
                                     value="#{patrimoniosController.selected.fechaBaja}" 
                                     title="#{bundle.EditPatrimoniosTitle_fechaBaja}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.EditPatrimoniosLabel_baja}" for="baja" />
-                        <p:inputText id="baja" value="#{patrimoniosController.selected.baja}" 
-                                     title="#{bundle.EditPatrimoniosTitle_baja}" />
+                        <p:selectBooleanCheckbox id="baja" value="#{patrimoniosController.selected.baja}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{patrimoniosController.update}" value="#{bundle.Save}" 
                                      update="display,:PatrimoniosListForm:datalist,:growl" 

@@ -23,19 +23,20 @@
                                  rowKey="#{item.idPatrimonio}"
                                  rows="20"
                                  rowsPerPageTemplate="20,30,40,50"
-                                 sortMode="multiple"
+                                 sortMode="multiple" styleClass="width: auto;"
                                  >
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column sortBy="#{item.idPatrimonio}" filterBy="#{item.idPatrimonio}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.idPatrimonio}" styleClass="colIdString"
+                                  filterBy="#{item.idPatrimonio}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPatrimoniosTitle_idPatrimonio}"/>
                             </f:facet>
                             <h:outputText value="#{item.idPatrimonio}"/>
                         </p:column>                        
-                        <p:column>
+                        <p:column styleClass="colFecha">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPatrimoniosTitle_fechaAlta}"/>
                             </f:facet>
@@ -43,19 +44,19 @@
                                 <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPatrimoniosTitle_idTipo}"/>
+                        <p:column headerText="#{bundle.ListPatrimoniosTitle_idTipo}" 
+                                  filterBy="#{item.idTipo.tipo}" filterMatchMode="in">
+                            <f:facet name="filter">
+                                <p:selectCheckboxMenu label="#{bundle.ListPatrimoniosTitle_idTipo}" 
+                                                      onchange="PF('patrimoniosTable').filter()" 
+                                                      panelStyle="width:auto" scrollHeight="150">
+                                    <f:selectItems value="#{tipoPatrimonioController.items}" />
+                                </p:selectCheckboxMenu>
                             </f:facet>
                             <h:outputText value="#{item.idTipo.tipo}"/>
                         </p:column>
                         <p:column headerText="#{bundle.ListPatrimoniosTitle_idPonderacion}" 
                                   filterBy="#{item.idPonderacion.ponderacion}" filterMatchMode="in">
-                            <!--
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPatrimoniosTitle_idPonderacion}"/>
-                            </f:facet>
-                            -->
                             <f:facet name="filter">
                                 <p:selectCheckboxMenu label="#{bundle.ListPatrimoniosTitle_idPonderacion}" 
                                                       onchange="PF('patrimoniosTable').filter()" 
@@ -71,7 +72,19 @@
                             </f:facet>
                             <h:outputText value="#{item.comentario}"/>
                         </p:column>
-                        <p:column headerText="#{bundle.ListPatrimoniosTitle_enReparacion}" 
+                        <p:column headerText="#{bundle.ListPatrimoniosTitle_asignado}" styleClass="colBooleano"
+                                  filterBy="#{item.asignado}" filterMatchMode="equals">
+                            <f:facet name="filter">
+                                <p:selectOneButton onchange="PF('patrimoniosTable').filter()">
+                                    <f:converter converterId="javax.faces.Boolean" />
+                                    <f:selectItem itemLabel="Todos" itemValue="" />
+                                    <f:selectItem itemLabel="S" itemValue="true" />
+                                    <f:selectItem itemLabel="N" itemValue="false" />
+                                </p:selectOneButton>                               
+                            </f:facet>
+                            <h:outputText value="#{item.asignado? 'S' : 'N'}"/>
+                        </p:column>
+                        <p:column headerText="#{bundle.ListPatrimoniosTitle_enReparacion}" styleClass="colBooleano"
                                   filterBy="#{item.enReparacion}" filterMatchMode="equals">
                             <f:facet name="filter">
                                 <p:selectOneButton onchange="PF('patrimoniosTable').filter()">
@@ -81,14 +94,9 @@
                                     <f:selectItem itemLabel="N" itemValue="false" />
                                 </p:selectOneButton>
                             </f:facet>
-                            <!--
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPatrimoniosTitle_enReparacion}"/>
-                            </f:facet>
-                            -->
                             <h:outputText value="#{item.enReparacion? 'S' : 'N'}"/>
                         </p:column>
-                        <p:column>
+                        <p:column styleClass="colFecha">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPatrimoniosTitle_fechaBaja}"/>
                             </f:facet>
@@ -96,7 +104,7 @@
                                 <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
                         </p:column>
-                        <p:column headerText="#{bundle.ListPatrimoniosTitle_baja}" 
+                        <p:column headerText="#{bundle.ListPatrimoniosTitle_baja}" styleClass="colBooleano"
                                   filterBy="#{item.baja}" filterMatchMode="equals">
                             <f:facet name="filter">
                                 <p:selectOneButton onchange="PF('patrimoniosTable').filter()">
@@ -106,11 +114,6 @@
                                     <f:selectItem itemLabel="N" itemValue="false" />
                                 </p:selectOneButton>                               
                             </f:facet>
-                            <!--
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPatrimoniosTitle_baja}"/>
-                            </f:facet>
-                            -->
                             <h:outputText value="#{item.baja? 'S' : 'N'}"/>
                         </p:column>
                         <f:facet name="footer">

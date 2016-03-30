@@ -29,9 +29,9 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPatrimoniosXAsignacionesTitle_idPatrimonio}"/>
+                                <h:outputText value="#{bundle.ListPatrimoniosXAsignacionesTitle_idPatXAsig}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idPatrimonio}"/>
+                            <h:outputText value="#{item.idPatXAsig}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -41,15 +41,43 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPatrimoniosXAsignacionesTitle_idPatXAsig}"/>
+                                <h:outputText value="#{bundle.ListPatrimoniosXAsignacionesTitle_idPatrimonio}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idPatXAsig}"/>
+                            <h:outputText value="#{item.idPatrimonio}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.fechaDesde}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPatrimoniosXAsignacionesTitle_fechaDesde}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaDesde}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="#{bundle.ListPatrimoniosXAsignacionesTitle_prestado}" styleClass="colBooleano"
+                                  filterBy="#{item.prestado}" filterMatchMode="equals">
+                            <f:facet name="filter">
+                                <p:selectOneButton onchange="PF('patrimoniosTable').filter()">
+                                    <f:converter converterId="javax.faces.Boolean" />
+                                    <f:selectItem itemLabel="Todos" itemValue="" />
+                                    <f:selectItem itemLabel="S" itemValue="true" />
+                                    <f:selectItem itemLabel="N" itemValue="false" />
+                                </p:selectOneButton>
+                            </f:facet>
+                            <h:outputText value="#{item.prestado? 'S' : 'N'}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{patrimoniosXAsignacionesController.prepareCreate}" update=":PatrimoniosXAsignacionesCreateForm" oncomplete="PF('PatrimoniosXAsignacionesCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PatrimoniosXAsignacionesViewForm" oncomplete="PF('PatrimoniosXAsignacionesViewDialog').show()" disabled="#{empty patrimoniosXAsignacionesController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PatrimoniosXAsignacionesEditForm" oncomplete="PF('PatrimoniosXAsignacionesEditDialog').show()" disabled="#{empty patrimoniosXAsignacionesController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{patrimoniosXAsignacionesController.destroy}" update=":growl,datalist" disabled="#{empty patrimoniosXAsignacionesController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" 
+                                             actionListener="#{patrimoniosXAsignacionesController.prepareCreate}" 
+                                             update=":PatrimoniosXAsignacionesCreateForm" oncomplete="PF('PatrimoniosXAsignacionesCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" 
+                                             update=":PatrimoniosXAsignacionesViewForm" oncomplete="PF('PatrimoniosXAsignacionesViewDialog').show()" 
+                                             disabled="#{empty patrimoniosXAsignacionesController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" 
+                                             update=":PatrimoniosXAsignacionesEditForm" oncomplete="PF('PatrimoniosXAsignacionesEditDialog').show()" 
+                                             disabled="#{empty patrimoniosXAsignacionesController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" 
+                                             actionListener="#{patrimoniosXAsignacionesController.destroy}" update=":growl,datalist" 
+                                             disabled="#{empty patrimoniosXAsignacionesController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

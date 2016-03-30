@@ -4,6 +4,9 @@
 package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.Objects;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 @Entity
@@ -31,6 +36,15 @@ public class PatrimoniosXAsignaciones implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPatXAsig;
+    
+    @Column(name = "fechaDesde", table = "patrimoniosXAsignaciones", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Basic
+    private Date fechaDesde;
+    
+    @Column(name = "prestado", table = "patrimoniosXAsignaciones", nullable = false)
+    @Basic
+    private boolean prestado;
 
     public PatrimoniosXAsignaciones() {
 
@@ -59,4 +73,51 @@ public class PatrimoniosXAsignaciones implements Serializable {
     public void setIdPatXAsig(Integer idPatXAsig) {
         this.idPatXAsig = idPatXAsig;
     }
+
+    public Date getFechaDesde() {
+        return fechaDesde;
+    }
+
+    public void setFechaDesde(Date fechaDesde) {
+        this.fechaDesde = fechaDesde;
+    }
+
+    public boolean isPrestado() {
+        return prestado;
+    }
+
+    public void setPrestado(boolean prestado) {
+        this.prestado = prestado;
+    }
+    
+    @Override
+    public String toString() {
+        return "PatrimoniosXAsignaciones{" + "idPatrimonio=" + idPatrimonio + ", idAsignacion=" + idAsignacion + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.idPatXAsig);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PatrimoniosXAsignaciones other = (PatrimoniosXAsignaciones) obj;
+        if (!Objects.equals(this.idPatXAsig, other.idPatXAsig)) {
+            return false;
+        }
+        return true;
+    }
+    
 }
