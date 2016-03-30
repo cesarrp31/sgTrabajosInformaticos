@@ -7,6 +7,7 @@ import org.legislaturachaco.sgTrabajosInformaticos.sessionBeans.PatrimoniosFacad
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -91,8 +92,26 @@ public class PatrimoniosController implements Serializable {
         if (items == null) {
             items = getFacade().findAll();
         }
+        Collections.sort(items);
         return items;
     }
+    
+    /*public int ordenarPorId(Object o1, Object o2){
+        System.err.println(o1+" "+o2);
+        if((o1 == null)||(o2 == null)) return 0;
+        Patrimonios p1= (Patrimonios)o1, p2= (Patrimonios)o2;
+        return p1.compareTo(p2);
+    }
+    public int sortByIdPatrimonio(Object o1, Object o2){
+        System.err.println(o1+" "+o2);
+        String aux1= (String)o1, aux2= (String)o2;
+        int v1= Integer.parseInt(aux1.trim()), v2= Integer.parseInt(aux2.trim());
+        return v1-v2;
+    }
+    
+    public void msg(){
+        
+    }*/
 
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {

@@ -20,7 +20,7 @@
                                  widgetVar="patrimoniosTable"
                                  selectionMode="single" selection="#{patrimoniosController.selected}"
                                  paginator="true"
-                                 rowKey="#{item.idPatrimonio}"
+                                 rowKey="#{item.idPatrimoniosInt}"
                                  rows="20"
                                  rowsPerPageTemplate="20,30,40,50"
                                  sortMode="multiple" styleClass="width: auto;"
@@ -29,8 +29,8 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column sortBy="#{item.idPatrimonio}" styleClass="colIdString"
-                                  filterBy="#{item.idPatrimonio}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.idPatrimoniosInt}" styleClass="colIdString"
+                                  filterBy="#{item.idPatrimonio}" filterMatchMode="contains" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPatrimoniosTitle_idPatrimonio}"/>
                             </f:facet>

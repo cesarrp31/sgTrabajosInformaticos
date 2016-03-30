@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "patrimonios")
 
-public class Patrimonios implements Serializable {
+public class Patrimonios implements Serializable, Comparable<Patrimonios> {
     public static int LONG_MAX_PATRIMONIO= 9,
                     LONG_MAX_COMENTARIO= 100;            
 
@@ -205,6 +205,17 @@ public class Patrimonios implements Serializable {
     public String toString() {
         return "Patrimonios{" + "idPatrimonio=" + idPatrimonio + ", idPonderacion=" + idPonderacion + '}';
     }
+
+    @Override
+    public int compareTo(Patrimonios o) {
+        if(o == null) return 1;
+        int valor1= Integer.parseInt(this.idPatrimonio),
+                valor2= Integer.parseInt(o.idPatrimonio);
+        
+        return valor1 - valor2;
+    }
     
-    
+    public int getIdPatrimoniosInt(){
+        return Integer.valueOf(this.idPatrimonio);
+    }
 }
