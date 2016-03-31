@@ -23,13 +23,9 @@
                 <p:ajax event="select" listener="#{cargaAsignaciones.onSelect}" update="msg" />
                 <p:ajax event="unselect" listener="#{cargaAsignaciones.onUnselect}" update="msg" />
                 <p:ajax event="reorder" listener="#{cargaAsignaciones.onReorder}" update="msg" />
-
-                <p:column style="width:auto">
-                    <h:outputText value="#{patrimonio.idPatrimonio}" />
-                </p:column>
+                
+                <f:validateLength for="cargaAsignaciones.listaDualPatrimonios.target.size()" minimum="1" />
             </p:pickList>
-
-            <p:commandButton id="pojoSubmit" style="margin-top:5px" />
         </h:form>
     </ui:composition>
 </html>

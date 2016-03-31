@@ -38,10 +38,6 @@
                             <p:calendar id="fechaHasta" pattern="dd/MM/yyyy HH:mm:ss" value="#{asignacionesController.selected.fechaHasta}" 
                                         title="#{bundle.EditAsignacionesTitle_fechaHasta}"  showOn="button"/>
                         </p:panelGrid>                   
-                        <p:commandButton actionListener="#{cargaAsignaciones.create}" value="#{bundle.Save}" 
-                                         update="display,:CargaAsignacionesListForm,:growl" icon="ui-icon-disk"
-                                         oncomplete="handleSubmit(args,'CargaAsignacionesListForm');"/>
-                        <p:commandButton value="#{bundle.Cancel}" icon="ui-icon-cancel"/>                        
                     </h:panelGroup>    
                 </p:panel>
                 <p:panel id="pnlExtras" header="#{bundle.CargaAsignacionesPatrimonios}">
@@ -52,6 +48,13 @@
                             </h:panelGrid>
                         </p:tab>
                     </p:tabView>
+                </p:panel>
+                <p:panel>
+                    <p:commandButton actionListener="#{cargaAsignaciones.create}" value="#{bundle.Save}" 
+                                         update="display,:CargaAsignacionesListForm,:growl" icon="ui-icon-disk"
+                                         oncomplete="handleSubmit(args,'CargaAsignacionesListForm');"
+                                         />
+                    <p:commandButton value="#{bundle.Cancel}" icon="ui-icon-cancel"/>
                 </p:panel>
             </h:form>
         </ui:define>
