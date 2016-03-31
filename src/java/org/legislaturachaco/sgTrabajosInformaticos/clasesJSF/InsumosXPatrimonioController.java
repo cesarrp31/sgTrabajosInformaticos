@@ -18,6 +18,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.Fechas;
 
 @Named("insumosXPatrimonioController")
 @SessionScoped
@@ -52,6 +53,7 @@ public class InsumosXPatrimonioController implements Serializable {
     public InsumosXPatrimonio prepareCreate() {
         selected = new InsumosXPatrimonio();
         initializeEmbeddableKey();
+        selected.setFechaDesde(Fechas.obtenerFechaActual());
         return selected;
     }
 

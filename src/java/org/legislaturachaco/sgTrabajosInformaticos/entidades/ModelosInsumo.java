@@ -5,6 +5,8 @@ package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
+import java.util.logging.Logger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -107,4 +109,35 @@ public class ModelosInsumo implements Serializable {
     public void setModelo(String modelo) {
         this.modelo = modelo;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.idModelo);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ModelosInsumo other = (ModelosInsumo) obj;
+        if (!Objects.equals(this.idModelo, other.idModelo)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "ModelosInsumo{" + "idTipoInsumo=" + idTipoInsumo + ", idUnidadMedida=" + idUnidadMedida + ", idMarca=" + idMarca + ", modelo=" + modelo + '}';
+    }
+        
 }

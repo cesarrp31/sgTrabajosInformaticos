@@ -4,6 +4,7 @@
 package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -108,4 +109,35 @@ public class Permisos implements Serializable {
     public void setLectura(boolean lectura) {
         this.lectura = lectura;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.idPermiso);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Permisos other = (Permisos) obj;
+        if (!Objects.equals(this.idPermiso, other.idPermiso)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Permisos{" + "elimincacion=" + elimincacion + ", idRol=" + idRol + ", idPermiso=" + idPermiso + ", modificacion=" + modificacion + ", escritura=" + escritura + ", tabla=" + tabla + ", lectura=" + lectura + '}';
+    }
+    
 }

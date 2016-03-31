@@ -5,6 +5,7 @@ package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -57,5 +58,35 @@ public class TipoNota implements Serializable {
 
     public void setNotasCollection(List<Notas> notasCollection) {
         this.notasCollection = notasCollection;
+    }
+
+    @Override
+    public String toString() {
+        return "TipoNota{" + "tipoNota=" + tipoNota + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 59 * hash + Objects.hashCode(this.idTipoNota);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TipoNota other = (TipoNota) obj;
+        if (!Objects.equals(this.idTipoNota, other.idTipoNota)) {
+            return false;
+        }
+        return true;
     }
 }

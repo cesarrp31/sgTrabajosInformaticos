@@ -19,6 +19,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.Fechas;
 
 @Named("ponderacionesController")
 @SessionScoped
@@ -61,6 +62,7 @@ public class PonderacionesController implements Serializable {
     public Ponderaciones prepareCreate() {
         selected = new Ponderaciones();
         initializeEmbeddableKey();
+        selected.setFechaDesde(Fechas.obtenerFechaActual());
         return selected;
     }
 

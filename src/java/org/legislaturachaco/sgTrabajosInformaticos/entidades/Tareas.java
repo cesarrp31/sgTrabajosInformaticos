@@ -5,6 +5,7 @@ package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -69,4 +70,35 @@ public class Tareas implements Serializable {
     public void setTareasRealizadasCollection(List<TareasRealizadas> tareasRealizadasCollection) {
         this.tareasRealizadasCollection = tareasRealizadasCollection;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 89 * hash + Objects.hashCode(this.idTarea);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Tareas other = (Tareas) obj;
+        if (!Objects.equals(this.idTarea, other.idTarea)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Tareas{" + "tarea=" + tarea + '}';
+    }
+    
 }

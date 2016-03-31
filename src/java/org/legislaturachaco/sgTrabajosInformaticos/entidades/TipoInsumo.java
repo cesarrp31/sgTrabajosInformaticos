@@ -5,6 +5,7 @@ package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -58,4 +59,35 @@ public class TipoInsumo implements Serializable {
     public void setTipoInsumo(String tipoInsumo) {
         this.tipoInsumo = tipoInsumo;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.idTipoInsumo);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TipoInsumo other = (TipoInsumo) obj;
+        if (!Objects.equals(this.idTipoInsumo, other.idTipoInsumo)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return tipoInsumo;
+    }
+    
 }

@@ -4,6 +4,7 @@
 package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -84,4 +85,35 @@ public class ElementosUtilizados implements Serializable {
     public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + Objects.hashCode(this.idElemento);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ElementosUtilizados other = (ElementosUtilizados) obj;
+        if (!Objects.equals(this.idElemento, other.idElemento)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "ElementosUtilizados{" + "idEstadoXTrabajo=" + idEstadoXTrabajo + ", idInsumo=" + idInsumo + ", cantidad=" + cantidad + '}';
+    }
+    
 }

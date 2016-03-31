@@ -18,6 +18,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.Fechas;
 
 @Named("notasController")
 @SessionScoped
@@ -52,6 +53,7 @@ public class NotasController implements Serializable {
     public Notas prepareCreate() {
         selected = new Notas();
         initializeEmbeddableKey();
+        selected.setFecha(Fechas.obtenerFechaActual());
         return selected;
     }
 

@@ -5,6 +5,7 @@ package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -81,4 +82,35 @@ public class Caracteristicas implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 17 * hash + Objects.hashCode(this.idCaracteristica);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Caracteristicas other = (Caracteristicas) obj;
+        if (!Objects.equals(this.idCaracteristica, other.idCaracteristica)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
+    
 }

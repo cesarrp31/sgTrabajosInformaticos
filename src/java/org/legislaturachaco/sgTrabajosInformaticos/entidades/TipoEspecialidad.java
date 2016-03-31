@@ -88,7 +88,7 @@ public class TipoEspecialidad implements Serializable {
 
     @Override
     public String toString() {
-        return "TipoEspecialidad{" + "especialidad=" + especialidad + '}';
+        return especialidad;
     }
      
 }

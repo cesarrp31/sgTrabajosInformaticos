@@ -4,6 +4,7 @@
 package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -72,4 +73,35 @@ public class CaracteristicasXInsumo implements Serializable {
     public void setIdModelo(ModelosInsumo idModelo) {
         this.idModelo = idModelo;
     }
+
+    @Override
+    public String toString() {
+        return "CaracteristicasXInsumo{" + "valor=" + valor + ", idModelo=" + idModelo + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 29 * hash + Objects.hashCode(this.idCarXIns);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final CaracteristicasXInsumo other = (CaracteristicasXInsumo) obj;
+        if (!Objects.equals(this.idCarXIns, other.idCarXIns)) {
+            return false;
+        }
+        return true;
+    }
+    
 }

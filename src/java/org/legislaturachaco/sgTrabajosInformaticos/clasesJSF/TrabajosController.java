@@ -75,6 +75,7 @@ public class TrabajosController implements Serializable {
     public Trabajos prepareCreate() {
         selected = new Trabajos();
         initializeEmbeddableKey();
+        selected.setFechaComienzo(Fechas.obtenerFechaActual());
         return selected;
     }
 

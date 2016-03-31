@@ -4,6 +4,7 @@
 package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -72,4 +73,35 @@ public class MedicionXTabla implements Serializable {
     public void setIdMedicionXTabla(Integer idMedicionXTabla) {
         this.idMedicionXTabla = idMedicionXTabla;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.idMedicionXTabla);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final MedicionXTabla other = (MedicionXTabla) obj;
+        if (!Objects.equals(this.idMedicionXTabla, other.idMedicionXTabla)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "MedicionXTabla{" + "valor=" + valor + ", idMedicion=" + idMedicion + ", tabla=" + tabla + '}';
+    }
+    
 }

@@ -4,6 +4,7 @@
 package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -72,4 +73,35 @@ public class TransicionesEstado implements Serializable {
     public void setIdProxEstado(Integer idProxEstado) {
         this.idProxEstado = idProxEstado;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.idProxEstado);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TransicionesEstado other = (TransicionesEstado) obj;
+        if (!Objects.equals(this.idProxEstado, other.idProxEstado)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "TransicionesEstado{" + "estado=" + estado + ", estadoSiguiente=" + estadoSiguiente + '}';
+    }
+    
 }

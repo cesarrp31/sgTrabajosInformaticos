@@ -21,6 +21,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.Fechas;
 
 @Named("patrimoniosController")
 @SessionScoped
@@ -64,6 +65,7 @@ public class PatrimoniosController implements Serializable {
     public Patrimonios prepareCreate() {
         selected = new Patrimonios();
         initializeEmbeddableKey();
+        selected.setFechaAlta(Fechas.obtenerFechaActual());
         return selected;
     }
 

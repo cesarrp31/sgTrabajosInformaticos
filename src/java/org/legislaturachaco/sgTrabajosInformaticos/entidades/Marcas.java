@@ -5,6 +5,7 @@ package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -82,4 +83,35 @@ public class Marcas implements Serializable {
     public void setIdMarca(Integer idMarca) {
         this.idMarca = idMarca;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 19 * hash + Objects.hashCode(this.idMarca);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Marcas other = (Marcas) obj;
+        if (!Objects.equals(this.idMarca, other.idMarca)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return marca;
+    }
+    
 }

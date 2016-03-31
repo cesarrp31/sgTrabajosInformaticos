@@ -4,6 +4,7 @@
 package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -72,4 +73,35 @@ public class LineaEntrega implements Serializable {
     public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 61 * hash + Objects.hashCode(this.idLineaEntrega);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final LineaEntrega other = (LineaEntrega) obj;
+        if (!Objects.equals(this.idLineaEntrega, other.idLineaEntrega)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "LineaEntrega{" + "idEntregaInsumo=" + idEntregaInsumo + ", idInsumo=" + idInsumo + ", cantidad=" + cantidad + '}';
+    }
+    
 }

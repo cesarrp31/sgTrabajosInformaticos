@@ -18,6 +18,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.Fechas;
 
 @Named("entregaInsumosController")
 @SessionScoped
@@ -52,6 +53,7 @@ public class EntregaInsumosController implements Serializable {
     public EntregaInsumos prepareCreate() {
         selected = new EntregaInsumos();
         initializeEmbeddableKey();
+        selected.setFecha(Fechas.obtenerFechaActual());
         return selected;
     }
 

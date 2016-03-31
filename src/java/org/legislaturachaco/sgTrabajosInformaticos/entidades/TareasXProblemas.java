@@ -4,6 +4,7 @@
 package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -59,4 +60,35 @@ public class TareasXProblemas implements Serializable {
     public void setIdTareaXProblema(Integer idTareaXProblema) {
         this.idTareaXProblema = idTareaXProblema;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 73 * hash + Objects.hashCode(this.idTareaXProblema);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TareasXProblemas other = (TareasXProblemas) obj;
+        if (!Objects.equals(this.idTareaXProblema, other.idTareaXProblema)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "TareasXProblemas{" + "idProblemaN3=" + idProblemaN3 + ", idTarea=" + idTarea + '}';
+    }
+    
 }

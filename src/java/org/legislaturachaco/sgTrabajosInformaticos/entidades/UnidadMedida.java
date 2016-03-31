@@ -5,6 +5,7 @@ package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -81,4 +82,35 @@ public class UnidadMedida implements Serializable {
     public void setCaracteristicasXPonderacionesCollection(List<CaracteristicasXPonderaciones> caracteristicasXPonderacionesCollection) {
         this.caracteristicasXPonderacionesCollection = caracteristicasXPonderacionesCollection;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.idUnidadMedida);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final UnidadMedida other = (UnidadMedida) obj;
+        if (!Objects.equals(this.idUnidadMedida, other.idUnidadMedida)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return abreviatura;
+    }
+    
 }

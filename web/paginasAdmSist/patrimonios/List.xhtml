@@ -52,7 +52,8 @@
                             <f:facet name="filter">
                                 <p:selectCheckboxMenu label="#{bundle.ListPatrimoniosTitle_idTipo}" 
                                                       onchange="PF('patrimoniosTable').filter()" 
-                                                      panelStyle="width:auto" scrollHeight="150">
+                                                      panelStyle="width:auto" scrollHeight="150"
+                                                      filter="true" filterMatchMode="contains">
                                     <f:selectItems value="#{tipoPatrimonioController.items}" />
                                 </p:selectCheckboxMenu>
                             </f:facet>
@@ -69,7 +70,7 @@
                             </f:facet>
                             <h:outputText value="#{item.idPonderacion.ponderacion}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.comentario}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPatrimoniosTitle_comentario}"/>
                             </f:facet>
@@ -120,15 +121,23 @@
                             <h:outputText value="#{item.baja? 'S' : 'N'}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{patrimoniosController.prepareCreate}" update=":PatrimoniosCreateForm" oncomplete="PF('PatrimoniosCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PatrimoniosViewForm" oncomplete="PF('PatrimoniosViewDialog').show()" disabled="#{empty patrimoniosController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PatrimoniosEditForm" oncomplete="PF('PatrimoniosEditDialog').show()" disabled="#{empty patrimoniosController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{patrimoniosController.destroy}" update=":growl,datalist" disabled="#{empty patrimoniosController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" 
+                                             actionListener="#{patrimoniosController.prepareCreate}" update=":PatrimoniosCreateForm" 
+                                             oncomplete="PF('PatrimoniosCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" 
+                                             update=":PatrimoniosViewForm" oncomplete="PF('PatrimoniosViewDialog').show()" 
+                                             disabled="#{empty patrimoniosController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" 
+                                             update=":PatrimoniosEditForm" oncomplete="PF('PatrimoniosEditDialog').show()" 
+                                             disabled="#{empty patrimoniosController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" 
+                                             actionListener="#{patrimoniosController.destroy}" update=":growl,datalist" 
+                                             disabled="#{empty patrimoniosController.selected}"/>
                             <br/>
                             <br/>
                             <h:commandLink>
                                 <p:graphicImage name="/iconos/xls.png" width="48"/>
-                                <p:dataExporter type="xls" target="datalist" fileName="patrimonios" />
+                                <p:dataExporter type="xls" target="datalist" fileName="patrimonios"/>
                             </h:commandLink>
                             <h:commandLink>
                                 <p:graphicImage name="/iconos/pdf.png" width="48"/>
@@ -136,7 +145,7 @@
                             </h:commandLink>
                             <h:commandLink>
                                 <p:graphicImage name="/iconos/csv.png" width="48"/>
-                                <p:dataExporter type="csv" target="datalist" fileName="patrimonios" />
+                                <p:dataExporter type="csv" target="datalist" fileName="patrimonios"/>
                             </h:commandLink>
                         </f:facet>
                     </p:dataTable>

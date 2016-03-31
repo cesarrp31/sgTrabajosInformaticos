@@ -5,6 +5,7 @@ package org.legislaturachaco.sgTrabajosInformaticos.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -94,4 +95,35 @@ public class InsumosDisponibles implements Serializable {
     public void setCantidadDisponible(double cantidadDisponible) {
         this.cantidadDisponible = cantidadDisponible;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.idInsumo);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final InsumosDisponibles other = (InsumosDisponibles) obj;
+        if (!Objects.equals(this.idInsumo, other.idInsumo)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "InsumosDisponibles{" + "idModelo=" + idModelo + ", cantidadDisponible=" + cantidadDisponible + '}';
+    }
+    
 }
