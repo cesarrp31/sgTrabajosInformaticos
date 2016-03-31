@@ -24,7 +24,6 @@
                 <p:ajax event="unselect" listener="#{cargaAsignaciones.onUnselect}" update="msg" />
                 <p:ajax event="reorder" listener="#{cargaAsignaciones.onReorder}" update="msg" />
                 
-                <f:validateLength for="cargaAsignaciones.listaDualPatrimonios.target.size()" minimum="1" />
             </p:pickList>
         </h:form>
     </ui:composition>

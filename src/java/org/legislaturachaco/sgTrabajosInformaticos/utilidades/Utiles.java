@@ -7,6 +7,8 @@ package org.legislaturachaco.sgTrabajosInformaticos.utilidades;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 
 /**
@@ -33,5 +35,10 @@ public final class Utiles {
     public static String fechaFormateada(Date fecha, String patron){
         SimpleDateFormat dt1 = new SimpleDateFormat(patron);
         return dt1.format(fecha);
+    }
+    
+    public static void mensajesFacesContext(Severity severidad, String msg, String o){
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(severidad, msg, o));
     }
 }

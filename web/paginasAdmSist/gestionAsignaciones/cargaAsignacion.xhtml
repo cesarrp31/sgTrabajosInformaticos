@@ -19,31 +19,34 @@
                     <h:panelGroup id="display">
                         <p:panelGrid columns="2" rendered="#{cargaAsignaciones.asignacion != null}">
                             <p:outputLabel value="#{bundle.CreateAsignacionesLabel_idNota}" for="idNota" />
-                            <p:selectOneMenu id="idNota" value="#{asignacionesController.selected.idNota.nroNota}" >
+                            <p:selectOneMenu id="idNota" value="#{asignacionesController.selected.idNota}" >
                                 <f:selectItems value="#{notasController.itemsAvailableSelectOne}"
                                                var="idNotaItem"
                                                itemValue="#{idNotaItem.nroNota}"/>
                             </p:selectOneMenu>
                             <p:outputLabel value="#{bundle.CreateAsignacionesLabel_idDependencia}" for="idDependencia" />
-                            <p:selectOneMenu id="idDependencia" value="#{asignacionesController.selected.idDependencia}" required="true" requiredMessage="#{bundle.EditAsignacionesRequiredMessage_idDependencia}">
+                            <p:selectOneMenu id="idDependencia" value="#{asignacionesController.selected.idDependencia}" 
+                                             required="true" requiredMessage="#{bundle.EditAsignacionesRequiredMessage_idDependencia}"
+                                             filter="true" filterMatchMode="contains">
                                 <f:selectItems value="#{dependenciasController.itemsAvailableSelectOne}"
                                                var="idDependenciaItem"
                                                itemValue="#{idDependenciaItem}"/>
                             </p:selectOneMenu>
                             <p:outputLabel value="#{bundle.CreateAsignacionesLabel_fechaDesde}" for="fechaDesde" />
                             <p:calendar id="fechaDesde" pattern="dd/MM/yyyy HH:mm:ss" value="#{asignacionesController.selected.fechaDesde}" 
-                                        title="#{bundle.EditAsignacionesTitle_fechaDesde}" required="true" requiredMessage="#{bundle.EditAsignacionesRequiredMessage_fechaDesde}" 
+                                        title="#{bundle.EditAsignacionesTitle_fechaDesde}" 
+                                        required="true" requiredMessage="#{bundle.EditAsignacionesRequiredMessage_fechaDesde}" 
                                         showOn="button"/>
                             <p:outputLabel value="#{bundle.CreateAsignacionesLabel_fechaHasta}" for="fechaHasta" />
                             <p:calendar id="fechaHasta" pattern="dd/MM/yyyy HH:mm:ss" value="#{asignacionesController.selected.fechaHasta}" 
-                                        title="#{bundle.EditAsignacionesTitle_fechaHasta}"  showOn="button"/>
+                                        title="#{bundle.EditAsignacionesTitle_fechaHasta}" showOn="button"/>
                         </p:panelGrid>                   
                     </h:panelGroup>    
                 </p:panel>
                 <p:panel id="pnlExtras" header="#{bundle.CargaAsignacionesPatrimonios}">
                      <p:tabView activeIndex="">
                         <p:tab title="#{bundle.CargaTrabajosPatrimoniosDisponibles}">
-                            <h:panelGrid columns="2" cellpadding="10">
+                            <h:panelGrid id="asigXpatr" columns="2" cellpadding="10">
                                 <ui:include src="/paginasAdmSist/gestionAsignaciones/CrearPatrimoniosXAsignacion.xhtml"/>
                             </h:panelGrid>
                         </p:tab>
@@ -51,10 +54,12 @@
                 </p:panel>
                 <p:panel>
                     <p:commandButton actionListener="#{cargaAsignaciones.create}" value="#{bundle.Save}" 
-                                         update="display,:CargaAsignacionesListForm,:growl" icon="ui-icon-disk"
-                                         oncomplete="handleSubmit(args,'CargaAsignacionesListForm');"
-                                         />
-                    <p:commandButton value="#{bundle.Cancel}" icon="ui-icon-cancel"/>
+                                         update="display,:CargaAsignacionesListForm,:growl, #{p:component('asigXpatr')}" icon="ui-icon-disk"
+                                         oncomplete="handleSubmit(args,'CargaAsignacionesListForm');"/>
+                    <p:commandButton value="#{bundle.Cancel}" icon="ui-icon-cancel" 
+                                     actionListener="#{cargaAsignaciones.cancelar()}" immediate="true" ajax="false">
+                        <p:resetInput target="display, #{p:component('asigXpatr')}"/>
+                    </p:commandButton>
                 </p:panel>
             </h:form>
         </ui:define>
