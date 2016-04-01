@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2016-04-01T11:32:19 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="graficoTorta" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="53a0cd7c-24b6-4776-9a26-78a5229992e1">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySql192"/>
+	<queryString>
+		<![CDATA[Select tp.idTipo, tp.tipo, count(*)*100/(select count(*) from patrimonios where baja = 0) as Porc, count(*) as Cant
+From patrimonios as p, tipoPatrimonio as tp
+Where p.idTipo = tp.idTipo and baja = 0
+Group by tp.idTipo]]>
+	</queryString>
+	<field name="idTipo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Porc" class="java.math.BigDecimal"/>
+	<field name="Cant" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="18" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="0" width="100" height="20" uuid="9e642a77-37f9-411a-999a-1f0bf8cbc99e"/>
+				<text><![CDATA[idTipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="0" width="100" height="20" uuid="2ad228d7-d8c6-49fd-855d-ed40e5c824b9"/>
+				<text><![CDATA[tipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="0" width="100" height="20" uuid="70c1dd18-4fe4-492e-b26b-e7e4ba3daf18"/>
+				<text><![CDATA[Porc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="372" y="0" width="100" height="20" uuid="da985149-45a5-497f-9e9b-86d8d973aca7"/>
+				<text><![CDATA[Cant]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="0" width="100" height="20" uuid="c81fc9fe-7a95-4fab-bb91-d6638492457d"/>
+				<textFieldExpression><![CDATA[$F{idTipo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="0" width="100" height="20" uuid="9545b494-3ef2-4342-9a4d-1749d38b9f71"/>
+				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="0" width="100" height="20" uuid="e657c043-db37-48bb-b970-ef28f20169ff"/>
+				<textFieldExpression><![CDATA[$F{Porc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="372" y="0" width="100" height="20" uuid="b8ff5eeb-216d-4616-ad1a-38c6d70e5b61"/>
+				<textFieldExpression><![CDATA[$F{Cant}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="421" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="50" y="10" width="430" height="390" uuid="8581dd74-8c28-4c4e-8192-a265aed4880b"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset maxCount="6" minPercentage="0.0">
+					<keyExpression><![CDATA[$F{tipo}]]></keyExpression>
+					<valueExpression><![CDATA[$F{Cant}]]></valueExpression>
+					<labelExpression><![CDATA[$F{Porc}.toString()]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</summary>
+</jasperReport>
