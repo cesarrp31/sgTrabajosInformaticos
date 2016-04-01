@@ -19,6 +19,8 @@
                     <p:dataTable id="datalist" value="#{encargadosController.items}" var="item"
                                  selectionMode="single" selection="#{encargadosController.selected}"
                                  paginator="true"
+                                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+                                 currentPageReportTemplate="{startRecord} - {endRecord} de {totalRecords}"
                                  rowKey="#{item.idEncargado}"
                                  rows="20"
                                  rowsPerPageTemplate="20,30"
@@ -54,6 +56,7 @@
                                              update=":EncargadosEditForm" oncomplete="PF('EncargadosEditDialog').show()" disabled="#{empty encargadosController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" 
                                              actionListener="#{encargadosController.destroy}" update=":growl,datalist" disabled="#{empty encargadosController.selected}"/>
+                            <ui:include src="/zComponentesGenerales/plantillaExporter.xhtml"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

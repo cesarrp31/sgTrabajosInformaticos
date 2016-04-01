@@ -19,6 +19,8 @@
                     <p:dataTable id="datalist" value="#{asignacionesController.items}" var="item"
                                  selectionMode="single" selection="#{asignacionesController.selected}"
                                  paginator="true"
+                                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+                                 currentPageReportTemplate="{startRecord} - {endRecord} de {totalRecords}"
                                  rowKey="#{item.idAsignacion}"
                                  rows="20"
                                  rowsPerPageTemplate="20,30"
@@ -68,6 +70,7 @@
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":AsignacionesViewForm" oncomplete="PF('AsignacionesViewDialog').show()" disabled="#{empty asignacionesController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":AsignacionesEditForm" oncomplete="PF('AsignacionesEditDialog').show()" disabled="#{empty asignacionesController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{asignacionesController.destroy}" update=":growl,datalist" disabled="#{empty asignacionesController.selected}"/>
+                            <ui:include src="/zComponentesGenerales/plantillaExporter.xhtml"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

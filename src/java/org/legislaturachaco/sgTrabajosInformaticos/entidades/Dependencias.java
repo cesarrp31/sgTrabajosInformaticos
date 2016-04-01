@@ -21,6 +21,10 @@ import javax.persistence.Table;
 @Table(name = "dependencias")
 
 public class Dependencias implements Serializable {
+    
+    public static final int LONG_MAX_OBSERVACIONES= 256, 
+                            LONG_MAX_DEPENDENCIA= 75, 
+                            LONG_MAX_NOMBRE_CORTO=25;
 
     @OneToMany(targetEntity = EntregaInsumos.class, mappedBy = "idDependencia")
     private List<EntregaInsumos> entregaInsumosCollection;

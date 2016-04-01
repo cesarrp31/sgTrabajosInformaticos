@@ -19,6 +19,8 @@
                     <p:dataTable id="datalist" value="#{rolesController.items}" var="item"
                                  selectionMode="single" selection="#{rolesController.selected}"
                                  paginator="true"
+                                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+                                 currentPageReportTemplate="{startRecord} - {endRecord} de {totalRecords}"
                                  rowKey="#{item.idRol}"
                                  rows="20"
                                  rowsPerPageTemplate="20,30"

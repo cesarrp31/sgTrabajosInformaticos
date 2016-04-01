@@ -20,6 +20,8 @@
                                  widgetVar="tecnicosTable"
                                  selectionMode="single" selection="#{tecnicosController.selected}"
                                  paginator="true"
+                                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+                                 currentPageReportTemplate="{startRecord} - {endRecord} de {totalRecords}"
                                  rowKey="#{item.idTecnico}"
                                  rows="20"
                                  rowsPerPageTemplate="20,30"
@@ -69,11 +71,6 @@
                                     <f:selectItem itemLabel="No" itemValue="false" />
                                 </p:selectOneButton>                               
                             </f:facet>
-                            <!--
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTecnicosTitle_ocupado}"/>
-                            </f:facet>
-                            -->
                             <h:outputText value="#{item.ocupado ? 'Si' : 'No'}"/>
                         </p:column>
                         <p:column headerText="#{bundle.ListTecnicosTitle_baja}" 
@@ -86,11 +83,6 @@
                                     <f:selectItem itemLabel="No" itemValue="false" />
                                 </p:selectOneButton>                               
                             </f:facet>
-                            <!--
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTecnicosTitle_baja}"/>
-                            </f:facet>
-                            -->
                             <h:outputText value="#{item.baja ? 'Si' : 'No'}"/>
                         </p:column>
                         <f:facet name="footer">
@@ -98,6 +90,7 @@
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TecnicosViewForm" oncomplete="PF('TecnicosViewDialog').show()" disabled="#{empty tecnicosController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TecnicosEditForm" oncomplete="PF('TecnicosEditDialog').show()" disabled="#{empty tecnicosController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{tecnicosController.destroy}" update=":growl,datalist" disabled="#{empty tecnicosController.selected}"/>
+                            <ui:include src="/zComponentesGenerales/plantillaExporter.xhtml"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

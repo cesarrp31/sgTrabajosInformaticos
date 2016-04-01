@@ -15,7 +15,7 @@
                     <p:panelGrid columns="2" rendered="#{patrimoniosController.selected != null}">
                         <p:outputLabel value="#{bundle.EditPatrimoniosLabel_idPatrimonio}" for="idPatrimonio" />
                         <p:inputText id="idPatrimonio" value="#{patrimoniosController.selected.idPatrimonio}" 
-                                     title="#{bundle.EditPatrimoniosTitle_idPatrimonio}" required="true" 
+                                     title="#{bundle.EditPatrimoniosTitle_idPatrimonio}" required="true" disabled="true"
                                      requiredMessage="#{bundle.EditPatrimoniosRequiredMessage_idPatrimonio}"/>
                         <p:outputLabel value="#{bundle.EditPatrimoniosLabel_fechaAlta}" for="fechaAlta" />
                         <p:calendar id="fechaAlta" pattern="dd/MM/yyyy HH:mm:ss" 
@@ -55,7 +55,9 @@
                     <p:commandButton actionListener="#{patrimoniosController.update}" value="#{bundle.Save}" 
                                      update="display,:PatrimoniosListForm:datalist,:growl" 
                                      oncomplete="handleSubmit(args, 'PatrimoniosEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="PatrimoniosEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PatrimoniosEditDialog.hide()" immediate="true" ajax="false">
+                        <p:resetInput target="display"/>
+                    </p:commandButton>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

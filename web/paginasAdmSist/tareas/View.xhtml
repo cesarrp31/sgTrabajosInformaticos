@@ -12,10 +12,10 @@
             <h:form id="TareasViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tareasController.selected != null}">
-                        <h:outputText value="#{bundle.ViewTareasLabel_tarea}"/>
-                        <h:outputText value="#{tareasController.selected.tarea}" title="#{bundle.ViewTareasTitle_tarea}"/>
                         <h:outputText value="#{bundle.ViewTareasLabel_idTarea}"/>
                         <h:outputText value="#{tareasController.selected.idTarea}" title="#{bundle.ViewTareasTitle_idTarea}"/>
+                        <h:outputText value="#{bundle.ViewTareasLabel_tarea}"/>
+                        <h:outputText value="#{tareasController.selected.tarea}" title="#{bundle.ViewTareasTitle_tarea}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="TareasViewDialog.hide()"/>
                 </h:panelGroup>

@@ -30,6 +30,42 @@ public class DependenciasController implements Serializable {
 
     public DependenciasController() {
     }
+    
+    public int getLongMaxObservaciones(){
+        return Dependencias.LONG_MAX_OBSERVACIONES;
+    }
+    
+    public int getCObservaciones(){
+        return Dependencias.LONG_MAX_OBSERVACIONES/getFObservaciones();
+    }
+    
+    public int getFObservaciones(){
+        return 4;
+    }
+    
+    public int getLongMaxDependencia(){
+        return Dependencias.LONG_MAX_DEPENDENCIA;
+    }
+    
+    public int getCDependencia(){
+        return Dependencias.LONG_MAX_DEPENDENCIA/getFDependencia();
+    }
+    
+    public int getFDependencia(){
+        return 1;
+    }
+    
+    public int getLongMaxNombreCorto(){
+        return Dependencias.LONG_MAX_NOMBRE_CORTO;
+    }
+    
+    public int getCNombreCorto(){
+        return Dependencias.LONG_MAX_NOMBRE_CORTO/getFNombreCorto();
+    }
+    
+    public int getFNombreCorto(){
+        return 1;
+    }
 
     public Dependencias getSelected() {
         return selected;

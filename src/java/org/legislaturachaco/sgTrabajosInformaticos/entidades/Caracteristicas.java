@@ -19,6 +19,9 @@ import javax.persistence.Table;
 @Table(name = "caracteristicas")
 
 public class Caracteristicas implements Serializable {
+    
+    public static final int LONG_MAX_DESCIPCION= 200,
+                            LONG_MAX_NOMBRE= 100;
 
     @Column(name = "descripcion", table = "caracteristicas", length = 200)
     @Basic

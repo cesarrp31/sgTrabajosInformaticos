@@ -13,11 +13,13 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tareasController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateTareasLabel_tarea}" for="tarea" />
-                        <p:inputText id="tarea" value="#{tareasController.selected.tarea}" title="#{bundle.CreateTareasTitle_tarea}" required="true" requiredMessage="#{bundle.CreateTareasRequiredMessage_tarea}"/>
-                        <p:outputLabel value="#{bundle.CreateTareasLabel_idTarea}" for="idTarea" />
-                        <p:inputText id="idTarea" value="#{tareasController.selected.idTarea}" title="#{bundle.CreateTareasTitle_idTarea}" required="true" requiredMessage="#{bundle.CreateTareasRequiredMessage_idTarea}"/>
+                        <p:inputTextarea id="tarea" value="#{tareasController.selected.tarea}" title="#{bundle.CreateTareasTitle_tarea}" 
+                                     required="true" requiredMessage="#{bundle.CreateTareasRequiredMessage_tarea}"
+                                     maxlength="#{tareasController.longMaxTarea}" rows="#{tareasController.fTarea}" cols="#{tareasController.cTarea}"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{tareasController.create}" value="#{bundle.Save}" update="display,:TareasListForm:datalist,:growl" oncomplete="handleSubmit(args,'TareasCreateDialog');"/>
+                    <p:commandButton actionListener="#{tareasController.create}" value="#{bundle.Save}" 
+                                     update="display,:TareasListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args,'TareasCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="TareasCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

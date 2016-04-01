@@ -18,6 +18,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.legislaturachaco.sgTrabajosInformaticos.entidades.Tareas;
 
 @Named("tablasController")
 @SessionScoped
@@ -30,7 +31,7 @@ public class TablasController implements Serializable {
 
     public TablasController() {
     }
-
+    
     public Tablas getSelected() {
         return selected;
     }

@@ -36,6 +36,10 @@ public class PatrimoniosController implements Serializable {
     public PatrimoniosController() {
     }
     
+    public int obtenerMaxIdPatrimonio(){
+        return (int) (Math.pow(10, Patrimonios.LONG_MAX_PATRIMONIO)-1);
+    }
+    
     public int obtenerLongMaxPatrimonio(){
         return Patrimonios.LONG_MAX_PATRIMONIO;
     }

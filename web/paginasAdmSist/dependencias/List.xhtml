@@ -19,6 +19,8 @@
                     <p:dataTable id="datalist" value="#{dependenciasController.items}" var="item"
                                  selectionMode="single" selection="#{dependenciasController.selected}"
                                  paginator="true"
+                                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+                                 currentPageReportTemplate="{startRecord} - {endRecord} de {totalRecords}"
                                  rowKey="#{item.idDependencia}"
                                  rows="20"
                                  rowsPerPageTemplate="20,30"

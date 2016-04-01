@@ -216,6 +216,7 @@ public class Patrimonios implements Serializable, Comparable<Patrimonios> {
     }
     
     public int getIdPatrimoniosInt(){
+        if(this.idPatrimonio == null) return 0;
         return Integer.valueOf(this.idPatrimonio);
     }
 }

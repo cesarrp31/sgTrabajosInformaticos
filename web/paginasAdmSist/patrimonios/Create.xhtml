@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions">
 
     <ui:composition>
 
@@ -14,9 +15,11 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{patrimoniosController.selected != null}">
                         <p:outputLabel value="#{bundle.CreatePatrimoniosLabel_idPatrimonio}" for="idPatrimonio" />
-                        <p:inputText id="idPatrimonio" value="#{patrimoniosController.selected.idPatrimonio}" 
-                                     title="#{bundle.CreatePatrimoniosTitle_idPatrimonio}" required="true" 
-                                     requiredMessage="#{bundle.CreatePatrimoniosRequiredMessage_idPatrimonio}"/>
+                        <pe:inputNumber id="idPatrimonio" minValue="1" maxValue="#{patrimoniosController.obtenerMaxIdPatrimonio()}"
+                                        thousandSeparator="" decimalPlaces="0" emptyValue="empty"
+                                        value="#{patrimoniosController.selected.idPatrimonio}" 
+                                        title="#{bundle.CreatePatrimoniosTitle_idPatrimonio}" required="true" 
+                                        requiredMessage="#{bundle.CreatePatrimoniosRequiredMessage_idPatrimonio}"/>
                         <p:outputLabel value="#{bundle.CreatePatrimoniosLabel_fechaAlta}" for="fechaAlta" />
                         <p:calendar id="fechaAlta" pattern="dd/MM/yyyy HH:mm:ss" 
                                     value="#{patrimoniosController.selected.fechaAlta}" 
@@ -53,7 +56,9 @@
                     <p:commandButton actionListener="#{patrimoniosController.create}" value="#{bundle.Save}" 
                                      update="display,:PatrimoniosListForm:datalist,:growl" 
                                      oncomplete="handleSubmit(args,'PatrimoniosCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="PatrimoniosCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PatrimoniosCreateDialog.hide()" immediate="true" ajax="false">
+                        <p:resetInput target="display"/>
+                    </p:commandButton>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

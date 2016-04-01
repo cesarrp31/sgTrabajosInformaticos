@@ -30,6 +30,18 @@ public class TareasController implements Serializable {
 
     public TareasController() {
     }
+    
+    public int getLongMaxTarea(){
+        return Tareas.LONG_MAX_TAREA;
+    }
+    
+    public int getCTarea(){
+        return Tareas.LONG_MAX_TAREA/getFTarea();
+    }
+    
+    public int getFTarea(){
+        return 2;
+    }
 
     public Tareas getSelected() {
         return selected;

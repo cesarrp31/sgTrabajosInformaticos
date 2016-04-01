@@ -19,6 +19,8 @@
                     <p:dataTable id="datalist" value="#{estadosTrabajoController.items}" var="item"
                                  selectionMode="single" selection="#{estadosTrabajoController.selected}"
                                  paginator="true"
+                                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+                                 currentPageReportTemplate="{startRecord} - {endRecord} de {totalRecords}"
                                  rowKey="#{item.estado}"
                                  rows="20"
                                  rowsPerPageTemplate="20,30"

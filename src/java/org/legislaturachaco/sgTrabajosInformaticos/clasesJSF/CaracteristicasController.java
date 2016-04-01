@@ -30,6 +30,30 @@ public class CaracteristicasController implements Serializable {
 
     public CaracteristicasController() {
     }
+    
+    public int getLongMaxDescripcion(){
+        return Caracteristicas.LONG_MAX_DESCIPCION;
+    }
+    
+    public int getCDescripcion(){
+        return Caracteristicas.LONG_MAX_DESCIPCION/getFDescripcion();
+    }
+    
+    public int getFDescripcion(){
+        return 4;
+    }
+    
+    public int getLongMaxNombre(){
+        return Caracteristicas.LONG_MAX_NOMBRE;
+    }
+    
+    public int getCNombre(){
+        return Caracteristicas.LONG_MAX_NOMBRE/getFDescripcion();
+    }
+    
+    public int getFNombre(){
+        return 2;
+    }
 
     public Caracteristicas getSelected() {
         return selected;

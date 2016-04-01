@@ -12,10 +12,14 @@
             <h:form id="TareasEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tareasController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditTareasLabel_tarea}" for="tarea" />
-                        <p:inputText id="tarea" value="#{tareasController.selected.tarea}" title="#{bundle.EditTareasTitle_tarea}" required="true" requiredMessage="#{bundle.EditTareasRequiredMessage_tarea}"/>
                         <p:outputLabel value="#{bundle.EditTareasLabel_idTarea}" for="idTarea" />
-                        <p:inputText id="idTarea" value="#{tareasController.selected.idTarea}" title="#{bundle.EditTareasTitle_idTarea}" required="true" requiredMessage="#{bundle.EditTareasRequiredMessage_idTarea}"/>
+                        <p:inputText id="idTarea" value="#{tareasController.selected.idTarea}" disabled="true"
+                                     title="#{bundle.EditTareasTitle_idTarea}" required="true" 
+                                     requiredMessage="#{bundle.EditTareasRequiredMessage_idTarea}"/>
+                        <p:outputLabel value="#{bundle.EditTareasLabel_tarea}" for="tarea" />
+                        <p:inputText id="tarea" value="#{tareasController.selected.tarea}" 
+                                     title="#{bundle.EditTareasTitle_tarea}" required="true" 
+                                     requiredMessage="#{bundle.EditTareasRequiredMessage_tarea}"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{tareasController.update}" value="#{bundle.Save}" update="display,:TareasListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TareasEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="TareasEditDialog.hide()"/>
