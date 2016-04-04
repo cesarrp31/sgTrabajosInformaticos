@@ -19,18 +19,19 @@ import org.primefaces.component.picklist.PickList;
 import org.primefaces.model.DualListModel;
 
 @FacesConverter("converterDualListTecnicos")
+@ViewScoped
 public class ConverterDualListTecnicos implements Converter, Serializable {
 
     @Override
-    public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        return getObjectFromUIPickListComponent(component,value);
-    }
-
-        @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         if(value == null) return "";
         
         return value.toString();
+    }
+    
+    @Override
+    public Object getAsObject(FacesContext context, UIComponent component, String value) {
+        return getObjectFromUIPickListComponent(component,value);
     }
 
     private Tecnicos getObjectFromUIPickListComponent(UIComponent component, String value) {
@@ -39,7 +40,7 @@ public class ConverterDualListTecnicos implements Converter, Serializable {
             dualList = (DualListModel<Tecnicos>) ((PickList)component).getValue();
             Tecnicos patrimonio = getObjectFromList(dualList.getSource(),value);
             if(patrimonio==null){
-                    patrimonio = getObjectFromList(dualList.getTarget(),value);
+                patrimonio = getObjectFromList(dualList.getTarget(),value);
             }
 
             return patrimonio;
@@ -50,14 +51,15 @@ public class ConverterDualListTecnicos implements Converter, Serializable {
         }
     }
 
-    private Tecnicos getObjectFromList(final List<Tecnicos> lista, final String idBuscado) {
-        String id;
+    private Tecnicos getObjectFromList(final List<Tecnicos> lista, final String tecnicoBuscado) {
+        CharSequence cs;
         for(final Tecnicos tecnicos:lista){
-            id= String.valueOf(tecnicos.getIdTecnico());
-            if(id.equals(idBuscado)){
+            //id= String.valueOf(tecnicos.getIdTecnico());
+            cs= String.valueOf(tecnicos.getIdTecnico());
+            if(tecnicoBuscado.contains(cs)){
                 return tecnicos;
             }
         }
-        throw new RuntimeException("Objeto no encontrado: "+idBuscado);
+        throw new RuntimeException("Objeto no encontrado: "+tecnicoBuscado);
     }
 }

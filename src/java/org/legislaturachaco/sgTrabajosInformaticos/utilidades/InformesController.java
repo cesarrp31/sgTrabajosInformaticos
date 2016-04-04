@@ -41,12 +41,12 @@ public class InformesController implements Serializable {
 
     public void generateReport() {
         try {
-            List<Object> countries = getListCountriesDummy();
+            List<Object> listaDatos = getListCountriesDummy();
 
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("fecha", Calendar.getInstance().getTime().toString());
 
-            outputStream = JasperReportUtil.getOutputStreamFromReport(countries, map, getPathFileJasper());
+            outputStream = JasperReportUtil.getOutputStreamFromReport(listaDatos, map, getPathFileJasper());
             media = JasperReportUtil.getStreamContentFromOutputStream(outputStream, "application/pdf", getNameFilePdf());
         } catch (Exception e) {
             System.err.println(e.getLocalizedMessage());

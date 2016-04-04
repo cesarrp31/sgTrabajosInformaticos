@@ -5,7 +5,9 @@
  */
 package org.legislaturachaco.sgTrabajosInformaticos.utilidades;
 
+import java.io.Serializable;
 import java.util.List;
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -16,7 +18,8 @@ import org.primefaces.component.picklist.PickList;
 import org.primefaces.model.DualListModel;
 
 @FacesConverter("converterDualListPatrimonios")
-public class ConverterDualListPatrimonios implements Converter {
+@ViewScoped
+public class ConverterDualListPatrimonios implements Converter, Serializable {
 
         @Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
