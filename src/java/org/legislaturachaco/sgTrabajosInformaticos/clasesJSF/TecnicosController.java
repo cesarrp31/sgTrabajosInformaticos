@@ -142,9 +142,9 @@ public class TecnicosController implements Serializable {
      */
     public List<Tecnicos> obtenerTecnicosDisponibles(){
         List<Tecnicos> tecnicosDisponibles= new ArrayList();
-        for(Tecnicos pat: this.getItems()){
-            if((!pat.isBaja())){
-                tecnicosDisponibles.add(pat);
+        for(Tecnicos tec: this.getItems()){
+            if((!tec.isBaja())){
+                tecnicosDisponibles.add(tec);
             }
         }
         return tecnicosDisponibles;
