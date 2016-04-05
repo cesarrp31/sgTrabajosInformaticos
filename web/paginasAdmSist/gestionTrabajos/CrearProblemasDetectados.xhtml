@@ -9,87 +9,47 @@
     <ui:composition>
         <h:form id="CargaTrabajosProblemasForm">
             <p:panel header="#{bundle.CargaTrabajosAgregarProblemas}">
-                <p:dataTable id="datalistProDet" value="#{cargaTrabajos.listaProblemasDisponibles()}" var="item"
-                             selectionMode="single" selection="#{cargaTrabajos.problemaActual}"
-                             paginator="true"
-                             rowKey="#{item.idProblemaN3}"
-                             rows="5"
-                             sortMode="multiple" >                    
-                    
-                    <p:ajax event="rowSelect" 
-                            update="#{p:component('datalistProDet')} #{p:component('datalistProAgregados')} btnAgregarPro btnInicializarPro"/>
-                    <p:ajax event="rowUnselect" 
-                            update="#{p:component('datalistProDet')} #{p:component('datalistProAgregados')} btnAgregarPro btnInicializarPro"/>
-                    
-                    <p:column sortBy="#{item.problema}" filterBy="#{item.problema}" filterMatchMode="contains">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListProblemasN3Title_problema}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.problema}"/>
-                    </p:column>                        
-                    <p:column sortBy="#{item.idProblemaN2.problema}" filterBy="#{item.idProblemaN2.problema}" filterMatchMode="contains">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListProblemasN2Title_problema}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.idProblemaN2.problema}"/>
-                    </p:column>
-                    <p:column sortBy="#{item.idProblemaN2.idProblemaN1.problema}" filterBy="#{item.idProblemaN2.idProblemaN1.problema}" filterMatchMode="contains">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListProblemasN1Title_problema}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.idProblemaN2.idProblemaN1.problema}"/>
-                    </p:column>
-                    <f:facet name="footer">
-                        <p:commandButton id="btnAgregarPro" icon="ui-icon-plus"
-                                 value="#{bundle.CargaTrabajosBtnAgregarProblemas}" 
-                                 actionListener="#{cargaTrabajos.agregarProblemaSeleccionado()}" 
-                                 update="#{p:component('datalistProDet')} #{p:component('datalistProAgregados')}"
-                                 process="@this"/>
-                        <p:commandButton id="btnInicializarPro" icon="ui-icon-alert"
-                                 value="#{bundle.CargaTrabajosBtnInicializarListasProblemas}" 
-                                 actionListener="#{cargaTrabajos.inicializarListasProblemas()}" 
-                                 update="#{p:component('datalistProDet')} #{p:component('datalistProAgregados')}"
-                                 process="@this"/>
-                    </f:facet>
-                </p:dataTable>               
-            </p:panel>
-            <p:panel header="#{bundle.CargaTrabajosProblemasSeleccionados}">
-                    <p:dataTable id="datalistProAgregados" value="#{cargaTrabajos.problemasSeleccionados}" var="itemA"
-                             selectionMode="single" selection="#{cargaTrabajos.problemaAgregadoActual}"
-                                     paginator="true"
-                                     rowKey="#{itemA.idProblemaN3}"
-                                     rows="10"
-                                     sortMode="multiple">
-                    <p:ajax event="rowSelect" 
-                            update="#{p:component('datalistProDet')} #{p:component('datalistProAgregados')} btnRemoverPro"/>
-                    <p:ajax event="rowUnselect" 
-                            update="#{p:component('datalistProDet')} #{p:component('datalistProAgregados')} btnRemoverPro"/>
-                    <p:column sortBy="#{itemA.problema}" filterBy="#{itemA.problema}">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListProblemasN3Title_problema}"/>
-                        </f:facet>
-                        <h:outputText value="#{itemA.problema}"/>
-                    </p:column>                        
-                    <p:column sortBy="#{itemA.idProblemaN2.problema}" filterBy="#{itemA.idProblemaN2.problema}">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListProblemasN2Title_problema}"/>
-                        </f:facet>
-                        <h:outputText value="#{itemA.idProblemaN2.problema}"/>
-                    </p:column>
-                    <p:column sortBy="#{itemA.idProblemaN2.idProblemaN1.problema}" filterBy="#{itemA.idProblemaN2.idProblemaN1.problema}">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListProblemasN1Title_problema}"/>
-                        </f:facet>
-                        <h:outputText value="#{itemA.idProblemaN2.idProblemaN1.problema}"/>
-                    </p:column>
-                    <f:facet name="footer">
-                        <p:commandButton id="btnRemoverPro" icon="ui-icon-trash"
-                                 value="#{bundle.CargaTrabajosBtnRemoverProblemas}" 
-                                 actionListener="#{cargaTrabajos.removerProblemaSeleccionado()}" 
-                                 update="#{p:component('datalistProDet')} #{p:component('datalistProAgregados')}" 
-                                 process="@this"/>
-                    </f:facet>
-                </p:dataTable>                
+                <p:panelGrid rendered="#{problemasN3Controller.selected != null}">
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="#{bundle.CreateProblemasN2Label_idProblemaN1}" for="idProblemaN1" />
+                        </p:column>
+                        <p:column>
+                            <p:selectOneMenu id="idProblemaN1" value="#{problemasN3Controller.tempN1}" required="true" 
+                                     requiredMessage="#{bundle.EditProblemasN2RequiredMessage_idProblemaN1}">
+                                <f:selectItem itemLabel="#{bundle.SelectOneMessage}" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{problemasN1Controller.itemsAvailableSelectOne}"/>
+                                <p:ajax listener="#{problemasN3Controller.buscarProblemasN2()}" update="idProblemaN2"/>
+                            </p:selectOneMenu>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="#{bundle.CreateProblemasN3Label_idProblemaN2}" for="idProblemaN2" />
+                        </p:column>
+                        <p:column>
+                            <p:selectOneMenu id="idProblemaN2" value="#{problemasN3Controller.selected.idProblemaN2}" 
+                                     required="true" requiredMessage="#{bundle.EditProblemasN3RequiredMessage_idProblemaN2}">
+                                <f:selectItems value="#{problemasN3Controller.tempN1.problemasN2Collection}"
+                                               var="idProblemaN2Item"
+                                               itemValue="#{idProblemaN2Item}"/>
+                                <p:ajax listener="#{problemasN3Controller.setearIdProblemas()}"/>
+                            </p:selectOneMenu>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="#{bundle.CreateProblemasN3Label_problema}" for="problema" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="problema" value="#{problemasN3Controller.selected.problema}"
+                                 size="#{problemasN3Controller.obtenerLongMaxProblema()}"
+                                 maxlength="#{problemasN3Controller.obtenerLongMaxProblema()}"
+                                 title="#{bundle.CreateProblemasN3Title_problema}" required="true" 
+                                 requiredMessage="#{bundle.CreateProblemasN3RequiredMessage_problema}"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
             </p:panel>
         </h:form>
     </ui:composition>

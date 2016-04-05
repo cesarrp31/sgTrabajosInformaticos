@@ -17,7 +17,7 @@
             <h:form id="CargaAsignacionesListForm">
                 <p:panel header="#{bundle.CargaAsignacionesTitle}">
                     <h:panelGroup id="display">
-                        <p:panelGrid columns="2" rendered="#{cargaAsignaciones.asignacion != null}">
+                        <p:panelGrid columns="2" rendered="#{cargaAsignaciones.asignacion != null}" styleClass="panelCentrado">
                             <p:outputLabel value="#{bundle.CreateAsignacionesLabel_idNota}" for="idNota" />
                             <p:selectOneMenu id="idNota" value="#{asignacionesController.selected.idNota}" >
                                 <f:selectItems value="#{notasController.itemsAvailableSelectOne}"
@@ -46,7 +46,7 @@
                 <p:panel id="pnlExtras" header="#{bundle.CargaAsignacionesPatrimonios}">
                      <p:tabView activeIndex="">
                         <p:tab title="#{bundle.CargaTrabajosPatrimoniosDisponibles}">
-                            <h:panelGrid id="asigXpatr" columns="2" cellpadding="10">
+                            <h:panelGrid id="asigXpatr" columns="2" cellpadding="10" styleClass="panelCentrado">
                                 <ui:include src="/paginasAdmSist/gestionAsignaciones/CrearPatrimoniosXAsignacion.xhtml"/>
                             </h:panelGrid>
                         </p:tab>

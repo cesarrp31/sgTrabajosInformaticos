@@ -16,48 +16,56 @@
             <h:form id="CargaTrabajosListForm">
                 <p:panel header="#{bundle.CargaTrabajosTitle}">
                     <h:panelGroup id="display">
-                        <p:panelGrid>
+                        <p:panelGrid styleClass="panelCentrado">
                             <p:row>
                                 <p:column width="200px">
-                                    <p:outputLabel value="#{bundle.CreateTrabajosLabel_nroFicha}" for="nroFicha"/>                                                                      
-                                    <p:inputText id="nroFicha" value="#{cargaTrabajos.trabajo.nroFicha}" size="10"
+                                    <div>
+                                        <p:outputLabel value="#{bundle.CreateTrabajosLabel_nroFicha}" for="nroFicha"/>
+                                    </div>
+                                    <div>
+                                        <p:inputText id="nroFicha" value="#{cargaTrabajos.trabajo.nroFicha}" size="10"
                                                  title="#{bundle.CreateTrabajosTitle_nroFicha}" required="true" 
                                                  requiredMessage="#{bundle.CreateTrabajosRequiredMessage_nroFicha}"/>
-
+                                    </div>
                                 </p:column>
                                 <p:column width="200px">
-                                    <p:outputLabel value="#{bundle.CreateTrabajosLabel_idNota}" for="idNota"/>
-                                    <p:selectOneMenu id="idNota" value="#{cargaTrabajos.trabajo.idNota}" style="width:150px">
-                                        <f:selectItems value="#{notasController.itemsAvailableSelectOne}"
+                                    <div>
+                                        <p:outputLabel value="#{bundle.CreateTrabajosLabel_idNota}" for="idNota"/>
+                                    </div>
+                                    <div>
+                                        <p:selectOneMenu id="idNota" value="#{cargaTrabajos.trabajo.idNota}" style="width:150px">
+                                            <f:selectItems value="#{notasController.itemsAvailableSelectOne}"
                                                        var="idNotaItem"
                                                        itemValue="#{idNotaItem}"/>
-                                    </p:selectOneMenu>
+                                        </p:selectOneMenu>
+                                    </div>
                                 </p:column>
                                 <p:column width="200px">
-                                    <p:outputLabel value="#{bundle.CreateTrabajosLabel_fechaComienzo}"/>
-                                    <p:calendar id="fechaComienzo" pattern="dd/MM/yyyy HH:mm:ss" style="width:150px"
+                                    <div>
+                                        <p:outputLabel value="#{bundle.CreateTrabajosLabel_fechaComienzo}"/>
+                                    </div>
+                                    <div>
+                                        <p:calendar id="fechaComienzo" pattern="dd/MM/yyyy HH:mm:ss" style="width:150px"
                                                 value="#{cargaTrabajos.trabajo.fechaComienzo}" 
                                                 title="#{bundle.EditTrabajosTitle_fechaComienzo}" required="true" 
                                                 requiredMessage="#{bundle.EditTrabajosRequiredMessage_fechaComienzo}" showOn="button"/>
+                                    </div>
                                 </p:column>
                                 <p:column width="200px">
-                                    <p:outputLabel value="#{bundle.CreateTrabajosLabel_idDependencia}"/>
-                                    <p:selectOneMenu id="idDependencia" value="#{cargaTrabajos.trabajo.idDependencia}" 
+                                    <div>
+                                        <p:outputLabel value="#{bundle.CreateTrabajosLabel_idDependencia}"/>
+                                    </div>
+                                    <div>
+                                        <p:selectOneMenu id="idDependencia" value="#{cargaTrabajos.trabajo.idDependencia}" 
                                                      required="true" filter="true" filterMatchMode="contains"
-                                                     requiredMessage="#{bundle.EditTrabajosRequiredMessage_idDependencia}">
-                                        <f:selectItems value="#{dependenciasController.itemsAvailableSelectOne}"
+                                                     requiredMessage="#{bundle.EditTrabajosRequiredMessage_idDependencia}"
+                                                     style="width: 250px">
+                                            <f:selectItems value="#{dependenciasController.itemsAvailableSelectOne}"
                                                        var="idDependenciaItem"
-                                                       itemValue="#{idDependenciaItem}"/>
-                                    </p:selectOneMenu>
-                                </p:column>
-                                <p:column width="200px">
-                                    <p:outputLabel value="#{bundle.CreateTrabajosLabel_idPrioridad}"/>
-                                    <p:selectOneMenu id="idPrioridad" value="#{cargaTrabajos.trabajo.idPrioridad}" required="true" 
-                                                     requiredMessage="#{bundle.EditTrabajosRequiredMessage_idPrioridad}">
-                                        <f:selectItems value="#{prioridadesController.itemsAvailableSelectOne}"
-                                                       var="idPrioridadItem"
-                                                       itemValue="#{idPrioridadItem}"/>
-                                    </p:selectOneMenu>
+                                                       itemValue="#{idDependenciaItem}"
+                                                       itemLabel="#{idDependenciaItem.dependencia}"/>
+                                        </p:selectOneMenu>
+                                    </div>
                                 </p:column>
                             </p:row>
                             <p:row>
@@ -74,48 +82,64 @@
                             </p:row>
                             <p:row>
                                 <p:column width="200px">
-                                    <p:panel>
+                                    <div>
                                         <p:outputLabel value="#{bundle.CreateTrabajosLabel_usuarioIniciador}" for="usuarioIniciador" />
+                                    </div>
+                                    <div>
                                         <p:selectOneMenu id="usuarioIniciador" value="#{cargaTrabajos.trabajo.usuarioIniciador}" required="true" 
                                                          requiredMessage="#{bundle.EditTrabajosRequiredMessage_usuarioIniciador}">
                                             <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"
                                                            var="usuarioIniciadorItem"
                                                            itemValue="#{usuarioIniciadorItem}"/>
                                         </p:selectOneMenu>
-                                    </p:panel>                                    
+                                    </div>
                                 </p:column>
                                 <p:column width="200px">
-                                    <p:panel>
+                                    <div>
                                         <p:outputLabel value="#{bundle.CreateTrabajosLabel_fechaFin}" for="fechaFin" />
+                                    </div>
+                                    <div>
                                         <p:calendar id="fechaFin" pattern="dd/MM/yyyy HH:mm:ss" disabled="true"
                                                     value="#{cargaTrabajos.trabajo.fechaFin}" 
-                                                    title="#{bundle.EditTrabajosTitle_fechaFin}"  showOn="button"/>
-                                    </p:panel>                                    
+                                                    title="#{bundle.EditTrabajosTitle_fechaFin}" showOn="button"/>
+                                    </div>
+                                </p:column>
+                                <p:column width="200px">
+                                    <div>
+                                        <p:outputLabel value="#{bundle.CreateTrabajosLabel_idPrioridad}"/>
+                                    </div>
+                                    <div>
+                                        <p:selectOneMenu id="idPrioridad" value="#{cargaTrabajos.trabajo.idPrioridad}" required="true" 
+                                                     requiredMessage="#{bundle.EditTrabajosRequiredMessage_idPrioridad}"
+                                                     style="width: 250px">
+                                            <f:selectItems value="#{prioridadesController.itemsAvailableSelectOne}"
+                                                       var="idPrioridadItem"
+                                                       itemValue="#{idPrioridadItem}"
+                                                       itemLabel="#{idPrioridadItem.prioridad}"/>
+                                    </p:selectOneMenu>
+                                    </div>
                                 </p:column>
                             </p:row>
                         </p:panelGrid>
-                   </h:panelGroup>    
+                   </h:panelGroup>
                 </p:panel>
                 <p:panel id="pnlExtras" header="#{bundle.CargaTrabajosExtras}">
                      <p:tabView activeIndex="">
                         <p:tab title="#{bundle.CargaTrabajosPatrimoniosDisponibles}">
-                            <h:panelGrid columns="2" cellpadding="10">
+                            <h:panelGrid columns="2" cellpadding="10" styleClass="panelCentrado">
                                 <ui:include src="/paginasAdmSist/gestionTrabajos/CrearPatrimoniosXTrabajo.xhtml"/>
                             </h:panelGrid>
                         </p:tab>
-                        
-                        <p:tab title="#{bundle.CargaTrabajosTecnicosDisponibles}">
-                            <h:panelGrid columns="2" cellpadding="10">
+                        <p:tab title="#{bundle.CargaTrabajosTecnicosDisponibles}" >
+                            <h:panelGrid columns="2" cellpadding="10" styleClass="panelCentrado">
                                 <ui:include src="/paginasAdmSist/gestionTrabajos/CrearTecnicosXTrabajo.xhtml"/>
                             </h:panelGrid>
                         </p:tab>
-                        <!--
-                         <p:tab title="#{bundle.CargaTrabajosProblemasDetectados}">
-                            <h:panelGrid columns="2" cellpadding="10">
+                        <p:tab title="#{bundle.CargaTrabajosProblemasDetectados}" >
+                            <h:panelGrid columns="2" cellpadding="10" styleClass="panelCentrado">
                                 <ui:include src="/paginasAdmSist/gestionTrabajos/CrearProblemasDetectados.xhtml"/>
                             </h:panelGrid>
                         </p:tab>
-                        -->
                     </p:tabView>
                 </p:panel>
                 <p:panel>

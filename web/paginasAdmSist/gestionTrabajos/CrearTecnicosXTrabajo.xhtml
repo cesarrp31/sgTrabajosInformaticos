@@ -13,7 +13,7 @@
             <p:pickList id="TecXTrabPickList" value="#{cargaTrabajos.listaDualTecnicos}" 
                         var="tecnico" converter="converterDualListTecnicos"
                         itemValue="#{tecnico}" itemLabel="#{tecnico.apellido}, #{tecnico.nombre}" 
-                        showCheckbox="true" responsive="true"
+                        showCheckbox="true" responsive="true" style="width:600px !important;"
                         showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains">
 
                 <f:facet name="sourceCaption">#{bundle.Disponibles}</f:facet>
