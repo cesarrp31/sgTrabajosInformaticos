@@ -174,7 +174,7 @@ public class Tecnicos implements Serializable {
 
     @Override
     public String toString() {
-        return "(id: " + apellido + ", " + nombre + ". " + baja + ")";
+        return "(id: "+idTecnico+ ", " + apellido + ", " + nombre + ". " + baja + ")";
     }
     
 }

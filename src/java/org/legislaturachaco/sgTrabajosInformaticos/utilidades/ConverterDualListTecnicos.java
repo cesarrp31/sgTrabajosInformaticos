@@ -52,12 +52,15 @@ public class ConverterDualListTecnicos implements Converter, Serializable {
     }
 
     private Tecnicos getObjectFromList(final List<Tecnicos> lista, final String tecnicoBuscado) {
+        System.out.println("Buscando: "+tecnicoBuscado);
         CharSequence cs;
-        for(final Tecnicos tecnicos:lista){
-            //id= String.valueOf(tecnicos.getIdTecnico());
-            cs= String.valueOf(tecnicos.getIdTecnico());
-            if(tecnicoBuscado.contains(cs)){
-                return tecnicos;
+        int idBuscado;
+        for(final Tecnicos tecnico:lista){
+            idBuscado= Integer.parseInt(tecnicoBuscado);
+            System.out.println("---"+tecnicoBuscado+". Actual: "+tecnico);
+            if(idBuscado == tecnico.getIdTecnico()){
+                System.out.println("-------------"+tecnicoBuscado+". Encontrado: "+tecnico);
+                return tecnico;
             }
         }
         throw new RuntimeException("Objeto no encontrado: "+tecnicoBuscado);
