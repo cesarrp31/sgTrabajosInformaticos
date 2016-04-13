@@ -52,6 +52,7 @@
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ProblemasN2ViewForm" oncomplete="PF('ProblemasN2ViewDialog').show()" disabled="#{empty problemasN2Controller.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ProblemasN2EditForm" oncomplete="PF('ProblemasN2EditDialog').show()" disabled="#{empty problemasN2Controller.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{problemasN2Controller.destroy}" update=":growl,datalist" disabled="#{empty problemasN2Controller.selected}"/>
+                            <ui:include src="/zComponentesGenerales/plantillaExporter.xhtml"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

@@ -46,6 +46,7 @@
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TipoNotaViewForm" oncomplete="PF('TipoNotaViewDialog').show()" disabled="#{empty tipoNotaController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TipoNotaEditForm" oncomplete="PF('TipoNotaEditDialog').show()" disabled="#{empty tipoNotaController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{tipoNotaController.destroy}" update=":growl,datalist" disabled="#{empty tipoNotaController.selected}"/>
+                            <ui:include src="/zComponentesGenerales/plantillaExporter.xhtml"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

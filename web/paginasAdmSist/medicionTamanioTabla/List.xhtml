@@ -54,6 +54,7 @@
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":MedicionTamanioTablaViewForm" oncomplete="PF('MedicionTamanioTablaViewDialog').show()" disabled="#{empty medicionTamanioTablaController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":MedicionTamanioTablaEditForm" oncomplete="PF('MedicionTamanioTablaEditDialog').show()" disabled="#{empty medicionTamanioTablaController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{medicionTamanioTablaController.destroy}" update=":growl,datalist" disabled="#{empty medicionTamanioTablaController.selected}"/>
+                            <ui:include src="/zComponentesGenerales/plantillaExporter.xhtml"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

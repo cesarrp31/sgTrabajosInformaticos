@@ -13,7 +13,9 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{encargadosController.selected != null}">
                         <p:outputLabel value="#{bundle.EditEncargadosLabel_idEncargado}" for="idEncargado" />
-                        <p:inputText id="idEncargado" value="#{encargadosController.selected.idEncargado}" title="#{bundle.EditEncargadosTitle_idEncargado}" required="true" requiredMessage="#{bundle.EditEncargadosRequiredMessage_idEncargado}"/>
+                        <p:inputText id="idEncargado" value="#{encargadosController.selected.idEncargado}" 
+                                     title="#{bundle.EditEncargadosTitle_idEncargado}" required="true" disabled="true"
+                                     requiredMessage="#{bundle.EditEncargadosRequiredMessage_idEncargado}"/>
                         <p:outputLabel value="#{bundle.EditEncargadosLabel_apellido}" for="apellido" />
                         <p:inputText id="apellido" value="#{encargadosController.selected.apellido}" title="#{bundle.EditEncargadosTitle_apellido}" required="true" requiredMessage="#{bundle.EditEncargadosRequiredMessage_apellido}"/>
                         <p:outputLabel value="#{bundle.EditEncargadosLabel_nombre}" for="nombre" />

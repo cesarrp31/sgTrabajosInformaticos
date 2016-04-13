@@ -39,3 +39,13 @@
 .panelCentrado{
     margin: 0 auto;
 }
+
+.colAbr {
+    text-align: center;
+    width: 120px;
+}
+
+.colApellidoNombre {
+    text-align: left;
+    width: 200px;
+}

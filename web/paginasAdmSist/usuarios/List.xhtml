@@ -70,6 +70,7 @@
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":UsuariosViewForm" oncomplete="PF('UsuariosViewDialog').show()" disabled="#{empty usuariosController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":UsuariosEditForm" oncomplete="PF('UsuariosEditDialog').show()" disabled="#{empty usuariosController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{usuariosController.destroy}" update=":growl,datalist" disabled="#{empty usuariosController.selected}"/>
+                            <ui:include src="/zComponentesGenerales/plantillaExporter.xhtml"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

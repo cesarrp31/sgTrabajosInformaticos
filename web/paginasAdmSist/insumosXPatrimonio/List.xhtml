@@ -74,6 +74,7 @@
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":InsumosXPatrimonioViewForm" oncomplete="PF('InsumosXPatrimonioViewDialog').show()" disabled="#{empty insumosXPatrimonioController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":InsumosXPatrimonioEditForm" oncomplete="PF('InsumosXPatrimonioEditDialog').show()" disabled="#{empty insumosXPatrimonioController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{insumosXPatrimonioController.destroy}" update=":growl,datalist" disabled="#{empty insumosXPatrimonioController.selected}"/>
+                            <ui:include src="/zComponentesGenerales/plantillaExporter.xhtml"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

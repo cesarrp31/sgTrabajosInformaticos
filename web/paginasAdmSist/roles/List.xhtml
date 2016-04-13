@@ -52,6 +52,7 @@
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":RolesViewForm" oncomplete="PF('RolesViewDialog').show()" disabled="#{empty rolesController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":RolesEditForm" oncomplete="PF('RolesEditDialog').show()" disabled="#{empty rolesController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{rolesController.destroy}" update=":growl,datalist" disabled="#{empty rolesController.selected}"/>
+                            <ui:include src="/zComponentesGenerales/plantillaExporter.xhtml"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

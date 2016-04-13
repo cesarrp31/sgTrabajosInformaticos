@@ -58,6 +58,7 @@
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":MedicionXTablaViewForm" oncomplete="PF('MedicionXTablaViewDialog').show()" disabled="#{empty medicionXTablaController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":MedicionXTablaEditForm" oncomplete="PF('MedicionXTablaEditDialog').show()" disabled="#{empty medicionXTablaController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{medicionXTablaController.destroy}" update=":growl,datalist" disabled="#{empty medicionXTablaController.selected}"/>
+                            <ui:include src="/zComponentesGenerales/plantillaExporter.xhtml"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

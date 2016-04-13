@@ -29,17 +29,23 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
+                        <p:column styleClass="colId">
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDependenciasTitle_idEncargado}"/>
+                                <h:outputText value="#{bundle.ListDependenciasTitle_idDependencia}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idEncargado.apellido}"/>
+                            <h:outputText value="#{item.idDependencia}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.dependencia}" filterMatchMode="contains">
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDependenciasTitle_observaciones}"/>
+                                <h:outputText value="#{bundle.ListDependenciasTitle_dependencia}"/>
                             </f:facet>
-                            <h:outputText value="#{item.observaciones}"/>
+                            <h:outputText value="#{item.dependencia}"/>
+                        </p:column>
+                        <p:column styleClass="colAbr">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDependenciasTitle_nombreCorto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreCorto}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -47,29 +53,24 @@
                             </f:facet>
                             <h:outputText value="#{item.dependeDe.dependencia}"/>
                         </p:column>
-                        <p:column>
+                        <p:column styleClass="colApellidoNombre">
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDependenciasTitle_idDependencia}"/>
+                                <h:outputText value="#{bundle.ListDependenciasTitle_idEncargado}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idDependencia}"/>
+                            <h:outputText value="#{item.idEncargado.apellido} #{item.idEncargado.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDependenciasTitle_dependencia}"/>
+                                <h:outputText value="#{bundle.ListDependenciasTitle_observaciones}"/>
                             </f:facet>
-                            <h:outputText value="#{item.dependencia}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDependenciasTitle_nombreCorto}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nombreCorto}"/>
+                            <h:outputText value="#{item.observaciones}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{dependenciasController.prepareCreate}" update=":DependenciasCreateForm" oncomplete="PF('DependenciasCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DependenciasViewForm" oncomplete="PF('DependenciasViewDialog').show()" disabled="#{empty dependenciasController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DependenciasEditForm" oncomplete="PF('DependenciasEditDialog').show()" disabled="#{empty dependenciasController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{dependenciasController.destroy}" update=":growl,datalist" disabled="#{empty dependenciasController.selected}"/>
+                            <ui:include src="/zComponentesGenerales/plantillaExporter.xhtml"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

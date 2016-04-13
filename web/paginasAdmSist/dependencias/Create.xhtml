@@ -8,32 +8,42 @@
 
     <ui:composition>
 
-        <p:dialog id="DependenciasCreateDlg" widgetVar="DependenciasCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDependenciasTitle}">
+        <p:dialog id="DependenciasCreateDlg" widgetVar="DependenciasCreateDialog" modal="true" resizable="false" 
+                  appendTo="@(body)" header="#{bundle.CreateDependenciasTitle}">
             <h:form id="DependenciasCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{dependenciasController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateDependenciasLabel_idEncargado}" for="idEncargado" />
-                        <p:selectOneMenu id="idEncargado" value="#{dependenciasController.selected.idEncargado}" required="true" requiredMessage="#{bundle.EditDependenciasRequiredMessage_idEncargado}">
-                            <f:selectItems value="#{encargadosController.itemsAvailableSelectOne}"
-                                           var="idEncargadoItem"
-                                           itemValue="#{idEncargadoItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateDependenciasLabel_observaciones}" for="observaciones" />
-                        <p:inputText id="observaciones" value="#{dependenciasController.selected.observaciones}" title="#{bundle.CreateDependenciasTitle_observaciones}" />
+                        <p:outputLabel value="#{bundle.CreateDependenciasLabel_dependencia}" for="dependencia" />
+                        <p:inputText id="dependencia" value="#{dependenciasController.selected.dependencia}" 
+                                     title="#{bundle.CreateDependenciasTitle_dependencia}" required="true" 
+                                     requiredMessage="#{bundle.CreateDependenciasRequiredMessage_dependencia}"/>
+                        <p:outputLabel value="#{bundle.CreateDependenciasLabel_nombreCorto}" for="nombreCorto" />
+                        <p:inputText id="nombreCorto" value="#{dependenciasController.selected.nombreCorto}" 
+                                     title="#{bundle.CreateDependenciasTitle_nombreCorto}" />
                         <p:outputLabel value="#{bundle.CreateDependenciasLabel_dependeDe}" for="dependeDe" />
-                        <p:selectOneMenu id="dependeDe" value="#{dependenciasController.selected.dependeDe}" required="true" requiredMessage="#{bundle.EditDependenciasRequiredMessage_dependeDe}">
+                        <p:selectOneMenu id="dependeDe" value="#{dependenciasController.selected.dependeDe}" required="true" 
+                                         requiredMessage="#{bundle.EditDependenciasRequiredMessage_dependeDe}"
+                                         filter="true" filterMatchMode="contains">
                             <f:selectItems value="#{dependenciasController.itemsAvailableSelectOne}"
                                            var="dependeDeItem"
                                            itemValue="#{dependeDeItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateDependenciasLabel_idDependencia}" for="idDependencia" />
-                        <p:inputText id="idDependencia" value="#{dependenciasController.selected.idDependencia}" title="#{bundle.CreateDependenciasTitle_idDependencia}" required="true" requiredMessage="#{bundle.CreateDependenciasRequiredMessage_idDependencia}"/>
-                        <p:outputLabel value="#{bundle.CreateDependenciasLabel_dependencia}" for="dependencia" />
-                        <p:inputText id="dependencia" value="#{dependenciasController.selected.dependencia}" title="#{bundle.CreateDependenciasTitle_dependencia}" required="true" requiredMessage="#{bundle.CreateDependenciasRequiredMessage_dependencia}"/>
-                        <p:outputLabel value="#{bundle.CreateDependenciasLabel_nombreCorto}" for="nombreCorto" />
-                        <p:inputText id="nombreCorto" value="#{dependenciasController.selected.nombreCorto}" title="#{bundle.CreateDependenciasTitle_nombreCorto}" />
+                        <p:outputLabel value="#{bundle.CreateDependenciasLabel_idEncargado}" for="idEncargado" />
+                        <p:selectOneMenu id="idEncargado" value="#{dependenciasController.selected.idEncargado}" required="true" 
+                                         requiredMessage="#{bundle.EditDependenciasRequiredMessage_idEncargado}"
+                                         filter="true" filterMatchMode="contains">
+                            <f:selectItems value="#{encargadosController.itemsAvailableSelectOne}"
+                                           var="idEncargadoItem"
+                                           itemLabel="#{idEncargadoItem.apellido} #{idEncargadoItem.nombre}"
+                                           itemValue="#{idEncargadoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDependenciasLabel_observaciones}" for="observaciones" />
+                        <p:inputText id="observaciones" value="#{dependenciasController.selected.observaciones}" 
+                                     title="#{bundle.CreateDependenciasTitle_observaciones}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{dependenciasController.create}" value="#{bundle.Save}" update="display,:DependenciasListForm:datalist,:growl" oncomplete="handleSubmit(args,'DependenciasCreateDialog');"/>
+                    <p:commandButton actionListener="#{dependenciasController.create}" value="#{bundle.Save}" 
+                                     update="display,:DependenciasListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args,'DependenciasCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="DependenciasCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

@@ -12,8 +12,6 @@
             <h:form id="EncargadosCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{encargadosController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateEncargadosLabel_idEncargado}" for="idEncargado" />
-                        <p:inputText id="idEncargado" value="#{encargadosController.selected.idEncargado}" title="#{bundle.CreateEncargadosTitle_idEncargado}" required="true" requiredMessage="#{bundle.CreateEncargadosRequiredMessage_idEncargado}"/>
                         <p:outputLabel value="#{bundle.CreateEncargadosLabel_apellido}" for="apellido" />
                         <p:inputText id="apellido" value="#{encargadosController.selected.apellido}" title="#{bundle.CreateEncargadosTitle_apellido}" required="true" requiredMessage="#{bundle.CreateEncargadosRequiredMessage_apellido}"/>
                         <p:outputLabel value="#{bundle.CreateEncargadosLabel_nombre}" for="nombre" />

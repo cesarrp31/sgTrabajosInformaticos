@@ -12,18 +12,19 @@
             <h:form id="DependenciasViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{dependenciasController.selected != null}">
-                        <h:outputText value="#{bundle.ViewDependenciasLabel_idEncargado}"/>
-                        <h:outputText value="#{dependenciasController.selected.idEncargado}" title="#{bundle.ViewDependenciasTitle_idEncargado}"/>
-                        <h:outputText value="#{bundle.ViewDependenciasLabel_observaciones}"/>
-                        <h:outputText value="#{dependenciasController.selected.observaciones}" title="#{bundle.ViewDependenciasTitle_observaciones}"/>
-                        <h:outputText value="#{bundle.ViewDependenciasLabel_dependeDe}"/>
-                        <h:outputText value="#{dependenciasController.selected.dependeDe}" title="#{bundle.ViewDependenciasTitle_dependeDe}"/>
                         <h:outputText value="#{bundle.ViewDependenciasLabel_idDependencia}"/>
                         <h:outputText value="#{dependenciasController.selected.idDependencia}" title="#{bundle.ViewDependenciasTitle_idDependencia}"/>
                         <h:outputText value="#{bundle.ViewDependenciasLabel_dependencia}"/>
                         <h:outputText value="#{dependenciasController.selected.dependencia}" title="#{bundle.ViewDependenciasTitle_dependencia}"/>
                         <h:outputText value="#{bundle.ViewDependenciasLabel_nombreCorto}"/>
                         <h:outputText value="#{dependenciasController.selected.nombreCorto}" title="#{bundle.ViewDependenciasTitle_nombreCorto}"/>
+                        <h:outputText value="#{bundle.ViewDependenciasLabel_dependeDe}"/>
+                        <h:outputText value="#{dependenciasController.selected.dependeDe.dependencia}" title="#{bundle.ViewDependenciasTitle_dependeDe}"/>
+                        <h:outputText value="#{bundle.ViewDependenciasLabel_idEncargado}"/>
+                        <h:outputText value="#{dependenciasController.selected.idEncargado.apellido}, #{dependenciasController.selected.idEncargado.nombre}" 
+                                      title="#{bundle.ViewDependenciasTitle_idEncargado}"/>
+                        <h:outputText value="#{bundle.ViewDependenciasLabel_observaciones}"/>
+                        <h:outputText value="#{dependenciasController.selected.observaciones}" title="#{bundle.ViewDependenciasTitle_observaciones}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="DependenciasViewDialog.hide()"/>
                 </h:panelGroup>

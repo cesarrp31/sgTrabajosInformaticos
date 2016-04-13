@@ -46,6 +46,7 @@
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TipoInsumoViewForm" oncomplete="PF('TipoInsumoViewDialog').show()" disabled="#{empty tipoInsumoController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TipoInsumoEditForm" oncomplete="PF('TipoInsumoEditDialog').show()" disabled="#{empty tipoInsumoController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{tipoInsumoController.destroy}" update=":growl,datalist" disabled="#{empty tipoInsumoController.selected}"/>
+                            <ui:include src="/zComponentesGenerales/plantillaExporter.xhtml"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
