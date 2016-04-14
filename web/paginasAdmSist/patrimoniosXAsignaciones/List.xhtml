@@ -17,6 +17,7 @@
             <h:form id="PatrimoniosXAsignacionesListForm">
                 <p:panel header="#{bundle.ListPatrimoniosXAsignacionesTitle}">
                     <p:dataTable id="datalist" value="#{patrimoniosXAsignacionesController.items}" var="item"
+                                 widgetVar="patXAsigTabla"
                                  selectionMode="single" selection="#{patrimoniosXAsignacionesController.selected}"
                                  paginator="true"
                                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
@@ -24,28 +25,36 @@
                                  rowKey="#{item.idPatXAsig}"
                                  rows="20"
                                  rowsPerPageTemplate="20,30"
+                                 sortMode="multiple"
                                  >
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
+                        <p:column styleClass="colId">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPatrimoniosXAsignacionesTitle_idPatXAsig}"/>
                             </f:facet>
                             <h:outputText value="#{item.idPatXAsig}"/>
                         </p:column>
-                        <p:column>
+                        <p:column styleClass="colId">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPatrimoniosXAsignacionesTitle_idAsignacion}"/>
                             </f:facet>
                             <h:outputText value="#{item.idAsignacion}"/>
                         </p:column>
-                        <p:column>
+                        <p:column styleClass="colIdPatrimonio">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPatrimoniosXAsignacionesTitle_idPatrimonio}"/>
                             </f:facet>
                             <h:outputText value="#{item.idPatrimonio}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.idAsignacion.idDependencia.dependencia}" 
+                                  filterBy="#{item.idAsignacion.idDependencia.dependencia}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPatrimoniosXAsignacionesTitle_Dependencia}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idAsignacion.idDependencia.dependencia}"/>
                         </p:column>
                         <p:column sortBy="#{item.fechaDesde}">
                             <f:facet name="header">
@@ -58,7 +67,7 @@
                         <p:column headerText="#{bundle.ListPatrimoniosXAsignacionesTitle_prestado}" styleClass="colBooleano"
                                   filterBy="#{item.prestado}" filterMatchMode="equals">
                             <f:facet name="filter">
-                                <p:selectOneButton onchange="PF('patrimoniosTable').filter()">
+                                <p:selectOneButton onchange="PF('patXAsigTabla').filter()">
                                     <f:converter converterId="javax.faces.Boolean" />
                                     <f:selectItem itemLabel="Todos" itemValue="" />
                                     <f:selectItem itemLabel="S" itemValue="true" />
