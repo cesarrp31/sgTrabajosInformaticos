@@ -29,26 +29,26 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
+                        <p:column styleClass="colIdString">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRolesTitle_idRol}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idRol}"/>
+                        </p:column>
+                        <p:column styleClass="colIdString">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRolesTitle_rol}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.rol}"/>
+                        </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListRolesTitle_descripcion}"/>
                             </f:facet>
                             <h:outputText value="#{item.descripcion}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRolesTitle_idRol}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idRol}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRolesTitle_rol}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.rol}"/>
-                        </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{rolesController.prepareCreate}" update=":RolesCreateForm" oncomplete="PF('RolesCreateDialog').show()"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus" value="#{bundle.Create}" actionListener="#{rolesController.prepareCreate}" update=":RolesCreateForm" oncomplete="PF('RolesCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":RolesViewForm" oncomplete="PF('RolesViewDialog').show()" disabled="#{empty rolesController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":RolesEditForm" oncomplete="PF('RolesEditDialog').show()" disabled="#{empty rolesController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{rolesController.destroy}" update=":growl,datalist" disabled="#{empty rolesController.selected}"/>

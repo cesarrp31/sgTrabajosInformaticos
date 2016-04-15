@@ -31,6 +31,12 @@
 
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPatrimoniosXTrabajosTitle_idPatrimonioXTrabajo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPatrimonioXTrabajo}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.idPatrimonio}" filterMatchMode="contains">
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPatrimoniosXTrabajosTitle_idPatrimonio}"/>
                             </f:facet>
                             <h:outputText value="#{item.idPatrimonio}"/>
@@ -43,9 +49,19 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPatrimoniosXTrabajosTitle_idPatrimonioXTrabajo}"/>
+                                <h:outputText value="#{bundle.ListPatrimoniosXTrabajosTitle_idTrabajo}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idPatrimonioXTrabajo}"/>
+                            <h:outputText value="#{item.idTrabajo.fechaComienzo}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPatrimoniosXTrabajosTitle_idTrabajo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idTrabajo.fechaFin}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{patrimoniosXTrabajosController.prepareCreate}" update=":PatrimoniosXTrabajosCreateForm" oncomplete="PF('PatrimoniosXTrabajosCreateDialog').show()"/>
