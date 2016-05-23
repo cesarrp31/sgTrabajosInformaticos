@@ -14,10 +14,12 @@ import java.util.Hashtable;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.naming.AuthenticationException;
 import javax.naming.Context;
 import javax.naming.NamingException;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
+import javax.naming.ldap.LdapContext;
 import javax.servlet.http.HttpSession;
 import org.primefaces.context.RequestContext;
  
@@ -28,10 +30,11 @@ import org.primefaces.context.RequestContext;
 @ManagedBean(name = "loginBean")
 @SessionScoped
 public class LoginBean implements Serializable {
-    private String nombre;
+    private String nombre, nombreCompleto;
     private String clave;
     private boolean logeado = false;
     private static final String INICIO="/login.xhtml";
+    private static final String PAGINA_SIGUIENTE= "/paginasAdmSist/indexAdmSist.xhtml?faces-redirect=true";
     
     public boolean estaLogeado() {
         return logeado;
@@ -48,18 +51,25 @@ public class LoginBean implements Serializable {
     public void setClave(String clave) {
         this.clave = clave;
     }
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
+    }
+    
     public String login() {
         String usu= "admin";
-        String sigPagina= INICIO;
+        String grupo= "Soportecnicos";
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
-            /*
+        /*
         if(consultaDominio()){
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@", nombre);
             System.out.println("Inicio sesión: "+nombre);
             sigPagina= "/paginasAdmSist/indexAdmSist.xhtml?faces-redirect=true";
         }*/
-        
+        /*
         if (nombre != null && nombre.equals(usu) && 
                     clave != null && clave.equals("admin")) {
                 logeado = true;
@@ -70,16 +80,48 @@ public class LoginBean implements Serializable {
             logeado = false;
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
             "Credenciales no válidas");
+        }*/
+        logeado = false;
+        msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
+            "Credenciales no válidas");
+        try{
+            Usuario u = ConexionLDap.getUser(nombre, clave);
+            if(u.perteneceAGrupo(grupo)){
+                nombreCompleto= u.getCommonName();
+                logeado = true;
+                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@", nombre);
+                    System.out.println("Inicio sesión: "+nombre);
+            }else{
+                logeado = false;
+                msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
+                "No pertenece a grupo");
+                //throw new RuntimeException(nombre+" no pertenece a grupo"); 
+            }
+            
+        } catch (AuthenticationException ex) {
+            manejarErrores(ex, "Error de autenticación");
+        } catch (Exception ex) {
+            manejarErrores(ex, ex.getLocalizedMessage());
         }
-        
+             
         FacesContext.getCurrentInstance().addMessage(null, msg);
         context.addCallbackParam("estaLogeado", logeado);
-        
-        if (logeado)
-            context.addCallbackParam("view", sigPagina);
-        
-        return sigPagina;
-    } 
+        String sig;
+        if (logeado){
+            context.addCallbackParam("view", PAGINA_SIGUIENTE);
+            sig= PAGINA_SIGUIENTE;
+        }else{
+            context.addCallbackParam("view", INICIO);
+            sig= INICIO;
+        }
+        return sig;
+    }
+    
+    private void manejarErrores(Exception ex, String msg){
+        System.err.println(msg);
+        ex.printStackTrace();
+        logeado = false;
+    }
     
     public void logout() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
