@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.legislaturachaco.sgTrabajosInformaticos.utilidades;
+package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logeo;
 
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logeo.Usuario;
 import java.util.Date;
 import java.util.Hashtable;
 import javax.naming.AuthenticationException;
@@ -68,33 +69,49 @@ public class ConexionLDap {
         return null;
     }
     
+    /**
+     * Obtiene un usuario con datos de los distintos grupos al cual pertenece, entre
+     * otras cosas mas.
+     * @param username Nombre de usuario.
+     * @param password Contraseña de usuario.
+     * @return Un usuario valido del dominio.
+     * @throws NamingException 
+     */
     public static Usuario getUser(String username, String password) throws NamingException {
         LdapContext ctx = getLdapContext(username, password);
-        return getUser("coperalta", ctx);
+        Usuario u= getUser(username, ctx);
+        ctx.close();
+        return u;
     }
     
     private static String aDC(String domainName) {
         StringBuilder buf = new StringBuilder();
         for (String token : domainName.split("\\.")) {
-            if(token.length()==0)   continue;   // defensive check
-            if(buf.length()>0)  buf.append(",");
+            if(token.length()==0) continue;
+            if(buf.length()>0) buf.append(",");
             buf.append("DC=").append(token);
         }
         return buf.toString();
     }
     
+    /**
+     * Obtiene una conexión con el servidor.
+     * @param username Un usuario para la conexión.
+     * @param password Una contraseña del usuario para la conexión.
+     * @return 
+     * @throws NamingException
+     * @throws AuthenticationException 
+     */
     private static LdapContext getLdapContext(String username, String password) 
         throws NamingException, AuthenticationException{
-        LdapContext ctx = null;
         Hashtable<String, String> env = new Hashtable();
         env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
         env.put(Context.SECURITY_AUTHENTICATION, "Simple");
         env.put(Context.SECURITY_PRINCIPAL, username.toUpperCase() + "@legislaturachaco.local");
         env.put(Context.SECURITY_CREDENTIALS, password);
         env.put(Context.PROVIDER_URL, "ldap://"+SERVER);
-        env.put(Context.REFERRAL, "follow");
-        ctx = new InitialLdapContext(env, null);        
-        return ctx;
+        env.put(Context.REFERRAL, "follow");  
+        return new InitialLdapContext(env, null);
     }
     
     public static void main(String[] args) {

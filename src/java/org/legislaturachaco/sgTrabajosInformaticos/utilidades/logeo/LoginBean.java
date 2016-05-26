@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.legislaturachaco.sgTrabajosInformaticos.utilidades;
+package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logeo;
 
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logeo.Usuario;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import org.legislaturachaco.sgTrabajosInformaticos.clasesJSF.UsuariosController;
@@ -13,13 +14,11 @@ import java.io.Serializable;
 import java.util.Hashtable;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.naming.AuthenticationException;
 import javax.naming.Context;
 import javax.naming.NamingException;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
-import javax.naming.ldap.LdapContext;
 import javax.servlet.http.HttpSession;
 import org.primefaces.context.RequestContext;
  
@@ -59,28 +58,10 @@ public class LoginBean implements Serializable {
     }
     
     public String login() {
-        String usu= "admin";
         String grupo= "Soportecnicos";
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
-        /*
-        if(consultaDominio()){
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@", nombre);
-            System.out.println("Inicio sesión: "+nombre);
-            sigPagina= "/paginasAdmSist/indexAdmSist.xhtml?faces-redirect=true";
-        }*/
-        /*
-        if (nombre != null && nombre.equals(usu) && 
-                    clave != null && clave.equals("admin")) {
-                logeado = true;
-                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@", nombre);
-                System.out.println("Inicio sesión: "+nombre);
-                sigPagina= "/paginasAdmSist/indexAdmSist.xhtml?faces-redirect=true";
-        }else{
-            logeado = false;
-            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
-            "Credenciales no válidas");
-        }*/
+
         logeado = false;
         msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
             "Credenciales no válidas");
@@ -89,12 +70,12 @@ public class LoginBean implements Serializable {
             if(u.perteneceAGrupo(grupo)){
                 nombreCompleto= u.getCommonName();
                 logeado = true;
-                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@", nombre);
+                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@ ", nombre);
                     System.out.println("Inicio sesión: "+nombre);
             }else{
                 logeado = false;
                 msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
-                "No pertenece a grupo");
+                    "No pertenece a grupo");
                 //throw new RuntimeException(nombre+" no pertenece a grupo"); 
             }
             
@@ -125,7 +106,7 @@ public class LoginBean implements Serializable {
     
     public void logout() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
-        .getExternalContext().getSession(false);
+            .getExternalContext().getSession(false);
         session.invalidate();
         logeado= false;
         System.out.println("Fin sesión: "+nombre);
@@ -136,24 +117,4 @@ public class LoginBean implements Serializable {
         return INICIO+"?faces-redirect=true";
     }
     
-    public boolean consultaDominio(){
-        final String LDAP_URL = "ldap://10.12.9.10:389/DC=legislaturachaco,DC=local";
-        
-        Hashtable env = new Hashtable();
-
-        env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
-        env.put(Context.PROVIDER_URL, LDAP_URL);
-        env.put(Context.SECURITY_AUTHENTICATION, "simple");
-        //env.put(Context.SECURITY_PRINCIPAL, "CN="+username.toUpperCase()+ ",OU=Dirección de Comunicaciones,OU=Usuarios,OU=Legislataura Chaco,DC=legislaturachaco,DC=local");
-        env.put(Context.SECURITY_PRINCIPAL, nombre.toUpperCase()+ "@legislaturachaco.local");
-        env.put(Context.SECURITY_CREDENTIALS, clave);
-        
-        try {
-            DirContext ctx = new InitialDirContext(env);
-            return true;
-        } catch (NamingException ex) {
-            System.err.println(ex.getMessage());
-        }
-        return false;
-    }
 }
