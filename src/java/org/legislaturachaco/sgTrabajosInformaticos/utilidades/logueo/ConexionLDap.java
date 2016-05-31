@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logeo;
+package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo;
 
-import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logeo.Usuario;
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.Usuario;
 import java.util.Date;
 import java.util.Hashtable;
 import javax.naming.AuthenticationException;

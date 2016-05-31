@@ -3,22 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logeo;
+package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo;
 
-import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logeo.Usuario;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import org.legislaturachaco.sgTrabajosInformaticos.clasesJSF.UsuariosController;
-import org.legislaturachaco.sgTrabajosInformaticos.entidades.Usuarios;
 import java.io.Serializable;
-import java.util.Hashtable;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.naming.AuthenticationException;
-import javax.naming.Context;
-import javax.naming.NamingException;
-import javax.naming.directory.DirContext;
-import javax.naming.directory.InitialDirContext;
 import javax.servlet.http.HttpSession;
 import org.primefaces.context.RequestContext;
  
@@ -32,8 +24,9 @@ public class LoginBean implements Serializable {
     private String nombre, nombreCompleto;
     private String clave;
     private boolean logeado = false;
-    private static final String INICIO="/login.xhtml";
-    private static final String PAGINA_SIGUIENTE= "/paginasAdmSist/indexAdmSist.xhtml?faces-redirect=true";
+    public static final String INICIO="login.xhtml";
+    private static final String PAGINA_SIGUIENTE= "/paginasAdmSist/indexAdmSist.xhtml?faces-redirect=true",
+            INICIO2="/"+INICIO;
     
     public boolean estaLogeado() {
         return logeado;
@@ -92,8 +85,8 @@ public class LoginBean implements Serializable {
             context.addCallbackParam("view", PAGINA_SIGUIENTE);
             sig= PAGINA_SIGUIENTE;
         }else{
-            context.addCallbackParam("view", INICIO);
-            sig= INICIO;
+            context.addCallbackParam("view", INICIO2);
+            sig= INICIO2;
         }
         return sig;
     }
@@ -104,17 +97,13 @@ public class LoginBean implements Serializable {
         logeado = false;
     }
     
-    public void logout() {
+    public String logout() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
             .getExternalContext().getSession(false);
         session.invalidate();
         logeado= false;
         System.out.println("Fin sesión: "+nombre);
-        
+        return INICIO2+"?faces-redirect=true";
     }
-    
-    public String obtenerSalida(){
-        return INICIO+"?faces-redirect=true";
-    }
-    
+ 
 }

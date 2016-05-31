@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logeo;
+package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo;
 
 import javax.naming.NamingEnumeration;
 import javax.naming.directory.Attributes;
