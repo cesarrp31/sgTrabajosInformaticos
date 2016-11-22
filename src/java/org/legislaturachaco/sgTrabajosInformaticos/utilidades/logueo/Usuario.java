@@ -23,6 +23,7 @@ public class Usuario {
             memberof= (String) attr.get("memberOf").get();
         }catch(NullPointerException e){
             memberof= "";
+            System.err.println(e.getLocalizedMessage());
         }
     }
 
@@ -43,7 +44,8 @@ public class Usuario {
     }
     
     public boolean perteneceAGrupo(String unGrupo){
-        return this.getMemberof().contains(unGrupo);
+        System.out.println(this.getMemberof()+" /// "+unGrupo);
+        return this.getMemberof().toLowerCase().contains(unGrupo.toLowerCase());
     }
 
     @Override

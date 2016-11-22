@@ -1,0 +1,321 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package LDAP;
+
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.Context;
+import javax.naming.NamingEnumeration;
+import javax.naming.NamingException;
+import javax.naming.directory.Attribute;
+import javax.naming.directory.Attributes;
+import javax.naming.directory.DirContext;
+import javax.naming.directory.SearchControls;
+import javax.naming.directory.SearchResult;
+import javax.naming.ldap.InitialLdapContext;
+import javax.naming.ldap.LdapContext;
+
+/**
+ *
+ * @author coperalta
+ */
+public class ConexionLDAP {
+
+    private static ConexionLDAP conexionLDAP;
+
+    private LdapContext ctx;
+
+    private String baseBusqueda;
+
+    private String dominio;
+
+    private ConexionLDAP() {
+        dominio = "@legislaturachaco.local";
+        baseBusqueda = "dc=LEGISLATURACHACO,dc=LOCAL";
+    }
+
+    public static ConexionLDAP getInstance() {
+        if (conexionLDAP == null) {
+            conexionLDAP = new ConexionLDAP();
+        }
+        return conexionLDAP;
+    }
+
+    public void crearConexion(String servidor, String puerto, String usuarioConexion, String passwordConexion) throws NamingException {
+        String urlServidor = "ldap://" + servidor + ":" + puerto;
+
+        Hashtable<String, Object> env = new Hashtable<String, Object>();
+        env.put(Context.SECURITY_AUTHENTICATION, "simple");
+        env.put(Context.SECURITY_PRINCIPAL, usuarioConexion.toUpperCase() + dominio);
+        env.put(Context.SECURITY_CREDENTIALS, passwordConexion);
+        env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+        env.put(Context.PROVIDER_URL, urlServidor);
+        //ensures that objectSID attribute values
+        //will be returned as a byte[] instead of a String
+        env.put("java.naming.ldap.attributes.binary", "objectSID");
+
+        //System.out.println(urlServidor);
+        // the following is helpful in debugging errors
+        //env.put("com.sun.jndi.ldap.trace.ber", System.err);
+        ctx = new InitialLdapContext(env, null);
+    }
+
+    public void cerrarConexion() throws NamingException {
+        ctx.close();
+    }
+
+    public boolean buscarGrupo(String usuario, String grupo) {
+        try {
+            usuario += dominio;
+
+            //System.out.println(usuario);
+            StringBuilder filtro = new StringBuilder("(&");
+            filtro.append("(objectClass=person)");
+            filtro.append("(userPrincipalName=" + usuario + ")");
+            filtro.append(")");
+
+            String returnAttrs[] = {"memberOf"};
+            SearchControls sCtrl = new SearchControls();
+            sCtrl.setSearchScope(SearchControls.SUBTREE_SCOPE);
+            sCtrl.setReturningAttributes(returnAttrs);
+
+            NamingEnumeration<SearchResult> answer = ctx.search(baseBusqueda, filtro.toString(), sCtrl);
+            boolean encontrado = false;
+
+            // Define the match string
+            // Loop through the results and check every single value in attribute "memberOf"
+            while (answer.hasMoreElements()) {
+                SearchResult sr = answer.next();
+                System.out.println(sr.toString());
+                String memberOfAttrValue = sr.getAttributes().get("memberOf").toString();
+                System.out.println(memberOfAttrValue);
+                if (memberOfAttrValue.contains(grupo)) {
+                    encontrado = true;
+                    break;
+                }
+            }
+
+            return encontrado;
+        } catch (Exception e) {
+            //System.err.println(e.getLocalizedMessage());
+            return false;
+        }
+    }
+
+    public void buscarMiembros(String grupo) throws NamingException {
+
+        // record_count is the sum of all returned records
+        Integer record_count = 0;
+        // enabled_count is the sum of all records found enabled
+        Integer enabled_count = 0;
+        // The three attributes we want to display
+        String display_name = "";
+        String account_name = "";
+        String account_control = "";
+
+        // Here we store the returned LDAP object data
+        String dn = "";
+        // This will hold the returned attribute list
+        Attributes attrs;
+
+        // The entries attribute list we want to return from a search. Here we want the
+        // real name, the domain account name and see if the account has been disabled.
+        String[] attr_list = {"member"};
+
+        SearchControls ctls = new SearchControls();
+        ctls.setReturningAttributes(attr_list);
+        ctls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+
+        // The group search filter: check if a entry is a person and a contact or user,
+        // and belongs to a group named here
+        //String filter = "(&(objectCategory=person)(|(objectClass=contact)(objectClass=user))(memberOf=" + grupo + "))";
+        String filter = "(&(objectclass=group)(cn=" + grupo + "))";
+
+        // Search the subtree for objects using the given filter
+        NamingEnumeration answer = ctx.search(baseBusqueda, filter, ctls);
+        // Print the answer
+        //Search.printSearchEnumeration(answer);
+        while (answer.hasMoreElements()) {
+            SearchResult sr = (SearchResult) answer.next();
+            System.out.println(">>>" + sr.getName());
+            attrs = sr.getAttributes();
+
+            if (null != attrs) {
+                for (NamingEnumeration ae = attrs.getAll(); ae.hasMoreElements();) {
+                    Attribute atr = (Attribute) ae.next();
+                    String attributeID = atr.getID();
+                    Enumeration vals = atr.getAll();
+                    System.out.println(attributeID);
+                    while(vals.hasMoreElements()) {
+                        String username = (String) vals.nextElement();
+                        System.out.println("Username: " + username);
+                    }
+                }
+            } else {
+                System.out.println("No members for groups found");
+            }
+        }
+
+    }
+
+    public SearchResult findAccountByAccountName(String accountName) throws NamingException {
+
+        String searchFilter = "(&(objectClass=user)(sAMAccountName=" + accountName + "))";
+
+        SearchControls searchControls = new SearchControls();
+        searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+
+        NamingEnumeration<SearchResult> results = ctx.search(baseBusqueda, searchFilter, searchControls);
+
+        SearchResult searchResult = null;
+        if (results.hasMoreElements()) {
+            searchResult = (SearchResult) results.nextElement();
+
+            //make sure there is not another item available, there should be only 1 match
+            if (results.hasMoreElements()) {
+                System.err.println("Matched multiple users for the accountName: " + accountName);
+                return null;
+            }
+        }
+
+        return searchResult;
+    }
+
+    public String findGroupBySID(String sid) throws NamingException {
+
+        String searchFilter = "(&(objectClass=group)(objectSid=" + sid + "))";
+
+        SearchControls searchControls = new SearchControls();
+        searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+
+        NamingEnumeration<SearchResult> results = ctx.search(baseBusqueda, searchFilter, searchControls);
+
+        if (results.hasMoreElements()) {
+            SearchResult searchResult = (SearchResult) results.nextElement();
+
+            //make sure there is not another item available, there should be only 1 match
+            if (results.hasMoreElements()) {
+                System.err.println("Matched multiple groups for the group with SID: " + sid);
+                return null;
+            } else {
+                return (String) searchResult.getAttributes().get("sAMAccountName").get();
+            }
+        }
+        return null;
+    }
+
+    public String getPrimaryGroupSID(SearchResult srLdapUser) throws NamingException {
+        byte[] objectSID = (byte[]) srLdapUser.getAttributes().get("objectSid").get();
+        String strPrimaryGroupID = (String) srLdapUser.getAttributes().get("primaryGroupID").get();
+
+        String strObjectSid = decodeSID(objectSID);
+
+        return strObjectSid.substring(0, strObjectSid.lastIndexOf('-') + 1) + strPrimaryGroupID;
+    }
+
+    /**
+     * The binary data is in the form: byte[0] - revision level byte[1] - count
+     * of sub-authorities byte[2-7] - 48 bit authority (big-endian) and then
+     * count x 32 bit sub authorities (little-endian)
+     *
+     * The String value is: S-Revision-Authority-SubAuthority[n]...
+     *
+     * Based on code from here -
+     * http://forums.oracle.com/forums/thread.jspa?threadID=1155740&tstart=0
+     */
+    private static String decodeSID(byte[] sid) {
+
+        final StringBuilder strSid = new StringBuilder("S-");
+
+        // get version
+        final int revision = sid[0];
+        strSid.append(Integer.toString(revision));
+
+        //next byte is the count of sub-authorities
+        final int countSubAuths = sid[1] & 0xFF;
+
+        //get the authority
+        long authority = 0;
+        //String rid = "";
+        for (int i = 2; i <= 7; i++) {
+            authority |= ((long) sid[i]) << (8 * (5 - (i - 2)));
+        }
+        strSid.append("-");
+        strSid.append(Long.toHexString(authority));
+
+        //iterate all the sub-auths
+        int offset = 8;
+        int size = 4; //4 bytes for each sub auth
+        for (int j = 0; j < countSubAuths; j++) {
+            long subAuthority = 0;
+            for (int k = 0; k < size; k++) {
+                subAuthority |= (long) (sid[offset + k] & 0xFF) << (8 * k);
+            }
+
+            strSid.append("-");
+            strSid.append(subAuthority);
+
+            offset += size;
+        }
+
+        return strSid.toString();
+    }
+
+    public static void main(String[] args) {
+
+        String[] lstUs = {"oficinasanchez", "gmario", "coperalta", "jsilva", "jfarina", "aacevedo", "opallud", "oficinagersel", "sss"};
+        String ldapAdServer = "10.2.0.49", puerto = "389";
+
+        String usConexion = "coperalta";
+        String passConexion = "/cesar1985/";
+        boolean respuesta;
+        String grupoABuscar = "Soportecnicos";
+
+        ConexionLDAP con = ConexionLDAP.getInstance();
+
+        try {
+            con.crearConexion(ldapAdServer, puerto, usConexion, passConexion);
+
+            for (int i = 0; i < lstUs.length; i++) {
+                System.out.println("--------------------------------------------------------");
+                try {
+
+                    System.out.println("Usuario: " + lstUs[i]);
+                    //1) lookup the ldap account
+                    SearchResult srLdapUser = con.findAccountByAccountName(lstUs[i]);
+
+                    //2) get the SID of the users primary group
+                    String primaryGroupSID = con.getPrimaryGroupSID(srLdapUser);
+
+                    System.out.println("primaryGroupSID: " + primaryGroupSID);
+
+                    //3) get the users Primary Group
+                    String primaryGroupName = con.findGroupBySID(primaryGroupSID);
+
+                    System.out.println("primaryGroupName: " + primaryGroupName);
+
+                    respuesta = con.buscarGrupo(lstUs[i], grupoABuscar);
+                    System.out.println("Resultado busqueda de " + lstUs[i] + " en " + grupoABuscar + ": " + respuesta);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage() + ". Usuario " + lstUs[i] + " no encontrador en el AD");
+                }
+            }
+            System.out.println("--------------------------------------------------------");
+            System.out.println("--------------------------------------------------------");
+
+            con.buscarMiembros(grupoABuscar);
+
+            con.cerrarConexion();
+        } catch (NamingException ex) {
+            System.err.println(ex.getMessage() + ". Error en la Conexión LDAP.");
+            ex.printStackTrace();
+        }
+    }
+}
