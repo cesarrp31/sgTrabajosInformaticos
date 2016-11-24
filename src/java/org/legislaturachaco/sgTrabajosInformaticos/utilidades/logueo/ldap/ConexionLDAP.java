@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package LDAP;
+package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.ldap;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -32,9 +32,8 @@ public class ConexionLDAP {
 
     private LdapContext ctx;
 
-    private String baseBusqueda;
-
-    private String dominio;
+    private final String baseBusqueda;
+    private final String dominio;
 
     private ConexionLDAP() {
         dominio = "@legislaturachaco.local";
@@ -78,7 +77,7 @@ public class ConexionLDAP {
             //System.out.println(usuario);
             StringBuilder filtro = new StringBuilder("(&");
             filtro.append("(objectClass=person)");
-            filtro.append("(userPrincipalName=" + usuario + ")");
+            filtro.append("(userPrincipalName=").append(usuario).append(")");
             filtro.append(")");
 
             String returnAttrs[] = {"memberOf"};
@@ -93,9 +92,9 @@ public class ConexionLDAP {
             // Loop through the results and check every single value in attribute "memberOf"
             while (answer.hasMoreElements()) {
                 SearchResult sr = answer.next();
-                System.out.println(sr.toString());
+                //System.out.println(sr.toString());
                 String memberOfAttrValue = sr.getAttributes().get("memberOf").toString();
-                System.out.println(memberOfAttrValue);
+                //System.out.println(memberOfAttrValue);
                 if (memberOfAttrValue.contains(grupo)) {
                     encontrado = true;
                     break;
@@ -104,7 +103,7 @@ public class ConexionLDAP {
 
             return encontrado;
         } catch (Exception e) {
-            //System.err.println(e.getLocalizedMessage());
+            System.out.println(e.getLocalizedMessage());
             return false;
         }
     }
@@ -153,7 +152,7 @@ public class ConexionLDAP {
                     String attributeID = atr.getID();
                     Enumeration vals = atr.getAll();
                     System.out.println(attributeID);
-                    while(vals.hasMoreElements()) {
+                    while (vals.hasMoreElements()) {
                         String username = (String) vals.nextElement();
                         System.out.println("Username: " + username);
                     }
@@ -162,7 +161,29 @@ public class ConexionLDAP {
                 System.out.println("No members for groups found");
             }
         }
+    }
 
+    public List<String> listarGrupos(String usuario) throws NamingException {
+        List<String> resultados= new ArrayList<>();
+       
+        SearchControls searchCtls = new SearchControls();
+        String returnedAtts[] = {"memberOf"};
+        searchCtls.setReturningAttributes(returnedAtts);
+        searchCtls.setSearchScope(SearchControls.SUBTREE_SCOPE);        
+        String searchFilter = "(&(objectClass=user)(sAMAccountName=" + usuario + "))";
+
+        NamingEnumeration answer = ctx.search(baseBusqueda, searchFilter, searchCtls);
+
+        while (answer.hasMoreElements()) {
+            SearchResult sr = (SearchResult) answer.next();
+            
+            Attributes attrs = sr.getAttributes();
+            Attribute groupMembers = attrs.get("memberOf");
+            for (int i = 0; i < groupMembers.size(); i++) {
+                resultados.add(groupMembers.get(i).toString());
+            }
+        }    
+        return resultados;
     }
 
     public SearchResult findAccountByAccountName(String accountName) throws NamingException {
@@ -270,11 +291,12 @@ public class ConexionLDAP {
 
     public static void main(String[] args) {
 
-        String[] lstUs = {"oficinasanchez", "gmario", "coperalta", "jsilva", "jfarina", "aacevedo", "opallud", "oficinagersel", "sss"};
+        String[] lstUs = {"oficinasanchez", "gmario", "coperalta", "jsilva", "mglopez", "aacevedo", "opallud", "oficinagersel", "sss"};
         String ldapAdServer = "10.2.0.49", puerto = "389";
 
-        String usConexion = "coperalta";
-        String passConexion = "/cesar1985/";
+        String passConexion = "";
+        String usConexion = "coperalta", unUsuario= "coperarlta";
+        
         boolean respuesta;
         String grupoABuscar = "Soportecnicos";
 
@@ -311,6 +333,14 @@ public class ConexionLDAP {
             System.out.println("--------------------------------------------------------");
 
             con.buscarMiembros(grupoABuscar);
+            
+            System.out.println("--------------------------------------------------------");
+            System.out.println("--------------------------------------------------------");
+            
+            List<String> lista= con.listarGrupos(unUsuario);
+            for(String a: lista){
+                System.out.println(a);
+            }
 
             con.cerrarConexion();
         } catch (NamingException ex) {

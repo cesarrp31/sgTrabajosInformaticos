@@ -24,6 +24,8 @@ public class LoginBean implements Serializable {
     private String nombre, nombreCompleto;
     private String clave;
     private boolean logeado = false;
+    
+    private final String grupo= "Soportecnicos";
     public static final String INICIO="login.xhtml";
     private static final String PAGINA_SIGUIENTE= "/paginasAdmSist/indexAdmSist.xhtml?faces-redirect=true",
             INICIO2="/"+INICIO;
@@ -51,9 +53,16 @@ public class LoginBean implements Serializable {
     }
     
     public String login() {
-        String grupo= "Soportecnicos";
+        /* 
+        1° Ver si es un usuario local de la base de datos
+            1°a: verificar si esta habilitado,
+        2° Verificar si el usuario es de dominio y grupo,
+            2°a: ver si no esta baneado
+        3° Si no cumple 1° o 2° rechazar;        
+        */
+        
         RequestContext context = RequestContext.getCurrentInstance();
-        FacesMessage msg = null;
+        FacesMessage msg;
 
         logeado = false;
         msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
