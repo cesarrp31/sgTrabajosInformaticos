@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo;
+package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.ldap;
 
-import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.Usuario;
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.ldap.Usuario;
 import java.util.Date;
 import java.util.Hashtable;
 import javax.naming.AuthenticationException;
@@ -24,7 +24,7 @@ import javax.naming.ldap.LdapContext;
  *
  * @author coperalta
  */
-public class ConexionLDap {
+public class ConexionLDap_antiguo {
     private static final String SERVER= "10.2.0.49:389";
     
     private static Usuario getUser(String username, LdapContext context) {

@@ -9,15 +9,13 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.naming.Context;
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
-import javax.naming.directory.DirContext;
 import javax.naming.directory.SearchControls;
+import static javax.naming.directory.SearchControls.SUBTREE_SCOPE;
 import javax.naming.directory.SearchResult;
 import javax.naming.ldap.InitialLdapContext;
 import javax.naming.ldap.LdapContext;
@@ -32,14 +30,15 @@ public class ConexionLDAP {
 
     private LdapContext ctx;
 
-    private final String baseBusqueda;
-    private final String dominio;
-
+    private final String baseBusqueda, dominio, servidor, puerto;
+    
     private ConexionLDAP() {
         dominio = "@legislaturachaco.local";
         baseBusqueda = "dc=LEGISLATURACHACO,dc=LOCAL";
+        servidor= "10.2.0.49";
+        puerto= "389";
     }
-
+    
     public static ConexionLDAP getInstance() {
         if (conexionLDAP == null) {
             conexionLDAP = new ConexionLDAP();
@@ -47,7 +46,7 @@ public class ConexionLDAP {
         return conexionLDAP;
     }
 
-    public void crearConexion(String servidor, String puerto, String usuarioConexion, String passwordConexion) throws NamingException {
+    public void crearConexion(String usuarioConexion, String passwordConexion) throws NamingException {
         String urlServidor = "ldap://" + servidor + ":" + puerto;
 
         Hashtable<String, Object> env = new Hashtable<String, Object>();
@@ -69,7 +68,71 @@ public class ConexionLDAP {
     public void cerrarConexion() throws NamingException {
         ctx.close();
     }
-
+    
+    private Usuario getUser(String username) throws UsuarioNoEncontradoException {
+        String[] userAttributes = {
+            "distinguishedName","cn","name","uid",
+            "sn","givenname","memberOf","samaccountname",
+            "userPrincipalName"};
+        try{
+            String domainName = null;
+            if (username.contains("@")){
+                username = username.substring(0, username.indexOf("@"));
+                domainName = username.substring(username.indexOf("@")+1);
+            }
+            else if(username.contains("\\")){
+                username = username.substring(0, username.indexOf("\\"));
+                domainName = username.substring(username.indexOf("\\")+1);
+            }
+            else{
+                String authenticatedUser = (String) ctx.getEnvironment().get(Context.SECURITY_PRINCIPAL);
+                if (authenticatedUser.contains("@")){
+                    domainName = authenticatedUser.substring(authenticatedUser.indexOf("@")+1);
+                }
+            }
+ 
+            if (domainName!=null){
+                String principalName = username + "@" + domainName;
+                SearchControls controls = new SearchControls();
+                controls.setSearchScope(SUBTREE_SCOPE);
+                controls.setReturningAttributes(userAttributes);
+                NamingEnumeration<SearchResult> answer = ctx.search( aDC(domainName), "(& (userPrincipalName="+principalName+")(objectClass=user))", controls);
+                if (answer.hasMore()) {
+                    Attributes attr = answer.next().getAttributes();
+                    Attribute user = attr.get("userPrincipalName");
+                    if (user!=null) return new Usuario(attr);
+                }
+            }
+        }
+        catch(NamingException e){
+            System.err.println(e.getLocalizedMessage());
+            e.printStackTrace();
+        }
+        throw new UsuarioNoEncontradoException("el servidor "+servidor);
+    }
+    
+    /**
+     * Obtiene un usuario con datos de los distintos grupos al cual pertenece, entre
+     * otras cosas mas.
+     * @param nombreUsuario Nombre de usuario.
+     * @return Un usuario valido del dominio.
+     * @throws NamingException 
+     */
+    public Usuario getUsuario(String nombreUsuario) throws NamingException, UsuarioNoEncontradoException {
+        Usuario u= getUser(nombreUsuario);
+        return u;
+    }
+    
+    private static String aDC(String domainName) {
+        StringBuilder buf = new StringBuilder();
+        for (String token : domainName.split("\\.")) {
+            if(token.length()==0) continue;
+            if(buf.length()>0) buf.append(",");
+            buf.append("DC=").append(token);
+        }
+        return buf.toString();
+    }
+    
     public boolean buscarGrupo(String usuario, String grupo) {
         try {
             usuario += dominio;
@@ -103,7 +166,7 @@ public class ConexionLDAP {
 
             return encontrado;
         } catch (Exception e) {
-            System.out.println(e.getLocalizedMessage());
+            //System.out.println(e.getLocalizedMessage());
             return false;
         }
     }
@@ -143,7 +206,7 @@ public class ConexionLDAP {
         //Search.printSearchEnumeration(answer);
         while (answer.hasMoreElements()) {
             SearchResult sr = (SearchResult) answer.next();
-            System.out.println(">>>" + sr.getName());
+            //System.out.println(">>>" + sr.getName());
             attrs = sr.getAttributes();
 
             if (null != attrs) {
@@ -151,7 +214,7 @@ public class ConexionLDAP {
                     Attribute atr = (Attribute) ae.next();
                     String attributeID = atr.getID();
                     Enumeration vals = atr.getAll();
-                    System.out.println(attributeID);
+                    //System.out.println(attributeID);
                     while (vals.hasMoreElements()) {
                         String username = (String) vals.nextElement();
                         System.out.println("Username: " + username);
@@ -289,21 +352,32 @@ public class ConexionLDAP {
         return strSid.toString();
     }
 
+    public String getServidor() {
+        return servidor;
+    }
+
+    public String getPuerto() {
+        return puerto;
+    }
+    
     public static void main(String[] args) {
 
         String[] lstUs = {"oficinasanchez", "gmario", "coperalta", "jsilva", "mglopez", "aacevedo", "opallud", "oficinagersel", "sss"};
-        String ldapAdServer = "10.2.0.49", puerto = "389";
 
-        String passConexion = "";
-        String usConexion = "coperalta", unUsuario= "coperarlta";
+        String passConexion = "trabinfacceso2016";
+        String usConexion = "accesotrabinf", unUsuario= "coperalta";
         
         boolean respuesta;
-        String grupoABuscar = "Soportecnicos";
+        String grupoABuscar = "trabajosinformaticos";
 
         ConexionLDAP con = ConexionLDAP.getInstance();
-
+        
+        Usuario u;
+        
         try {
-            con.crearConexion(ldapAdServer, puerto, usConexion, passConexion);
+            con.crearConexion(usConexion, passConexion);
+            
+            System.out.println("Conexion establecida exitosamente");
 
             for (int i = 0; i < lstUs.length; i++) {
                 System.out.println("--------------------------------------------------------");
@@ -325,6 +399,11 @@ public class ConexionLDAP {
 
                     respuesta = con.buscarGrupo(lstUs[i], grupoABuscar);
                     System.out.println("Resultado busqueda de " + lstUs[i] + " en " + grupoABuscar + ": " + respuesta);
+                    
+                    //datos usuario
+                    u= con.getUsuario(lstUs[i]);
+                    System.out.println(u);
+                    
                 } catch (Exception e) {
                     System.out.println(e.getMessage() + ". Usuario " + lstUs[i] + " no encontrador en el AD");
                 }

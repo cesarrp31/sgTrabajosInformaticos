@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo;
+package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.ldap;
 
 import javax.naming.NamingEnumeration;
 import javax.naming.directory.Attributes;
@@ -23,8 +23,9 @@ public class Usuario {
             memberof= (String) attr.get("memberOf").get();
         }catch(NullPointerException e){
             memberof= "";
-            System.err.println(e.getLocalizedMessage());
+            System.err.println("Error para obtener \"memberof\": "+e.getLocalizedMessage());
         }
+        this.attr= attr;
     }
 
     public String getUserPrincipal() {
