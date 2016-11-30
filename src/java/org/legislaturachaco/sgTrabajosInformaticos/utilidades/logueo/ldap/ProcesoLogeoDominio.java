@@ -19,7 +19,7 @@ public class ProcesoLogeoDominio {
         conexionLDAP= ConexionLDAP.getInstance();
     }
     
-    public void verificarUsuarioDominio(String usuario, String clave) throws Exception{
+    public void verificarUsuarioDominio(String usuario, String clave) throws NamingException, UsuarioNoEncontradoException{
         conexionLDAP.crearConexion(usuario, clave);
         this.usuario = conexionLDAP.getUsuario(usuario);
         conexionLDAP.cerrarConexion();        
@@ -37,6 +37,10 @@ public class ProcesoLogeoDominio {
     
     public String getNombreCompleto(){
         return usuario.getCommonName();
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
     }
     
 }

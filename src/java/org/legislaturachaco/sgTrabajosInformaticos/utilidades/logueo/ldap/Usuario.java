@@ -51,12 +51,22 @@ public class Usuario {
 
     @Override
     public String toString() {
-        StringBuilder sb= new StringBuilder();        
+        StringBuilder sb= new StringBuilder();
+        /**
         NamingEnumeration ne= attr.getAll();
         while(ne.hasMoreElements()){
             sb.append(ne.nextElement());
             sb.append("\n");
-        }
+        }*/
+        sb.append(this.getClass());
+        sb.append(" ");
+        sb.append(this.getCommonName());
+        sb.append(" ");
+        sb.append(this.getDistinguishedName());
+        sb.append(" ");
+        sb.append(this.getMemberof());
+        sb.append(" ");
+        sb.append(this.getUserPrincipal());
         return sb.toString();
     }
 }
