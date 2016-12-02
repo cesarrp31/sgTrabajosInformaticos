@@ -10,6 +10,5 @@
         <property name="URL" value="jdbc:mysql://10.12.9.36:3306/trabajosBD?zeroDateTimeBehavior=convertToNull"/>
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
     </jdbc-connection-pool>
-    <jdbc-resource enabled="true" jndi-name="java:app/TrabajosBDLeg" object-type="user" pool-name="mysql_trabajosBD_adminPool"/>
     <jdbc-resource enabled="true" jndi-name="java:app/TrabajosBDUbuntu" object-type="user" pool-name="mysql_trabajosBD_adminPool"/>
 </resources>
