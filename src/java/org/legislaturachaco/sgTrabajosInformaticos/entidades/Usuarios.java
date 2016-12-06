@@ -42,6 +42,10 @@ public class Usuarios implements Serializable {
     @Column(name = "baja", table = "usuarios", nullable = false)
     @Basic
     private boolean baja;
+    
+    @Column(name = "usarClaveBD", table = "usuarios", nullable = false)
+    @Basic
+    private boolean usarClaveBD;
 
     @Column(name = "usuario", table = "usuarios", nullable = false, length = 45)
     @Id
@@ -130,6 +134,14 @@ public class Usuarios implements Serializable {
         this.trabajosCollection = trabajosCollection;
     }
 
+    public boolean isUsarClaveBD() {
+        return usarClaveBD;
+    }
+
+    public void setUsarClaveBD(boolean usarClaveBD) {
+        this.usarClaveBD = usarClaveBD;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;

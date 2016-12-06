@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.ldap;
+package org.legislaturachaco.sgTrabajosInformaticos.utilidades;
 
 /**
  *
@@ -11,8 +11,12 @@ package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.ldap;
  */
 public class UsuarioNoEncontradoException extends Exception{
     
-    public UsuarioNoEncontradoException(String lugadBusqueda){
-        super("Usuario no encontrado en "+lugadBusqueda);
+    public UsuarioNoEncontradoException(String lugarBusqueda){
+        super("Usuario no encontrado en "+lugarBusqueda);
+    }
+    
+    public UsuarioNoEncontradoException(){
+        super("Usuario no encontrado");
     }
     
 }

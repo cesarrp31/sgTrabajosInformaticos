@@ -12,8 +12,6 @@
             <h:form id="UsuariosViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{usuariosController.selected != null}">
-                        <h:outputText value="#{bundle.ViewUsuariosLabel_password}"/>
-                        <h:outputText value="#{usuariosController.selected.password}" title="#{bundle.ViewUsuariosTitle_password}"/>
                         <h:outputText value="#{bundle.ViewUsuariosLabel_idRol}"/>
                         <h:outputText value="#{usuariosController.selected.idRol}" title="#{bundle.ViewUsuariosTitle_idRol}"/>
                         <h:outputText value="#{bundle.ViewUsuariosLabel_dominio}"/>
@@ -24,6 +22,10 @@
                         <h:outputText value="#{usuariosController.selected.usuario}" title="#{bundle.ViewUsuariosTitle_usuario}"/>
                         <h:outputText value="#{bundle.ViewUsuariosLabel_idTecnico}"/>
                         <h:outputText value="#{usuariosController.selected.idTecnico}" title="#{bundle.ViewUsuariosTitle_idTecnico}"/>
+                        <h:outputText value="#{bundle.ViewUsuariosLabel_baja}"/>
+                        <h:outputText value="#{usuariosController.selected.baja}" title="#{bundle.ViewUsuariosTitle_baja}"/>
+                        <h:outputText value="#{bundle.ViewUsuariosLabel_usarClaveBD}"/>
+                        <h:outputText value="#{usuariosController.selected.usarClaveBD}" title="#{bundle.ViewUsuariosTitle_usarClaveBD}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="UsuariosViewDialog.hide()"/>
                 </h:panelGroup>

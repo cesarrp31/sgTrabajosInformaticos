@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" pkg="org.legislaturachaco.sgTrabajosInformaticos.entidades" v="1.5.2" persistenceUnitName="sgTrabajosInformaticosUnit" xs="false" id="_1458916094328101" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
-    <jpa:entity xre="false" sm="false" abs="false" class="TecnicosXTrabajos" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094329102">
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" pkg="org.legislaturachaco.sgTrabajosInformaticos.entidades" v="1.5.2" persistenceUnitName="sgTrabajosInformaticosUnit" sm="false" xs="false" id="_1458916094328101" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:entity xre="false" compositePrimaryKeyClass="TecnicosXTrabajosPK" abs="false" class="TecnicosXTrabajos" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094329102">
         <jpa:attributes>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347132" connected-attribute-id="_1458916094355316" visibile="true" name="idEstadoXTrabajo" id="_1458916094350146">
-                <join-column name="idEstadoXTrabajo" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347117" connected-attribute-id="_1458916094353236" visibile="true" name="idTecnico" id="_1458916094350147">
-                <join-column name="idTecnico" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347132" connected-attribute-id="_1458916094355316" visibile="true" name="idEstadoXTrabajo" id="_1458916094350146">
+                <jpa:join-column name="idEstadoXTrabajo" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347117" connected-attribute-id="_1458916094353236" visibile="true" name="idTecnico" id="_1458916094350147">
+                <jpa:join-column name="idTecnico" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
             <jpa:id attribute-type="Integer" visibile="true" name="idTecnicoXTrabajo" id="_1458916094350145">
                 <jpa:column name="idTecnicoXTrabajo" unique="false" nullable="false" insertable="true" updatable="true" table="tecnicosXTrabajos"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -15,16 +15,16 @@
         </jpa:attributes>
         <jpa:table name="tecnicosXTrabajos"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="Caracteristicas" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094346103">
+    <jpa:entity xre="false" compositePrimaryKeyClass="CaracteristicasPK" abs="false" class="Caracteristicas" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094346103">
         <jpa:attributes>
-            <basic optional="false" attribute-type="String" visibile="true" name="nombre" id="_1458916094350149">
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="nombre" id="_1458916094350149">
                 <jpa:column name="nombre" unique="false" nullable="false" insertable="true" updatable="true" table="caracteristicas" length="100"/>
-            </basic>
-            <basic optional="true" attribute-type="String" visibile="true" name="descripcion" id="_1458916094350150">
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="descripcion" id="_1458916094350150">
                 <jpa:column name="descripcion" unique="false" nullable="true" insertable="true" updatable="true" table="caracteristicas" length="200"/>
-            </basic>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347121" connected-attribute-id="_1458916094353253" visibile="true" name="caracteristicasXPonderacionesCollection" id="_1458916094350151"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347131" connected-attribute-id="_1458916094354307" visibile="true" name="caracteristicasXInsumoCollection" id="_1458916094350152"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347121" connected-attribute-id="_1458916094353253" visibile="true" name="caracteristicasXPonderacionesCollection" id="_1458916094350151"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347131" connected-attribute-id="_1458916094354307" visibile="true" name="caracteristicasXInsumoCollection" id="_1458916094350152"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idCaracteristica" id="_1458916094350148">
                 <jpa:column name="idCaracteristica" unique="false" nullable="false" insertable="true" updatable="true" table="caracteristicas"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -32,15 +32,15 @@
         </jpa:attributes>
         <jpa:table name="caracteristicas"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="TipoPatrimonio" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094346104">
+    <jpa:entity xre="false" compositePrimaryKeyClass="TipoPatrimonioPK" abs="false" class="TipoPatrimonio" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094346104">
         <jpa:attributes>
-            <basic optional="false" attribute-type="String" visibile="true" name="tipo" id="_1458916094350154">
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="tipo" id="_1458916094350154">
                 <jpa:column name="tipo" unique="false" nullable="false" insertable="true" updatable="true" table="tipoPatrimonio" length="45"/>
-            </basic>
-            <basic optional="true" attribute-type="String" visibile="true" name="descripcion" id="_1458916094350155">
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="descripcion" id="_1458916094350155">
                 <jpa:column name="descripcion" unique="false" nullable="true" insertable="true" updatable="true" table="tipoPatrimonio" length="100"/>
-            </basic>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347134" connected-attribute-id="_1458916094356332" visibile="true" name="patrimoniosCollection" id="_1458916094350156"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347134" connected-attribute-id="_1458916094356332" visibile="true" name="patrimoniosCollection" id="_1458916094350156"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idTipo" id="_1458916094350153">
                 <jpa:column name="idTipo" unique="false" nullable="false" insertable="true" updatable="true" table="tipoPatrimonio"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -48,14 +48,14 @@
         </jpa:attributes>
         <jpa:table name="tipoPatrimonio"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="EstadosTrabajo" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094346105">
+    <jpa:entity xre="false" compositePrimaryKeyClass="EstadosTrabajoPK" abs="false" class="EstadosTrabajo" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094346105">
         <jpa:attributes>
-            <basic optional="true" attribute-type="String" visibile="true" name="descripcion" id="_1458916094350158">
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="descripcion" id="_1458916094350158">
                 <jpa:column name="descripcion" unique="false" nullable="true" insertable="true" updatable="true" table="estadosTrabajo" length="100"/>
-            </basic>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347111" connected-attribute-id="_1458916094352209" visibile="true" name="transicionesEstadoCollection" id="_1458916094350159"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347111" connected-attribute-id="_1458916094352210" visibile="true" name="transicionesEstadoCollection1" id="_1458916094350160"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347132" connected-attribute-id="_1458916094355319" visibile="true" name="estadosXTrabajoCollection" id="_1458916094350161"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347111" connected-attribute-id="_1458916094352209" visibile="true" name="transicionesEstadoCollection" id="_1458916094350159"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347111" connected-attribute-id="_1458916094352210" visibile="true" name="transicionesEstadoCollection1" id="_1458916094350160"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347132" connected-attribute-id="_1458916094355319" visibile="true" name="estadosXTrabajoCollection" id="_1458916094350161"/>
             <jpa:id attribute-type="String" visibile="true" name="estado" id="_1458916094350157">
                 <jpa:column name="estado" unique="false" nullable="false" insertable="true" updatable="true" table="estadosTrabajo" length="45"/>
                 <jpa:generated-value/>
@@ -63,34 +63,34 @@
         </jpa:attributes>
         <jpa:table name="estadosTrabajo"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="Notas" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094346106">
+    <jpa:entity xre="false" compositePrimaryKeyClass="NotasPK" abs="false" class="Notas" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094346106">
         <jpa:attributes>
-            <basic optional="false" attribute-type="String" visibile="true" name="nroNota" id="_1458916094351163">
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="nroNota" id="_1458916094351163">
                 <jpa:column name="nroNota" unique="false" nullable="false" insertable="true" updatable="true" table="notas" length="45"/>
-            </basic>
-            <basic optional="false" attribute-type="java.util.Date" visibile="true" name="fecha" id="_1458916094351164">
-                <jpa:column name="fecha" unique="false" nullable="false" insertable="true" updatable="true" table="notas"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="java.util.Date" visibile="true" name="fecha" id="_1458916094351164">
                 <jpa:temporal>TIMESTAMP</jpa:temporal>
-            </basic>
-            <basic optional="true" attribute-type="String" visibile="true" name="observacion" id="_1458916094351165">
+                <jpa:column name="fecha" unique="false" nullable="false" insertable="true" updatable="true" table="notas"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="observacion" id="_1458916094351165">
                 <jpa:column name="observacion" unique="false" nullable="true" insertable="true" updatable="true" table="notas" length="500"/>
-            </basic>
-            <basic optional="true" attribute-type="byte []" visibile="true" name="imagen" id="_1458916094351166">
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="byte []" visibile="true" name="imagen" id="_1458916094351166">
                 <jpa:column name="imagen" unique="false" nullable="true" insertable="true" updatable="true" table="notas"/>
                 <jpa:lob/>
-            </basic>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347126" connected-attribute-id="_1458916094354278" visibile="true" name="idDependenciaOrigen" id="_1458916094351167">
-                <join-column name="idDependenciaOrigen" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347126" connected-attribute-id="_1458916094354279" visibile="true" name="idDependenciaDestino" id="_1458916094351168">
-                <join-column name="idDependenciaDestino" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347115" connected-attribute-id="_1458916094352227" visibile="true" name="idTipoNota" id="_1458916094351169">
-                <join-column name="idTipoNota" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347108" connected-attribute-id="_1458916094351185" visibile="true" name="trabajosCollection" id="_1458916094351170"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347110" connected-attribute-id="_1458916094351202" visibile="true" name="entregaInsumosCollection" id="_1458916094351171"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347125" connected-attribute-id="_1458916094353273" visibile="true" name="asignacionesCollection" id="_1458916094351172"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347126" connected-attribute-id="_1458916094354278" visibile="true" name="idDependenciaOrigen" id="_1458916094351167">
+                <jpa:join-column name="idDependenciaOrigen" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347126" connected-attribute-id="_1458916094354279" visibile="true" name="idDependenciaDestino" id="_1458916094351168">
+                <jpa:join-column name="idDependenciaDestino" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347115" connected-attribute-id="_1458916094352227" visibile="true" name="idTipoNota" id="_1458916094351169">
+                <jpa:join-column name="idTipoNota" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347108" connected-attribute-id="_1458916094351185" visibile="true" name="trabajosCollection" id="_1458916094351170"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347110" connected-attribute-id="_1458916094351202" visibile="true" name="entregaInsumosCollection" id="_1458916094351171"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347125" connected-attribute-id="_1458916094353273" visibile="true" name="asignacionesCollection" id="_1458916094351172"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idNota" id="_1458916094351162">
                 <jpa:column name="idNota" unique="false" nullable="false" insertable="true" updatable="true" table="notas"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -98,16 +98,16 @@
         </jpa:attributes>
         <jpa:table name="notas"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="Roles" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094346107">
+    <jpa:entity xre="false" compositePrimaryKeyClass="RolesPK" abs="false" class="Roles" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094346107">
         <jpa:attributes>
-            <basic optional="false" attribute-type="String" visibile="true" name="rol" id="_1458916094351174">
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="rol" id="_1458916094351174">
                 <jpa:column name="rol" unique="false" nullable="false" insertable="true" updatable="true" table="roles" length="50"/>
-            </basic>
-            <basic optional="true" attribute-type="String" visibile="true" name="descripcion" id="_1458916094351175">
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="descripcion" id="_1458916094351175">
                 <jpa:column name="descripcion" unique="false" nullable="true" insertable="true" updatable="true" table="roles" length="200"/>
-            </basic>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347109" connected-attribute-id="_1458916094351196" visibile="true" name="usuariosCollection" id="_1458916094351176"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347128" connected-attribute-id="_1458916094354296" visibile="true" name="permisosCollection" id="_1458916094351177"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347109" connected-attribute-id="_1458916094351196" visibile="true" name="usuariosCollection" id="_1458916094351176"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347128" connected-attribute-id="_1458916094354296" visibile="true" name="permisosCollection" id="_1458916094351177"/>
             <jpa:id attribute-type="String" visibile="true" name="idRol" id="_1458916094351173">
                 <jpa:column name="idRol" unique="false" nullable="false" insertable="true" updatable="true" table="roles" length="15"/>
                 <jpa:generated-value/>
@@ -115,37 +115,37 @@
         </jpa:attributes>
         <jpa:table name="roles"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="Trabajos" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347108">
+    <jpa:entity xre="false" compositePrimaryKeyClass="TrabajosPK" abs="false" class="Trabajos" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347108">
         <jpa:attributes>
-            <basic optional="false" attribute-type="int" visibile="true" name="nroFicha" id="_1458916094351179">
+            <jpa:basic optional="false" attribute-type="int" visibile="true" name="nroFicha" id="_1458916094351179">
                 <jpa:column name="nroFicha" unique="false" nullable="false" insertable="true" updatable="true" table="trabajos"/>
-            </basic>
-            <basic optional="false" attribute-type="java.util.Date" visibile="true" name="fechaComienzo" id="_1458916094351180">
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="java.util.Date" visibile="true" name="fechaComienzo" id="_1458916094351180">
+                <jpa:temporal>TIMESTAMP</jpa:temporal>
                 <jpa:column name="fechaComienzo" unique="false" nullable="false" insertable="true" updatable="true" table="trabajos"/>
-                <jpa:temporal>TIMESTAMP</jpa:temporal>
-            </basic>
-            <basic optional="true" attribute-type="String" visibile="true" name="sintomas" id="_1458916094351181">
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="sintomas" id="_1458916094351181">
                 <jpa:column name="sintomas" unique="false" nullable="true" insertable="true" updatable="true" table="trabajos" length="500"/>
-            </basic>
-            <basic optional="true" attribute-type="java.util.Date" visibile="true" name="fechaFin" id="_1458916094351182">
-                <jpa:column name="fechaFin" unique="false" nullable="true" insertable="true" updatable="true" table="trabajos"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" visibile="true" name="fechaFin" id="_1458916094351182">
                 <jpa:temporal>TIMESTAMP</jpa:temporal>
-            </basic>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347130" connected-attribute-id="_1458916094354304" visibile="true" name="idPrioridad" id="_1458916094351183">
-                <join-column name="idPrioridad" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347126" connected-attribute-id="_1458916094354280" visibile="true" name="idDependencia" id="_1458916094351184">
-                <join-column name="idDependencia" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one primaryKey="false" connected-entity-id="_1458916094346106" connected-attribute-id="_1458916094351170" visibile="true" name="idNota" id="_1458916094351185">
-                <join-column name="idNota" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347109" connected-attribute-id="_1458916094351195" visibile="true" name="usuarioIniciador" id="_1458916094351186">
-                <join-column name="usuarioIniciador" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347119" connected-attribute-id="_1458916094353245" visibile="true" name="problemasDetectadosCollection" id="_1458916094351187"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347132" connected-attribute-id="_1458916094355320" visibile="true" name="estadosXTrabajoCollection" id="_1458916094351188"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347136" connected-attribute-id="_1458916094356344" visibile="true" name="patrimoniosXTrabajosCollection" id="_1458916094351189"/>
+                <jpa:column name="fechaFin" unique="false" nullable="true" insertable="true" updatable="true" table="trabajos"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347130" connected-attribute-id="_1458916094354304" visibile="true" name="idPrioridad" id="_1458916094351183">
+                <jpa:join-column name="idPrioridad" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347126" connected-attribute-id="_1458916094354280" visibile="true" name="idDependencia" id="_1458916094351184">
+                <jpa:join-column name="idDependencia" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one primaryKey="false" connected-entity-id="_1458916094346106" connected-attribute-id="_1458916094351170" visibile="true" name="idNota" id="_1458916094351185">
+                <jpa:join-column name="idNota" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347109" connected-attribute-id="_1458916094351195" visibile="true" name="usuarioIniciador" id="_1458916094351186">
+                <jpa:join-column name="usuarioIniciador" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347119" connected-attribute-id="_1458916094353245" visibile="true" name="problemasDetectadosCollection" id="_1458916094351187"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347132" connected-attribute-id="_1458916094355320" visibile="true" name="estadosXTrabajoCollection" id="_1458916094351188"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347136" connected-attribute-id="_1458916094356344" visibile="true" name="patrimoniosXTrabajosCollection" id="_1458916094351189"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idTrabajo" id="_1458916094351178">
                 <jpa:column name="idTrabajo" unique="false" nullable="false" insertable="true" updatable="true" table="trabajos"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -153,28 +153,28 @@
         </jpa:attributes>
         <jpa:table name="trabajos"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="Usuarios" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347109">
+    <jpa:entity xre="false" compositePrimaryKeyClass="UsuariosPK" abs="false" class="Usuarios" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347109">
         <jpa:attributes>
-            <basic optional="false" attribute-type="String" visibile="true" name="password" id="_1458916094351191">
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="password" id="_1458916094351191">
                 <jpa:column name="password" unique="false" nullable="false" insertable="true" updatable="true" table="usuarios" length="64"/>
-            </basic>
-            <basic optional="true" attribute-type="String" visibile="true" name="dominio" id="_1458916094351192">
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="dominio" id="_1458916094351192">
                 <jpa:column name="dominio" unique="false" nullable="true" insertable="true" updatable="true" table="usuarios" length="45"/>
-            </basic>
-            <basic optional="true" attribute-type="String" visibile="true" name="grupo" id="_1458916094351193">
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="grupo" id="_1458916094351193">
                 <jpa:column name="grupo" unique="false" nullable="true" insertable="true" updatable="true" table="usuarios" length="45"/>
-            </basic>
-            <basic optional="false" attribute-type="boolean" visibile="true" name="baja" id="_1458916094351194">
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="boolean" visibile="true" name="baja" id="_1458916094351194">
                 <jpa:column name="baja" unique="false" nullable="false" insertable="true" updatable="true" table="usuarios"/>
-            </basic>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094346107" connected-attribute-id="_1458916094351176" visibile="true" name="idRol" id="_1458916094351196">
-                <join-column name="idRol" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one primaryKey="false" connected-entity-id="_1458916094347117" connected-attribute-id="_1458916094353237" visibile="true" name="idTecnico" id="_1458916094351197">
-                <join-column name="idTecnico" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347108" connected-attribute-id="_1458916094351186" visibile="true" name="trabajosCollection" id="_1458916094351195"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347110" connected-attribute-id="_1458916094352203" visibile="true" name="entregaInsumosCollection" id="_1458916094351198"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094346107" connected-attribute-id="_1458916094351176" visibile="true" name="idRol" id="_1458916094351196">
+                <jpa:join-column name="idRol" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one primaryKey="false" connected-entity-id="_1458916094347117" connected-attribute-id="_1458916094353237" visibile="true" name="idTecnico" id="_1458916094351197">
+                <jpa:join-column name="idTecnico" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347108" connected-attribute-id="_1458916094351186" visibile="true" name="trabajosCollection" id="_1458916094351195"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347110" connected-attribute-id="_1458916094352203" visibile="true" name="entregaInsumosCollection" id="_1458916094351198"/>
             <jpa:id attribute-type="String" visibile="true" name="usuario" id="_1458916094351190">
                 <jpa:column name="usuario" unique="false" nullable="false" insertable="true" updatable="true" table="usuarios" length="45"/>
                 <jpa:generated-value/>
@@ -182,28 +182,28 @@
         </jpa:attributes>
         <jpa:table name="usuarios"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="EntregaInsumos" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347110">
+    <jpa:entity xre="false" compositePrimaryKeyClass="EntregaInsumosPK" abs="false" class="EntregaInsumos" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347110">
         <jpa:attributes>
-            <basic optional="false" attribute-type="java.util.Date" visibile="true" name="fecha" id="_1458916094351200">
-                <jpa:column name="fecha" unique="false" nullable="false" insertable="true" updatable="true" table="entregaInsumos"/>
+            <jpa:basic optional="false" attribute-type="java.util.Date" visibile="true" name="fecha" id="_1458916094351200">
                 <jpa:temporal>TIMESTAMP</jpa:temporal>
-            </basic>
-            <basic optional="true" attribute-type="String" visibile="true" name="observacion" id="_1458916094351201">
+                <jpa:column name="fecha" unique="false" nullable="false" insertable="true" updatable="true" table="entregaInsumos"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="observacion" id="_1458916094351201">
                 <jpa:column name="observacion" unique="false" nullable="true" insertable="true" updatable="true" table="entregaInsumos" length="100"/>
-            </basic>
-            <many-to-one primaryKey="false" connected-entity-id="_1458916094346106" connected-attribute-id="_1458916094351171" visibile="true" name="idNota" id="_1458916094351202">
-                <join-column name="idNota" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347109" connected-attribute-id="_1458916094351198" visibile="true" name="usuarioIniciador" id="_1458916094352203">
-                <join-column name="usuarioIniciador" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347126" connected-attribute-id="_1458916094354281" visibile="true" name="idDependencia" id="_1458916094352204">
-                <join-column name="idDependencia" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347117" connected-attribute-id="_1458916094353238" visibile="true" name="idTecnico" id="_1458916094352205">
-                <join-column name="idTecnico" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347133" connected-attribute-id="_1458916094355323" visibile="true" name="lineaEntregaCollection" id="_1458916094352206"/>
+            </jpa:basic>
+            <jpa:many-to-one primaryKey="false" connected-entity-id="_1458916094346106" connected-attribute-id="_1458916094351171" visibile="true" name="idNota" id="_1458916094351202">
+                <jpa:join-column name="idNota" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347109" connected-attribute-id="_1458916094351198" visibile="true" name="usuarioIniciador" id="_1458916094352203">
+                <jpa:join-column name="usuarioIniciador" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347126" connected-attribute-id="_1458916094354281" visibile="true" name="idDependencia" id="_1458916094352204">
+                <jpa:join-column name="idDependencia" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347117" connected-attribute-id="_1458916094353238" visibile="true" name="idTecnico" id="_1458916094352205">
+                <jpa:join-column name="idTecnico" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347133" connected-attribute-id="_1458916094355323" visibile="true" name="lineaEntregaCollection" id="_1458916094352206"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idEntregaInsumo" id="_1458916094351199">
                 <jpa:column name="idEntregaInsumo" unique="false" nullable="false" insertable="true" updatable="true" table="entregaInsumos"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -211,17 +211,17 @@
         </jpa:attributes>
         <jpa:table name="entregaInsumos"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="TransicionesEstado" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347111">
+    <jpa:entity xre="false" compositePrimaryKeyClass="TransicionesEstadoPK" abs="false" class="TransicionesEstado" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347111">
         <jpa:attributes>
-            <basic optional="true" attribute-type="String" visibile="true" name="descripcion" id="_1458916094352208">
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="descripcion" id="_1458916094352208">
                 <jpa:column name="descripcion" unique="false" nullable="true" insertable="true" updatable="true" table="transicionesEstado" length="100"/>
-            </basic>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094346105" connected-attribute-id="_1458916094350159" visibile="true" name="estado" id="_1458916094352209">
-                <join-column name="estado" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094346105" connected-attribute-id="_1458916094350160" visibile="true" name="estadoSiguiente" id="_1458916094352210">
-                <join-column name="estadoSiguiente" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094346105" connected-attribute-id="_1458916094350159" visibile="true" name="estado" id="_1458916094352209">
+                <jpa:join-column name="estado" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094346105" connected-attribute-id="_1458916094350160" visibile="true" name="estadoSiguiente" id="_1458916094352210">
+                <jpa:join-column name="estadoSiguiente" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
             <jpa:id attribute-type="Integer" visibile="true" name="idProxEstado" id="_1458916094352207">
                 <jpa:column name="idProxEstado" unique="false" nullable="false" insertable="true" updatable="true" table="transicionesEstado"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -234,24 +234,24 @@
             </jpa:unique-constraint>
         </jpa:table>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="Ponderaciones" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347112">
+    <jpa:entity xre="false" compositePrimaryKeyClass="PonderacionesPK" abs="false" class="Ponderaciones" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347112">
         <jpa:attributes>
-            <basic optional="false" attribute-type="String" visibile="true" name="ponderacion" id="_1458916094352212">
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="ponderacion" id="_1458916094352212">
                 <jpa:column name="ponderacion" unique="false" nullable="false" insertable="true" updatable="true" table="ponderaciones" length="45"/>
-            </basic>
-            <basic optional="false" attribute-type="java.util.Date" visibile="true" name="fechaDesde" id="_1458916094352213">
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="java.util.Date" visibile="true" name="fechaDesde" id="_1458916094352213">
+                <jpa:temporal>TIMESTAMP</jpa:temporal>
                 <jpa:column name="fechaDesde" unique="false" nullable="false" insertable="true" updatable="true" table="ponderaciones"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" visibile="true" name="fechaHasta" id="_1458916094352214">
                 <jpa:temporal>TIMESTAMP</jpa:temporal>
-            </basic>
-            <basic optional="true" attribute-type="java.util.Date" visibile="true" name="fechaHasta" id="_1458916094352214">
                 <jpa:column name="fechaHasta" unique="false" nullable="true" insertable="true" updatable="true" table="ponderaciones"/>
-                <jpa:temporal>TIMESTAMP</jpa:temporal>
-            </basic>
-            <basic optional="true" attribute-type="String" visibile="true" name="observacion" id="_1458916094352215">
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="observacion" id="_1458916094352215">
                 <jpa:column name="observacion" unique="false" nullable="true" insertable="true" updatable="true" table="ponderaciones" length="100"/>
-            </basic>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347121" connected-attribute-id="_1458916094353252" visibile="true" name="caracteristicasXPonderacionesCollection" id="_1458916094352216"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347134" connected-attribute-id="_1458916094356331" visibile="true" name="patrimoniosCollection" id="_1458916094352217"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347121" connected-attribute-id="_1458916094353252" visibile="true" name="caracteristicasXPonderacionesCollection" id="_1458916094352216"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347134" connected-attribute-id="_1458916094356331" visibile="true" name="patrimoniosCollection" id="_1458916094352217"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idPonderacion" id="_1458916094352211">
                 <jpa:column name="idPonderacion" unique="false" nullable="false" insertable="true" updatable="true" table="ponderaciones"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -259,15 +259,15 @@
         </jpa:attributes>
         <jpa:table name="ponderaciones"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="Encargados" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347113">
+    <jpa:entity xre="false" compositePrimaryKeyClass="EncargadosPK" abs="false" class="Encargados" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347113">
         <jpa:attributes>
-            <basic optional="false" attribute-type="String" visibile="true" name="apellido" id="_1458916094352219">
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="apellido" id="_1458916094352219">
                 <jpa:column name="apellido" unique="false" nullable="false" insertable="true" updatable="true" table="encargados" length="45"/>
-            </basic>
-            <basic optional="false" attribute-type="String" visibile="true" name="nombre" id="_1458916094352220">
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="nombre" id="_1458916094352220">
                 <jpa:column name="nombre" unique="false" nullable="false" insertable="true" updatable="true" table="encargados" length="45"/>
-            </basic>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347126" connected-attribute-id="_1458916094354283" visibile="true" name="dependenciasCollection" id="_1458916094352221"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347126" connected-attribute-id="_1458916094354283" visibile="true" name="dependenciasCollection" id="_1458916094352221"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idEncargado" id="_1458916094352218">
                 <jpa:column name="idEncargado" unique="false" nullable="false" insertable="true" updatable="true" table="encargados"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -275,14 +275,14 @@
         </jpa:attributes>
         <jpa:table name="encargados"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="TareasRealizadas" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347114">
+    <jpa:entity xre="false" compositePrimaryKeyClass="TareasRealizadasPK" abs="false" class="TareasRealizadas" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347114">
         <jpa:attributes>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347129" connected-attribute-id="_1458916094354300" visibile="true" name="idTarea" id="_1458916094352223">
-                <join-column name="idTarea" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347132" connected-attribute-id="_1458916094355317" visibile="true" name="idEstadoXTrabajo" id="_1458916094352224">
-                <join-column name="idEstadoXTrabajo" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347129" connected-attribute-id="_1458916094354300" visibile="true" name="idTarea" id="_1458916094352223">
+                <jpa:join-column name="idTarea" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347132" connected-attribute-id="_1458916094355317" visibile="true" name="idEstadoXTrabajo" id="_1458916094352224">
+                <jpa:join-column name="idEstadoXTrabajo" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
             <jpa:id attribute-type="Integer" visibile="true" name="idTareaXTrabajo" id="_1458916094352222">
                 <jpa:column name="idTareaXTrabajo" unique="false" nullable="false" insertable="true" updatable="true" table="tareasRealizadas"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -295,12 +295,12 @@
             </jpa:unique-constraint>
         </jpa:table>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="TipoNota" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347115">
+    <jpa:entity xre="false" compositePrimaryKeyClass="TipoNotaPK" abs="false" class="TipoNota" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347115">
         <jpa:attributes>
-            <basic optional="false" attribute-type="String" visibile="true" name="tipoNota" id="_1458916094352226">
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="tipoNota" id="_1458916094352226">
                 <jpa:column name="tipoNota" unique="false" nullable="false" insertable="true" updatable="true" table="tipoNota" length="100"/>
-            </basic>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094346106" connected-attribute-id="_1458916094351169" visibile="true" name="notasCollection" id="_1458916094352227"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094346106" connected-attribute-id="_1458916094351169" visibile="true" name="notasCollection" id="_1458916094352227"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idTipoNota" id="_1458916094352225">
                 <jpa:column name="idTipoNota" unique="false" nullable="false" insertable="true" updatable="true" table="tipoNota"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -308,14 +308,14 @@
         </jpa:attributes>
         <jpa:table name="tipoNota"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="PatrimoniosXAsignaciones" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347116">
+    <jpa:entity xre="false" compositePrimaryKeyClass="PatrimoniosXAsignacionesPK" abs="false" class="PatrimoniosXAsignaciones" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347116">
         <jpa:attributes>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347125" connected-attribute-id="_1458916094353271" visibile="true" name="idAsignacion" id="_1458916094352229">
-                <join-column name="idAsignacion" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347134" connected-attribute-id="_1458916094356330" visibile="true" name="idPatrimonio" id="_1458916094352230">
-                <join-column name="idPatrimonio" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347125" connected-attribute-id="_1458916094353271" visibile="true" name="idAsignacion" id="_1458916094352229">
+                <jpa:join-column name="idAsignacion" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347134" connected-attribute-id="_1458916094356330" visibile="true" name="idPatrimonio" id="_1458916094352230">
+                <jpa:join-column name="idPatrimonio" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
             <jpa:id attribute-type="Integer" visibile="true" name="idPatXAsig" id="_1458916094352228">
                 <jpa:column name="idPatXAsig" unique="false" nullable="false" insertable="true" updatable="true" table="patrimoniosXAsignaciones"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -328,26 +328,26 @@
             </jpa:unique-constraint>
         </jpa:table>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="Tecnicos" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347117">
+    <jpa:entity xre="false" compositePrimaryKeyClass="TecnicosPK" abs="false" class="Tecnicos" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347117">
         <jpa:attributes>
-            <basic optional="false" attribute-type="String" visibile="true" name="apellido" id="_1458916094352232">
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="apellido" id="_1458916094352232">
                 <jpa:column name="apellido" unique="false" nullable="false" insertable="true" updatable="true" table="tecnicos" length="45"/>
-            </basic>
-            <basic optional="false" attribute-type="String" visibile="true" name="nombre" id="_1458916094352233">
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="nombre" id="_1458916094352233">
                 <jpa:column name="nombre" unique="false" nullable="false" insertable="true" updatable="true" table="tecnicos" length="45"/>
-            </basic>
-            <basic optional="false" attribute-type="String" visibile="true" name="correo" id="_1458916094353234">
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="correo" id="_1458916094353234">
                 <jpa:column name="correo" unique="false" nullable="false" insertable="true" updatable="true" table="tecnicos" length="50"/>
-            </basic>
-            <basic optional="false" attribute-type="boolean" visibile="true" name="baja" id="_1458916094353235">
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="boolean" visibile="true" name="baja" id="_1458916094353235">
                 <jpa:column name="baja" unique="false" nullable="false" insertable="true" updatable="true" table="tecnicos"/>
-            </basic>
-            <many-to-one primaryKey="false" connected-entity-id="_1458916094347118" connected-attribute-id="_1458916094353242" visibile="true" name="idTipoEspecialidad" id="_1458916094353239">
-                <join-column name="idTipoEspecialidad" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094329102" connected-attribute-id="_1458916094350147" visibile="true" name="tecnicosXTrabajosCollection" id="_1458916094353236"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347109" connected-attribute-id="_1458916094351197" visibile="true" name="usuariosCollection" id="_1458916094353237"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347110" connected-attribute-id="_1458916094352205" visibile="true" name="entregaInsumosCollection" id="_1458916094353238"/>
+            </jpa:basic>
+            <jpa:many-to-one primaryKey="false" connected-entity-id="_1458916094347118" connected-attribute-id="_1458916094353242" visibile="true" name="idTipoEspecialidad" id="_1458916094353239">
+                <jpa:join-column name="idTipoEspecialidad" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094329102" connected-attribute-id="_1458916094350147" visibile="true" name="tecnicosXTrabajosCollection" id="_1458916094353236"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347109" connected-attribute-id="_1458916094351197" visibile="true" name="usuariosCollection" id="_1458916094353237"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347110" connected-attribute-id="_1458916094352205" visibile="true" name="entregaInsumosCollection" id="_1458916094353238"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idTecnico" id="_1458916094352231">
                 <jpa:column name="idTecnico" unique="false" nullable="false" insertable="true" updatable="true" table="tecnicos"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -355,12 +355,12 @@
         </jpa:attributes>
         <jpa:table name="tecnicos"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="TipoEspecialidad" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347118">
+    <jpa:entity xre="false" compositePrimaryKeyClass="TipoEspecialidadPK" abs="false" class="TipoEspecialidad" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347118">
         <jpa:attributes>
-            <basic optional="false" attribute-type="String" visibile="true" name="especialidad" id="_1458916094353241">
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="especialidad" id="_1458916094353241">
                 <jpa:column name="especialidad" unique="false" nullable="false" insertable="true" updatable="true" table="tipoEspecialidad" length="60"/>
-            </basic>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347117" connected-attribute-id="_1458916094353239" visibile="true" name="tecnicosCollection" id="_1458916094353242"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347117" connected-attribute-id="_1458916094353239" visibile="true" name="tecnicosCollection" id="_1458916094353242"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idTipoEspecialidad" id="_1458916094353240">
                 <jpa:column name="idTipoEspecialidad" unique="false" nullable="false" insertable="true" updatable="true" table="tipoEspecialidad"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -368,14 +368,14 @@
         </jpa:attributes>
         <jpa:table name="tipoEspecialidad"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="ProblemasDetectados" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347119">
+    <jpa:entity xre="false" compositePrimaryKeyClass="ProblemasDetectadosPK" abs="false" class="ProblemasDetectados" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347119">
         <jpa:attributes>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347140" connected-attribute-id="_1458916094356361" visibile="true" name="idProblemaN3" id="_1458916094353244">
-                <join-column name="idProblemaN3" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347108" connected-attribute-id="_1458916094351187" visibile="true" name="idTrabajo" id="_1458916094353245">
-                <join-column name="idTrabajo" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347140" connected-attribute-id="_1458916094356361" visibile="true" name="idProblemaN3" id="_1458916094353244">
+                <jpa:join-column name="idProblemaN3" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347108" connected-attribute-id="_1458916094351187" visibile="true" name="idTrabajo" id="_1458916094353245">
+                <jpa:join-column name="idTrabajo" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
             <jpa:id attribute-type="Integer" visibile="true" name="idProblemaDetectado" id="_1458916094353243">
                 <jpa:column name="idProblemaDetectado" unique="false" nullable="false" insertable="true" updatable="true" table="problemasDetectados"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -388,13 +388,13 @@
             </jpa:unique-constraint>
         </jpa:table>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="Tablas" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347120">
+    <jpa:entity xre="false" compositePrimaryKeyClass="TablasPK" abs="false" class="Tablas" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347120">
         <jpa:attributes>
-            <basic optional="true" attribute-type="String" visibile="true" name="descripcion" id="_1458916094353247">
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="descripcion" id="_1458916094353247">
                 <jpa:column name="descripcion" unique="false" nullable="true" insertable="true" updatable="true" table="tablas" length="200"/>
-            </basic>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347123" connected-attribute-id="_1458916094353263" visibile="true" name="medicionXTablaCollection" id="_1458916094353248"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347128" connected-attribute-id="_1458916094354297" visibile="true" name="permisosCollection" id="_1458916094353249"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347123" connected-attribute-id="_1458916094353263" visibile="true" name="medicionXTablaCollection" id="_1458916094353248"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347128" connected-attribute-id="_1458916094354297" visibile="true" name="permisosCollection" id="_1458916094353249"/>
             <jpa:id attribute-type="String" visibile="true" name="tabla" id="_1458916094353246">
                 <jpa:column name="tabla" unique="false" nullable="false" insertable="true" updatable="true" table="tablas" length="100"/>
                 <jpa:generated-value/>
@@ -402,20 +402,20 @@
         </jpa:attributes>
         <jpa:table name="tablas"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="CaracteristicasXPonderaciones" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347121">
+    <jpa:entity xre="false" compositePrimaryKeyClass="CaracteristicasXPonderacionesPK" abs="false" class="CaracteristicasXPonderaciones" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347121">
         <jpa:attributes>
-            <basic optional="false" attribute-type="double" visibile="true" name="valor" id="_1458916094353251">
+            <jpa:basic optional="false" attribute-type="double" visibile="true" name="valor" id="_1458916094353251">
                 <jpa:column name="valor" unique="false" nullable="false" insertable="true" updatable="true" table="caracteristicasXPonderaciones"/>
-            </basic>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347112" connected-attribute-id="_1458916094352216" visibile="true" name="idPonderacion" id="_1458916094353252">
-                <join-column name="idPonderacion" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094346103" connected-attribute-id="_1458916094350151" visibile="true" name="idCaracteristica" id="_1458916094353253">
-                <join-column name="idCaracteristica" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347122" connected-attribute-id="_1458916094353258" visibile="true" name="idUnidadMedida" id="_1458916094353254">
-                <join-column name="idUnidadMedida" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347112" connected-attribute-id="_1458916094352216" visibile="true" name="idPonderacion" id="_1458916094353252">
+                <jpa:join-column name="idPonderacion" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094346103" connected-attribute-id="_1458916094350151" visibile="true" name="idCaracteristica" id="_1458916094353253">
+                <jpa:join-column name="idCaracteristica" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347122" connected-attribute-id="_1458916094353258" visibile="true" name="idUnidadMedida" id="_1458916094353254">
+                <jpa:join-column name="idUnidadMedida" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
             <jpa:id attribute-type="Integer" visibile="true" name="idCarXPon" id="_1458916094353250">
                 <jpa:column name="IdCarXPon" unique="false" nullable="false" insertable="true" updatable="true" table="caracteristicasXPonderaciones"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -428,16 +428,16 @@
             </jpa:unique-constraint>
         </jpa:table>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="UnidadMedida" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347122">
+    <jpa:entity xre="false" compositePrimaryKeyClass="UnidadMedidaPK" abs="false" class="UnidadMedida" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347122">
         <jpa:attributes>
-            <basic optional="false" attribute-type="String" visibile="true" name="unidadMedida" id="_1458916094353256">
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="unidadMedida" id="_1458916094353256">
                 <jpa:column name="unidadMedida" unique="false" nullable="false" insertable="true" updatable="true" table="unidadMedida" length="100"/>
-            </basic>
-            <basic optional="false" attribute-type="String" visibile="true" name="abreviatura" id="_1458916094353257">
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="abreviatura" id="_1458916094353257">
                 <jpa:column name="abreviatura" unique="false" nullable="false" insertable="true" updatable="true" table="unidadMedida" length="25"/>
-            </basic>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347121" connected-attribute-id="_1458916094353254" visibile="true" name="caracteristicasXPonderacionesCollection" id="_1458916094353258"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347135" connected-attribute-id="_1458916094356340" visibile="true" name="modelosInsumoCollection" id="_1458916094353259"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347121" connected-attribute-id="_1458916094353254" visibile="true" name="caracteristicasXPonderacionesCollection" id="_1458916094353258"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347135" connected-attribute-id="_1458916094356340" visibile="true" name="modelosInsumoCollection" id="_1458916094353259"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idUnidadMedida" id="_1458916094353255">
                 <jpa:column name="idUnidadMedida" unique="false" nullable="false" insertable="true" updatable="true" table="unidadMedida"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -445,17 +445,17 @@
         </jpa:attributes>
         <jpa:table name="unidadMedida"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="MedicionXTabla" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347123">
+    <jpa:entity xre="false" compositePrimaryKeyClass="MedicionXTablaPK" abs="false" class="MedicionXTabla" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347123">
         <jpa:attributes>
-            <basic optional="false" attribute-type="double" visibile="true" name="valor" id="_1458916094353261">
+            <jpa:basic optional="false" attribute-type="double" visibile="true" name="valor" id="_1458916094353261">
                 <jpa:column name="valor" unique="false" nullable="false" insertable="true" updatable="true" table="medicionXTabla"/>
-            </basic>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347124" connected-attribute-id="_1458916094353267" visibile="true" name="idMedicion" id="_1458916094353262">
-                <join-column name="idMedicion" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347120" connected-attribute-id="_1458916094353248" visibile="true" name="tabla" id="_1458916094353263">
-                <join-column name="tabla" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347124" connected-attribute-id="_1458916094353267" visibile="true" name="idMedicion" id="_1458916094353262">
+                <jpa:join-column name="idMedicion" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347120" connected-attribute-id="_1458916094353248" visibile="true" name="tabla" id="_1458916094353263">
+                <jpa:join-column name="tabla" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
             <jpa:id attribute-type="Integer" visibile="true" name="idMedicionXTabla" id="_1458916094353260">
                 <jpa:column name="idMedicionXTabla" unique="false" nullable="false" insertable="true" updatable="true" table="medicionXTabla"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -468,16 +468,16 @@
             </jpa:unique-constraint>
         </jpa:table>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="MedicionTamanioTabla" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347124">
+    <jpa:entity xre="false" compositePrimaryKeyClass="MedicionTamanioTablaPK" abs="false" class="MedicionTamanioTabla" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347124">
         <jpa:attributes>
-            <basic optional="false" attribute-type="java.util.Date" visibile="true" name="fecha" id="_1458916094353265">
-                <jpa:column name="fecha" unique="false" nullable="false" insertable="true" updatable="true" table="medicionTamanioTabla"/>
+            <jpa:basic optional="false" attribute-type="java.util.Date" visibile="true" name="fecha" id="_1458916094353265">
                 <jpa:temporal>TIMESTAMP</jpa:temporal>
-            </basic>
-            <basic optional="true" attribute-type="String" visibile="true" name="observacion" id="_1458916094353266">
+                <jpa:column name="fecha" unique="false" nullable="false" insertable="true" updatable="true" table="medicionTamanioTabla"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="observacion" id="_1458916094353266">
                 <jpa:column name="observacion" unique="false" nullable="true" insertable="true" updatable="true" table="medicionTamanioTabla" length="100"/>
-            </basic>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347123" connected-attribute-id="_1458916094353262" visibile="true" name="medicionXTablaCollection" id="_1458916094353267"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347123" connected-attribute-id="_1458916094353262" visibile="true" name="medicionXTablaCollection" id="_1458916094353267"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idMedicion" id="_1458916094353264">
                 <jpa:column name="idMedicion" unique="false" nullable="false" insertable="true" updatable="true" table="medicionTamanioTabla"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -485,23 +485,23 @@
         </jpa:attributes>
         <jpa:table name="medicionTamanioTabla"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="Asignaciones" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347125">
+    <jpa:entity xre="false" compositePrimaryKeyClass="AsignacionesPK" abs="false" class="Asignaciones" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347125">
         <jpa:attributes>
-            <basic optional="false" attribute-type="java.util.Date" visibile="true" name="fechaDesde" id="_1458916094353269">
+            <jpa:basic optional="false" attribute-type="java.util.Date" visibile="true" name="fechaDesde" id="_1458916094353269">
+                <jpa:temporal>TIMESTAMP</jpa:temporal>
                 <jpa:column name="fechaDesde" unique="false" nullable="false" insertable="true" updatable="true" table="asignaciones"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" visibile="true" name="fechaHasta" id="_1458916094353270">
                 <jpa:temporal>TIMESTAMP</jpa:temporal>
-            </basic>
-            <basic optional="true" attribute-type="java.util.Date" visibile="true" name="fechaHasta" id="_1458916094353270">
                 <jpa:column name="fechaHasta" unique="false" nullable="true" insertable="true" updatable="true" table="asignaciones"/>
-                <jpa:temporal>TIMESTAMP</jpa:temporal>
-            </basic>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347126" connected-attribute-id="_1458916094354282" visibile="true" name="idDependencia" id="_1458916094353272">
-                <join-column name="idDependencia" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one primaryKey="false" connected-entity-id="_1458916094346106" connected-attribute-id="_1458916094351172" visibile="true" name="idNota" id="_1458916094353273">
-                <join-column name="idNota" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347116" connected-attribute-id="_1458916094352229" visibile="true" name="patrimoniosXAsignacionesCollection" id="_1458916094353271"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347126" connected-attribute-id="_1458916094354282" visibile="true" name="idDependencia" id="_1458916094353272">
+                <jpa:join-column name="idDependencia" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one primaryKey="false" connected-entity-id="_1458916094346106" connected-attribute-id="_1458916094351172" visibile="true" name="idNota" id="_1458916094353273">
+                <jpa:join-column name="idNota" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347116" connected-attribute-id="_1458916094352229" visibile="true" name="patrimoniosXAsignacionesCollection" id="_1458916094353271"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idAsignacion" id="_1458916094353268">
                 <jpa:column name="idAsignacion" unique="false" nullable="false" insertable="true" updatable="true" table="asignaciones"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -514,29 +514,29 @@
             </jpa:unique-constraint>
         </jpa:table>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="Dependencias" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347126">
+    <jpa:entity xre="false" compositePrimaryKeyClass="DependenciasPK" abs="false" class="Dependencias" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347126">
         <jpa:attributes>
-            <basic optional="false" attribute-type="String" visibile="true" name="dependencia" id="_1458916094354275">
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="dependencia" id="_1458916094354275">
                 <jpa:column name="dependencia" unique="false" nullable="false" insertable="true" updatable="true" table="dependencias" length="75"/>
-            </basic>
-            <basic optional="true" attribute-type="String" visibile="true" name="observaciones" id="_1458916094354276">
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="observaciones" id="_1458916094354276">
                 <jpa:column name="observaciones" unique="false" nullable="true" insertable="true" updatable="true" table="dependencias" length="256"/>
-            </basic>
-            <basic optional="true" attribute-type="String" visibile="true" name="nombreCorto" id="_1458916094354277">
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="nombreCorto" id="_1458916094354277">
                 <jpa:column name="nombreCorto" unique="false" nullable="true" insertable="true" updatable="true" table="dependencias" length="45"/>
-            </basic>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347113" connected-attribute-id="_1458916094352221" visibile="true" name="idEncargado" id="_1458916094354283">
-                <join-column name="idEncargado" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347126" connected-attribute-id="_1458916094354284" visibile="true" name="dependeDe" id="_1458916094354285">
-                <join-column name="dependeDe" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094346106" connected-attribute-id="_1458916094351167" visibile="true" name="notasCollection" id="_1458916094354278"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094346106" connected-attribute-id="_1458916094351168" visibile="true" name="notasCollection1" id="_1458916094354279"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347108" connected-attribute-id="_1458916094351184" visibile="true" name="trabajosCollection" id="_1458916094354280"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347110" connected-attribute-id="_1458916094352204" visibile="true" name="entregaInsumosCollection" id="_1458916094354281"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347125" connected-attribute-id="_1458916094353272" visibile="true" name="asignacionesCollection" id="_1458916094354282"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347126" connected-attribute-id="_1458916094354285" visibile="true" name="dependenciasCollection" id="_1458916094354284"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347113" connected-attribute-id="_1458916094352221" visibile="true" name="idEncargado" id="_1458916094354283">
+                <jpa:join-column name="idEncargado" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347126" connected-attribute-id="_1458916094354284" visibile="true" name="dependeDe" id="_1458916094354285">
+                <jpa:join-column name="dependeDe" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094346106" connected-attribute-id="_1458916094351167" visibile="true" name="notasCollection" id="_1458916094354278"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094346106" connected-attribute-id="_1458916094351168" visibile="true" name="notasCollection1" id="_1458916094354279"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347108" connected-attribute-id="_1458916094351184" visibile="true" name="trabajosCollection" id="_1458916094354280"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347110" connected-attribute-id="_1458916094352204" visibile="true" name="entregaInsumosCollection" id="_1458916094354281"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347125" connected-attribute-id="_1458916094353272" visibile="true" name="asignacionesCollection" id="_1458916094354282"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347126" connected-attribute-id="_1458916094354285" visibile="true" name="dependenciasCollection" id="_1458916094354284"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idDependencia" id="_1458916094354274">
                 <jpa:column name="idDependencia" unique="false" nullable="false" insertable="true" updatable="true" table="dependencias"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -544,20 +544,20 @@
         </jpa:attributes>
         <jpa:table name="dependencias"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="ElementosUtilizados" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347127">
+    <jpa:entity xre="false" compositePrimaryKeyClass="ElementosUtilizadosPK" abs="false" class="ElementosUtilizados" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347127">
         <jpa:attributes>
-            <basic optional="false" attribute-type="double" visibile="true" name="cantidad" id="_1458916094354287">
+            <jpa:basic optional="false" attribute-type="double" visibile="true" name="cantidad" id="_1458916094354287">
                 <jpa:column name="cantidad" unique="false" nullable="false" insertable="true" updatable="true" table="elementosUtilizados"/>
-            </basic>
-            <basic optional="true" attribute-type="String" visibile="true" name="observaciones" id="_1458916094354288">
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="observaciones" id="_1458916094354288">
                 <jpa:column name="observaciones" unique="false" nullable="true" insertable="true" updatable="true" table="elementosUtilizados" length="500"/>
-            </basic>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347132" connected-attribute-id="_1458916094355318" visibile="true" name="idEstadoXTrabajo" id="_1458916094354289">
-                <join-column name="idEstadoXTrabajo" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347137" connected-attribute-id="_1458916094356347" visibile="true" name="idInsumo" id="_1458916094354290">
-                <join-column name="idInsumo" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347132" connected-attribute-id="_1458916094355318" visibile="true" name="idEstadoXTrabajo" id="_1458916094354289">
+                <jpa:join-column name="idEstadoXTrabajo" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347137" connected-attribute-id="_1458916094356347" visibile="true" name="idInsumo" id="_1458916094354290">
+                <jpa:join-column name="idInsumo" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
             <jpa:id attribute-type="Integer" visibile="true" name="idElemento" id="_1458916094354286">
                 <jpa:column name="idElemento" unique="false" nullable="false" insertable="true" updatable="true" table="elementosUtilizados"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -570,26 +570,26 @@
             </jpa:unique-constraint>
         </jpa:table>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="Permisos" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347128">
+    <jpa:entity xre="false" compositePrimaryKeyClass="PermisosPK" abs="false" class="Permisos" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347128">
         <jpa:attributes>
-            <basic optional="false" attribute-type="boolean" visibile="true" name="lectura" id="_1458916094354292">
+            <jpa:basic optional="false" attribute-type="boolean" visibile="true" name="lectura" id="_1458916094354292">
                 <jpa:column name="lectura" unique="false" nullable="false" insertable="true" updatable="true" table="permisos"/>
-            </basic>
-            <basic optional="false" attribute-type="boolean" visibile="true" name="escritura" id="_1458916094354293">
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="boolean" visibile="true" name="escritura" id="_1458916094354293">
                 <jpa:column name="escritura" unique="false" nullable="false" insertable="true" updatable="true" table="permisos"/>
-            </basic>
-            <basic optional="false" attribute-type="boolean" visibile="true" name="modificacion" id="_1458916094354294">
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="boolean" visibile="true" name="modificacion" id="_1458916094354294">
                 <jpa:column name="modificacion" unique="false" nullable="false" insertable="true" updatable="true" table="permisos"/>
-            </basic>
-            <basic optional="false" attribute-type="boolean" visibile="true" name="elimincacion" id="_1458916094354295">
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="boolean" visibile="true" name="elimincacion" id="_1458916094354295">
                 <jpa:column name="elimincacion" unique="false" nullable="false" insertable="true" updatable="true" table="permisos"/>
-            </basic>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094346107" connected-attribute-id="_1458916094351177" visibile="true" name="idRol" id="_1458916094354296">
-                <join-column name="idRol" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347120" connected-attribute-id="_1458916094353249" visibile="true" name="tabla" id="_1458916094354297">
-                <join-column name="tabla" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094346107" connected-attribute-id="_1458916094351177" visibile="true" name="idRol" id="_1458916094354296">
+                <jpa:join-column name="idRol" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347120" connected-attribute-id="_1458916094353249" visibile="true" name="tabla" id="_1458916094354297">
+                <jpa:join-column name="tabla" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
             <jpa:id attribute-type="Integer" visibile="true" name="idPermiso" id="_1458916094354291">
                 <jpa:column name="idPermiso" unique="false" nullable="false" insertable="true" updatable="true" table="permisos"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -602,13 +602,13 @@
             </jpa:unique-constraint>
         </jpa:table>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="Tareas" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347129">
+    <jpa:entity xre="false" compositePrimaryKeyClass="TareasPK" abs="false" class="Tareas" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347129">
         <jpa:attributes>
-            <basic optional="false" attribute-type="String" visibile="true" name="tarea" id="_1458916094354299">
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="tarea" id="_1458916094354299">
                 <jpa:column name="tarea" unique="false" nullable="false" insertable="true" updatable="true" table="tareas" length="100"/>
-            </basic>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347114" connected-attribute-id="_1458916094352223" visibile="true" name="tareasRealizadasCollection" id="_1458916094354300"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094348144" connected-attribute-id="_1458916094357379" visibile="true" name="tareasXProblemasCollection" id="_1458916094354301"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347114" connected-attribute-id="_1458916094352223" visibile="true" name="tareasRealizadasCollection" id="_1458916094354300"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094348144" connected-attribute-id="_1458916094357379" visibile="true" name="tareasXProblemasCollection" id="_1458916094354301"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idTarea" id="_1458916094354298">
                 <jpa:column name="idTarea" unique="false" nullable="false" insertable="true" updatable="true" table="tareas"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -616,12 +616,12 @@
         </jpa:attributes>
         <jpa:table name="tareas"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="Prioridades" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347130">
+    <jpa:entity xre="false" compositePrimaryKeyClass="PrioridadesPK" abs="false" class="Prioridades" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347130">
         <jpa:attributes>
-            <basic optional="false" attribute-type="String" visibile="true" name="prioridad" id="_1458916094354303">
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="prioridad" id="_1458916094354303">
                 <jpa:column name="prioridad" unique="false" nullable="false" insertable="true" updatable="true" table="prioridades" length="50"/>
-            </basic>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347108" connected-attribute-id="_1458916094351183" visibile="true" name="trabajosCollection" id="_1458916094354304"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347108" connected-attribute-id="_1458916094351183" visibile="true" name="trabajosCollection" id="_1458916094354304"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idPrioridad" id="_1458916094354302">
                 <jpa:column name="idPrioridad" unique="false" nullable="false" insertable="true" updatable="true" table="prioridades"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -629,17 +629,17 @@
         </jpa:attributes>
         <jpa:table name="prioridades"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="CaracteristicasXInsumo" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347131">
+    <jpa:entity xre="false" compositePrimaryKeyClass="CaracteristicasXInsumoPK" abs="false" class="CaracteristicasXInsumo" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347131">
         <jpa:attributes>
-            <basic optional="false" attribute-type="double" visibile="true" name="valor" id="_1458916094354306">
+            <jpa:basic optional="false" attribute-type="double" visibile="true" name="valor" id="_1458916094354306">
                 <jpa:column name="valor" unique="false" nullable="false" insertable="true" updatable="true" table="caracteristicasXInsumo"/>
-            </basic>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094346103" connected-attribute-id="_1458916094350152" visibile="true" name="idCaracteristica" id="_1458916094354307">
-                <join-column name="idCaracteristica" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347135" connected-attribute-id="_1458916094356337" visibile="true" name="idModelo" id="_1458916094354308">
-                <join-column name="idModelo" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094346103" connected-attribute-id="_1458916094350152" visibile="true" name="idCaracteristica" id="_1458916094354307">
+                <jpa:join-column name="idCaracteristica" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347135" connected-attribute-id="_1458916094356337" visibile="true" name="idModelo" id="_1458916094354308">
+                <jpa:join-column name="idModelo" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
             <jpa:id attribute-type="Integer" visibile="true" name="idCarXIns" id="_1458916094354305">
                 <jpa:column name="idCarXIns" unique="false" nullable="false" insertable="true" updatable="true" table="caracteristicasXInsumo"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -652,37 +652,37 @@
             </jpa:unique-constraint>
         </jpa:table>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="EstadosXTrabajo" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347132">
+    <jpa:entity xre="false" compositePrimaryKeyClass="EstadosXTrabajoPK" abs="false" class="EstadosXTrabajo" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347132">
         <jpa:attributes>
-            <basic optional="false" attribute-type="java.util.Date" visibile="true" name="fechaDesde" id="_1458916094355310">
+            <jpa:basic optional="false" attribute-type="java.util.Date" visibile="true" name="fechaDesde" id="_1458916094355310">
+                <jpa:temporal>TIMESTAMP</jpa:temporal>
                 <jpa:column name="fechaDesde" unique="false" nullable="false" insertable="true" updatable="true" table="estadosXTrabajo"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" visibile="true" name="fechaHasta" id="_1458916094355311">
                 <jpa:temporal>TIMESTAMP</jpa:temporal>
-            </basic>
-            <basic optional="true" attribute-type="java.util.Date" visibile="true" name="fechaHasta" id="_1458916094355311">
                 <jpa:column name="fechaHasta" unique="false" nullable="true" insertable="true" updatable="true" table="estadosXTrabajo"/>
-                <jpa:temporal>TIMESTAMP</jpa:temporal>
-            </basic>
-            <basic optional="false" attribute-type="int" visibile="true" name="nroFicha" id="_1458916094355312">
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="int" visibile="true" name="nroFicha" id="_1458916094355312">
                 <jpa:column name="nroFicha" unique="false" nullable="false" insertable="true" updatable="true" table="estadosXTrabajo"/>
-            </basic>
-            <basic optional="false" attribute-type="String" visibile="true" name="trabajoRealizado" id="_1458916094355313">
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="trabajoRealizado" id="_1458916094355313">
                 <jpa:column name="trabajoRealizado" unique="false" nullable="false" insertable="true" updatable="true" table="estadosXTrabajo" length="1000"/>
-            </basic>
-            <basic optional="true" attribute-type="String" visibile="true" name="observaciones" id="_1458916094355314">
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="observaciones" id="_1458916094355314">
                 <jpa:column name="observaciones" unique="false" nullable="true" insertable="true" updatable="true" table="estadosXTrabajo" length="1000"/>
-            </basic>
-            <basic optional="false" attribute-type="boolean" visibile="true" name="trabajoFirmado" id="_1458916094355315">
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="boolean" visibile="true" name="trabajoFirmado" id="_1458916094355315">
                 <jpa:column name="trabajoFirmado" unique="false" nullable="false" insertable="true" updatable="true" table="estadosXTrabajo"/>
-            </basic>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094346105" connected-attribute-id="_1458916094350161" visibile="true" name="estado" id="_1458916094355319">
-                <join-column name="estado" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347108" connected-attribute-id="_1458916094351188" visibile="true" name="idTrabajo" id="_1458916094355320">
-                <join-column name="idTrabajo" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094329102" connected-attribute-id="_1458916094350146" visibile="true" name="tecnicosXTrabajosCollection" id="_1458916094355316"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347114" connected-attribute-id="_1458916094352224" visibile="true" name="tareasRealizadasCollection" id="_1458916094355317"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347127" connected-attribute-id="_1458916094354289" visibile="true" name="elementosUtilizadosCollection" id="_1458916094355318"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094346105" connected-attribute-id="_1458916094350161" visibile="true" name="estado" id="_1458916094355319">
+                <jpa:join-column name="estado" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347108" connected-attribute-id="_1458916094351188" visibile="true" name="idTrabajo" id="_1458916094355320">
+                <jpa:join-column name="idTrabajo" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094329102" connected-attribute-id="_1458916094350146" visibile="true" name="tecnicosXTrabajosCollection" id="_1458916094355316"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347114" connected-attribute-id="_1458916094352224" visibile="true" name="tareasRealizadasCollection" id="_1458916094355317"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347127" connected-attribute-id="_1458916094354289" visibile="true" name="elementosUtilizadosCollection" id="_1458916094355318"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idEstadoXTrabajo" id="_1458916094355309">
                 <jpa:column name="idEstadoXTrabajo" unique="false" nullable="false" insertable="true" updatable="true" table="estadosXTrabajo"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -696,17 +696,17 @@
             </jpa:unique-constraint>
         </jpa:table>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="LineaEntrega" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347133">
+    <jpa:entity xre="false" compositePrimaryKeyClass="LineaEntregaPK" abs="false" class="LineaEntrega" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347133">
         <jpa:attributes>
-            <basic optional="false" attribute-type="double" visibile="true" name="cantidad" id="_1458916094355322">
+            <jpa:basic optional="false" attribute-type="double" visibile="true" name="cantidad" id="_1458916094355322">
                 <jpa:column name="cantidad" unique="false" nullable="false" insertable="true" updatable="true" table="lineaEntrega"/>
-            </basic>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347110" connected-attribute-id="_1458916094352206" visibile="true" name="idEntregaInsumo" id="_1458916094355323">
-                <join-column name="idEntregaInsumo" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347137" connected-attribute-id="_1458916094356348" visibile="true" name="idInsumo" id="_1458916094355324">
-                <join-column name="idInsumo" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347110" connected-attribute-id="_1458916094352206" visibile="true" name="idEntregaInsumo" id="_1458916094355323">
+                <jpa:join-column name="idEntregaInsumo" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347137" connected-attribute-id="_1458916094356348" visibile="true" name="idInsumo" id="_1458916094355324">
+                <jpa:join-column name="idInsumo" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
             <jpa:id attribute-type="Integer" visibile="true" name="idLineaEntrega" id="_1458916094355321">
                 <jpa:column name="idLineaEntrega" unique="false" nullable="false" insertable="true" updatable="true" table="lineaEntrega"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -719,31 +719,31 @@
             </jpa:unique-constraint>
         </jpa:table>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="Patrimonios" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347134">
+    <jpa:entity xre="false" compositePrimaryKeyClass="PatrimoniosPK" abs="false" class="Patrimonios" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347134">
         <jpa:attributes>
-            <basic optional="true" attribute-type="String" visibile="true" name="comentario" id="_1458916094356326">
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="comentario" id="_1458916094356326">
                 <jpa:column name="comentario" unique="false" nullable="true" insertable="true" updatable="true" table="patrimonios" length="100"/>
-            </basic>
-            <basic optional="false" attribute-type="java.util.Date" visibile="true" name="fechaAlta" id="_1458916094356327">
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="java.util.Date" visibile="true" name="fechaAlta" id="_1458916094356327">
+                <jpa:temporal>TIMESTAMP</jpa:temporal>
                 <jpa:column name="fechaAlta" unique="false" nullable="false" insertable="true" updatable="true" table="patrimonios"/>
-                <jpa:temporal>TIMESTAMP</jpa:temporal>
-            </basic>
-            <basic optional="true" attribute-type="Boolean" visibile="true" name="baja" id="_1458916094356328">
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Boolean" visibile="true" name="baja" id="_1458916094356328">
                 <jpa:column name="baja" unique="false" nullable="true" insertable="true" updatable="true" table="patrimonios"/>
-            </basic>
-            <basic optional="true" attribute-type="java.util.Date" visibile="true" name="fechaBaja" id="_1458916094356329">
-                <jpa:column name="fechaBaja" unique="false" nullable="true" insertable="true" updatable="true" table="patrimonios"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" visibile="true" name="fechaBaja" id="_1458916094356329">
                 <jpa:temporal>TIMESTAMP</jpa:temporal>
-            </basic>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347112" connected-attribute-id="_1458916094352217" visibile="true" name="idPonderacion" id="_1458916094356331">
-                <join-column name="idPonderacion" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094346104" connected-attribute-id="_1458916094350156" visibile="true" name="idTipo" id="_1458916094356332">
-                <join-column name="idTipo" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347116" connected-attribute-id="_1458916094352230" visibile="true" name="patrimoniosXAsignacionesCollection" id="_1458916094356330"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347136" connected-attribute-id="_1458916094356343" visibile="true" name="patrimoniosXTrabajosCollection" id="_1458916094356333"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347141" connected-attribute-id="_1458916094356369" visibile="true" name="insumosXPatrimonioCollection" id="_1458916094356334"/>
+                <jpa:column name="fechaBaja" unique="false" nullable="true" insertable="true" updatable="true" table="patrimonios"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347112" connected-attribute-id="_1458916094352217" visibile="true" name="idPonderacion" id="_1458916094356331">
+                <jpa:join-column name="idPonderacion" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094346104" connected-attribute-id="_1458916094350156" visibile="true" name="idTipo" id="_1458916094356332">
+                <jpa:join-column name="idTipo" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347116" connected-attribute-id="_1458916094352230" visibile="true" name="patrimoniosXAsignacionesCollection" id="_1458916094356330"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347136" connected-attribute-id="_1458916094356343" visibile="true" name="patrimoniosXTrabajosCollection" id="_1458916094356333"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347141" connected-attribute-id="_1458916094356369" visibile="true" name="insumosXPatrimonioCollection" id="_1458916094356334"/>
             <jpa:id attribute-type="String" visibile="true" name="idPatrimonio" id="_1458916094356325">
                 <jpa:column name="idPatrimonio" unique="false" nullable="false" insertable="true" updatable="true" table="patrimonios" length="9"/>
                 <jpa:generated-value/>
@@ -751,22 +751,22 @@
         </jpa:attributes>
         <jpa:table name="patrimonios"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="ModelosInsumo" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347135">
+    <jpa:entity xre="false" compositePrimaryKeyClass="ModelosInsumoPK" abs="false" class="ModelosInsumo" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347135">
         <jpa:attributes>
-            <basic optional="false" attribute-type="String" visibile="true" name="modelo" id="_1458916094356336">
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="modelo" id="_1458916094356336">
                 <jpa:column name="modelo" unique="false" nullable="false" insertable="true" updatable="true" table="modelosInsumo" length="100"/>
-            </basic>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347138" connected-attribute-id="_1458916094356355" visibile="true" name="idMarca" id="_1458916094356338">
-                <join-column name="idMarca" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347139" connected-attribute-id="_1458916094356358" visibile="true" name="idTipoInsumo" id="_1458916094356339">
-                <join-column name="idTipoInsumo" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347122" connected-attribute-id="_1458916094353259" visibile="true" name="idUnidadMedida" id="_1458916094356340">
-                <join-column name="idUnidadMedida" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347131" connected-attribute-id="_1458916094354308" visibile="true" name="caracteristicasXInsumoCollection" id="_1458916094356337"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347137" connected-attribute-id="_1458916094356349" visibile="true" name="insumosDisponiblesCollection" id="_1458916094356341"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347138" connected-attribute-id="_1458916094356355" visibile="true" name="idMarca" id="_1458916094356338">
+                <jpa:join-column name="idMarca" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347139" connected-attribute-id="_1458916094356358" visibile="true" name="idTipoInsumo" id="_1458916094356339">
+                <jpa:join-column name="idTipoInsumo" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347122" connected-attribute-id="_1458916094353259" visibile="true" name="idUnidadMedida" id="_1458916094356340">
+                <jpa:join-column name="idUnidadMedida" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347131" connected-attribute-id="_1458916094354308" visibile="true" name="caracteristicasXInsumoCollection" id="_1458916094356337"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347137" connected-attribute-id="_1458916094356349" visibile="true" name="insumosDisponiblesCollection" id="_1458916094356341"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idModelo" id="_1458916094356335">
                 <jpa:column name="idModelo" unique="false" nullable="false" insertable="true" updatable="true" table="modelosInsumo"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -774,14 +774,14 @@
         </jpa:attributes>
         <jpa:table name="modelosInsumo"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="PatrimoniosXTrabajos" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347136">
+    <jpa:entity xre="false" compositePrimaryKeyClass="PatrimoniosXTrabajosPK" abs="false" class="PatrimoniosXTrabajos" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347136">
         <jpa:attributes>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347134" connected-attribute-id="_1458916094356333" visibile="true" name="idPatrimonio" id="_1458916094356343">
-                <join-column name="idPatrimonio" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347108" connected-attribute-id="_1458916094351189" visibile="true" name="idTrabajo" id="_1458916094356344">
-                <join-column name="idTrabajo" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347134" connected-attribute-id="_1458916094356333" visibile="true" name="idPatrimonio" id="_1458916094356343">
+                <jpa:join-column name="idPatrimonio" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347108" connected-attribute-id="_1458916094351189" visibile="true" name="idTrabajo" id="_1458916094356344">
+                <jpa:join-column name="idTrabajo" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
             <jpa:id attribute-type="Integer" visibile="true" name="idPatrimonioXTrabajo" id="_1458916094356342">
                 <jpa:column name="idPatrimonioXTrabajo" unique="false" nullable="false" insertable="true" updatable="true" table="patrimoniosXTrabajos"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -794,17 +794,17 @@
             </jpa:unique-constraint>
         </jpa:table>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="InsumosDisponibles" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347137">
+    <jpa:entity xre="false" compositePrimaryKeyClass="InsumosDisponiblesPK" abs="false" class="InsumosDisponibles" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347137">
         <jpa:attributes>
-            <basic optional="false" attribute-type="double" visibile="true" name="cantidadDisponible" id="_1458916094356346">
+            <jpa:basic optional="false" attribute-type="double" visibile="true" name="cantidadDisponible" id="_1458916094356346">
                 <jpa:column name="cantidadDisponible" unique="false" nullable="false" insertable="true" updatable="true" table="insumosDisponibles"/>
-            </basic>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347135" connected-attribute-id="_1458916094356341" visibile="true" name="idModelo" id="_1458916094356349">
-                <join-column name="idModelo" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347127" connected-attribute-id="_1458916094354290" visibile="true" name="elementosUtilizadosCollection" id="_1458916094356347"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347133" connected-attribute-id="_1458916094355324" visibile="true" name="lineaEntregaCollection" id="_1458916094356348"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347141" connected-attribute-id="_1458916094356368" visibile="true" name="insumosXPatrimonioCollection" id="_1458916094356350"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347135" connected-attribute-id="_1458916094356341" visibile="true" name="idModelo" id="_1458916094356349">
+                <jpa:join-column name="idModelo" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347127" connected-attribute-id="_1458916094354290" visibile="true" name="elementosUtilizadosCollection" id="_1458916094356347"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347133" connected-attribute-id="_1458916094355324" visibile="true" name="lineaEntregaCollection" id="_1458916094356348"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347141" connected-attribute-id="_1458916094356368" visibile="true" name="insumosXPatrimonioCollection" id="_1458916094356350"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idInsumo" id="_1458916094356345">
                 <jpa:column name="idInsumo" unique="false" nullable="false" insertable="true" updatable="true" table="insumosDisponibles"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -812,18 +812,18 @@
         </jpa:attributes>
         <jpa:table name="insumosDisponibles"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="Marcas" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347138">
+    <jpa:entity xre="false" compositePrimaryKeyClass="MarcasPK" abs="false" class="Marcas" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347138">
         <jpa:attributes>
-            <basic optional="false" attribute-type="String" visibile="true" name="marca" id="_1458916094356352">
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="marca" id="_1458916094356352">
                 <jpa:column name="marca" unique="false" nullable="false" insertable="true" updatable="true" table="marcas" length="100"/>
-            </basic>
-            <basic optional="true" attribute-type="String" visibile="true" name="abreviatura" id="_1458916094356353">
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="abreviatura" id="_1458916094356353">
                 <jpa:column name="abreviatura" unique="false" nullable="true" insertable="true" updatable="true" table="marcas" length="45"/>
-            </basic>
-            <basic optional="true" attribute-type="String" visibile="true" name="paginaWeb" id="_1458916094356354">
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" visibile="true" name="paginaWeb" id="_1458916094356354">
                 <jpa:column name="paginaWeb" unique="false" nullable="true" insertable="true" updatable="true" table="marcas" length="100"/>
-            </basic>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347135" connected-attribute-id="_1458916094356338" visibile="true" name="modelosInsumoCollection" id="_1458916094356355"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347135" connected-attribute-id="_1458916094356338" visibile="true" name="modelosInsumoCollection" id="_1458916094356355"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idMarca" id="_1458916094356351">
                 <jpa:column name="idMarca" unique="false" nullable="false" insertable="true" updatable="true" table="marcas"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -831,12 +831,12 @@
         </jpa:attributes>
         <jpa:table name="marcas"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="TipoInsumo" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347139">
+    <jpa:entity xre="false" compositePrimaryKeyClass="TipoInsumoPK" abs="false" class="TipoInsumo" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347139">
         <jpa:attributes>
-            <basic optional="false" attribute-type="String" visibile="true" name="tipoInsumo" id="_1458916094356357">
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="tipoInsumo" id="_1458916094356357">
                 <jpa:column name="tipoInsumo" unique="false" nullable="false" insertable="true" updatable="true" table="tipoInsumo" length="100"/>
-            </basic>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347135" connected-attribute-id="_1458916094356339" visibile="true" name="modelosInsumoCollection" id="_1458916094356358"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347135" connected-attribute-id="_1458916094356339" visibile="true" name="modelosInsumoCollection" id="_1458916094356358"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idTipoInsumo" id="_1458916094356356">
                 <jpa:column name="idTipoInsumo" unique="false" nullable="false" insertable="true" updatable="true" table="tipoInsumo"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -844,16 +844,16 @@
         </jpa:attributes>
         <jpa:table name="tipoInsumo"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="ProblemasN3" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347140">
+    <jpa:entity xre="false" compositePrimaryKeyClass="ProblemasN3PK" abs="false" class="ProblemasN3" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347140">
         <jpa:attributes>
-            <basic optional="false" attribute-type="String" visibile="true" name="problema" id="_1458916094356360">
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="problema" id="_1458916094356360">
                 <jpa:column name="problema" unique="false" nullable="false" insertable="true" updatable="true" table="problemasN3" length="45"/>
-            </basic>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347143" connected-attribute-id="_1458916094357375" visibile="true" name="idProblemaN2" id="_1458916094356362">
-                <join-column name="idProblemaN2" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347119" connected-attribute-id="_1458916094353244" visibile="true" name="problemasDetectadosCollection" id="_1458916094356361"/>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094348144" connected-attribute-id="_1458916094357378" visibile="true" name="tareasXProblemasCollection" id="_1458916094356363"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347143" connected-attribute-id="_1458916094357375" visibile="true" name="idProblemaN2" id="_1458916094356362">
+                <jpa:join-column name="idProblemaN2" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347119" connected-attribute-id="_1458916094353244" visibile="true" name="problemasDetectadosCollection" id="_1458916094356361"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094348144" connected-attribute-id="_1458916094357378" visibile="true" name="tareasXProblemasCollection" id="_1458916094356363"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idProblemaN3" id="_1458916094356359">
                 <jpa:column name="idProblemaN3" unique="false" nullable="false" insertable="true" updatable="true" table="problemasN3"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -866,25 +866,25 @@
             </jpa:unique-constraint>
         </jpa:table>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="InsumosXPatrimonio" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347141">
+    <jpa:entity xre="false" compositePrimaryKeyClass="InsumosXPatrimonioPK" abs="false" class="InsumosXPatrimonio" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347141">
         <jpa:attributes>
-            <basic optional="false" attribute-type="double" visibile="true" name="cantidad" id="_1458916094356365">
+            <jpa:basic optional="false" attribute-type="double" visibile="true" name="cantidad" id="_1458916094356365">
                 <jpa:column name="cantidad" unique="false" nullable="false" insertable="true" updatable="true" table="insumosXPatrimonio"/>
-            </basic>
-            <basic optional="false" attribute-type="java.util.Date" visibile="true" name="fechaDesde" id="_1458916094356366">
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="java.util.Date" visibile="true" name="fechaDesde" id="_1458916094356366">
+                <jpa:temporal>TIMESTAMP</jpa:temporal>
                 <jpa:column name="fechaDesde" unique="false" nullable="false" insertable="true" updatable="true" table="insumosXPatrimonio"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" visibile="true" name="fechaHasta" id="_1458916094356367">
                 <jpa:temporal>TIMESTAMP</jpa:temporal>
-            </basic>
-            <basic optional="true" attribute-type="java.util.Date" visibile="true" name="fechaHasta" id="_1458916094356367">
                 <jpa:column name="fechaHasta" unique="false" nullable="true" insertable="true" updatable="true" table="insumosXPatrimonio"/>
-                <jpa:temporal>TIMESTAMP</jpa:temporal>
-            </basic>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347137" connected-attribute-id="_1458916094356350" visibile="true" name="idInsumo" id="_1458916094356368">
-                <join-column name="idInsumo" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347134" connected-attribute-id="_1458916094356334" visibile="true" name="idPatrimonio" id="_1458916094356369">
-                <join-column name="idPatrimonio" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347137" connected-attribute-id="_1458916094356350" visibile="true" name="idInsumo" id="_1458916094356368">
+                <jpa:join-column name="idInsumo" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347134" connected-attribute-id="_1458916094356334" visibile="true" name="idPatrimonio" id="_1458916094356369">
+                <jpa:join-column name="idPatrimonio" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
             <jpa:id attribute-type="Integer" visibile="true" name="idInsumoXPatrimonio" id="_1458916094356364">
                 <jpa:column name="idInsumoXPatrimonio" unique="false" nullable="false" insertable="true" updatable="true" table="insumosXPatrimonio"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -897,12 +897,12 @@
             </jpa:unique-constraint>
         </jpa:table>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="ProblemasN1" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347142">
+    <jpa:entity xre="false" compositePrimaryKeyClass="ProblemasN1PK" abs="false" class="ProblemasN1" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347142">
         <jpa:attributes>
-            <basic optional="false" attribute-type="String" visibile="true" name="problema" id="_1458916094356371">
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="problema" id="_1458916094356371">
                 <jpa:column name="problema" unique="false" nullable="false" insertable="true" updatable="true" table="problemasN1" length="45"/>
-            </basic>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347143" connected-attribute-id="_1458916094357376" visibile="true" name="problemasN2Collection" id="_1458916094356372"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347143" connected-attribute-id="_1458916094357376" visibile="true" name="problemasN2Collection" id="_1458916094356372"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idProblemaN1" id="_1458916094356370">
                 <jpa:column name="idProblemaN1" unique="false" nullable="false" insertable="true" updatable="true" table="problemasN1"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -910,15 +910,15 @@
         </jpa:attributes>
         <jpa:table name="problemasN1"/>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="ProblemasN2" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347143">
+    <jpa:entity xre="false" compositePrimaryKeyClass="ProblemasN2PK" abs="false" class="ProblemasN2" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094347143">
         <jpa:attributes>
-            <basic optional="false" attribute-type="String" visibile="true" name="problema" id="_1458916094357374">
+            <jpa:basic optional="false" attribute-type="String" visibile="true" name="problema" id="_1458916094357374">
                 <jpa:column name="problema" unique="false" nullable="false" insertable="true" updatable="true" table="problemasN2" length="45"/>
-            </basic>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347142" connected-attribute-id="_1458916094356372" visibile="true" name="idProblemaN1" id="_1458916094357376">
-                <join-column name="idProblemaN1" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347140" connected-attribute-id="_1458916094356362" visibile="true" name="problemasN3Collection" id="_1458916094357375"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347142" connected-attribute-id="_1458916094356372" visibile="true" name="idProblemaN1" id="_1458916094357376">
+                <jpa:join-column name="idProblemaN1" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1458916094347140" connected-attribute-id="_1458916094356362" visibile="true" name="problemasN3Collection" id="_1458916094357375"/>
             <jpa:id attribute-type="Integer" visibile="true" name="idProblemaN2" id="_1458916094357373">
                 <jpa:column name="idProblemaN2" unique="false" nullable="false" insertable="true" updatable="true" table="problemasN2"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -931,14 +931,14 @@
             </jpa:unique-constraint>
         </jpa:table>
     </jpa:entity>
-    <jpa:entity xre="false" sm="false" abs="false" class="TareasXProblemas" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094348144">
+    <jpa:entity xre="false" compositePrimaryKeyClass="TareasXProblemasPK" abs="false" class="TareasXProblemas" visibile="true" minimized="false" rootElement="_1458916094328101" id="_1458916094348144">
         <jpa:attributes>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347140" connected-attribute-id="_1458916094356363" visibile="true" name="idProblemaN3" id="_1458916094357378">
-                <join-column name="idProblemaN3" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
-            <many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347129" connected-attribute-id="_1458916094354301" visibile="true" name="idTarea" id="_1458916094357379">
-                <join-column name="idTarea" unique="false" nullable="true" insertable="true" updatable="true"/>
-            </many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347140" connected-attribute-id="_1458916094356363" visibile="true" name="idProblemaN3" id="_1458916094357378">
+                <jpa:join-column name="idProblemaN3" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1458916094347129" connected-attribute-id="_1458916094354301" visibile="true" name="idTarea" id="_1458916094357379">
+                <jpa:join-column name="idTarea" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
             <jpa:id attribute-type="Integer" visibile="true" name="idTareaXProblema" id="_1458916094357377">
                 <jpa:column name="idTareaXProblema" unique="false" nullable="false" insertable="true" updatable="true" table="tareasXProblemas"/>
                 <jpa:generated-value strategy="IDENTITY"/>
@@ -954,133 +954,133 @@
     <jpa:diagram>
         <plane elementRef="_1458916094328101">
             <shape elementRef="_1458916094329102">
-                <Bounds x="2549.0" y="2118.0" width="206.0" height="113.0"/>
+                <Bounds x="2549.0" y="2118.0" width="228.0" height="106.0"/>
             </shape>
             <shape elementRef="_1458916094346103">
-                <Bounds x="1326.0" y="2666.0" width="283.0" height="168.0"/>
+                <Bounds x="1326.0" y="2666.0" width="312.0" height="158.0"/>
             </shape>
             <shape elementRef="_1458916094346104">
-                <Bounds x="323.0" y="1886.0" width="182.0" height="147.0"/>
+                <Bounds x="323.0" y="1886.0" width="203.0" height="138.0"/>
             </shape>
             <shape elementRef="_1458916094346105">
-                <Bounds x="2549.0" y="1507.0" width="226.0" height="168.0"/>
+                <Bounds x="2549.0" y="1507.0" width="247.0" height="158.0"/>
             </shape>
             <shape elementRef="_1458916094346106">
-                <Bounds x="1978.0" y="938.0" width="203.0" height="294.0"/>
+                <Bounds x="1978.0" y="938.0" width="220.0" height="278.0"/>
             </shape>
             <shape elementRef="_1458916094346107">
-                <Bounds x="1326.0" y="306.0" width="165.0" height="168.0"/>
+                <Bounds x="1326.0" y="306.0" width="175.0" height="158.0"/>
             </shape>
             <shape elementRef="_1458916094347108">
-                <Bounds x="1326.0" y="938.0" width="235.0" height="315.0"/>
+                <Bounds x="1326.0" y="938.0" width="257.0" height="298.0"/>
             </shape>
             <shape elementRef="_1458916094347109">
-                <Bounds x="1673.0" y="622.0" width="203.0" height="252.0"/>
+                <Bounds x="1673.0" y="622.0" width="220.0" height="238.0"/>
             </shape>
             <shape elementRef="_1458916094347110">
-                <Bounds x="2270.0" y="622.0" width="189.0" height="231.0"/>
+                <Bounds x="2270.0" y="622.0" width="211.0" height="218.0"/>
             </shape>
             <shape elementRef="_1458916094347111">
-                <Bounds x="2873.0" y="1886.0" width="209.0" height="147.0"/>
+                <Bounds x="2873.0" y="1886.0" width="235.0" height="138.0"/>
             </shape>
             <shape elementRef="_1458916094347112">
-                <Bounds x="637.0" y="2118.0" width="283.0" height="210.0"/>
+                <Bounds x="637.0" y="2118.0" width="312.0" height="198.0"/>
             </shape>
             <shape elementRef="_1458916094347113">
-                <Bounds x="984.0" y="1886.0" width="191.0" height="147.0"/>
+                <Bounds x="984.0" y="1886.0" width="207.0" height="138.0"/>
             </shape>
             <shape elementRef="_1458916094347114">
-                <Bounds x="1673.0" y="1886.0" width="198.0" height="113.0"/>
+                <Bounds x="1673.0" y="1886.0" width="223.0" height="106.0"/>
             </shape>
             <shape elementRef="_1458916094347115">
-                <Bounds x="2270.0" y="1317.0" width="146.0" height="126.0"/>
+                <Bounds x="2270.0" y="1317.0" width="160.0" height="118.0"/>
             </shape>
             <shape elementRef="_1458916094347116">
-                <Bounds x="323.0" y="1317.0" width="250.0" height="113.0"/>
+                <Bounds x="323.0" y="1317.0" width="284.0" height="106.0"/>
             </shape>
             <shape elementRef="_1458916094347117">
-                <Bounds x="1978.0" y="306.0" width="214.0" height="252.0"/>
+                <Bounds x="1978.0" y="306.0" width="232.0" height="238.0"/>
             </shape>
             <shape elementRef="_1458916094347118">
-                <Bounds x="1673.0" y="32.0" width="192.0" height="126.0"/>
+                <Bounds x="1673.0" y="32.0" width="215.0" height="118.0"/>
             </shape>
             <shape elementRef="_1458916094347119">
-                <Bounds x="984.0" y="622.0" width="223.0" height="113.0"/>
+                <Bounds x="984.0" y="622.0" width="253.0" height="106.0"/>
             </shape>
             <shape elementRef="_1458916094347120">
-                <Bounds x="637.0" y="306.0" width="201.0" height="147.0"/>
+                <Bounds x="637.0" y="306.0" width="215.0" height="138.0"/>
             </shape>
             <shape elementRef="_1458916094347121">
-                <Bounds x="984.0" y="2392.0" width="278.0" height="168.0"/>
+                <Bounds x="984.0" y="2392.0" width="318.0" height="158.0"/>
             </shape>
             <shape elementRef="_1458916094347122">
-                <Bounds x="637.0" y="2666.0" width="283.0" height="168.0"/>
+                <Bounds x="637.0" y="2666.0" width="312.0" height="158.0"/>
             </shape>
             <shape elementRef="_1458916094347123">
-                <Bounds x="323.0" y="32.0" width="186.0" height="147.0"/>
+                <Bounds x="323.0" y="32.0" width="207.0" height="138.0"/>
             </shape>
             <shape elementRef="_1458916094347124">
-                <Bounds x="32.0" y="306.0" width="227.0" height="147.0"/>
+                <Bounds x="32.0" y="306.0" width="258.0" height="138.0"/>
             </shape>
             <shape elementRef="_1458916094347125">
-                <Bounds x="2549.0" y="938.0" width="260.0" height="189.0"/>
+                <Bounds x="2549.0" y="938.0" width="282.0" height="178.0"/>
             </shape>
             <shape elementRef="_1458916094347126">
-                <Bounds x="1326.0" y="1507.0" width="203.0" height="315.0"/>
+                <Bounds x="1326.0" y="1507.0" width="220.0" height="298.0"/>
             </shape>
             <shape elementRef="_1458916094347127">
-                <Bounds x="2270.0" y="1886.0" width="211.0" height="168.0"/>
+                <Bounds x="2270.0" y="1886.0" width="241.0" height="158.0"/>
             </shape>
             <shape elementRef="_1458916094347128">
-                <Bounds x="984.0" y="32.0" width="151.0" height="210.0"/>
+                <Bounds x="984.0" y="32.0" width="161.0" height="198.0"/>
             </shape>
             <shape elementRef="_1458916094347129">
-                <Bounds x="2270.0" y="2392.0" width="215.0" height="147.0"/>
+                <Bounds x="2270.0" y="2392.0" width="232.0" height="138.0"/>
             </shape>
             <shape elementRef="_1458916094347130">
-                <Bounds x="1673.0" y="1317.0" width="162.0" height="126.0"/>
+                <Bounds x="1673.0" y="1317.0" width="178.0" height="118.0"/>
             </shape>
             <shape elementRef="_1458916094347131">
-                <Bounds x="1673.0" y="2898.0" width="234.0" height="147.0"/>
+                <Bounds x="1673.0" y="2898.0" width="263.0" height="138.0"/>
             </shape>
             <shape elementRef="_1458916094347132">
-                <Bounds x="1978.0" y="1507.0" width="225.0" height="315.0"/>
+                <Bounds x="1978.0" y="1507.0" width="243.0" height="298.0"/>
             </shape>
             <shape elementRef="_1458916094347133">
-                <Bounds x="2549.0" y="306.0" width="171.0" height="147.0"/>
+                <Bounds x="2549.0" y="306.0" width="191.0" height="138.0"/>
             </shape>
             <shape elementRef="_1458916094347134">
-                <Bounds x="637.0" y="1507.0" width="260.0" height="273.0"/>
+                <Bounds x="637.0" y="1507.0" width="282.0" height="258.0"/>
             </shape>
             <shape elementRef="_1458916094347135">
-                <Bounds x="1673.0" y="2392.0" width="241.0" height="210.0"/>
+                <Bounds x="1673.0" y="2392.0" width="263.0" height="198.0"/>
             </shape>
             <shape elementRef="_1458916094347136">
-                <Bounds x="984.0" y="1317.0" width="223.0" height="113.0"/>
+                <Bounds x="984.0" y="1317.0" width="252.0" height="106.0"/>
             </shape>
             <shape elementRef="_1458916094347137">
-                <Bounds x="1978.0" y="2118.0" width="228.0" height="189.0"/>
+                <Bounds x="1978.0" y="2118.0" width="244.0" height="178.0"/>
             </shape>
             <shape elementRef="_1458916094347138">
-                <Bounds x="2270.0" y="2898.0" width="203.0" height="168.0"/>
+                <Bounds x="2270.0" y="2898.0" width="216.0" height="158.0"/>
             </shape>
             <shape elementRef="_1458916094347139">
-                <Bounds x="1978.0" y="2666.0" width="203.0" height="126.0"/>
+                <Bounds x="1978.0" y="2666.0" width="216.0" height="118.0"/>
             </shape>
             <shape elementRef="_1458916094347140">
-                <Bounds x="637.0" y="938.0" width="235.0" height="168.0"/>
+                <Bounds x="637.0" y="938.0" width="257.0" height="158.0"/>
             </shape>
             <shape elementRef="_1458916094347141">
-                <Bounds x="1326.0" y="2118.0" width="215.0" height="189.0"/>
+                <Bounds x="1326.0" y="2118.0" width="241.0" height="178.0"/>
             </shape>
             <shape elementRef="_1458916094347142">
-                <Bounds x="32.0" y="938.0" width="188.0" height="126.0"/>
+                <Bounds x="32.0" y="938.0" width="201.0" height="118.0"/>
             </shape>
             <shape elementRef="_1458916094347143">
-                <Bounds x="323.0" y="622.0" width="188.0" height="147.0"/>
+                <Bounds x="323.0" y="622.0" width="201.0" height="138.0"/>
             </shape>
             <shape elementRef="_1458916094348144">
-                <Bounds x="32.0" y="1507.0" width="206.0" height="113.0"/>
+                <Bounds x="32.0" y="1507.0" width="229.0" height="106.0"/>
             </shape>
         </plane>
     </jpa:diagram>

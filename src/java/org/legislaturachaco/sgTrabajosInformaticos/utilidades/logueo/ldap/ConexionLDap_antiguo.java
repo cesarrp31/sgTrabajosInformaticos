@@ -5,7 +5,7 @@
  */
 package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.ldap;
 
-import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.ldap.Usuario;
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.ldap.UsuarioDominio;
 import java.util.Date;
 import java.util.Hashtable;
 import javax.naming.AuthenticationException;
@@ -27,7 +27,7 @@ import javax.naming.ldap.LdapContext;
 public class ConexionLDap_antiguo {
     private static final String SERVER= "10.2.0.49:389";
     
-    private static Usuario getUser(String username, LdapContext context) {
+    private static UsuarioDominio getUser(String username, LdapContext context) {
         String[] userAttributes = {
             "distinguishedName","cn","name","uid",
             "sn","givenname","memberOf","samaccountname",
@@ -58,7 +58,7 @@ public class ConexionLDap_antiguo {
                 if (answer.hasMore()) {
                     Attributes attr = answer.next().getAttributes();
                     Attribute user = attr.get("userPrincipalName");
-                    if (user!=null) return new Usuario(attr);
+                    if (user!=null) return new UsuarioDominio(attr);
                 }
             }
         }
@@ -77,9 +77,9 @@ public class ConexionLDap_antiguo {
      * @return Un usuario valido del dominio.
      * @throws NamingException 
      */
-    public static Usuario getUser(String username, String password) throws NamingException {
+    public static UsuarioDominio getUser(String username, String password) throws NamingException {
         LdapContext ctx = getLdapContext(username, password);
-        Usuario u= getUser(username, ctx);
+        UsuarioDominio u= getUser(username, ctx);
         ctx.close();
         return u;
     }
@@ -119,7 +119,7 @@ public class ConexionLDap_antiguo {
             String grupoABuscar= "Soportecnicos";
             System.out.println("run: " + new Date());
             LdapContext ctx = getLdapContext("oficinasanchez", "oficina2011");
-            Usuario u= getUser("coperalta", ctx);
+            UsuarioDominio u= getUser("coperalta", ctx);
             System.out.println(u.getCommonName());
             System.out.println(u.getDistinguishedName());
             System.out.println(u.getUserPrincipal());

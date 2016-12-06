@@ -5,6 +5,7 @@
  */
 package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.ldap;
 
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.UsuarioNoEncontradoException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -69,7 +70,7 @@ public class ConexionLDAP {
         ctx.close();
     }
     
-    private Usuario getUser(String username) throws UsuarioNoEncontradoException {
+    private UsuarioDominio getUser(String username) throws UsuarioNoEncontradoException {
         String[] userAttributes = {
             "distinguishedName","cn","name","uid",
             "sn","givenname","memberOf","samaccountname",
@@ -100,7 +101,7 @@ public class ConexionLDAP {
                 if (answer.hasMore()) {
                     Attributes attr = answer.next().getAttributes();
                     Attribute user = attr.get("userPrincipalName");
-                    if (user!=null) return new Usuario(attr);
+                    if (user!=null) return new UsuarioDominio(attr);
                 }
             }
         }
@@ -118,8 +119,8 @@ public class ConexionLDAP {
      * @return Un usuario valido del dominio.
      * @throws NamingException 
      */
-    public Usuario getUsuario(String nombreUsuario) throws NamingException, UsuarioNoEncontradoException {
-        Usuario u= getUser(nombreUsuario);
+    public UsuarioDominio getUsuario(String nombreUsuario) throws NamingException, UsuarioNoEncontradoException {
+        UsuarioDominio u= getUser(nombreUsuario);
         return u;
     }
     
@@ -372,7 +373,7 @@ public class ConexionLDAP {
 
         ConexionLDAP con = ConexionLDAP.getInstance();
         
-        Usuario u;
+        UsuarioDominio u;
         
         try {
             con.crearConexion(usConexion, passConexion);

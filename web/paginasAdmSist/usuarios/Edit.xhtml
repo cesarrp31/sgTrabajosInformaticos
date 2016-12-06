@@ -34,6 +34,10 @@
                                            var="idTecnicoItem"
                                            itemValue="#{idTecnicoItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditUsuariosLabel_baja}" for="baja" />
+                        <p:inputText id="baja" value="#{usuariosController.selected.baja}" title="#{bundle.EditUsuariosTitle_baja}" />
+                        <p:outputLabel value="#{bundle.EditUsuariosLabel_usarClaveBD}" for="usarClaveBD" />
+                        <p:inputText id="usarClaveBD" value="#{usuariosController.selected.usarClaveBD}" title="#{bundle.EditUsuariosTitle_usarClaveBD}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{usuariosController.update}" value="#{bundle.Save}" update="display,:UsuariosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UsuariosEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UsuariosEditDialog.hide()"/>

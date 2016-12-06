@@ -5,6 +5,8 @@
  */
 package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.ldap;
 
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.UsuarioNoPerteneceAGrupoExeption;
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.UsuarioNoEncontradoException;
 import javax.naming.NamingException;
 
 /**
@@ -13,7 +15,7 @@ import javax.naming.NamingException;
  */
 public class ProcesoLogeoDominio {
     private ConexionLDAP conexionLDAP;
-    private Usuario usuario;
+    private UsuarioDominio usuario;
 
     public ProcesoLogeoDominio(){
         conexionLDAP= ConexionLDAP.getInstance();
@@ -39,7 +41,7 @@ public class ProcesoLogeoDominio {
         return usuario.getCommonName();
     }
 
-    public Usuario getUsuario() {
+    public UsuarioDominio getUsuario() {
         return usuario;
     }
     

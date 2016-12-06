@@ -8,14 +8,14 @@ package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.ldap;
 import javax.naming.NamingEnumeration;
 import javax.naming.directory.Attributes;
 
-public class Usuario {
+public class UsuarioDominio {
     private Attributes attr;
     private String distinguishedName;
     private String userPrincipal;
     private String commonName;
     private String memberof;
 
-    public Usuario(Attributes attr) throws javax.naming.NamingException {
+    public UsuarioDominio(Attributes attr) throws javax.naming.NamingException {
         userPrincipal = (String) attr.get("userPrincipalName").get();
         commonName = (String) attr.get("cn").get();
         distinguishedName = (String) attr.get("distinguishedName").get();

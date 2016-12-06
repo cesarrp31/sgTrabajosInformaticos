@@ -15,7 +15,7 @@ import org.legislaturachaco.sgTrabajosInformaticos.sessionBeans.AbstractFacade;
  * @author Cesar
  */
 @Stateless
-public class CargaTrabajosFacade extends AbstractFacade<CargaTrabajosControllerBkp> {
+public class CargaTrabajosFacade extends AbstractFacade<CargaTrabajosController> {
 
     @PersistenceContext(unitName = "sgTrabajosInformaticosUnit")
     private EntityManager em;
@@ -26,7 +26,7 @@ public class CargaTrabajosFacade extends AbstractFacade<CargaTrabajosControllerB
     }
 
     public CargaTrabajosFacade() {
-        super(CargaTrabajosControllerBkp.class);
+        super(CargaTrabajosController.class);
     }
     
 }

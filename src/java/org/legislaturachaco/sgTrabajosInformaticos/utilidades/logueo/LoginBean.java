@@ -12,10 +12,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.naming.AuthenticationException;
 import javax.servlet.http.HttpSession;
-import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.ldap.CredencialesNoValidasException;
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.ClaveUsuarioIncorrectaException;
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.CredencialesNoValidasException;
 import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.ldap.ProcesoLogeoDominio;
-import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.ldap.Usuario;
-import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.ldap.UsuarioNoEncontradoException;
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.ldap.UsuarioDominio;
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.UsuarioNoEncontradoException;
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.jdbcMySql.ConexionBaseDatos;
 import org.primefaces.context.RequestContext;
 
 /**
@@ -29,7 +31,7 @@ public class LoginBean implements Serializable {
     private String nombre;
     private String clave;
     private boolean logeado = false, debug = false;
-    private Usuario usuario;
+    private UsuarioDominio usuarioDominio;
 
     private final String grupo = "trabajosinformaticos";
     public static final String INICIO = "login.xhtml";
@@ -41,11 +43,11 @@ public class LoginBean implements Serializable {
     private RequestContext context;
 
     private LoginBean(boolean debug) {
-        this();
         this.debug = debug;
     }
 
     public LoginBean() {
+        this(false);
     }
 
     public boolean estaLogeado() {
@@ -69,7 +71,7 @@ public class LoginBean implements Serializable {
     }
 
     public String getNombreCompleto() {
-        return usuario.getCommonName();
+        return usuarioDominio.getCommonName();
     }
 
     public String login() {
@@ -81,33 +83,35 @@ public class LoginBean implements Serializable {
         3° Si no cumple 1° o 2° rechazar;        
          */
 
+        logeado = false;
         if (!debug) {
             context = RequestContext.getCurrentInstance();
-        }
-
-        logeado = false;
-
-        if (!debug) {
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
                     "Credenciales no válidas");
         }
-
+        
         //1º
         if (verificarUsuarioLocalBD()) {
-
-        } else//2
-        if (verificarUsuarioDominio()) {
             
-        } else {//3
-            rechazarAccesoPagina();
+        } else{//2
+            if (verificarUsuarioDominio()) {
+
+            } else {//3
+                rechazarAccesoPagina();
+            }
         }
-        String sig = "";
+        /*
+        verificarUsuarioLocalBD();
+        verificarUsuarioDominio();
+        rechazarAccesoPagina();*/
+        
+        String sig= "";
         if (!debug) {
             FacesContext.getCurrentInstance().addMessage(null, msg);
             context.addCallbackParam("estaLogeado", logeado);
 
             if (logeado) {
-                System.out.println("Usuario Logueado: "+usuario.getCommonName());
+                System.out.println("Usuario Logueado: "+usuarioDominio.getCommonName());
                 context.addCallbackParam("view", PAGINA_SIGUIENTE);
                 sig = PAGINA_SIGUIENTE;
             } else {
@@ -120,6 +124,17 @@ public class LoginBean implements Serializable {
 
     private boolean verificarUsuarioLocalBD() {
         boolean resultado = false;
+        ConexionBaseDatos cbd= new ConexionBaseDatos();
+        try {
+            cbd.verificarUsuario(nombre, clave);
+            resultado= true;
+        } catch (UsuarioNoEncontradoException ex) {
+            System.out.println("");
+            manejarErrores(ex, "Error de autenticación");
+        } catch (ClaveUsuarioIncorrectaException ex) {
+            System.out.println("");
+            manejarErrores(ex, "Credenciales inválidas");
+        }
         return resultado;
     }
 
@@ -131,22 +146,10 @@ public class LoginBean implements Serializable {
             pld.verificarGrupoDominio(grupo);
             pld.verificarListaNegraDominio();
             resultado = true;
-            usuario= pld.getUsuario();
+            usuarioDominio= pld.getUsuario();
             logeado = true;
             System.out.println("Inicio sesión: " + nombre);
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@ ", nombre);
-            /*
-            if(u.perteneceAGrupo(grupo)){
-                nombreCompleto= u.getCommonName();
-                logeado = true;
-                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@ ", nombre);
-            }else{
-                logeado = false;
-                msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
-                    "No pertenece a grupo");
-                //throw new RuntimeException(nombre+" no pertenece a grupo"); 
-            }            
-            conexionLDAP.cerrarConexion();*/
+            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@ ", nombre);            
         } catch (AuthenticationException ae) {
             manejarErrores(ae, "Error de autenticación");
         } catch (UsuarioNoEncontradoException une) {
@@ -189,7 +192,7 @@ public class LoginBean implements Serializable {
 
         lb.login();
 
-        System.out.println("Esta logeado?: " + lb.estaLogeado()+ " "+lb.usuario);
+        System.out.println("Esta logeado?: " + lb.estaLogeado()+ " "+lb.usuarioDominio);
 
         lb.logout();
     }
