@@ -1,0 +1,4 @@
+dominio = @legislaturachaco.local
+baseBusqueda = dc=LEGISLATURACHACO,dc=LOCAL
+servidor= 10.2.0.49
+puerto= 389

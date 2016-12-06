@@ -6,7 +6,8 @@
 package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.jdbcMySql;
 
 import java.io.Serializable;
-import javax.annotation.PostConstruct;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
@@ -15,6 +16,7 @@ import org.legislaturachaco.sgTrabajosInformaticos.entidades.Usuarios;
 import org.legislaturachaco.sgTrabajosInformaticos.utilidades.ClaveUsuarioIncorrectaException;
 import org.legislaturachaco.sgTrabajosInformaticos.utilidades.Utiles;
 import org.legislaturachaco.sgTrabajosInformaticos.utilidades.UsuarioNoEncontradoException;
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.UsuarioLogueado;
 
 /**
  *
@@ -31,22 +33,41 @@ public class ConexionBaseDatos implements Serializable {
         usuariosController = (UsuariosController) Utiles.obtenerController("usuariosController");
     }
 
-    public void verificarUsuario(String nombre, String clave) throws UsuarioNoEncontradoException, ClaveUsuarioIncorrectaException {
+    public UsuarioLogueado verificarUsuario(String nombre, String clave) 
+            throws UsuarioNoEncontradoException, ClaveUsuarioIncorrectaException, NoSuchAlgorithmException {
         Usuarios usuario = usuariosController.getUsuarios(nombre);
-
+        
         if (usuario == null) {
             throw new UsuarioNoEncontradoException();
         } else {
-            if(usuario.getPassword().equals(clave)){
+            if(usuario.getPassword().equals(sha256(clave))){
                 //usuario verificado ok
                 //usuario.
+                System.out.println("Usuario local válido!!!!!!!!!!!!!!!!!");
+                return new UsuarioLogueado(null, usuario);
             }else{
                 throw new ClaveUsuarioIncorrectaException();
             }
         }
     }
     
-    public static void main(String[] args) throws UsuarioNoEncontradoException, ClaveUsuarioIncorrectaException {
+    private String sha256(String valor) throws NoSuchAlgorithmException{
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        md.update(valor.getBytes());
+
+        byte byteData[] = md.digest();
+
+        StringBuffer hexString = new StringBuffer();
+    	for (int i=0;i<byteData.length;i++) {
+    		String hex=Integer.toHexString(0xff & byteData[i]);
+   	     	if(hex.length()==1) hexString.append('0');
+   	     	hexString.append(hex);
+    	}
+    	return hexString.toString();
+    }
+    
+    public static void main(String[] args) 
+            throws UsuarioNoEncontradoException, ClaveUsuarioIncorrectaException, NoSuchAlgorithmException {
         ConexionBaseDatos c= new ConexionBaseDatos();
         c.verificarUsuario("","");
     }
