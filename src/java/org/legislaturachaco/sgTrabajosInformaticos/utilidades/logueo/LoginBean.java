@@ -38,7 +38,6 @@ public class LoginBean implements Serializable {
             INICIO2 = "/" + INICIO;
 
     private FacesMessage msg;
-
     private RequestContext context;
 
     private LoginBean(boolean debug) {
@@ -82,10 +81,10 @@ public class LoginBean implements Serializable {
         3° Si no cumple 1° o 2° rechazar;        
          */
 
-        logeado = false;
+        logeado= false;
         if (!debug) {
-            context = RequestContext.getCurrentInstance();
-            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
+            context= RequestContext.getCurrentInstance();
+            msg= new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
                     "Credenciales no válidas");
         }
         
@@ -99,12 +98,8 @@ public class LoginBean implements Serializable {
                 rechazarAccesoPagina();
             }
         }
-        /*
-        verificarUsuarioLocalBD();
-        verificarUsuarioDominio();
-        rechazarAccesoPagina();*/
         
-        String sig= "";
+        String paginaSiguiente= "";
         if (!debug) {
             FacesContext.getCurrentInstance().addMessage(null, msg);
             context.addCallbackParam("estaLogeado", logeado);
@@ -112,30 +107,27 @@ public class LoginBean implements Serializable {
             if (logeado) {
                 System.out.println("Usuario Logueado: "+usuarioLogueado.getNombreUsuario());
                 context.addCallbackParam("view", PAGINA_SIGUIENTE);
-                sig = PAGINA_SIGUIENTE;
+                paginaSiguiente= PAGINA_SIGUIENTE;
             } else {
                 context.addCallbackParam("view", INICIO2);
-                sig = INICIO2;
+                paginaSiguiente= INICIO2;
             }
         }
-        return sig;
+        return paginaSiguiente;
     }
 
     private boolean verificarUsuarioLocalBD() {
-        boolean resultado = false;
+        boolean resultado= false;
         ConexionBaseDatos cbd= new ConexionBaseDatos();
         try {
             usuarioLogueado= cbd.verificarUsuario(nombre, clave);
             resultado= true;
-            logeado = true;
+            logeado= true;
         } catch (UsuarioNoEncontradoException ex) {
-            System.out.println("");
             manejarErrores(ex, "Error de autenticación");
         } catch (ClaveUsuarioIncorrectaException ex) {
-            System.out.println("");
             manejarErrores(ex, "Credenciales inválidas");
         } catch (Exception ex) {
-            System.out.println("");
             manejarErrores(ex, "Se ha producido un error!");
         }
         return resultado;
