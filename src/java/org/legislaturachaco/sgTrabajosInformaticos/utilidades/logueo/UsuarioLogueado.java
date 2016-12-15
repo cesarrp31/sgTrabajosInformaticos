@@ -17,21 +17,26 @@ public class UsuarioLogueado {
     private final UsuarioDominio usuarioDominio;
     private final Usuarios usuario;
 
-    public UsuarioLogueado(UsuarioDominio usuarioDominio, Usuarios usuario) {
+    private UsuarioLogueado(UsuarioDominio usuarioDominio, Usuarios usuario) {
         this.usuarioDominio = usuarioDominio;
         this.usuario = usuario;
     }
-
-    public UsuarioDominio getUsuarioDominio() {
-        return usuarioDominio;
-    }
-
-    public Usuarios getUsuario() {
-        return usuario;
+    
+    public UsuarioLogueado(UsuarioDominio usuarioDominio){
+        this(usuarioDominio, null);
     }
     
+    public UsuarioLogueado(Usuarios usuarios){
+        this(null, usuarios);
+    }
+
     public String getNombreUsuario(){
-        if(usuario == null) return usuarioDominio.getCommonName();
-        else return usuario.getUsuario();
+        if(usuario == null) return usuarioDominio.getNombre()+" "+usuarioDominio.getApellido();
+        else {
+            String nomAp="";
+            if(usuario.getIdTecnico()!=null) nomAp+=": "+
+                    usuario.getIdTecnico().getApellido()+" "+usuario.getIdTecnico().getNombre();
+            return usuario.getUsuario()+nomAp;
+        }
     }
 }

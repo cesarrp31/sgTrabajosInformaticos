@@ -21,9 +21,10 @@
                                 <p:outputLabel value="Usuario:" for="username"/>
                             </p:column>
                             <p:column>
-                                <p:inputText id="username" value="#{loginBean.nombre}" ></p:inputText>
+                                <p:inputText id="username" value="#{loginBean.nombre}" required="true"></p:inputText>
                                 <p:message for="username" ></p:message>
                                 <p:watermark value="Nombre de Ususario" for="username"/>
+                                <p:tooltip id="toolUser" for="username" value="Ingrese valores no nulos."/>
                             </p:column>
                         </p:row>
                         <p:row>
@@ -31,9 +32,11 @@
                                 <p:outputLabel value="Contraseña:" for="password"/>
                             </p:column>
                             <p:column>
-                                <p:password id="password" value="#{loginBean.clave}" feedback="false" ></p:password>
+                                <p:password id="password" value="#{loginBean.clave}" feedback="false" 
+                                            required="true"></p:password>
                                 <p:message for="password"></p:message>
-                                <p:watermark value="Contraseña de Ususario" for="password"/>
+                                <p:watermark value="Contraseña de Usuario" for="password"/>
+                                <p:tooltip id="toolPass" for="password" value="Ingrese valores no nulos."/>
                             </p:column>                                           
                         </p:row>
                         <p:row>
@@ -46,6 +49,16 @@
                     </p:panelGrid>
                 </p:panel> 
             </h:form>
+            <script type="text/javascript">
+                function handleLoginRequest(xhr, status, args) {
+                    if (args.validationFailed || !args.loggedIn) {
+                        PF('dlg').jq.effect("shake", {times: 5}, 100);
+                    } else {
+                        PF('dlg').hide();
+                        $('#loginLink').fadeOut();
+                    }
+                }
+            </script>
         </ui:define>
     </ui:composition>
 </html>

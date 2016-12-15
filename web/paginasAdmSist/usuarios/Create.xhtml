@@ -36,6 +36,8 @@
                         <p:inputText id="baja" value="#{usuariosController.selected.baja}" title="#{bundle.CreateUsuariosTitle_baja}" />
                         <p:outputLabel value="#{bundle.CreateUsuariosLabel_usarClaveBD}" for="usarClaveBD" />
                         <p:inputText id="usarClaveBD" value="#{usuariosController.selected.usarClaveBD}" title="#{bundle.CreateUsuariosTitle_usarClaveBD}" />
+                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_nombreUsuarioDominio}" for="nombreUsuarioDominio" />
+                        <p:inputText id="nombreUsuarioDominio" value="#{usuariosController.selected.nombreUsuarioDominio}" title="#{bundle.CreateUsuariosTitle_nombreUsuarioDominio}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{usuariosController.create}" value="#{bundle.Save}" update="display,:UsuariosListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuariosCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UsuariosCreateDialog.hide()"/>

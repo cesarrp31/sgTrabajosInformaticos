@@ -32,14 +32,14 @@ public class ConexionLDAP {
     private LdapContext ctx;
 
     private final String baseBusqueda, dominio, servidor, puerto;
-    
+
     private ConexionLDAP() {
         dominio = "@legislaturachaco.local";
         baseBusqueda = "dc=LEGISLATURACHACO,dc=LOCAL";
-        servidor= "10.2.0.49";
-        puerto= "389";
+        servidor = "10.2.0.49";
+        puerto = "389";
     }
-    
+
     public static ConexionLDAP getInstance() {
         if (conexionLDAP == null) {
             conexionLDAP = new ConexionLDAP();
@@ -50,7 +50,7 @@ public class ConexionLDAP {
     public void crearConexion(String usuarioConexion, String passwordConexion) throws NamingException {
         String urlServidor = "ldap://" + servidor + ":" + puerto;
 
-        Hashtable<String, Object> env = new Hashtable<String, Object>();
+        Hashtable<String, Object> env = new Hashtable();
         env.put(Context.SECURITY_AUTHENTICATION, "simple");
         env.put(Context.SECURITY_PRINCIPAL, usuarioConexion.toUpperCase() + dominio);
         env.put(Context.SECURITY_CREDENTIALS, passwordConexion);
@@ -69,71 +69,88 @@ public class ConexionLDAP {
     public void cerrarConexion() throws NamingException {
         ctx.close();
     }
-    
-    private UsuarioDominio getUser(String username) throws UsuarioNoEncontradoException {
-        String[] userAttributes = {
-            "distinguishedName","cn","name","uid",
-            "sn","givenname","memberOf","samaccountname",
+
+    private UsuarioDominio getUser(String nombreUsuario) throws NamingException, UsuarioNoEncontradoException {
+        //String leg = "OU=Usuarios,OU=Legislatura Chaco,";
+        String[] atributosUsuario = {
+            "distinguishedName", "cn", "name", "uid",
+            "sn", "givenname", "memberOf", "samaccountname",
             "userPrincipalName"};
-        try{
-            String domainName = null;
-            if (username.contains("@")){
-                username = username.substring(0, username.indexOf("@"));
-                domainName = username.substring(username.indexOf("@")+1);
-            }
-            else if(username.contains("\\")){
-                username = username.substring(0, username.indexOf("\\"));
-                domainName = username.substring(username.indexOf("\\")+1);
-            }
-            else{
-                String authenticatedUser = (String) ctx.getEnvironment().get(Context.SECURITY_PRINCIPAL);
-                if (authenticatedUser.contains("@")){
-                    domainName = authenticatedUser.substring(authenticatedUser.indexOf("@")+1);
-                }
-            }
- 
-            if (domainName!=null){
-                String principalName = username + "@" + domainName;
-                SearchControls controls = new SearchControls();
-                controls.setSearchScope(SUBTREE_SCOPE);
-                controls.setReturningAttributes(userAttributes);
-                NamingEnumeration<SearchResult> answer = ctx.search( aDC(domainName), "(& (userPrincipalName="+principalName+")(objectClass=user))", controls);
-                if (answer.hasMore()) {
-                    Attributes attr = answer.next().getAttributes();
-                    Attribute user = attr.get("userPrincipalName");
-                    if (user!=null) return new UsuarioDominio(attr);
+
+        String nombreDominio = valorNombreDominio(nombreUsuario);
+        /*System.out.println("------ domainName: " + domainName + " || username: " + username
+                + " || aDC(domainName): " + aDC(domainName));
+        //System.out.println("------ ");*/
+        if (nombreDominio != null) {
+            //String principalName = username + "@" + domainName;
+            SearchControls controles = new SearchControls();
+            controles.setSearchScope(SUBTREE_SCOPE);
+            controles.setReturningAttributes(atributosUsuario);
+            String filtroBusqueda = "(&(objectClass=user)(sAMAccountName=" + nombreUsuario + "))";
+            //String searchFilter = "(& (userPrincipalName=" + principalName + ")(objectClass=user))";
+            NamingEnumeration<SearchResult> resultadoBusqueda = 
+                    ctx.search(aDC(nombreDominio), filtroBusqueda, controles);
+            //System.out.println("---------------------ResultadoBusqueda: "+resultadoBusqueda.hasMore());
+            if (resultadoBusqueda.hasMore()) {
+                Attributes attr = resultadoBusqueda.next().getAttributes();
+                //System.out.println("--------------------attr:"+ attr.toString());
+                //Attribute user = attr.get("userPrincipalName");
+                Attribute usuario = attr.get("cn");
+                //System.out.println("-|-|-|-|-|-|-|-|-|-|-|-|- "+new UsuarioDominio(attr));
+                if (usuario != null) {
+                    return new UsuarioDominio(attr);
                 }
             }
         }
-        catch(NamingException e){
-            System.err.println(e.getLocalizedMessage());
-            e.printStackTrace();
-        }
-        throw new UsuarioNoEncontradoException("el servidor "+servidor);
+        throw new UsuarioNoEncontradoException("el servidor " + servidor);
     }
     
+    private String valorNombreDominio(String nombreUsuario) throws NamingException{
+        String nombreDominio = null;
+        if (nombreUsuario.contains("@")) {
+            nombreUsuario = nombreUsuario.substring(0, nombreUsuario.indexOf("@"));
+            nombreDominio = nombreUsuario.substring(nombreUsuario.indexOf("@") + 1);
+        } else if (nombreUsuario.contains("\\")) {
+            nombreUsuario = nombreUsuario.substring(0, nombreUsuario.indexOf("\\"));
+            nombreDominio = nombreUsuario.substring(nombreUsuario.indexOf("\\") + 1);
+        } else {
+            String usuarioAutenticado = (String) ctx.getEnvironment().get(Context.SECURITY_PRINCIPAL);
+            if (usuarioAutenticado.contains("@")) {
+                nombreDominio = usuarioAutenticado.substring(usuarioAutenticado.indexOf("@") + 1);
+            }
+        }
+        return nombreDominio;
+    }
+
     /**
-     * Obtiene un usuario con datos de los distintos grupos al cual pertenece, entre
-     * otras cosas mas.
+     * Obtiene un usuario con datos de los distintos grupos al cual pertenece,
+     * entre otras cosas mas.
+     *
      * @param nombreUsuario Nombre de usuario.
      * @return Un usuario valido del dominio.
-     * @throws NamingException 
+     * @throws NamingException
+     * @throws org.legislaturachaco.sgTrabajosInformaticos.utilidades.UsuarioNoEncontradoException
      */
-    public UsuarioDominio getUsuario(String nombreUsuario) throws NamingException, UsuarioNoEncontradoException {
-        UsuarioDominio u= getUser(nombreUsuario);
+    public UsuarioDominio getUsuario(String nombreUsuario)
+            throws NamingException, UsuarioNoEncontradoException {
+        UsuarioDominio u = getUser(nombreUsuario);
         return u;
     }
-    
+
     private static String aDC(String domainName) {
         StringBuilder buf = new StringBuilder();
         for (String token : domainName.split("\\.")) {
-            if(token.length()==0) continue;
-            if(buf.length()>0) buf.append(",");
+            if (token.length() == 0) {
+                continue;
+            }
+            if (buf.length() > 0) {
+                buf.append(",");
+            }
             buf.append("DC=").append(token);
         }
         return buf.toString();
     }
-    
+
     public boolean buscarGrupo(String usuario, String grupo) {
         try {
             usuario += dominio;
@@ -173,7 +190,7 @@ public class ConexionLDAP {
     }
 
     public void buscarMiembros(String grupo) throws NamingException {
-
+        /*
         // record_count is the sum of all returned records
         Integer record_count = 0;
         // enabled_count is the sum of all records found enabled
@@ -184,7 +201,7 @@ public class ConexionLDAP {
         String account_control = "";
 
         // Here we store the returned LDAP object data
-        String dn = "";
+        String dn = "";*/
         // This will hold the returned attribute list
         Attributes attrs;
 
@@ -213,7 +230,7 @@ public class ConexionLDAP {
             if (null != attrs) {
                 for (NamingEnumeration ae = attrs.getAll(); ae.hasMoreElements();) {
                     Attribute atr = (Attribute) ae.next();
-                    String attributeID = atr.getID();
+                    //String attributeID = atr.getID();
                     Enumeration vals = atr.getAll();
                     //System.out.println(attributeID);
                     while (vals.hasMoreElements()) {
@@ -228,25 +245,25 @@ public class ConexionLDAP {
     }
 
     public List<String> listarGrupos(String usuario) throws NamingException {
-        List<String> resultados= new ArrayList<>();
-       
+        List<String> resultados = new ArrayList<>();
+
         SearchControls searchCtls = new SearchControls();
         String returnedAtts[] = {"memberOf"};
         searchCtls.setReturningAttributes(returnedAtts);
-        searchCtls.setSearchScope(SearchControls.SUBTREE_SCOPE);        
+        searchCtls.setSearchScope(SearchControls.SUBTREE_SCOPE);
         String searchFilter = "(&(objectClass=user)(sAMAccountName=" + usuario + "))";
 
         NamingEnumeration answer = ctx.search(baseBusqueda, searchFilter, searchCtls);
 
         while (answer.hasMoreElements()) {
             SearchResult sr = (SearchResult) answer.next();
-            
+
             Attributes attrs = sr.getAttributes();
             Attribute groupMembers = attrs.get("memberOf");
             for (int i = 0; i < groupMembers.size(); i++) {
                 resultados.add(groupMembers.get(i).toString());
             }
-        }    
+        }
         return resultados;
     }
 
@@ -360,24 +377,24 @@ public class ConexionLDAP {
     public String getPuerto() {
         return puerto;
     }
-    
+
     public static void main(String[] args) {
 
-        String[] lstUs = {"oficinasanchez", "gmario", "coperalta", "jsilva", "mglopez", "aacevedo", "opallud", "oficinagersel", "sss"};
-
+        //String[] lstUs = {"oficinasanchez", "gmario", "coperalta", "jsilva", "mglopez", "aacevedo", "opallud", "oficinagersel", "sss"};
+        String[] lstUs = {"coperalta"};
         String passConexion = "trabinfacceso2016";
-        String usConexion = "accesotrabinf", unUsuario= "coperalta";
-        
+        String usConexion = "accesotrabinf", unUsuario = "coperalta";
+
         boolean respuesta;
         String grupoABuscar = "trabajosinformaticos";
 
         ConexionLDAP con = ConexionLDAP.getInstance();
-        
+
         UsuarioDominio u;
-        
+
         try {
             con.crearConexion(usConexion, passConexion);
-            
+
             System.out.println("Conexion establecida exitosamente");
 
             for (int i = 0; i < lstUs.length; i++) {
@@ -400,25 +417,26 @@ public class ConexionLDAP {
 
                     respuesta = con.buscarGrupo(lstUs[i], grupoABuscar);
                     System.out.println("Resultado busqueda de " + lstUs[i] + " en " + grupoABuscar + ": " + respuesta);
-                    
+
                     //datos usuario
-                    u= con.getUsuario(lstUs[i]);
+                    u = con.getUsuario(lstUs[i]);
                     System.out.println(u);
-                    
+
                 } catch (Exception e) {
                     System.out.println(e.getMessage() + ". Usuario " + lstUs[i] + " no encontrador en el AD");
+                    e.printStackTrace();
                 }
             }
             System.out.println("--------------------------------------------------------");
             System.out.println("--------------------------------------------------------");
 
             con.buscarMiembros(grupoABuscar);
-            
+
             System.out.println("--------------------------------------------------------");
             System.out.println("--------------------------------------------------------");
-            
-            List<String> lista= con.listarGrupos(unUsuario);
-            for(String a: lista){
+
+            List<String> lista = con.listarGrupos(unUsuario);
+            for (String a : lista) {
                 System.out.println(a);
             }
 

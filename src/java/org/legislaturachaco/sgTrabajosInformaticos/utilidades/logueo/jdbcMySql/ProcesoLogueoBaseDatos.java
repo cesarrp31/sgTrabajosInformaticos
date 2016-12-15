@@ -25,11 +25,11 @@ import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.UsuarioLogu
 @Named(value = "conexionBaseDatos")
 @SessionScoped
 @ViewScoped
-public class ConexionBaseDatos implements Serializable {
+public class ProcesoLogueoBaseDatos implements Serializable {
 
     private final UsuariosController usuariosController;
 
-    public ConexionBaseDatos() {
+    public ProcesoLogueoBaseDatos() {
         usuariosController = (UsuariosController) Utiles.obtenerController("usuariosController");
     }
 
@@ -44,7 +44,7 @@ public class ConexionBaseDatos implements Serializable {
                 //usuario verificado ok
                 //usuario.
                 System.out.println("Usuario local válido!!!!!!!!!!!!!!!!!");
-                return new UsuarioLogueado(null, usuario);
+                return new UsuarioLogueado(usuario);
             }else{
                 throw new ClaveUsuarioIncorrectaException();
             }
@@ -57,7 +57,7 @@ public class ConexionBaseDatos implements Serializable {
 
         byte byteData[] = md.digest();
 
-        StringBuffer hexString = new StringBuffer();
+        StringBuilder hexString = new StringBuilder();
     	for (int i=0;i<byteData.length;i++) {
     		String hex=Integer.toHexString(0xff & byteData[i]);
    	     	if(hex.length()==1) hexString.append('0');
@@ -68,7 +68,7 @@ public class ConexionBaseDatos implements Serializable {
     
     public static void main(String[] args) 
             throws UsuarioNoEncontradoException, ClaveUsuarioIncorrectaException, NoSuchAlgorithmException {
-        ConexionBaseDatos c= new ConexionBaseDatos();
+        ProcesoLogueoBaseDatos c= new ProcesoLogueoBaseDatos();
         c.verificarUsuario("","");
     }
 }

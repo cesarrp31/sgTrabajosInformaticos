@@ -5,11 +5,15 @@
  */
 package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.ldap;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import javax.faces.context.FacesContext;
 import org.legislaturachaco.sgTrabajosInformaticos.utilidades.UsuarioNoPerteneceAGrupoExeption;
 import org.legislaturachaco.sgTrabajosInformaticos.utilidades.UsuarioNoEncontradoException;
 import javax.naming.NamingException;
+import javax.naming.PartialResultException;
 import org.legislaturachaco.sgTrabajosInformaticos.utilidades.UsuarioEnListaNegraException;
 import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.UsuarioLogueado;
 
@@ -28,11 +32,17 @@ public class ProcesoLogeoDominio {
     }
     
     private void cargarListaNegra(){
-        listaNegra.add("coperalta");
+        String path= "/WEB-INF/configuraciones/listaNegraUsuarios";
+        InputStream s= FacesContext.getCurrentInstance().getExternalContext()
+                .getResourceAsStream(path);
+        Scanner sc= new Scanner(s);
+        while(sc.hasNextLine()){
+            listaNegra.add(sc.nextLine());
+        }        
     }
     
     public UsuarioLogueado verificarUsuarioDominio(String nombreUsuario, String clave, String grupo) 
-            throws NamingException, UsuarioNoEncontradoException, UsuarioNoPerteneceAGrupoExeption, UsuarioEnListaNegraException{
+            throws PartialResultException, NamingException, UsuarioNoEncontradoException, UsuarioNoPerteneceAGrupoExeption, UsuarioEnListaNegraException{
         conexionLDAP.crearConexion(nombreUsuario, clave);
         this.usuario = conexionLDAP.getUsuario(nombreUsuario);
         conexionLDAP.cerrarConexion();
@@ -40,7 +50,7 @@ public class ProcesoLogeoDominio {
         verificarGrupoDominio(grupo);
         verificarListaNegraDominio(nombreUsuario);
         
-        return new UsuarioLogueado(usuario, null);
+        return new UsuarioLogueado(usuario);
     }
     
     private void verificarGrupoDominio(String grupo) throws UsuarioNoPerteneceAGrupoExeption{
@@ -55,14 +65,5 @@ public class ProcesoLogeoDominio {
                 throw new UsuarioEnListaNegraException();
             }
         }        
-    }
-    
-    public String getNombreCompleto(){
-        return usuario.getCommonName();
-    }
-
-    public UsuarioDominio getUsuario() {
-        return usuario;
-    }
-    
+    }        
 }

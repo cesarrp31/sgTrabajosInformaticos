@@ -16,7 +16,7 @@ import org.legislaturachaco.sgTrabajosInformaticos.utilidades.ClaveUsuarioIncorr
 import org.legislaturachaco.sgTrabajosInformaticos.utilidades.UsuarioEnListaNegraException;
 import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.ldap.ProcesoLogeoDominio;
 import org.legislaturachaco.sgTrabajosInformaticos.utilidades.UsuarioNoEncontradoException;
-import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.jdbcMySql.ConexionBaseDatos;
+import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.jdbcMySql.ProcesoLogueoBaseDatos;
 import org.primefaces.context.RequestContext;
 
 /**
@@ -36,6 +36,8 @@ public class LoginBean implements Serializable {
     public static final String INICIO = "login.xhtml";
     private static final String PAGINA_SIGUIENTE = "/paginasAdmSist/indexAdmSist.xhtml?faces-redirect=true",
             INICIO2 = "/" + INICIO;
+
+    private String msgErrorConsola, msgErrorPantallaResumen, msgErrorPantallaDetalle;
 
     private FacesMessage msg;
     private RequestContext context;
@@ -73,62 +75,80 @@ public class LoginBean implements Serializable {
     }
 
     public String login() {
-        /* 
-        1° Ver si es un usuario local de la base de datos
-            1°a: verificar si esta habilitado,
-        2° Verificar si el usuario es de dominio y grupo,
-            2°a: ver si no esta baneado
-        3° Si no cumple 1° o 2° rechazar;        
-         */
-
-        logeado= false;
+        String paginaSiguiente = "";
+        
+        logeado = false;
         if (!debug) {
-            context= RequestContext.getCurrentInstance();
-            msg= new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
-                    "Credenciales no válidas");
+            context = RequestContext.getCurrentInstance();
+            //msg = new FacesMessage();
         }
         
-        //1º
-        if (verificarUsuarioLocalBD()) {
-            
-        } else{//2
-            if (verificarUsuarioDominio()) {
+        if (verificarValidezCredenciales()) {
+            /* 
+            1° Ver si es un usuario local de la base de datos
+                1°a: verificar si esta habilitado,
+            2° Verificar si el usuario es de dominio y grupo,
+                2°a: ver si no esta baneado
+            3° Si no cumple 1° o 2° rechazar;        
+            */
 
-            } else {//3
-                rechazarAccesoPagina();
+            //1º
+            verificarUsuarioLocalBD();
+            //2°
+            if (!logeado) {
+                verificarUsuarioDominio();
             }
-        }
-        
-        String paginaSiguiente= "";
-        if (!debug) {
+
+            if (!debug) {
+                /*
             FacesContext.getCurrentInstance().addMessage(null, msg);
-            context.addCallbackParam("estaLogeado", logeado);
+            context.addCallbackParam("estaLogeado", logeado);*/
 
-            if (logeado) {
-                System.out.println("Usuario Logueado: "+usuarioLogueado.getNombreUsuario());
-                context.addCallbackParam("view", PAGINA_SIGUIENTE);
-                paginaSiguiente= PAGINA_SIGUIENTE;
-            } else {
-                context.addCallbackParam("view", INICIO2);
-                paginaSiguiente= INICIO2;
+                if (logeado) {
+                    aceptarAccesoPagina();
+                    System.out.println("Usuario Logueado: " + usuarioLogueado.getNombreUsuario());
+                    FacesContext.getCurrentInstance().addMessage(null, msg);
+                    context.addCallbackParam("view", PAGINA_SIGUIENTE);
+                    paginaSiguiente = PAGINA_SIGUIENTE;
+                } else {
+                    rechazarAccesoPagina();
+                    FacesContext.getCurrentInstance().addMessage(null, msg);
+                    context.addCallbackParam("view", INICIO2);
+                    paginaSiguiente = INICIO2;
+                }
             }
+            return paginaSiguiente;
+        } else {
+            msgErrorConsola= msgErrorPantallaResumen= "Valores de credenciales Inválidas";
+            msgErrorPantallaDetalle= msgErrorConsola+". Vuelva a ingresar valores";
+            mensajes(msgErrorConsola, msgErrorPantallaResumen, msgErrorPantallaDetalle);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            context.addCallbackParam("view", INICIO2);
+            return INICIO2;
         }
-        return paginaSiguiente;
+    }
+
+    private boolean verificarValidezCredenciales() {
+        String nulo = "null";
+
+        return (!(nombre.isEmpty() || clave.isEmpty()
+                || (nombre == null) || (clave == null)
+                || (nombre.equals(nulo)) || (clave.equals(nulo))));
     }
 
     private boolean verificarUsuarioLocalBD() {
-        boolean resultado= false;
-        ConexionBaseDatos cbd= new ConexionBaseDatos();
+        boolean resultado = false;
+        ProcesoLogueoBaseDatos cbd = new ProcesoLogueoBaseDatos();
         try {
-            usuarioLogueado= cbd.verificarUsuario(nombre, clave);
-            resultado= true;
-            logeado= true;
+            usuarioLogueado = cbd.verificarUsuario(nombre, clave);
+            resultado = true;
+            logeado = true;
         } catch (UsuarioNoEncontradoException ex) {
             manejarErrores(ex, "Error de autenticación");
         } catch (ClaveUsuarioIncorrectaException ex) {
             manejarErrores(ex, "Credenciales inválidas");
         } catch (Exception ex) {
-            manejarErrores(ex, "Se ha producido un error!");
+            manejarErrores(ex, ex.getLocalizedMessage());
         }
         return resultado;
     }
@@ -137,35 +157,44 @@ public class LoginBean implements Serializable {
         boolean resultado = false;
         ProcesoLogeoDominio pld = new ProcesoLogeoDominio();
         try {
-            usuarioLogueado= pld.verificarUsuarioDominio(nombre, clave, grupo);
+            usuarioLogueado = pld.verificarUsuarioDominio(nombre, clave, grupo);
             resultado = true;
             logeado = true;
-            System.out.println("Inicio sesión: " + nombre);
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenid@ ", nombre);            
         } catch (AuthenticationException ae) {
             manejarErrores(ae, "Error de autenticación");
         } catch (UsuarioNoEncontradoException une) {
             manejarErrores(une, "Usuario no encontrado");
-        }catch (UsuarioEnListaNegraException ulne) {
+        } catch (UsuarioEnListaNegraException ulne) {
             manejarErrores(ulne, "Usuario baneado!!!");
         } catch (Exception ex) {
             manejarErrores(ex, ex.getLocalizedMessage());
         }
-
         return resultado;
     }
-    
+
+    private void aceptarAccesoPagina() {
+        mensajes("Inicio sesión: " + nombre, "Bienvenid@ ", nombre);
+    }
+
     private void rechazarAccesoPagina() {
-        /*Exception e = new CredencialesNoValidasException();
-        manejarErrores(e, e.getLocalizedMessage());*/
+        String s = "No se puede iniciar sesión con el usuario: ";
+        //mensajes(s + nombre, s, nombre);
+        mensajes(s + msgErrorConsola, msgErrorPantallaResumen, s + msgErrorPantallaDetalle);
     }
 
     private void manejarErrores(Exception ex, String comentario) {
-        System.err.println(comentario);
-        msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",
-                "Error " + comentario);
+        //mensajes(comentario, "Login Error", comentario);
+        this.msgErrorConsola = comentario;
+        this.msgErrorPantallaResumen = "Login Error";
+        this.msgErrorPantallaDetalle = comentario + ". " + ex.getLocalizedMessage();
         ex.printStackTrace();
         logeado = false;
+    }
+
+    private void mensajes(String msgConsola, String msgPantallaResumen, String msgPantallaDetalle) {
+        System.out.println(msgConsola);
+        msg = new FacesMessage(FacesMessage.SEVERITY_WARN, msgPantallaResumen, msgPantallaDetalle);
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
     public String logout() {
@@ -184,10 +213,8 @@ public class LoginBean implements Serializable {
         lb.setNombre("accesotrabinf");
         lb.setClave("trabinfacceso2016");
 
-        lb.login();
-
-        System.out.println("Esta logeado?: " + lb.estaLogeado()+ " "+lb.getNombreCompleto());
-
+        //lb.login();
+        System.out.println("Esta logeado?: " + lb.estaLogeado() + " " + lb.getNombreCompleto());
         lb.logout();
     }
 }

@@ -46,6 +46,10 @@ public class Usuarios implements Serializable {
     @Column(name = "usarClaveBD", table = "usuarios", nullable = false)
     @Basic
     private boolean usarClaveBD;
+    
+    @Column(name = "nombreUsuarioDominio", table = "usuarios", length = 45)
+    @Basic
+    private String nombreUsuarioDominio;
 
     @Column(name = "usuario", table = "usuarios", nullable = false, length = 45)
     @Id
@@ -140,6 +144,14 @@ public class Usuarios implements Serializable {
 
     public void setUsarClaveBD(boolean usarClaveBD) {
         this.usarClaveBD = usarClaveBD;
+    }
+
+    public String getNombreUsuarioDominio() {
+        return nombreUsuarioDominio;
+    }
+
+    public void setNombreUsuarioDominio(String nombreUsuarioDominio) {
+        this.nombreUsuarioDominio = nombreUsuarioDominio;
     }
     
     @Override

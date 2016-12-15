@@ -17,6 +17,7 @@
             <h:form id="UsuariosListForm">
                 <p:panel header="#{bundle.ListUsuariosTitle}">
                     <p:dataTable id="datalist" value="#{usuariosController.items}" var="item"
+                                 widgetVar="usuariosTable"
                                  selectionMode="single" selection="#{usuariosController.selected}"
                                  paginator="true"
                                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
@@ -72,11 +73,23 @@
                             </f:facet>
                             <h:outputText value="#{item.baja}"/>
                         </p:column>
+                        <p:column headerText="#{bundle.ListUsuariosTitle_usarClaveBD}" styleClass="colBooleano"
+                                  filterBy="#{item.usarClaveBD}" filterMatchMode="equals">
+                            <f:facet name="filter">
+                                <p:selectOneButton onchange="PF('usuariosTable').filter()">
+                                    <f:converter converterId="javax.faces.Boolean" />
+                                    <f:selectItem itemLabel="Todos" itemValue="" />
+                                    <f:selectItem itemLabel="S" itemValue="true" />
+                                    <f:selectItem itemLabel="N" itemValue="false" />
+                                </p:selectOneButton>                               
+                            </f:facet>
+                            <h:outputText value="#{item.usarClaveBD? 'S' : 'N'}"/>
+                        </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_usarClaveBD}"/>
+                                <h:outputText value="#{bundle.ListUsuariosTitle_nombreUsuarioDominio}"/>
                             </f:facet>
-                            <h:outputText value="#{item.usarClaveBD}"/>
+                            <h:outputText value="#{item.nombreUsuarioDominio}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{usuariosController.prepareCreate}" update=":UsuariosCreateForm" oncomplete="PF('UsuariosCreateDialog').show()"/>
