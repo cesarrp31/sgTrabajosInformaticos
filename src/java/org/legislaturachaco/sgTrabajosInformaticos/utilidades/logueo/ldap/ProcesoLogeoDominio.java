@@ -22,6 +22,8 @@ import org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.UsuarioLogu
  * @author coperalta
  */
 public class ProcesoLogeoDominio {
+    private String defaultUsuarioConexion= "accesotrabinf", defaultClaveConexion= "trabinfacceso2016";
+    
     private ConexionLDAP conexionLDAP;
     private UsuarioDominio usuario;
     private List<String> listaNegra= new ArrayList<>();
@@ -41,16 +43,46 @@ public class ProcesoLogeoDominio {
         }        
     }
     
-    public UsuarioLogueado verificarUsuarioDominio(String nombreUsuario, String clave, String grupo) 
-            throws PartialResultException, NamingException, UsuarioNoEncontradoException, UsuarioNoPerteneceAGrupoExeption, UsuarioEnListaNegraException{
-        conexionLDAP.crearConexion(nombreUsuario, clave);
+    public UsuarioLogueado verificarUsuarioDominioValidoParaSistema(String nombreUsuario, String clave, String grupo) 
+            throws PartialResultException, NamingException, UsuarioNoEncontradoException, 
+            UsuarioNoPerteneceAGrupoExeption, UsuarioEnListaNegraException{
+        
+        /*conexionLDAP.crearConexion(nombreUsuario, clave);
         this.usuario = conexionLDAP.getUsuario(nombreUsuario);
-        conexionLDAP.cerrarConexion();
+        conexionLDAP.cerrarConexion();*/
+        
+        verificarUsuarioDominio(nombreUsuario, clave, nombreUsuario);
         
         verificarGrupoDominio(grupo);
         verificarListaNegraDominio(nombreUsuario);
         
         return new UsuarioLogueado(usuario);
+    }
+    
+    private boolean verificarUsuarioDominio(String usuarioConexion, String claveConexion, String usuarioBusqueda) 
+            throws NamingException, UsuarioNoEncontradoException{
+        conexionLDAP.crearConexion(usuarioConexion, claveConexion);
+        this.usuario = conexionLDAP.getUsuario(usuarioBusqueda);
+        conexionLDAP.cerrarConexion();
+        
+        return true;
+    }
+    
+    private boolean verificarUsuarioDominio(String usuarioBusqueda) 
+            throws NamingException, UsuarioNoEncontradoException{
+        
+        return this.verificarUsuarioDominio(defaultUsuarioConexion, defaultClaveConexion, usuarioBusqueda);
+    }
+    
+    public static boolean existeUsuarioEnDominio(String usuarioBusqueda){
+        ProcesoLogeoDominio plg= new ProcesoLogeoDominio();
+        try {
+            plg.verificarUsuarioDominio(usuarioBusqueda);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
     
     private void verificarGrupoDominio(String grupo) throws UsuarioNoPerteneceAGrupoExeption{

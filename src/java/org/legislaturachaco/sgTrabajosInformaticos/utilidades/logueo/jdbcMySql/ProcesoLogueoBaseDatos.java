@@ -6,7 +6,6 @@
 package org.legislaturachaco.sgTrabajosInformaticos.utilidades.logueo.jdbcMySql;
 
 import java.io.Serializable;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ViewScoped;
@@ -40,7 +39,7 @@ public class ProcesoLogueoBaseDatos implements Serializable {
         if (usuario == null) {
             throw new UsuarioNoEncontradoException();
         } else {
-            if(usuario.getPassword().equals(sha256(clave))){
+            if(usuario.getPassword().equals(Utiles.sha256(clave))){
                 //usuario verificado ok
                 //usuario.
                 System.out.println("Usuario local válido!!!!!!!!!!!!!!!!!");
@@ -49,21 +48,6 @@ public class ProcesoLogueoBaseDatos implements Serializable {
                 throw new ClaveUsuarioIncorrectaException();
             }
         }
-    }
-    
-    private String sha256(String valor) throws NoSuchAlgorithmException{
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        md.update(valor.getBytes());
-
-        byte byteData[] = md.digest();
-
-        StringBuilder hexString = new StringBuilder();
-    	for (int i=0;i<byteData.length;i++) {
-    		String hex=Integer.toHexString(0xff & byteData[i]);
-   	     	if(hex.length()==1) hexString.append('0');
-   	     	hexString.append(hex);
-    	}
-    	return hexString.toString();
     }
     
     public static void main(String[] args) 

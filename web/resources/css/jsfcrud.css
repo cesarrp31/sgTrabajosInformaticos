@@ -54,3 +54,12 @@
     text-align: right;
     width: 150px;
 }
+
+.iconoValidacionOk{
+    background-image: url(/iconos/csv.png);
+    background-color: green;
+}
+
+.iconoValidacionError{
+    background: url(fa-close);
+}

@@ -5,6 +5,8 @@
  */
 package org.legislaturachaco.sgTrabajosInformaticos.utilidades;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.faces.application.FacesMessage;
@@ -35,6 +37,21 @@ public final class Utiles {
     public static String fechaFormateada(Date fecha, String patron){
         SimpleDateFormat dt1 = new SimpleDateFormat(patron);
         return dt1.format(fecha);
+    }
+    
+    public static String sha256(String valor) throws NoSuchAlgorithmException{
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        md.update(valor.getBytes());
+
+        byte byteData[] = md.digest();
+
+        StringBuilder hexString = new StringBuilder();
+    	for (int i=0;i<byteData.length;i++) {
+    		String hex=Integer.toHexString(0xff & byteData[i]);
+   	     	if(hex.length()==1) hexString.append('0');
+   	     	hexString.append(hex);
+    	}
+    	return hexString.toString();
     }
     
     public static void mensajesFacesContext(Severity severidad, String msg, String o){

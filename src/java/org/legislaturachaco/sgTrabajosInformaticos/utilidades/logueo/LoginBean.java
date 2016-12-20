@@ -157,7 +157,7 @@ public class LoginBean implements Serializable {
         boolean resultado = false;
         ProcesoLogeoDominio pld = new ProcesoLogeoDominio();
         try {
-            usuarioLogueado = pld.verificarUsuarioDominio(nombre, clave, grupo);
+            usuarioLogueado = pld.verificarUsuarioDominioValidoParaSistema(nombre, clave, grupo);
             resultado = true;
             logeado = true;
         } catch (AuthenticationException ae) {
@@ -208,13 +208,4 @@ public class LoginBean implements Serializable {
         return INICIO2 + "?faces-redirect=true";
     }
 
-    public static void main(String[] args) {
-        LoginBean lb = new LoginBean(true);
-        lb.setNombre("accesotrabinf");
-        lb.setClave("trabinfacceso2016");
-
-        //lb.login();
-        System.out.println("Esta logeado?: " + lb.estaLogeado() + " " + lb.getNombreCompleto());
-        lb.logout();
-    }
 }

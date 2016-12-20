@@ -8,36 +8,114 @@
 
     <ui:composition>
 
-        <p:dialog id="UsuariosCreateDlg" widgetVar="UsuariosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUsuariosTitle}">
+        <p:dialog id="UsuariosCreateDlg" widgetVar="UsuariosCreateDialog" modal="true" resizable="false" 
+                  appendTo="@(body)" header="#{bundle.CreateUsuariosTitle}">
             <h:form id="UsuariosCreateForm">
+                <p:growl id="msg" showDetail="true" life="5000" />
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{usuariosController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_password}" for="password" />
-                        <p:inputText id="password" value="#{usuariosController.selected.password}" title="#{bundle.CreateUsuariosTitle_password}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_password}"/>
-                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_idRol}" for="idRol" />
-                        <p:selectOneMenu id="idRol" value="#{usuariosController.selected.idRol}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_idRol}">
-                            <f:selectItems value="#{rolesController.itemsAvailableSelectOne}"
-                                           var="idRolItem"
-                                           itemValue="#{idRolItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_dominio}" for="dominio" />
-                        <p:inputText id="dominio" value="#{usuariosController.selected.dominio}" title="#{bundle.CreateUsuariosTitle_dominio}" />
-                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_grupo}" for="grupo" />
-                        <p:inputText id="grupo" value="#{usuariosController.selected.grupo}" title="#{bundle.CreateUsuariosTitle_grupo}" />
-                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_usuario}" for="usuario" />
-                        <p:inputText id="usuario" value="#{usuariosController.selected.usuario}" title="#{bundle.CreateUsuariosTitle_usuario}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_usuario}"/>
-                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_idTecnico}" for="idTecnico" />
-                        <p:selectOneMenu id="idTecnico" value="#{usuariosController.selected.idTecnico}" >
-                            <f:selectItems value="#{tecnicosController.itemsAvailableSelectOne}"
-                                           var="idTecnicoItem"
-                                           itemValue="#{idTecnicoItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_baja}" for="baja" />
-                        <p:inputText id="baja" value="#{usuariosController.selected.baja}" title="#{bundle.CreateUsuariosTitle_baja}" />
-                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_usarClaveBD}" for="usarClaveBD" />
-                        <p:inputText id="usarClaveBD" value="#{usuariosController.selected.usarClaveBD}" title="#{bundle.CreateUsuariosTitle_usarClaveBD}" />
-                        <p:outputLabel value="#{bundle.CreateUsuariosLabel_nombreUsuarioDominio}" for="nombreUsuarioDominio" />
-                        <p:inputText id="nombreUsuarioDominio" value="#{usuariosController.selected.nombreUsuarioDominio}" title="#{bundle.CreateUsuariosTitle_nombreUsuarioDominio}" />
+                    <!--<p:messages autoUpdate="true" />-->
+                    <p:panelGrid rendered="#{usuariosController.selected != null}">
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.CreateUsuariosLabel_usuario}" for="usuario" />
+                            </p:column>
+                            <p:column colspan="2">
+                                <p:inputText id="usuario" value="#{usuariosController.selected.usuario}" 
+                                             title="#{bundle.CreateUsuariosTitle_usuario}" required="true" 
+                                             requiredMessage="#{bundle.CreateUsuariosRequiredMessage_usuario}"
+                                             style="width: 95%"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.CreateUsuariosLabel_nombreUsuarioDominio}" for="nombreUsuarioDominio" />
+                            </p:column>
+                            <p:column>
+                                <p:inputText id="nombreUsuarioDominio" value="#{usuariosController.nombreUsuarioDominio}" 
+                                             title="#{bundle.CreateUsuariosTitle_nombreUsuarioDominio}" >
+                                    <f:validator validatorId="validadorNombreUsuarioDominio" />
+                                    <p:clientValidator/>
+                                    <p:ajax update="nombreUsuarioDominio, ch"/>
+                                    <!--
+                                    <p:message id="msgUsDom" for="nombreUsuarioDominio" display="icon"
+                                               styleClass="#{validadorUsuarioDominio.validado?'iconoValidacionOk':'iconoValidacionError'}"/>-->
+                                </p:inputText>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel id="ch" styleClass="ui-icon #{validadorNombreUsuarioDominio.validado?'ui-icon-check':'ui-icon-closethick'}" />
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.CreateUsuariosLabel_usarClaveBD}" for="usarClaveBD" />
+                            </p:column>
+                            <p:column colspan="2">
+                                <p:selectBooleanCheckbox id="usarClaveBD" value="#{usuariosController.selected.usarClaveBD}">
+                                    <p:ajax update="password"/>
+                                </p:selectBooleanCheckbox>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.CreateUsuariosLabel_password}" for="password" />
+                            </p:column>
+                            <p:column colspan="2">
+                                <p:password id="password" value="#{usuariosController.selected.password}" 
+                                            title="#{bundle.CreateUsuariosTitle_password}" required="true" 
+                                            requiredMessage="#{bundle.CreateUsuariosRequiredMessage_password}"
+                                            feedback="true" promptLabel="Ingrese una clave" weakLabel="Débil"
+                                            goodLabel="Bueno" strongLabel="Fuerte" style="width: 95%"
+                                            disabled="#{usuariosController.selected.usarClaveBD == '1'}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.CreateUsuariosLabel_dominio}" for="dominio" />
+                            </p:column>
+                            <p:column colspan="2">
+                                <p:inputText id="dominio" value="#{usuariosController.selected.dominio}" 
+                                             title="#{bundle.CreateUsuariosTitle_dominio}"
+                                             disabled="true" style="width: 95%"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.CreateUsuariosLabel_grupo}" for="grupo" />
+                            </p:column>
+                            <p:column colspan="2">
+                                <p:inputText id="grupo" value="#{usuariosController.selected.grupo}" 
+                                             title="#{bundle.CreateUsuariosTitle_grupo}" 
+                                             disabled="true" style="width: 95%"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.CreateUsuariosLabel_idTecnico}" for="idTecnico" />
+                            </p:column>
+                            <p:column colspan="2">
+                                <p:selectOneMenu id="idTecnico" style="width: 90%"
+                                                 value="#{usuariosController.selected.idTecnico}" >
+                                    <f:selectItems value="#{tecnicosController.itemsAvailableSelectOne}"
+                                                   var="idTecnicoItem"
+                                                   itemValue="#{idTecnicoItem}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.CreateUsuariosLabel_idRol}" for="idRol" />
+                            </p:column>
+                            <p:column colspan="2">
+                                <p:selectOneMenu id="idRol" value="#{usuariosController.selected.idRol}" style="width: 90%"
+                                                 required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_idRol}">
+                                    <f:selectItems value="#{rolesController.itemsAvailableSelectOne}"
+                                                   var="idRolItem"
+                                                   itemValue="#{idRolItem}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+<!--<p:outputLabel value="#{bundle.CreateUsuariosLabel_baja}" for="baja" />
+<p:selectBooleanCheckbox id="baja" value="#{usuariosController.selected.baja}" />-->
                     </p:panelGrid>
                     <p:commandButton actionListener="#{usuariosController.create}" value="#{bundle.Save}" update="display,:UsuariosListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuariosCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UsuariosCreateDialog.hide()"/>
